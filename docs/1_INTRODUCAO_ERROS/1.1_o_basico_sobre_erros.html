@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="pt-BR" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1.1 O básicos sobre erros &#8212; Caderno didático de Métodos Numéricos em Python</title>
+    <title>1.1 O básico sobre erros &#8212; Caderno didático de Métodos Numéricos em Python</title>
   
   
   
@@ -41,7 +41,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/documentation_options.js?v=2efa9f5e"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,6 +51,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=000972dd"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -60,12 +61,12 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros';</script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.2. Aritmética de ponto flutuante" href="1.2_aritmetica_de_ponto_flutuante.html" />
-    <link rel="prev" title="Métodos Numéricos em Python" href="../intro.html" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="next" title="1.2 Aritmética de ponto flutuante" href="1.2_aritmetica_de_ponto_flutuante.html" />
+    <link rel="prev" title="1. Introdução e Erros" href="1_INTRODUCAO_ERROS.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="pt-BR"/>
   </head>
   
   
@@ -164,9 +165,9 @@
 
  <script>
  document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
+    <span class="search-button__default-text">Buscar</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
    </button>
  `);
@@ -181,55 +182,53 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introdução e erros</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1.1 O básicos sobre erros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1.2_aritmetica_de_ponto_flutuante.html">1.2. Aritmética de ponto flutuante</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1.4_exemplos_de_aplicacoes.html">1.4 Exemplos aplicados</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Zeros de funções</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2. Método da bisseção</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2. Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Sistemas Lineares</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">4.Interpolação polinomial</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Ajuste por minimos quadrados</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_ajuste_linear_nos_parametros.html">5.2 Ajuste linear nos parâmetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">6.Integração Numérica</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_metodo_de_newton_cotes.html">6.2 Regras de Newton-Cotes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regra_dos_trapezios.html">6.3 Regra dos trapézios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.4_regras_de_simpson.html">6.4 Regras de Simpson</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. Equações diferenciais</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -286,7 +285,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
+   title="Repositório fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -303,7 +302,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
+   title="Abra um problema"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -324,7 +323,7 @@
 
 
 <div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
     <i class="fas fa-download"></i>
   </button>
   <ul class="dropdown-menu">
@@ -333,7 +332,7 @@
       
       <li><a href="../_sources/1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
+   title="Baixar arquivo fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -351,7 +350,7 @@
       <li>
 <button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Imprimir em PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -371,7 +370,7 @@
 
 <button onclick="toggleFullScreen()"
   class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
+  title="Modo tela cheia"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
@@ -397,7 +396,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -415,13 +414,13 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1.1 O básicos sobre erros</h1>
+    <h1>1.1 O básico sobre erros</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
             <div>
-                <h2> Contents </h2>
+                <h2> Conteúdo </h2>
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -444,8 +443,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="o-basicos-sobre-erros">
-<h1>1.1 O básicos sobre erros<a class="headerlink" href="#o-basicos-sobre-erros" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="o-basico-sobre-erros">
+<h1>1.1 O básico sobre erros<a class="headerlink" href="#o-basico-sobre-erros" title="Link para este cabeçalho">#</a></h1>
 <p>De modo geral, a resolução de um problema, em ciências e engenharia, passa necessariamente por três etapas distintas:</p>
 <ol class="arabic simple">
 <li><p>A observação e entendimento do(s) fenômeno(s) envolvido(s);</p></li>
@@ -453,12 +452,13 @@ document.write(`
 <li><p>A resolução do modelo matemático por métodos numéricos ou analíticos.</p></li>
 </ol>
 <p>As duas primeiras etapas consistem na <strong>fase de modelagem</strong> e a terceira é a <strong>fase de resolução</strong>. Tanto na fase de modelagem quanto na fase de resolução podem ocorrer erros, mesmo que esses erros não tornem a resposta obtida inválida ou inútil. Em geral busca-se uma solução aproximada, dentro de uma precisão pré-estabelecida.</p>
-<img src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/erros.png" width="600">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/erros.png"><img alt="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/erros.png" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/erros.png" style="width: 600px;" />
+</a>
 <p>Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/14">Arenalles e Darezzo, 2016</a>.</p>
 <p>Os erros na fase de modelagem podem ser decorrentes de medições imprecisas, erros de anotação, simplificações e deduções equivocadas. Os erros na fase de resolução ocorrem devido a erros de cálculo, escolha de um método ineficaz, aproximações numéricas ou arredondamentos. Dizemos que métodos analíticos de resolução geram soluções exatas e métodos numéricos geram soluções aproximadas.</p>
 <p>A maioria dos problemas envolvendo fenômenos reais produzem modelos matemáticos cuja solução analítica é difícil (ou impossível) de se obter, mesmo quando provamos que a solução existe. Nesses casos usamos <strong>métodos numéricos</strong>, os quais fornecem <strong>soluções aproximadas</strong>, que apesar de, em geral, serem diferentes da solução exata, podem ser suficientemete próximas para que sejam úteis em suas aplicações.</p>
 <section id="representacao-de-numeros-em-ponto-flutuante">
-<h2>Representação de números em ponto flutuante<a class="headerlink" href="#representacao-de-numeros-em-ponto-flutuante" title="Link to this heading">#</a></h2>
+<h2>Representação de números em ponto flutuante<a class="headerlink" href="#representacao-de-numeros-em-ponto-flutuante" title="Link para este cabeçalho">#</a></h2>
 <p>Os métodos numéricos são especialmente úteis quando utilizamos computadores para realizar os cálculos, no entanto, existem limitações na capacidade de armazenar certos números internamente. A representação de números reais nas máquinas é feita, geralmente, utilizando o <strong>sistema de ponto flutuante normalizado</strong> e <strong>base binária</strong>. Ou seja, os números reais são armazenados em um conjunto fixo de bits. Cada bit pode assumir somente dois valores, 0 ou 1 (corte ou passagem de energia, respectivamente), dessa forma, nem todos os números reais podem ser representados de forma exata. Vamos entender isso um pouco melhor com os argumentos a seguir.</p>
 <p>Sabemos que o número <span class="math notranslate nohighlight">\(0.125\)</span>, na base decimal, pode ser escrito como</p>
 <div class="math notranslate nohighlight">
@@ -510,14 +510,17 @@ document.write(`
 <p>Use esse exemplo para testar outros números inteiros.</p>
 </section>
 <section id="padrao-ieee">
-<h2>Padrão IEEE<a class="headerlink" href="#padrao-ieee" title="Link to this heading">#</a></h2>
+<h2>Padrão IEEE<a class="headerlink" href="#padrao-ieee" title="Link para este cabeçalho">#</a></h2>
 <p>Em geral, uma máquina com 32 bit utiliza 23 bit para armazenar os algarismos da parte fracionária, 8 bit para os algarismos do expoente da base e 1 bit para armazenar o sinal. Para 64 bits, são 52 bits de digitos significativos, 11 bits para o expoente e 1 bit para o sinal.</p>
 <p>O esquema para 32 bits é ilustrado na figura abaixo.</p>
-<img src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/floatstructure.png" width="360">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/floatstructure.png"><img alt="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/floatstructure.png" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/floatstructure.png" style="width: 360px;" />
+</a>
 <p>O padrão IEEE 754 é atualmente o mais utilizado para representar números reais. Na precisão  <code class="docutils literal notranslate"><span class="pre">float</span></code> usa 23 bits, para a parte fracionária, 8 bits para o expoente e 1 bit para o sinal. Na precisão <code class="docutils literal notranslate"><span class="pre">double</span></code>, usa 52 bits, para a parte fracionária, 11 bits para o expoente e 1 bit para o sinal, o que permite representar valores entre  <span class="math notranslate nohighlight">\(2^{-1022}\)</span> até <span class="math notranslate nohighlight">\(2^{1023}\)</span>. Alguns exemplos de representações do numero zero, infinito e “não número”.</p>
-<img src="https://github.com/tiagoburiol/NUMETHODS/raw/master/1_INTRODUCAO_ERROS/imagens/tabelafloat.gif" width="400">
+<a class="reference internal image-reference" href="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/1_INTRODUCAO_ERROS/imagens/tabelafloat.png?raw=true"><img alt="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/1_INTRODUCAO_ERROS/imagens/tabelafloat.png?raw=true" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/1_INTRODUCAO_ERROS/imagens/tabelafloat.png?raw=true" style="width: 400px;" />
+</a>
 <p>Alguns exemplos de tipos de dados disponíveis no módulo numérico <strong>Numpy</strong> (<a class="reference external" href="http://numpy.org">numpy.org</a>) são mostrados abaixo para o caso de um</p>
-<img src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/datatypes.png" width="400">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/datatypes.png"><img alt="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/datatypes.png" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/datatypes.png" style="width: 400px;" />
+</a>
 <p>Alguns números, como os irracionais ou a fração 1/3, por exemplo, têm representações fracionárias com infinitas casas decimais. Então, para serem computados precisam ser truncados ou arredondados. Além disso, alguns números com representação decimal finita, possuem representação binária infinita, e vice versa. Assim, erros de arredondamento podem ocorrer no processo de conversão entre bases e, também, nas operações aritméticas de ponto flutuante.</p>
 <p><strong>Exemplo 1.1.2:</strong> Observe o que acontece se fazemos <span class="math notranslate nohighlight">\(x=\frac{1}{3}\)</span> e, então espera-se obter <span class="math notranslate nohighlight">\(x\times 10 \times 0.3 = \frac{1}{3} \times 3 = 1\)</span>. vejamos o que acontece computacionalmente.</p>
 <div class="cell docutils container">
@@ -546,17 +549,17 @@ document.write(`
 </div>
 </div>
 <p>Tente fazer <span class="math notranslate nohighlight">\(x\times (10 \times 0.3)\)</span> e tente explicar o que você observou  nos resultados obtidos.</p>
-</section>
 <hr class="docutils" />
+</section>
 <section id="conversao-entre-bases">
-<h2>Conversão entre bases<a class="headerlink" href="#conversao-entre-bases" title="Link to this heading">#</a></h2>
+<h2>Conversão entre bases<a class="headerlink" href="#conversao-entre-bases" title="Link para este cabeçalho">#</a></h2>
 <p>Usualmente, utilizamos o sistema de numeração decimal para representar números. Esse é um sistema de numeração posicional onde a posição do dígito indica a potência de 10 que o dígito representa. Por exemplo, o número 293 é decomposto como 293 = 2 centenas +9 dezenas +  3 unidades. O sistema de numeração posicional também pode ser usado com outras bases.</p>
 <p>Dado um número real, <span class="math notranslate nohighlight">\(N\)</span>, é sempre possível representá-lo em qualquer base <span class="math notranslate nohighlight">\(b\)</span>, da seguinte forma</p>
 <div class="math notranslate nohighlight">
 \[ N_b=\sum_{i=n}^m a_ i \times b^i\]</div>
 <p>em que <span class="math notranslate nohighlight">\(a_i \in \{0,1,2,3,...,(b-1)\}\)</span>, com <span class="math notranslate nohighlight">\(n\)</span> e <span class="math notranslate nohighlight">\(m\)</span> inteiros.</p>
 <section id="base-binaria">
-<h3>Base binária<a class="headerlink" href="#base-binaria" title="Link to this heading">#</a></h3>
+<h3>Base binária<a class="headerlink" href="#base-binaria" title="Link para este cabeçalho">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ N_2=\sum_{i=n}^m a_ i \times 2^i, \,\,\,\,\ a_2 \in \{0,1\}\]</div>
 <p><strong>Exemplos 1.1.3:</strong> (Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/15">Arenalles e Darezzo, 2016</a>)</p>
@@ -564,7 +567,7 @@ document.write(`
 <p>b) <span class="math notranslate nohighlight">\((111.01)_2 = 1 \times 2^{-2} + 0 \times 2^{-1} + 1 \times 2^0 + 1 \times 2^1 + 1 \times 2^2 \)</span></p>
 </section>
 <section id="base-decimal">
-<h3>Base decimal<a class="headerlink" href="#base-decimal" title="Link to this heading">#</a></h3>
+<h3>Base decimal<a class="headerlink" href="#base-decimal" title="Link para este cabeçalho">#</a></h3>
 <div class="math notranslate nohighlight">
 \[ N_{10}=\sum_{i=n}^m a_ i \times 10^i, \,\,\,\,\ a_{10} \in \{0,1,2,3,...,9 \}\]</div>
 <p><strong>Exemplos 1.1.4:</strong> (Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/15">Arenalles e Darezzo, 2016</a>)</p>
@@ -580,7 +583,8 @@ document.write(`
 <p>A mudança de <strong>base decimal para binária</strong>, no caso de um número inteiro, é realizada dividindo o número sucessivamente por 2 até obter o quociente 1. Então, toma-se o quociente e os restos das divisões na ordem contrária em que foram obtidos para formar o número binário. Vejamos um exemplo.</p>
 <p><strong>Exemplo 1.1.5:</strong> (Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/16">Arenalles e Darezzo, 2016</a>)</p>
 <p>O número 25, na base 10, pode ser convertido para a base 2 procedenco sucessivas divisões por 2 como é mostrado abaixo.</p>
-<img src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/dec2bin_int.png" width="200">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/dec2bin_int.png"><img alt="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/dec2bin_int.png" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/dec2bin_int.png" style="width: 200px;" />
+</a>
 <p>Tomando-se o quociente 1 e os restos das divisões na ordem contrária em que foram obtidos, formamos o número binário 11001. Assim,</p>
 <div class="math notranslate nohighlight">
 \[(25)_{10}=(11001)_2.\]</div>
@@ -600,7 +604,8 @@ document.write(`
 <p>Para converter uma fração decimal para a base binária procedemos sucessivas multiplicações por 2. A parte inteira do resultado obtido será o primeiro dígito binário. A parte fracionária será multiplicada novamente por 2 para obter-se os próximos dígitos no número binário, sucessivamente. vejamos um exemplo.</p>
 <p><strong>Exemplo 1.1.7:</strong></p>
 <p>O número <span class="math notranslate nohighlight">\((0.1875)_{10}\)</span> pode ser convertido para a base binária procedendo como é mostrado na figura abaixo</p>
-<img src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/dec2bin_frac.png" width="400">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/dec2bin_frac.png"><img alt="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/dec2bin_frac.png" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/dec2bin_frac.png" style="width: 400px;" />
+</a>
 <p>Assim, obtemos que <span class="math notranslate nohighlight">\((0.1875)_{10}=(0.0011)_2\)</span>.</p>
 <p><strong>Exercício 1.1.8:</strong> Converta os números <span class="math notranslate nohighlight">\((13.25)_{10}\)</span> e <span class="math notranslate nohighlight">\((0.2)_{10}\)</span> para a base binária.</p>
 <p><strong>Exercício 1.1.9:</strong> Faça um programa em Python para converter um número qualquer da base decimal para a base binária. Dica: para pegar a parte inteira podemos usar a função <code class="docutils literal notranslate"><span class="pre">floor</span></code> da biblioteca <code class="docutils literal notranslate"><span class="pre">math</span></code> do Python.</p>
@@ -621,7 +626,7 @@ document.write(`
 </section>
 </section>
 <section id="outras-bases">
-<h2>Outras bases<a class="headerlink" href="#outras-bases" title="Link to this heading">#</a></h2>
+<h2>Outras bases<a class="headerlink" href="#outras-bases" title="Link para este cabeçalho">#</a></h2>
 <p><strong>Exemplo 1.1.10:</strong> Em Python existem funções para representar números em diferentes bases, incluindo os sistemas octogonal e hexadecimal. Para converter um inteiro em um binário, octal, ou hexadecimal, podemos proceder como é mostrado abaixo</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -712,20 +717,20 @@ d) (0,8125)_{10} \quad e) (0,994140625)_{10} \quad f) (0,40625)_{10} \quad\)</sp
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../intro.html"
+       href="1_INTRODUCAO_ERROS.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Métodos Numéricos em Python</p>
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">1. Introdução e Erros</p>
       </div>
     </a>
     <a class="right-next"
        href="1.2_aritmetica_de_ponto_flutuante.html"
        title="next page">
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1.2. Aritmética de ponto flutuante</p>
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">1.2 Aritmética de ponto flutuante</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -741,7 +746,7 @@ d) (0,8125)_{10} \quad e) (0,994140625)_{10} \quad f) (0,40625)_{10} \quad\)</sp
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+    <i class="fa-solid fa-list"></i> Conteúdo
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
@@ -767,7 +772,7 @@ d) (0,8125)_{10} \quad e) (0,994140625)_{10} \quad f) (0,40625)_{10} \quad\)</sp
   <div class="footer-item">
     
 <p class="component-author">
-By Tiago M. Buriol
+De Tiago M. Buriol
 </p>
 
   </div>

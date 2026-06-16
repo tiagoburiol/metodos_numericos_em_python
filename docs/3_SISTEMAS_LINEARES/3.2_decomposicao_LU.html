@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="pt-BR" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
@@ -41,7 +41,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/documentation_options.js?v=2efa9f5e"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,6 +51,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=000972dd"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -60,12 +61,12 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '3_SISTEMAS_LINEARES/3.2_decomposicao_LU';</script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
     <link rel="next" title="3.3 Eliminação de Gauss-Jordan e matriz inversa" href="3.3_gauss-jordan_e_matriz_inversa.html" />
     <link rel="prev" title="3.1. Forma matricial" href="3.1_forma_matricial_e_escalonamento.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="pt-BR"/>
   </head>
   
   
@@ -164,9 +165,9 @@
 
  <script>
  document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
+    <span class="search-button__default-text">Buscar</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
    </button>
  `);
@@ -181,55 +182,53 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introdução e erros</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básicos sobre erros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2. Aritmética de ponto flutuante</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos aplicados</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Zeros de funções</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2. Método da bisseção</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2. Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Sistemas Lineares</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3.2 Métodos diretos: decomposição LU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">4.Interpolação polinomial</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Ajuste por minimos quadrados</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_ajuste_linear_nos_parametros.html">5.2 Ajuste linear nos parâmetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">6.Integração Numérica</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_metodo_de_newton_cotes.html">6.2 Regras de Newton-Cotes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regra_dos_trapezios.html">6.3 Regra dos trapézios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.4_regras_de_simpson.html">6.4 Regras de Simpson</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. Equações diferenciais</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -286,7 +285,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
+   title="Repositório fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -303,7 +302,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
+   title="Abra um problema"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -324,7 +323,7 @@
 
 
 <div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
     <i class="fas fa-download"></i>
   </button>
   <ul class="dropdown-menu">
@@ -333,7 +332,7 @@
       
       <li><a href="../_sources/3_SISTEMAS_LINEARES/3.2_decomposicao_LU.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
+   title="Baixar arquivo fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -351,7 +350,7 @@
       <li>
 <button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Imprimir em PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -371,7 +370,7 @@
 
 <button onclick="toggleFullScreen()"
   class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
+  title="Modo tela cheia"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
@@ -397,7 +396,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -421,7 +420,7 @@ document.write(`
         <div id="jb-print-toc">
             
             <div>
-                <h2> Contents </h2>
+                <h2> Conteúdo </h2>
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -442,7 +441,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="metodos-diretos-decomposicao-lu">
-<h1>3.2 Métodos diretos: decomposição LU<a class="headerlink" href="#metodos-diretos-decomposicao-lu" title="Link to this heading">#</a></h1>
+<h1>3.2 Métodos diretos: decomposição LU<a class="headerlink" href="#metodos-diretos-decomposicao-lu" title="Link para este cabeçalho">#</a></h1>
 <p>Os métodos diretos para resolução de sistemas lineares teoricamente dão a solução exata do sistema em um número finito de passos. Na prática, as soluções podem sofrer erros de arredondamento devido à aritmética que está sendo usada.</p>
 <p>Os métodos diretos de eliminação consistem no processo
 de transformar um sistema de equações lineares <span class="math notranslate nohighlight">\(Ax=b\)</span>, em que <span class="math notranslate nohighlight">\(A= [a_{ij}]_i,j=1,..,n\)</span>,
@@ -452,7 +451,7 @@ resolução mais simples ou imediata, por substituição direta.</p>
 <p>O método de eliminação de Gauss é o método direto usado para escalonar a matriz que representa um sistema linear com o objetivo de obter um ou mais sistemas triangulares, os quais podem ser resolvidos por subtituições subsequentes. Outros métodos diretos podem envolver fatorar a matriz dos coeficientes do sistema em um produto de duas ou mais matrizes, como é o caso do método por fatoração LU, que será abordado nesse texto.</p>
 <p>Antes disso, vamos relembrar as função já desenvolvidas nas aulas anteriores.</p>
 <section id="funcoes-para-escalonar-uma-matriz-e-para-resolver-sistemas-triangulares">
-<h2>Funções para escalonar uma matriz e para resolver sistemas triangulares<a class="headerlink" href="#funcoes-para-escalonar-uma-matriz-e-para-resolver-sistemas-triangulares" title="Link to this heading">#</a></h2>
+<h2>Funções para escalonar uma matriz e para resolver sistemas triangulares<a class="headerlink" href="#funcoes-para-escalonar-uma-matriz-e-para-resolver-sistemas-triangulares" title="Link para este cabeçalho">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -811,11 +810,11 @@ x_1+x_2+x_4 &amp; =2, \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_4617/899190976.py:8: RuntimeWarning: divide by zero encountered in scalar divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_24015/899190976.py:8: RuntimeWarning: divide by zero encountered in scalar divide
   m = M[i+1,j]/M[j,j]
-/tmp/ipykernel_4617/899190976.py:9: RuntimeWarning: invalid value encountered in multiply
+/tmp/ipykernel_24015/899190976.py:9: RuntimeWarning: invalid value encountered in multiply
   M[i+1] = M[i+1]-m*M[j]
-/tmp/ipykernel_4617/899190976.py:8: RuntimeWarning: invalid value encountered in scalar divide
+/tmp/ipykernel_24015/899190976.py:8: RuntimeWarning: invalid value encountered in scalar divide
   m = M[i+1,j]/M[j,j]
 </pre></div>
 </div>
@@ -930,7 +929,7 @@ x_1+x_2+x_4 &amp; =2, \\
 </section>
 <hr class="docutils" />
 <section id="decomposicao-lu">
-<h2>Decomposição LU<a class="headerlink" href="#decomposicao-lu" title="Link to this heading">#</a></h2>
+<h2>Decomposição LU<a class="headerlink" href="#decomposicao-lu" title="Link para este cabeçalho">#</a></h2>
 <p>A fatoração <span class="math notranslate nohighlight">\(LU\)</span> é útil para resolver sistemas lineares, calcular determinantes e encontrar inversas de matrizes de forma mais eficiente. Uma vez que a matriz <span class="math notranslate nohighlight">\(A\)</span> é fatorada, resolver sistemas do tipo <span class="math notranslate nohighlight">\(Ax=b\)</span> fica mais rápido, pois basta resolver dois sistemas triangulares mais simples, primeiramente <span class="math notranslate nohighlight">\(Ly=b\)</span> e, então, <span class="math notranslate nohighlight">\(Ux=y\)</span>.</p>
 <p>Além disso, é mais fácil obter o determinante de <span class="math notranslate nohighlight">\(A\)</span> calculando o produto dos elementos da diagonal da matriz triangular. Por fim, evita fazer a eliminação gaussiana para obter a solução do sistema <span class="math notranslate nohighlight">\(Ax=b\)</span> toda vez que muda o vetor <span class="math notranslate nohighlight">\(b\)</span>.</p>
 <p>As mesmas operações com linhas utilizadas para resolver um sistema da forma <span class="math notranslate nohighlight">\(Ax = b\)</span> por eliminação de Gauss podem ser utilizados para fatorar uma matriz <span class="math notranslate nohighlight">\(A\)</span> em um produto de duas matrizes triangulares <span class="math notranslate nohighlight">\(L\)</span> (triangular inferior) e <span class="math notranslate nohighlight">\(U\)</span> (triangular superior).  Vejamos um exemplo:</p>
@@ -1400,7 +1399,7 @@ Resolvendo o sistema $Ly=b$ obtem-se $y$, então, resolvendo o sistema $Ux=y$, o
 </div>
 </section>
 <section id="fatoracao-lu-por-reducao-de-doolittle">
-<h2>Fatoração LU por redução de Doolittle<a class="headerlink" href="#fatoracao-lu-por-reducao-de-doolittle" title="Link to this heading">#</a></h2>
+<h2>Fatoração LU por redução de Doolittle<a class="headerlink" href="#fatoracao-lu-por-reducao-de-doolittle" title="Link para este cabeçalho">#</a></h2>
 <p>Uma forma de obter a fatoração <span class="math notranslate nohighlight">\(LU\)</span> da matriz <span class="math notranslate nohighlight">\(A\)</span>, conhecido como processo Redução de Doolittle será apresentado a seguir (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/43">fonte</a>). Considere a fatoração da matriz <span class="math notranslate nohighlight">\(A = (a_{ij})_{i,j=1,...,n}\)</span> nas matrizes <span class="math notranslate nohighlight">\(L = (l_{ij})_{i,j=1,...,n}\)</span> e <span class="math notranslate nohighlight">\(U = (u_{ij})_{i,j=1,...,n}\)</span> como é mostrado a seguir</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left[\begin{array}{cccc} 
@@ -1498,7 +1497,7 @@ x_1+x_2+3 x_4 &amp; =8, \\
 \)</span>$</p>
 </section>
 <section id="usando-o-modulo-scipy-linalg-para-fatorar-uma-matriz">
-<h2>Usando o módulo <code class="docutils literal notranslate"><span class="pre">scipy.linalg</span></code> para fatorar uma matriz<a class="headerlink" href="#usando-o-modulo-scipy-linalg-para-fatorar-uma-matriz" title="Link to this heading">#</a></h2>
+<h2>Usando o módulo <code class="docutils literal notranslate"><span class="pre">scipy.linalg</span></code> para fatorar uma matriz<a class="headerlink" href="#usando-o-modulo-scipy-linalg-para-fatorar-uma-matriz" title="Link para este cabeçalho">#</a></h2>
 <p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/linalg.html">https://docs.scipy.org/doc/scipy/reference/linalg.html</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1611,7 +1610,7 @@ A=L L^T
 </div>
 </section>
 <section id="exercicios">
-<h2>Exercícios<a class="headerlink" href="#exercicios" title="Link to this heading">#</a></h2>
+<h2>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
 <p><strong>1.</strong> Obtenha, caso exista, a solução para os seguintes sistemas lineares utilizando os métodos estudados (eliminação de Gauss e decomposição LU).</p>
 <p>a) <span class="math notranslate nohighlight">\(\begin{cases} 
 	         2x_1 + 3x_2 + x_3 +5x_4= 11\\ 
@@ -1690,7 +1689,7 @@ A=L L^T
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-subtitle">anterior</p>
         <p class="prev-next-title">3.1. Forma matricial</p>
       </div>
     </a>
@@ -1698,7 +1697,7 @@ A=L L^T
        href="3.3_gauss-jordan_e_matriz_inversa.html"
        title="next page">
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-subtitle">próximo</p>
         <p class="prev-next-title">3.3 Eliminação de Gauss-Jordan e matriz inversa</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
@@ -1715,7 +1714,7 @@ A=L L^T
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+    <i class="fa-solid fa-list"></i> Conteúdo
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
@@ -1738,7 +1737,7 @@ A=L L^T
   <div class="footer-item">
     
 <p class="component-author">
-By Tiago M. Buriol
+De Tiago M. Buriol
 </p>
 
   </div>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="pt-BR" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
@@ -41,7 +41,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/documentation_options.js?v=2efa9f5e"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,6 +51,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=000972dd"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -60,12 +61,12 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton';</script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
     <link rel="next" title="4.3. Erros na interpolação" href="4.3_erro_na_interpolacao_polinomial.html" />
     <link rel="prev" title="4.1. Intepolação polinomial e fórmula de Lagrange" href="4.1_interpolacao_de_lagrange.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="pt-BR"/>
   </head>
   
   
@@ -164,9 +165,9 @@
 
  <script>
  document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
+    <span class="search-button__default-text">Buscar</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
    </button>
  `);
@@ -181,55 +182,53 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introdução e erros</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básicos sobre erros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2. Aritmética de ponto flutuante</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos aplicados</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Zeros de funções</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2. Método da bisseção</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2. Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Sistemas Lineares</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">4.Interpolação polinomial</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4.2 Fórmula de Newton</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Ajuste por minimos quadrados</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_ajuste_linear_nos_parametros.html">5.2 Ajuste linear nos parâmetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">6.Integração Numérica</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_metodo_de_newton_cotes.html">6.2 Regras de Newton-Cotes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regra_dos_trapezios.html">6.3 Regra dos trapézios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.4_regras_de_simpson.html">6.4 Regras de Simpson</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. Equações diferenciais</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -286,7 +285,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
+   title="Repositório fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -303,7 +302,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
+   title="Abra um problema"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -324,7 +323,7 @@
 
 
 <div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
     <i class="fas fa-download"></i>
   </button>
   <ul class="dropdown-menu">
@@ -333,7 +332,7 @@
       
       <li><a href="../_sources/4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
+   title="Baixar arquivo fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -351,7 +350,7 @@
       <li>
 <button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Imprimir em PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -371,7 +370,7 @@
 
 <button onclick="toggleFullScreen()"
   class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
+  title="Modo tela cheia"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
@@ -397,7 +396,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -421,7 +420,7 @@ document.write(`
         <div id="jb-print-toc">
             
             <div>
-                <h2> Contents </h2>
+                <h2> Conteúdo </h2>
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -439,7 +438,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="formula-de-newton">
-<h1>4.2 Fórmula de Newton<a class="headerlink" href="#formula-de-newton" title="Link to this heading">#</a></h1>
+<h1>4.2 Fórmula de Newton<a class="headerlink" href="#formula-de-newton" title="Link para este cabeçalho">#</a></h1>
 <p>Seja <span class="math notranslate nohighlight">\(f(x)\)</span> definida em <span class="math notranslate nohighlight">\(x_0, x_1,...,x_n\)</span>, (n+1) pontos distintos de um intervalo <span class="math notranslate nohighlight">\([a,b]\)</span> e <span class="math notranslate nohighlight">\(y_i=f(x_i)\)</span>, <span class="math notranslate nohighlight">\(i=0,1,...,n\)</span>. O polinômio interpolador de Newton é dado por</p>
 <div class="math notranslate nohighlight">
 \[P(x)=f[x_0]+(x-x_0)f[x_0,x_1]+(x-x_0)(x-x_1)f[x_0,x_1,x_2]+...\]</div>
@@ -458,7 +457,7 @@ $<span class="math notranslate nohighlight">\(f[x_i, x_{i+1}, x_{i+2}]=\frac{f[x
 $<span class="math notranslate nohighlight">\(f[x_0,...,x_n]=\frac{f[x_1,...,x_n] - f[x_0, ...,x_{n-1}]}   {x_n - x_0} \)</span>$</p>
 <p>A seguir é apresentado um exemplo de como obter as diferenças divididas para um conjunto de 5 pontos distintos da função <span class="math notranslate nohighlight">\(f(x)=1/x\)</span>.</p>
 <p><strong>Exemplo 4.2.1 :</strong> Considere os pontos
-\begin{array}{cccccc}
+\begin{array}{ccccccc}
 \hline
 i   &amp;0     &amp;1    &amp;2     &amp;3     &amp;4     \ \hline
 x_i &amp;1     &amp;2    &amp;4     &amp;5     &amp;8     \
@@ -499,7 +498,7 @@ x_i&amp; &amp; &amp;f[x_i]&amp;  &amp;f[x_i,x_{i+1}]&amp;  &amp;f[x_i,\dots,x_{i
 <p><span class="math notranslate nohighlight">\(P_2(x) = f[x_0,\dots,x_{n-2}]+ (x-x_{n-2})P_1(x)\)</span></p>
 <p><span class="math notranslate nohighlight">\(\vdots\)</span></p>
 <p><span class="math notranslate nohighlight">\(P_n(x) = f[x_0]+ (x-x_0)P_n(x)\)</span></p>
-<p><strong>Exemplo 4.2.1</strong>
+<p><strong>Exemplo 4.2.2</strong>
 Considere a função <span class="math notranslate nohighlight">\(f(x)=e^x +sen(x)\)</span> tabelada  nos pontos <span class="math notranslate nohighlight">\(x_0=0.0\)</span>, <span class="math notranslate nohighlight">\(x_1=0.5\)</span> e <span class="math notranslate nohighlight">\(x_2=1.0\)</span>. Determine o polinômio interpolador usando a fórmula de Newton e avalie <span class="math notranslate nohighlight">\(f(0.7)\)</span>.</p>
 <p>Vamos fazer isso, inicialmente de um modo “não vetorizado”.</p>
 <div class="cell docutils container">
@@ -663,7 +662,7 @@ Considere a função <span class="math notranslate nohighlight">\(f(x)=e^x +se
 </div>
 </div>
 <p>Vamos agora melhorar nosso algoritmo usando a vetorização do código.</p>
-<p><strong>Exemplo 4.2.2:</strong></p>
+<p><strong>Exemplo 4.2.3:</strong></p>
 <p>Seja a função <span class="math notranslate nohighlight">\(f(x)=e^xcos(x)\sqrt{x}\)</span> tabelada  nos pontos <span class="math notranslate nohighlight">\(x_0=0.0\)</span>, <span class="math notranslate nohighlight">\(x_1=1.0\)</span>, <span class="math notranslate nohighlight">\(x_2=2.3\)</span>, <span class="math notranslate nohighlight">\(x_3=2.5\)</span> e <span class="math notranslate nohighlight">\(x_4=4.0\)</span>. Vamos usar a fórmula de interpolatória de Newton para obter o gráfico do polinômio que interpola esses pontos calculando o valor numérico do poliômio em conjunto discreto de pontos. Também vamos obter uma forma analítica para esse polinônio usando Python.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -734,7 +733,7 @@ Considere a função <span class="math notranslate nohighlight">\(f(x)=e^x +se
 <img alt="../_images/d93e106440c6b5ea9d59dc5c37842c1b7975bb9f7b45a9236ed500850cfa5bf0.png" src="../_images/d93e106440c6b5ea9d59dc5c37842c1b7975bb9f7b45a9236ed500850cfa5bf0.png" />
 </div>
 </div>
-<p><strong>Exemplo 4.2.3:</strong></p>
+<p><strong>Exemplo 4.2.4:</strong></p>
 <p>Considere a função <span class="math notranslate nohighlight">\(f(x)=\frac{x}{(x+1)}\)</span> tabelada  nos pontos <span class="math notranslate nohighlight">\(x_0=0.0\)</span>, <span class="math notranslate nohighlight">\(x_1=1.0\)</span> e <span class="math notranslate nohighlight">\(x_2=2.0\)</span>. Determine o polinômio interpolador usando a fórmula de Newton e avalie <span class="math notranslate nohighlight">\(f(1.3)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -815,7 +814,7 @@ Considere a função <span class="math notranslate nohighlight">\(f(x)=e^x +se
 </div>
 <p>Para saber mais, pesquise sobre <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code> na <em>internet</em>.</p>
 <section id="interpolacao-inversa">
-<h2>Interpolação Inversa<a class="headerlink" href="#interpolacao-inversa" title="Link to this heading">#</a></h2>
+<h2>Interpolação Inversa<a class="headerlink" href="#interpolacao-inversa" title="Link para este cabeçalho">#</a></h2>
 <p>Denominamos interpolação inversa quando, conhecidos os valores de uma função <span class="math notranslate nohighlight">\(f(x)\)</span> definida em <span class="math notranslate nohighlight">\((n+1)\)</span>  pontos distintos <span class="math notranslate nohighlight">\(x_i\)</span> ,<span class="math notranslate nohighlight">\(i =0,...,n\)</span>, necessitamos calcular o valor numérico da variável <span class="math notranslate nohighlight">\(x\)</span> correspondente a um valor <span class="math notranslate nohighlight">\(y = f(x)\)</span> conhecido inicialmente.</p>
 <p>Supondo que a função inversa de <span class="math notranslate nohighlight">\(f (x)\)</span> exista no intervalo de interpolação, a qual denotamos por <span class="math notranslate nohighlight">\(f^{-1}(x)\)</span>, então para os pontos tabelados <span class="math notranslate nohighlight">\( y_i = f(x_i) \)</span>, <span class="math notranslate nohighlight">\(i = 0,...,n\)</span> temos <span class="math notranslate nohighlight">\(x_i =f^{-1}(y_i)\)</span>, e o valor desejado <span class="math notranslate nohighlight">\(x\)</span> tal que <span class="math notranslate nohighlight">\(y=f(x)\)</span> é obtido por <span class="math notranslate nohighlight">\(x=f^{-1}(y)\)</span>.</p>
 <p>Assim, simplesmente trocamos na tabela de dados os valores de <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(f(x)\)</span> e fazemos a interpolação de <span class="math notranslate nohighlight">\(f^{-1}(x)\)</span>, como visto anteriormente.</p>
@@ -879,10 +878,10 @@ P(3.63)= 1.4207663681347895
 </div>
 </section>
 <section id="exercicios">
-<h2>Exercícios<a class="headerlink" href="#exercicios" title="Link to this heading">#</a></h2>
+<h2>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
 <p><strong>1.</strong> Considere os dados,
 $<span class="math notranslate nohighlight">\(
-\begin{array}{cccccc}
+\begin{array}{ccccccc}
 \hline
 x    &amp;1,6  &amp;1,9  &amp;2,5    &amp;3,2   &amp;3,9  &amp;4,5 \\ \hline
 f(x) &amp;2,0  &amp;8,0  &amp;14,0   &amp;15,5  &amp;9,0  &amp;2,1  \\
@@ -932,6 +931,16 @@ $<span class="math notranslate nohighlight">\(f(x)=\frac{3.21}{0.73 + 9.81x^2}\)
 <p>(a) Utilize todos os pontos para obter uma estimativa para <span class="math notranslate nohighlight">\(f(0,22)\)</span> usando um polinômio interpolador com a fórmula de Newton.</p>
 <p>(b) Plote o gráfico do polinômio obtido juntamente com os pontos tabelados para verificar o resultado da interpolação.</p>
 <p>(c) Escolha 4 pontos e estime <span class="math notranslate nohighlight">\(f(0,22)\)</span> utilizando um polinomio de terceiro grau. Plote o gráfico e compare com o resultado do item anterior. Comente.</p>
+<p><strong>6.</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/163">Fonte</a>) Use interpolação de Newton para construir polinômios interpoladores de grau três para os pontos espaçados de forma desigual fornecidos na tabela a seguir:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{cc}
+{\boldsymbol{x}} &amp; f(x) \\
+\hline -0,1 &amp; 5,30000 \\
+\hline 0,0 &amp; 2,00000 \\
+\hline 0,2 &amp; 3,19000 \\
+\hline 0,3 &amp; 1,00000 \\
+\end{array}\end{split}\]</div>
+<p>Acrescente <span class="math notranslate nohighlight">\(f(0,35)=0,97260\)</span> à tabela e construa o polinômio interpolador de grau quatro.</p>
 </section>
 </section>
 
@@ -970,7 +979,7 @@ $<span class="math notranslate nohighlight">\(f(x)=\frac{3.21}{0.73 + 9.81x^2}\)
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-subtitle">anterior</p>
         <p class="prev-next-title">4.1. Intepolação polinomial e fórmula de Lagrange</p>
       </div>
     </a>
@@ -978,7 +987,7 @@ $<span class="math notranslate nohighlight">\(f(x)=\frac{3.21}{0.73 + 9.81x^2}\)
        href="4.3_erro_na_interpolacao_polinomial.html"
        title="next page">
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-subtitle">próximo</p>
         <p class="prev-next-title">4.3. Erros na interpolação</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
@@ -995,7 +1004,7 @@ $<span class="math notranslate nohighlight">\(f(x)=\frac{3.21}{0.73 + 9.81x^2}\)
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+    <i class="fa-solid fa-list"></i> Conteúdo
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
@@ -1015,7 +1024,7 @@ $<span class="math notranslate nohighlight">\(f(x)=\frac{3.21}{0.73 + 9.81x^2}\)
   <div class="footer-item">
     
 <p class="component-author">
-By Tiago M. Buriol
+De Tiago M. Buriol
 </p>
 
   </div>

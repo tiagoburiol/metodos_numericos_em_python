@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="pt-BR" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
@@ -41,7 +41,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/documentation_options.js?v=2efa9f5e"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,6 +51,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=000972dd"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -60,12 +61,12 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto';</script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5.2 Ajuste linear nos parâmetros" href="5.2_ajuste_linear_nos_parametros.html" />
-    <link rel="prev" title="4.3. Erros na interpolação" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="next" title="5.3 Ajuste não linear e linearização" href="5.3_ajuste_nao_linear_e_linearizacao.html" />
+    <link rel="prev" title="5. Ajuste por Mínimos Quadrados" href="5_MINIMOS_QUADRADOS.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="pt-BR"/>
   </head>
   
   
@@ -164,9 +165,9 @@
 
  <script>
  document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
+    <span class="search-button__default-text">Buscar</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
    </button>
  `);
@@ -181,55 +182,53 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introdução e erros</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básicos sobre erros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2. Aritmética de ponto flutuante</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos aplicados</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Zeros de funções</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2. Método da bisseção</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2. Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Sistemas Lineares</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">4.Interpolação polinomial</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Ajuste por minimos quadrados</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">5.1 Minimos quadrados: caso discreto</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5.2_ajuste_linear_nos_parametros.html">5.2 Ajuste linear nos parâmetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">6.Integração Numérica</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_metodo_de_newton_cotes.html">6.2 Regras de Newton-Cotes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regra_dos_trapezios.html">6.3 Regra dos trapézios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.4_regras_de_simpson.html">6.4 Regras de Simpson</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. Equações diferenciais</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -286,7 +285,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
+   title="Repositório fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -303,7 +302,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
+   title="Abra um problema"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -324,7 +323,7 @@
 
 
 <div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
     <i class="fas fa-download"></i>
   </button>
   <ul class="dropdown-menu">
@@ -333,7 +332,7 @@
       
       <li><a href="../_sources/5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
+   title="Baixar arquivo fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -351,7 +350,7 @@
       <li>
 <button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Imprimir em PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -371,7 +370,7 @@
 
 <button onclick="toggleFullScreen()"
   class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
+  title="Modo tela cheia"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
@@ -397,7 +396,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -421,17 +420,16 @@ document.write(`
         <div id="jb-print-toc">
             
             <div>
-                <h2> Contents </h2>
+                <h2> Conteúdo </h2>
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caso-discreto">Caso discreto</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forma-matricial-do-sistema">Forma matricial do sistema</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-linear-nao-polinomial">Ajuste linear não polinomial</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemplo">Exemplo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercícios</a></li>
 </ul>
             </nav>
         </div>
@@ -444,7 +442,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="minimos-quadrados-caso-discreto">
-<h1>5.1 Minimos quadrados: caso discreto<a class="headerlink" href="#minimos-quadrados-caso-discreto" title="Link to this heading">#</a></h1>
+<h1>5.1 Minimos quadrados: caso discreto<a class="headerlink" href="#minimos-quadrados-caso-discreto" title="Link para este cabeçalho">#</a></h1>
 <p>O método dos mínimos quadrados é útil quando queremos aproximar uma função <span class="math notranslate nohighlight">\(f(x)\)</span> por uma outra função <span class="math notranslate nohighlight">\(g(x)\)</span>, seja porque <span class="math notranslate nohighlight">\(f\)</span> não tem expressão analítica conhecida, ou por ser de difícil tratamento ou manipulação. A função <span class="math notranslate nohighlight">\(g(x)\)</span> pode ser uma combinação de funções polinomiais, exponenciais, logarítmicas, trigonométricas, etc.</p>
 <p>De forma geral, escrevemos a função <span class="math notranslate nohighlight">\(g(x)\)</span> como uma combinação linear das funções <span class="math notranslate nohighlight">\(g_1(x)\)</span>, <span class="math notranslate nohighlight">\(g_2(x)\)</span>,…,<span class="math notranslate nohighlight">\(g_n(x)\)</span>, ou seja:</p>
 <div class="math notranslate nohighlight">
@@ -458,16 +456,18 @@ document.write(`
 <p>Se <span class="math notranslate nohighlight">\(f\)</span> for conhecida, buscamos minimizar a função</p>
 <div class="math notranslate nohighlight">
 \[ E = \int_a^b [e(x)]^2 dx = \int_a^b [f(x)-g(x)]^2 dx\]</div>
-<p>ou seja, queremos minimizar a área entra os gráficos de <span class="math notranslate nohighlight">\(g(x)\)</span> e <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
-<p>O caso discreto é útil quando queremos aproximar uma função complicada por outra mais simples, ou então, obter uma função que possa representar um conjunto de dados obtidos experimentalmente usamos. Por exemplo, se quisermos encontrar a função linear que representa o comportamento de uma mola a partir de medidas da força  <span class="math notranslate nohighlight">\(F\)</span>  aplicada para esticar essa mola e o do comprimento <span class="math notranslate nohighlight">\(x\)</span> da mola esticada, podemos buscar a função linear <span class="math notranslate nohighlight">\(F(x)=kx\)</span> (Lei de Hooke), encontrando constante elástica <span class="math notranslate nohighlight">\(k\)</span> que determina a reta que melhor se ajusta aos dados.</p>
+<p>ou seja, buscamos minimizar a área entra os gráficos de <span class="math notranslate nohighlight">\(g(x)\)</span> e <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+<p>O caso discreto é útil quando queremos aproximar uma função complicada por outra mais simples, ou então, obter uma função que possa representar um conjunto de dados obtidos experimentalmente. Por exemplo, se quisermos encontrar a função linear que representa o comportamento de uma mola a partir de medidas da força  <span class="math notranslate nohighlight">\(F\)</span>  aplicada para esticar essa mola e o do comprimento <span class="math notranslate nohighlight">\(x\)</span> da mola esticada, podemos buscar a função linear <span class="math notranslate nohighlight">\(F(x)=kx\)</span> (Lei de Hooke), encontrando constante elástica <span class="math notranslate nohighlight">\(k\)</span> que determina a reta que melhor se ajusta aos dados.</p>
 <section id="caso-discreto">
-<h2>Caso discreto<a class="headerlink" href="#caso-discreto" title="Link to this heading">#</a></h2>
+<h2>Caso discreto<a class="headerlink" href="#caso-discreto" title="Link para este cabeçalho">#</a></h2>
 <p>Inicialmente vamos supor que queremos ajustar uma reta <span class="math notranslate nohighlight">\(g(x) = a_1x+a_2\)</span> aos pontos <span class="math notranslate nohighlight">\((x_i, f(x_i))\)</span>, <span class="math notranslate nohighlight">\(i=1,...,m\)</span>, como é mostrado na figura abaixo</p>
-<p><img src="imagens/ajuste_reta.png" width="500">m</p>
-<p>Então, buscamos os coeficientes <span class="math notranslate nohighlight">\(a_1\)</span> e <span class="math notranslate nohighlight">\(a_2\)</span> que definem a reta que melhor se ajusta aos pontos, ou seja, os coeficientes que minimizam a função</p>
+<a class="reference internal image-reference" href="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_reta.png?raw=true"><img alt="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_reta.png?raw=true" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_reta.png?raw=true" style="width: 500px;" />
+</a>
+<p>Figura 5.1.1 - Ajuste de uma reta por um conjunto de pontos.</p>
+<p>Então, buscamos os coeficientes <span class="math notranslate nohighlight">\(a_1\)</span> e <span class="math notranslate nohighlight">\(a_2\)</span> que determinam a reta que melhor se ajusta aos pontos, ou seja, os coeficientes que minimizam a função</p>
 <div class="math notranslate nohighlight">
 \[ E(a_1, a_2)= \sum_{i=1}^{m} [g(x_i)-f(x_i)]^2 \]</div>
-<p>Do cálculo infinitesimal, sabemos que se a função <span class="math notranslate nohighlight">\( E(a_1, a_2)\)</span> possui um ponto de mínimo, suas derivadas parciais nesse ponto devem ser nulas, ou seja</p>
+<p>Do cálculo infinitesimal, sabemos que se a função <span class="math notranslate nohighlight">\( E(a_1, a_2)\)</span> possui um ponto de mínimo, então suas derivadas parciais nesse ponto devem ser nulas, ou seja</p>
 <div class="math notranslate nohighlight">
 \[ \frac{\partial E}{\partial a_1} = 0  \,\,\,\,\,  \frac{\partial E}{\partial a_2} = 0\]</div>
 <p>Derivando <span class="math notranslate nohighlight">\( E(a_1, a_2)\)</span> em relação a <span class="math notranslate nohighlight">\(a_1\)</span> e <span class="math notranslate nohighlight">\(a_2\)</span> obtemos</p>
@@ -505,7 +505,7 @@ document.write(`
 	         \sum_{i=1}^{m} f(x_i) 
 	         \end{array} \right] 
              \end{split}\]</div>
-<p><strong>Exemplo 1:</strong> Ajuste uma reta à função <span class="math notranslate nohighlight">\(f(x)\)</span>, tabelada como segue</p>
+<p><strong>Exemplo 1:</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/193">Arenales, 2016</a>) Ajuste uma reta à função <span class="math notranslate nohighlight">\(f(x)\)</span>, tabelada como segue</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{cccccc}
 \hline
@@ -528,12 +528,10 @@ Fazendo</p>
 	         a_1 \\ 
 	         a_2 
 	         \end{array} \right]
-=
-\left[\begin{array}{c} 
+=\left[\begin{array}{c} 
 	         \sum_{i=1}^{5} f(x_i)x_i \\ 
 	         \sum_{i=1}^{5} f(x_i) 
-	         \end{array} \right] 
-             \end{split}\]</div>
+	         \end{array} \right]\end{split}\]</div>
 <p>Obtem-se</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left[\begin{array}{cc}
@@ -543,8 +541,7 @@ Fazendo</p>
 \left[\begin{array}{c} 
 	         a_1 \\ 
 	         a_2 
-	         \end{array} \right]
-=
+	         \end{array} \right]=
 \left[\begin{array}{c} 
 	         -110.02 \\ 
 	         -35.03 
@@ -556,20 +553,24 @@ Fazendo</p>
 \left[\begin{array}{c} 
 	         a_1 \\ 
 	         a_2 
-	         \end{array} \right]
-=
+	         \end{array} \right]=
 \left[\begin{array}{c} 
 	         -3.996 \\ 
 	          0.986 
 	         \end{array} \right]\end{split}\]</div>
-<p>Que são os coefinientes da reta procurada
-]</p>
+<p>Que são os coefinientes da reta procurada.</p>
+<p>Vamos agora fazer as contas usando Python:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pontos tabelados</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.98</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.01</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.99</span><span class="p">,</span> <span class="o">-</span><span class="mf">11.01</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.0</span><span class="p">])</span>
 
@@ -582,13 +583,28 @@ Fazendo</p>
 
 <span class="c1"># Monta e resolve o sistema</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">a11</span><span class="p">,</span> <span class="n">a12</span><span class="p">],</span> <span class="p">[</span><span class="n">a12</span><span class="p">,</span> <span class="n">a22</span><span class="p">]])</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;A =&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
 <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">])</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;b = &quot;</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
 
-<span class="n">a</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
-
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Solução:&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A = [[30 10]
+ [10  5]]
+b =  [-110.02  -35.03]
+Solução: [-3.996  0.986]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Assim, a reta procurada é <span class="math notranslate nohighlight">\(g(x) = -3.996x+0.986\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotnado</span>
 <span class="c1"># define a funcao g(x) para plotar </span>
 <span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
@@ -603,16 +619,10 @@ Fazendo</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[30 10]
- [10  5]]
-[-110.02  -35.03]
-[-3.996  0.986]
-</pre></div>
-</div>
 <img alt="../_images/14f5c8c8d1c5038030e3f837b602e10a342ce1ed3ccc7a7759ffa7318ee28c54.png" src="../_images/14f5c8c8d1c5038030e3f837b602e10a342ce1ed3ccc7a7759ffa7318ee28c54.png" />
 </div>
 </div>
-<p>Para aproximar a função f(x) por um polinômio de grau 2, usamos a seguinte forma geral para <span class="math notranslate nohighlight">\(g(x)\)</span></p>
+<p>Para aproximar a função f(x) por um <strong>polinômio de grau 2</strong>, usamos a seguinte forma geral para <span class="math notranslate nohighlight">\(g(x)\)</span></p>
 <div class="math notranslate nohighlight">
 \[ g(x)=a_1g_1(x) + a_2g_2(x) + a_3g_3(x) = a_1x^2 + a_2x + a_3\]</div>
 <p>com <span class="math notranslate nohighlight">\(g_1(x) = x^2\)</span>, <span class="math notranslate nohighlight">\(g_2(x) = x\)</span> e <span class="math notranslate nohighlight">\(g_3(x) = 1\)</span>.</p>
@@ -646,7 +656,7 @@ Fazendo</p>
              \\
              \left(\sum_{i=1}^{m} x_i^2\right)a_ 1 + \left(\sum_{i=1}^{m} x_i\right)a_ 2 + \left(\sum_{i=1}^{m} 1\right)a_ 3  = \sum_{i=1}^{m} f(x_i)
    \end{cases} \end{split}\]</div>
-<p><strong>Exemplo 2:</strong> Considere uma função f (x) definida conforme tabela</p>
+<p><strong>Exemplo 2:</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/196">Arenales, 2016</a>) Considere uma função f (x) definida conforme tabela</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{array}{c|c|c|c|c|c|c}
@@ -739,7 +749,7 @@ a_3
 <p>A solução do sistema nos fornece <span class="math notranslate nohighlight">\( a_1=5,0898\)</span>, <span class="math notranslate nohighlight">\(a_2=0,0519\)</span> e <span class="math notranslate nohighlight">\(a_3=-1,1437\)</span> como podemos ver a seguir. Ou seja, a função que procuramos é <span class="math notranslate nohighlight">\(g(x) = 5,0898x^2 + 5,0898x -1,1437 \)</span>. Vamos plotar essa função junto com os pontos:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -774,25 +784,23 @@ a_3
 </div>
 </div>
 <section id="forma-matricial-do-sistema">
-<h3>Forma matricial do sistema<a class="headerlink" href="#forma-matricial-do-sistema" title="Link to this heading">#</a></h3>
-<p>Observe que podemos obter o mesmo resultado se fizermos <span class="math notranslate nohighlight">\(A= V^TV\)</span> e  <span class="math notranslate nohighlight">\(B=V^T y_i\)</span>, onde <span class="math notranslate nohighlight">\(V\)</span> é a matriz cujas linhas são formadas por <span class="math notranslate nohighlight">\([g_1(x_i) \,\, g_n(x_i) \,\,... \,\,g_n(x_i)\,\,]\)</span>, <span class="math notranslate nohighlight">\(i=1,...,m\)</span>. Nesse caso, a solução pode ser obtida fazendo:</p>
+<h3>Forma matricial do sistema<a class="headerlink" href="#forma-matricial-do-sistema" title="Link para este cabeçalho">#</a></h3>
+<p>Observe que podemos obter o mesmo resultado se fizermos <span class="math notranslate nohighlight">\(A= V^TV\)</span> e  <span class="math notranslate nohighlight">\(B=V^T y_i\)</span>, onde <span class="math notranslate nohighlight">\(V\)</span> é a matriz cujas linhas são formadas por <span class="math notranslate nohighlight">\([g_1(x_i) \,\, g_2(x_i) \,\,... \,\,g_n(x_i)\,\,]\)</span>, <span class="math notranslate nohighlight">\(i=1,...,m\)</span>. Nesse caso, a solução pode ser obtida fazendo:</p>
 <div class="math notranslate nohighlight">
 \[ a = (V^TV)^{-1}V^Ty \]</div>
 <p>Observe os códigos a seguir:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">X</span><span class="o">**</span><span class="mf">2.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mf">1.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">V</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 4. -2.  1.]
- [ 1. -1.  1.]
- [ 0.  0.  1.]
- [ 1.  1.  1.]
- [ 4.  2.  1.]
- [ 9.  3.  1.]]
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">X</span><span class="o">**</span><span class="mf">2.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mf">1.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="o">**</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+                      <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid decimal literal
 </pre></div>
 </div>
 </div>
@@ -804,13 +812,6 @@ a_3
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[115.  27.  19.]
- [ 27.  19.   3.]
- [ 19.   3.   6.]]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -819,21 +820,11 @@ a_3
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>B= [565.   134.98  90.  ]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;solução:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>solução: [ 5.08982143  0.05189286 -1.14371429]
 </pre></div>
 </div>
 </div>
@@ -856,8 +847,171 @@ a_3
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>solução: [ 5.08982143  0.05189286 -1.14371429]
+</div>
+<p><strong>Generalizando o procedimento</strong>, podemos determinar os coeficientes <span class="math notranslate nohighlight">\(a_1,a_2,...,a_n\)</span> da função<span class="math notranslate nohighlight">\( g(x) = a_1g_1(x)+a_1g_1(x)+...+a_ng_n(x)\)</span> resolvendo o sistema linear formado pelas equações</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial E}{\partial a_1} = 0, \,\,  \frac{\partial E}{\partial a_2} = 0, ..., \,\, \frac{\partial E}{\partial a_n} = 0\]</div>
+<p>ou seja,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+\left(\sum_{i=1}^{m} g_1(x_i)g_1(x_i)\right)a_1 + \left(\sum_{i=1}^{m} g_1(x_i)g_2(x_i)\right)a_2+...+\left(\sum_{i=1}^{m} g_1(x_i)g_n(x_i)\right)a_n = \sum_{i=1}^{m} f(x_i)g_1(x_i) \\
+\left(\sum_{i=1}^{m} g_2(x_i)g_1(x_i)\right)a_1 + \left(\sum_{i=1}^{m} g_2(x_i)g_2(x_i)\right)a_2+...+\left(\sum_{i=1}^{m} g_2(x_i)g_n(x_i)\right)a_n = \sum_{i=1}^{m} f(x_i)g_2(x_i) \\
+\vdots\\
+\left(\sum_{i=1}^{m} g_n(x_i)g_1(x_i)\right)a_1 + \left(\sum_{i=1}^{m} g_n(x_i)g_2(x_i)\right)a_2+...+\left(\sum_{i=1}^{m} g_n(x_i)g_n(x_i)\right)a_n = \sum_{i=1}^{m} f(x_i)g_n(x_i) \\
+\end{cases} \end{split}\]</div>
+<p><strong>Exemplo 3:</strong> Dado o seguinte conjunto de dados
+$<span class="math notranslate nohighlight">\(
+  \begin{array}{l|ccccccccccc}
+  \hline
+x_i &amp; 0,0 &amp; 0,1 &amp; 0,2 &amp; 0,3 &amp; 0,4 &amp; 0,5 &amp; 0,6 &amp; 0,7 &amp; 0,8 &amp; 0,9 &amp; 1,0\\\hline
+      y_i &amp; 31 &amp; 35 &amp; 37 &amp; 33 &amp; 28 &amp; 20 &amp; 16 &amp; 15 &amp; 18 &amp; 23 &amp; 31\\
+    \hline
+  \end{array}
+\)</span>$</p>
+<p>Encontre a função do tipo <span class="math notranslate nohighlight">\(f(x)=a+b\sin(2\pi x)+c\cos(2\pi x)\)</span> que melhor aproxima os valores dados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">31.</span><span class="p">,</span><span class="mf">35.</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mf">33.</span><span class="p">,</span><span class="mf">28.</span><span class="p">,</span><span class="mf">20.</span><span class="p">,</span><span class="mf">16.</span><span class="p">,</span><span class="mf">15.</span><span class="p">,</span><span class="mf">18.</span><span class="p">,</span><span class="mf">23.</span><span class="p">,</span><span class="mf">31.</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">g2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="n">g3</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">g1</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">g2</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">g3</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">V</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">g1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">g2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">g3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plota os pontos e a função g(x)</span>
+<span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ajuste-linear-nao-polinomial">
+<h3>Ajuste linear não polinomial<a class="headerlink" href="#ajuste-linear-nao-polinomial" title="Link para este cabeçalho">#</a></h3>
+<p>Uma função do tipo</p>
+<div class="math notranslate nohighlight">
+\[ g(x) = a_1 g_1(x) + a_2 g_2(x) + ... + a_n g_n(x)\]</div>
+<p>é dita um <em>modelo de regressão linear</em>. O adjetivo “linear” é usado para indicar que o modelo é linear nos parâmetros <span class="math notranslate nohighlight">\(a_1\)</span>, <span class="math notranslate nohighlight">\(a_2\)</span>,…, <span class="math notranslate nohighlight">\(a_n\)</span> e não porque é um função linear de <span class="math notranslate nohighlight">\(x\)</span>. Por exemplo, uma expressão da forma</p>
+<div class="math notranslate nohighlight">
+\[ y = a_1 + a_2 log(x) + a_3 x^3 \]</div>
+<p>é um modelo de regressão linear múltipla, assim como os ajustes polinomiais feitos nos capítulos anteriores, mas o mesmo não acontece com a equação</p>
+<div class="math notranslate nohighlight">
+\[y =a_1 + a_2 x^{a_3} + a_4 x^2\]</div>
+<p>Algumas maneiras de justar funções não lineares serão discutidos nas próximas seções. Por hora, apresentamos um exemplo de ajuste linear não polinomial.</p>
+<p><strong>Exemplo 4:</strong> Considere o segunte conjunto de pontos</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{cccccccccccc}
+x_i    &amp;-0.5 &amp;0.0 &amp;0.5 &amp;1.0 &amp;1.5 &amp;2.0 &amp;2.5 &amp;3.0 &amp;3.5 &amp;4.0 &amp;4.5\\ 
+f(x_i) &amp;-0.25 &amp;0.5 &amp;0.25 &amp;0.0 &amp;0.75 &amp;1.5 &amp;1.25 &amp;1.00 &amp;1.75 &amp;2.5 &amp;2.25
+\end{array} \end{split}\]</div>
+<p>Usando o método dos mínimos quadrados, ajuste uma função <span class="math notranslate nohighlight">\(g(x)\)</span> aos dados.</p>
+<p><strong>Solução:</strong>
+Primeiramente, construimos o diagrama de dispersão dos pontos dados:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.25</span><span class="p">])</span>
+
+<span class="c1"># Plota os pontos e a reta</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>É possível perceber que os pontos parecem crescer linearmente mas também parecem oscilar com período igual a 2.</p>
+<p>Essas características sugerem uma função do tipo <span class="math notranslate nohighlight">\(g(x) = a_1x+a_2 \cos(\pi x)\)</span> em que <span class="math notranslate nohighlight">\(g_1(x)=x\)</span> e <span class="math notranslate nohighlight">\(g_2(x) = cos(\pi x)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
+
+<span class="c1"># Calcula os elementos das marizes</span>
+<span class="n">g1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">X</span>
+<span class="n">g2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">X</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">g1</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="n">a11</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">g1</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="n">g1</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
+<span class="n">a12</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">g1</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="n">g2</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
+<span class="n">a21</span> <span class="o">=</span> <span class="n">a12</span>
+<span class="n">a22</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">g2</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="n">g2</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">a11</span><span class="p">,</span> <span class="n">a12</span><span class="p">,</span> <span class="n">a22</span><span class="p">)</span>
+
+<span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">g1</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">g2</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">)</span>
+
+
+<span class="c1"># Monta e resolve o sistema</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">a11</span><span class="p">,</span> <span class="n">a12</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">a21</span><span class="p">,</span> <span class="n">a22</span><span class="p">]])</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">])</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="c1"># define a funcao g(x) para plotar </span>
+<span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">g1</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">g2</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># cria pontos (x, y) da reta </span>
+<span class="n">Xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">Yr</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">Xr</span><span class="p">)</span>   
+
+<span class="c1"># Plota os pontos e a reta</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="s2">&quot;ro&quot;</span><span class="p">,</span> <span class="n">Xr</span><span class="p">,</span> <span class="n">Yr</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -865,7 +1019,7 @@ a_3
 </section>
 </section>
 <section id="exercicios">
-<h2>Exercícios:<a class="headerlink" href="#exercicios" title="Link to this heading">#</a></h2>
+<h2>Exercícios:<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
 <p><strong>1.</strong> Em um experimento foram obtidos os seguintes dados:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -876,94 +1030,7 @@ x_i &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 \\
 \end{split}\]</div>
 <p>a) Determine a reta que melhor se ajusta aos dados da tabela, usando o método dos mínimos quadrados</p>
 <p>b) Calcule a soma do erro quadrático <span class="math notranslate nohighlight">\(\sum_{i=1}^5 (f(x_i)-g(x_i))^2\)</span></p>
-<p><strong>2.</strong> Após serem efetuadas medições num gerador de corrente contínua, foram obtidos os seguintes
-valores indicados por um voltímetro e um amperímetro.
-$<span class="math notranslate nohighlight">\(
-\begin{array}{ccccccccccccc}
-    \hline
-I(A) &amp;1.58&amp;1.75&amp;2.10&amp;2.20&amp;2.50&amp;3.50&amp;3.75&amp;4.25&amp;4.8&amp;4.9&amp;3.12    \\ \hline
-V(v) &amp;210&amp;155&amp;170&amp;120&amp;85&amp;50&amp;110&amp;79&amp;150&amp;120&amp;60		  \\
-\hline
-\end{array}
-\)</span><span class="math notranslate nohighlight">\(
-Faça um gráfico dos dados.(a) Ajuste os dados por polinômio de grau adequado. (b) Estime o valor a ser obtido no voltímetro quando o amperímetro estiver marcando \)</span>4.0A$.</p>
-<p><strong>3.</strong> Dados os seguintes pontos tabelados
-$<span class="math notranslate nohighlight">\(
-\begin{array}{cccccccccc}
-\hline
-x_i    &amp;0.01  &amp;0.99  &amp;2.02  &amp;3.01  &amp;3.97  &amp;5.01  &amp;5.93  &amp;6.99  &amp;8.08  \\
-\hline
-f(x_i) &amp;0.000 &amp;1.621  &amp;1.782  &amp;0.915 &amp;-0.122 &amp;-0.225 &amp;1.099 &amp;2.728 &amp;3.534\\
-\hline
-\end{array}
-\)</span>$</p>
-<p>Encontre o polinômio de grau 3 que melhor se ajusta aos pontos dados.</p>
-</section>
-<section id="exemplo">
-<h2>Exemplo<a class="headerlink" href="#exemplo" title="Link to this heading">#</a></h2>
-<p>p190</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">exp</span>
-
-<span class="n">g1g1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span>
-<span class="n">g1g2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
-<span class="n">g2g2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">fg1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.75</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
-<span class="n">fg2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.75</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
-
-
-
-
-<span class="c1"># Calcula os elementos das marizes</span>
-<span class="n">a11</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">g1g1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">a12</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">g1g2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">a22</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">g2g2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">b1</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">fg1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">b2</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">fg2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-
-
-
-<span class="c1"># Monta e resolve o sistema</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">a11</span><span class="p">,</span> <span class="n">a12</span><span class="p">],</span> <span class="p">[</span><span class="n">a12</span><span class="p">,</span> <span class="n">a22</span><span class="p">]])</span>
-
-<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">])</span>
-
-<span class="n">a</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
-
-<span class="c1"># define a funcao g(x) para plotar </span>
-<span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span>
-
-<span class="c1"># cria pontos (x, y) da reta </span>
-<span class="n">Xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
-<span class="c1">#print (Xr)</span>
-
-<span class="c1">#Y = np.exp(X)</span>
-
-<span class="c1"># Plota os pontos e a reta</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Xr</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.75</span><span class="o">*</span><span class="n">Xr</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">Xr</span><span class="p">,</span> <span class="n">g</span><span class="p">(</span><span class="n">Xr</span><span class="p">),</span> <span class="s2">&quot;b-&quot;</span><span class="p">)</span> 
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.59854891  0.17695201]
-</pre></div>
-</div>
-<img alt="../_images/b5d0a05c755dd63d7de8f330225bec9411a8c09869172ba71c9e81b3abdeabd0.png" src="../_images/b5d0a05c755dd63d7de8f330225bec9411a8c09869172ba71c9e81b3abdeabd0.png" />
-</div>
-</div>
-</section>
-<section id="id1">
-<h2>Exercícios<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<p><strong>1.</strong>  Encontre o polinômio <span class="math notranslate nohighlight">\(p(x) = a_1 + a_2x + a_3x^2\)</span> que melhor se ajusta no sentido de mínimos quadrados aos pontos:</p>
+<p><strong>2.</strong>  Encontre o polinômio <span class="math notranslate nohighlight">\(p(x) = a_1 + a_2x + a_3x^2\)</span> que melhor se ajusta no sentido de mínimos quadrados aos pontos:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     \begin{array}{l|cccc}
@@ -975,7 +1042,7 @@ f(x_i) &amp;0.000 &amp;1.621  &amp;1.782  &amp;0.915 &amp;-0.122 &amp;-0.225 &am
   \end{array}
 \end{split}\]</div>
 <p><em>Resposta:</em> <span class="math notranslate nohighlight">\(a_1 = -0,67112\)</span>, <span class="math notranslate nohighlight">\(a_2 = -0,12123\)</span>, <span class="math notranslate nohighlight">\(a_3 = 0,73907\)</span>.</p>
-<p><strong>2.</strong> Encontrar a parábola <span class="math notranslate nohighlight">\(y=ax^2+bx+c\)</span> que melhor aproxima o seguinte conjunto de dados:
+<p><strong>3.</strong> Encontrar a parábola <span class="math notranslate nohighlight">\(y=ax^2+bx+c\)</span> que melhor aproxima o seguinte conjunto de dados:
 $<span class="math notranslate nohighlight">\(
   \begin{array}{l|ccccc}
   \hline
@@ -984,9 +1051,42 @@ $<span class="math notranslate nohighlight">\(
       y_i &amp; 1,99 &amp; 4,55 &amp; 7,20 &amp; 9,51 &amp; 10,82\\
     \hline
   \end{array}
+\)</span>$</p>
+<p><em>Resposta:</em>     <span class="math notranslate nohighlight">\(y=-0,0407898x^2+ 2,6613293x+ 1,9364598\)</span></p>
+<p><strong>4.</strong> Após serem efetuadas medições num gerador de corrente contínua, foram obtidos os seguintes
+valores indicados por um voltímetro e um amperímetro.
+$<span class="math notranslate nohighlight">\(
+\begin{array}{ccccccccccccc}
+    \hline
+I(A) &amp;1.58&amp;1.75&amp;2.10&amp;2.20&amp;2.50&amp;3.50&amp;3.75&amp;4.25&amp;4.8&amp;4.9&amp;3.12    \\ \hline
+V(v) &amp;210&amp;155&amp;170&amp;120&amp;85&amp;50&amp;110&amp;79&amp;150&amp;120&amp;60		  \\
+\hline
+\end{array}
 \)</span><span class="math notranslate nohighlight">\(
-_Resposta:_     \)</span>y=-0,0407898x^2+ 2,6613293x+ 1,9364598$</p>
-<p><strong>3.</strong> Dado o seguinte conjunto de dados
+Faça um gráfico dos dados.(a) Ajuste os dados por polinômio de grau adequado. (b) Estime o valor a ser obtido no voltímetro quando o amperímetro estiver marcando \)</span>4.0A$.</p>
+<p><strong>5.</strong> Dados os seguintes pontos tabelados
+$<span class="math notranslate nohighlight">\(
+\begin{array}{cccccccccc}
+\hline
+x_i    &amp;0.01  &amp;0.99  &amp;2.02  &amp;3.01  &amp;3.97  &amp;5.01  &amp;5.93  &amp;6.99  &amp;8.08  \\
+\hline
+f(x_i) &amp;0.000 &amp;1.621  &amp;1.782  &amp;0.915 &amp;-0.122 &amp;-0.225 &amp;1.099 &amp;2.728 &amp;3.534\\
+\hline
+\end{array}
+\)</span>$</p>
+<p>Encontre o polinômio de grau 3 que melhor se ajusta aos pontos dados.</p>
+<p><strong>6.</strong> Dados os seguintes pontos tabelados
+$<span class="math notranslate nohighlight">\(
+\begin{array}{cccccccccc}
+\hline
+x_i    &amp;0.01  &amp;0.99  &amp;2.02  &amp;3.01  &amp;3.97  &amp;5.01  &amp;5.93  &amp;6.99  &amp;8.08  \\
+\hline
+f(x_i) &amp;0.000 &amp;1.621  &amp;1.782  &amp;0.915 &amp;-0.122 &amp;-0.225 &amp;1.099 &amp;2.728 &amp;3.534\\
+\hline
+\end{array}
+\)</span>$</p>
+<p>Encontre a função do tipo <span class="math notranslate nohighlight">\(g(x)=a_1x + a_2 sen(x)\)</span> que melhor se ajusta.</p>
+<p><strong>7.</strong> Dado o seguinte conjunto de dados
 $<span class="math notranslate nohighlight">\(
   \begin{array}{l|ccccccccccc}
   \hline
@@ -1033,20 +1133,20 @@ x_i &amp; 0,0 &amp; 0,1 &amp; 0,2 &amp; 0,3 &amp; 0,4 &amp; 0,5 &amp; 0,6 &amp; 
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html"
+       href="5_MINIMOS_QUADRADOS.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">4.3. Erros na interpolação</p>
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">5. Ajuste por Mínimos Quadrados</p>
       </div>
     </a>
     <a class="right-next"
-       href="5.2_ajuste_linear_nos_parametros.html"
+       href="5.3_ajuste_nao_linear_e_linearizacao.html"
        title="next page">
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">5.2 Ajuste linear nos parâmetros</p>
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">5.3 Ajuste não linear e linearização</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1062,17 +1162,16 @@ x_i &amp; 0,0 &amp; 0,1 &amp; 0,2 &amp; 0,3 &amp; 0,4 &amp; 0,5 &amp; 0,6 &amp; 
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+    <i class="fa-solid fa-list"></i> Conteúdo
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caso-discreto">Caso discreto</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forma-matricial-do-sistema">Forma matricial do sistema</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-linear-nao-polinomial">Ajuste linear não polinomial</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemplo">Exemplo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercícios</a></li>
 </ul>
   </nav></div>
 
@@ -1087,7 +1186,7 @@ x_i &amp; 0,0 &amp; 0,1 &amp; 0,2 &amp; 0,3 &amp; 0,4 &amp; 0,5 &amp; 0,6 &amp; 
   <div class="footer-item">
     
 <p class="component-author">
-By Tiago M. Buriol
+De Tiago M. Buriol
 </p>
 
   </div>

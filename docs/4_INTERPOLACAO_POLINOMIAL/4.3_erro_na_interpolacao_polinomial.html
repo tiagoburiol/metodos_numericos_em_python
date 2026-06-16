@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="pt-BR" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
@@ -41,7 +41,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/documentation_options.js?v=2efa9f5e"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,6 +51,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=000972dd"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -60,12 +61,12 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial';</script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5.1 Minimos quadrados: caso discreto" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="next" title="5. Ajuste por Mínimos Quadrados" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html" />
     <link rel="prev" title="4.2 Fórmula de Newton" href="4.2_interpolacao_de_newton.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="pt-BR"/>
   </head>
   
   
@@ -164,9 +165,9 @@
 
  <script>
  document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
+    <span class="search-button__default-text">Buscar</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
    </button>
  `);
@@ -181,55 +182,53 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introdução e erros</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básicos sobre erros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2. Aritmética de ponto flutuante</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos aplicados</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Zeros de funções</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2. Método da bisseção</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2. Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Sistemas Lineares</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">4.Interpolação polinomial</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4.3. Erros na interpolação</a></li>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.3. Erros na interpolação</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Ajuste por minimos quadrados</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_ajuste_linear_nos_parametros.html">5.2 Ajuste linear nos parâmetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">6.Integração Numérica</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_metodo_de_newton_cotes.html">6.2 Regras de Newton-Cotes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regra_dos_trapezios.html">6.3 Regra dos trapézios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.4_regras_de_simpson.html">6.4 Regras de Simpson</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. Equações diferenciais</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -286,7 +285,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
+   title="Repositório fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -303,7 +302,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
+   title="Abra um problema"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -324,7 +323,7 @@
 
 
 <div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
     <i class="fas fa-download"></i>
   </button>
   <ul class="dropdown-menu">
@@ -333,7 +332,7 @@
       
       <li><a href="../_sources/4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
+   title="Baixar arquivo fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -351,7 +350,7 @@
       <li>
 <button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Imprimir em PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -371,7 +370,7 @@
 
 <button onclick="toggleFullScreen()"
   class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
+  title="Modo tela cheia"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
@@ -397,7 +396,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -421,10 +420,11 @@ document.write(`
         <div id="jb-print-toc">
             
             <div>
-                <h2> Contents </h2>
+                <h2> Conteúdo </h2>
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#um-limitante-superior-para-o-erro-usando-a-formula-de-lagrange">Um limitante superior para o erro usando a fórmula de Lagrange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uma-estimativa-para-o-erro-usando-a-formula-de-newton-de-diferencas-divididas">Uma estimativa para o erro usando a fórmula de Newton de diferenças divididas</a></li>
 </ul>
             </nav>
@@ -438,9 +438,10 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="erros-na-interpolacao">
-<h1>4.3. Erros na interpolação<a class="headerlink" href="#erros-na-interpolacao" title="Link to this heading">#</a></h1>
-<p><strong>Um limitante superior para o erro usando a fórmula de Lagrange</strong></p>
-<p>Se <span class="math notranslate nohighlight">\(x_0, x_1, \ldots, x_n\)</span> são <span class="math notranslate nohighlight">\(n+1\)</span> números distintos, e <span class="math notranslate nohighlight">\(f\)</span> é uma função cujos valores são dados por esses números, então existe um único polinômio <span class="math notranslate nohighlight">\(P(x)\)</span> de grau no máximo <span class="math notranslate nohighlight">\(n\)</span></p>
+<h1>4.3. Erros na interpolação<a class="headerlink" href="#erros-na-interpolacao" title="Link para este cabeçalho">#</a></h1>
+<section id="um-limitante-superior-para-o-erro-usando-a-formula-de-lagrange">
+<h2>Um limitante superior para o erro usando a fórmula de Lagrange<a class="headerlink" href="#um-limitante-superior-para-o-erro-usando-a-formula-de-lagrange" title="Link para este cabeçalho">#</a></h2>
+<p>(<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/136">Burden,2016</a>) Se <span class="math notranslate nohighlight">\(x_0, x_1, \ldots, x_n\)</span> são <span class="math notranslate nohighlight">\(n+1\)</span> números distintos, e <span class="math notranslate nohighlight">\(f\)</span> é uma função cujos valores são dados por esses números, então existe um único polinômio <span class="math notranslate nohighlight">\(P(x)\)</span> de grau no máximo <span class="math notranslate nohighlight">\(n\)</span></p>
 <div class="math notranslate nohighlight">
 \[
 f\left(x_k\right)=P\left(x_k\right), \quad \text { para cada } k=0,1, \ldots, n .
@@ -459,20 +460,170 @@ L_{n, k}(x) &amp; =\frac{\left(x-x_0\right)\left(x-x_1\right) \cdots\left(x-x_{k
 i \neq k}}^n \frac{\left(x-x_i\right)}{\left(x_k-x_i\right)}
 \end{aligned}
 \end{split}\]</div>
-<p>Um esboço do gráfico de um típico <span class="math notranslate nohighlight">\(L_{n, k}\)</span> quando <span class="math notranslate nohighlight">\(n\)</span> é par é mostrado na Figura 4.3.1 (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/136">Burden,2016</a>).</p>
-<img src="imagens/polinomio_Lk.png" width="800">
-<p>Figura 4.3.1 - Gráfico de um típico <span class="math notranslate nohighlight">\(L_{n, k}\)</span> quando <span class="math notranslate nohighlight">\(n\)</span> é par</p>
-<p>Essa fórmula é conhecida como <em>polinômio interpolados de Lagrange</em>.</p>
+<p>Um esboço do gráfico de um típico <span class="math notranslate nohighlight">\(L_{n, k}\)</span> quando <span class="math notranslate nohighlight">\(n\)</span> é par é mostrado na Figura 4.3.1.</p>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/polinomio_Lk.png"><img alt="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/polinomio_Lk.png" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/polinomio_Lk.png" style="width: 800px;" />
+</a>
+<p>Figura 4.3.1 - Gráfico de um típico <span class="math notranslate nohighlight">\(L_{n, k}\)</span> quando <span class="math notranslate nohighlight">\(n\)</span> é par (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/136">Burden,2016</a>).</p>
+<p>Já vimos que essa fórmula é conhecida como <em>polinômio interpolados de Lagrange</em>.</p>
 <p>O próximo passo é calcular um resto ou limitante para o erro envolvido na aproximação de uma função por um polinômio interpolador.</p>
 <p>Suponha que <span class="math notranslate nohighlight">\(x_0, x_1, \ldots, x_n\)</span> sejam números distintos no intervalo <span class="math notranslate nohighlight">\([a, b]\)</span> e que <span class="math notranslate nohighlight">\(f \in\)</span> <span class="math notranslate nohighlight">\(C^{n+1}[a, b]\)</span>. Então, para cada <span class="math notranslate nohighlight">\(x\)</span> em <span class="math notranslate nohighlight">\([a, b]\)</span>, existe umnúmero <span class="math notranslate nohighlight">\(\xi(x)\)</span> (geralmente desconhecido) entre <span class="math notranslate nohighlight">\(\min \left\{x_0, x_1, \ldots, x_n\right\}\)</span>, e o <span class="math notranslate nohighlight">\(\max \left\{x_0, x_1, \ldots, x_n\right\}\)</span> e consequentemente em <span class="math notranslate nohighlight">\((a, b)\)</span>, com</p>
 <div class="math notranslate nohighlight">
 \[f(x)=P(x)+\frac{f^{(n+1)}(\xi(x))}{(n+1)!}\left(x-x_0\right)\left(x-x_1\right) \cdots\left(x-x_n\right)\]</div>
-<p>onde <span class="math notranslate nohighlight">\(P(x)\)</span> é o polinômio interpolador <span class="math notranslate nohighlight">\(P(x)=\sum_{k=0}^n f\left(x_k\right) L_{n, k}(x)\)</span></p>
-<p><strong>Exemplos:</strong></p>
-<p><a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/137">https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/137</a></p>
-<p><a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/139">https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/139</a></p>
+<p>onde <span class="math notranslate nohighlight">\(P(x)\)</span> é o polinômio interpolador <span class="math notranslate nohighlight">\(P(x)=\sum_{k=0}^n f\left(x_k\right) L_{n, k}(x)\)</span>,</p>
+<p>A demonstração desse resultado pode ser vista em <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/138">Burden (2016, p. 138)</a>.</p>
+<p><strong>Exemplo 4.3.1:</strong> Vamos usar os pontos com <span class="math notranslate nohighlight">\(x_0=2, x_1=2,75\)</span> e <span class="math notranslate nohighlight">\(x_2=4\)</span> para determinar o polinômio de Lagrange de grau 2 que aproxima a função <span class="math notranslate nohighlight">\(f(x)=\frac{1}{x}\)</span>. Em seguida vamos determinar o erro máximo  quando o polinômio for usado para aproximar <span class="math notranslate nohighlight">\(f(x)\)</span> com <span class="math notranslate nohighlight">\(x \in [2,4]\)</span>.</p>
+<p><em>Solução:</em> Primeiramente determinamos os coeficientes polinomiais <span class="math notranslate nohighlight">\(L_0(x), L_1(x)\)</span> e <span class="math notranslate nohighlight">\(L_2(x)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp; L_0(x)=\frac{(x-2,75)(x-4)}{(2-2,75)(2-4)}=\frac{2}{3}(x-2,75)(x-4) \\
+&amp; L_1(x)=\frac{(x-2)(x-4)}{(2,75-2)(2,75-4)}=-\frac{16}{15}(x-2)(x-4)
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+L_2(x)=\frac{(x-2)(x-2,75)}{(4-2)(4-2,75)}=\frac{2}{5}(x-2)(x-2,75)
+\]</div>
+<p>Além disso, tem-se <span class="math notranslate nohighlight">\(f\left(x_0\right)=f(2)=1 / 2, f\left(x_1\right)=f(2,75)=4 / 11\)</span> e <span class="math notranslate nohighlight">\(f\left(x^2\right)=f(4)=1 / 4\)</span>, de modo que</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+P(x) &amp; =\sum_{k=0}^2 f\left(x_k\right) L_k(x) \\
+&amp; =\frac{1}{3}(x-2,75)(x-4)-\frac{64}{165}(x-2)(x-4)+\frac{1}{10}(x-2)(x-2,75) \\
+&amp; =\frac{1}{22} x^2-\frac{35}{88} x+\frac{49}{44}
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">yi</span> <span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">xi</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">22</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="mi">35</span><span class="o">/</span><span class="mi">88</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">49</span><span class="o">/</span><span class="mi">44</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pontos&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Polinômio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Função&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2690da9e2ec5d71a7b148f45c05eee8eb12cb2e3d83cb09ed5f2cd77ec53ad01.png" src="../_images/2690da9e2ec5d71a7b148f45c05eee8eb12cb2e3d83cb09ed5f2cd77ec53ad01.png" />
+</div>
+</div>
+<p>Para estimar o erro máximo, vamos primeiramente obter as derivadas de <span class="math notranslate nohighlight">\(f(x)=x^{-1}\)</span> fazendo</p>
+<div class="math notranslate nohighlight">
+\[
+f^{\prime}(x)=-x^{-2}, \quad f^{\prime \prime}(x)=2 x^{-3} \quad \text { e } \quad f^{\prime \prime \prime}(x)=-6 x^{-4}
+\]</div>
+<p>Assim, a fórmula do erro fornece</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{f^{\prime \prime \prime}(\xi(x))}{3!}\left(x-x_0\right)\left(x-x_1\right)\left(x-x_2\right)=-(\xi(x))^{-4}(x-2)(x-2,75)(x-4), \quad \text { para } \xi(x) \text { em }(2,4)
+\]</div>
+<p>O valor máximo de <span class="math notranslate nohighlight">\((\xi(x))^{-4}\)</span> no intervalo é <span class="math notranslate nohighlight">\(2^{-4}=1 / 16\)</span>. Precisamos agora determinar o valor máximo neste intervalo do valor absoluto do polinômio</p>
+<div class="math notranslate nohighlight">
+\[
+g(x)=(x-2)(x-2,75)(x-4)=x^3-\frac{35}{4} x^2+\frac{49}{2} x-22.
+\]</div>
+<p>Já que</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{dx} \left(x^3-\frac{35}{4} x^2+\frac{49}{2} x-22\right)=3 x^2-\frac{35}{2} x+\frac{49}{2}=\frac{1}{2}(3 x-7)(2 x-7),
+\]</div>
+<p>os pontos críticos ocorrem em</p>
+<div class="math notranslate nohighlight">
+\[
+x=\frac{7}{3}, \operatorname{com} g\left(\frac{7}{3}\right)=\frac{25}{108}, \quad \text { e } \quad x=\frac{7}{2}, \operatorname{com} g\left(\frac{7}{2}\right)=-\frac{9}{16} .
+\]</div>
+<p>Assim, o erro máximo é</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{f^{\prime \prime \prime}(\xi(x))}{3!}\left|\left(x-x_0\right)\left(x-x_1\right)\left(x-x_2\right)\right| \leq \frac{1}{16}\left|-\frac{9}{16}\right|=\frac{9}{256} \approx 0,03515625 .
+\]</div>
+<p><strong>Exemplo 4.3.2:</strong> Considerando o polinômio de Lagrange que aproxima a função <span class="math notranslate nohighlight">\(f(x)=1/x\)</span> no intervalo <span class="math notranslate nohighlight">\([2,4]\)</span> pelos pontos <span class="math notranslate nohighlight">\(x_0=2, x_1=2,75\)</span> e <span class="math notranslate nohighlight">\(x_2=4\)</span>. Vamos agora usar a função <code class="docutils literal notranslate"><span class="pre">calculaP</span></code> para calcular o valor numérico do polinômio <strong>sem obter a expressão do polinômio</strong> e verificar o erro em um conjunto de 21 pontos igualmente espaçados o londo do intervalo. Vamos verificar se o erro não ultrapassa o valor estimado no Exemplo 4.3.1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculaP</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span>
+    <span class="n">valor</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="n">lk</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
+                <span class="n">lk</span> <span class="o">=</span> <span class="n">lk</span><span class="o">*</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">valor</span> <span class="o">=</span> <span class="n">valor</span> <span class="o">+</span> <span class="n">Y</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">lk</span> 
+    <span class="k">return</span> <span class="n">valor</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span>
+<span class="n">yp</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">xp</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xp</span><span class="p">:</span>
+    <span class="n">pi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">calculaP</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">))</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">erro</span> <span class="o">=</span> <span class="n">pi</span><span class="o">-</span><span class="n">yp</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">erro</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.          0.00267316  0.00409091  0.00453557  0.00424242  0.00340909
+  0.0022028   0.00076599 -0.00077922 -0.00232759 -0.00378788 -0.00508065
+ -0.00613636 -0.00689394 -0.00729947 -0.00730519 -0.00686869 -0.00595209
+ -0.00452153 -0.00254662  0.        ]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">abs</span><span class="p">(</span><span class="n">erro</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.007305194805194759
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">erro</span><span class="p">)</span>
+<span class="c1">#plt.plot(xp, yp)</span>
+<span class="c1">#plt.plot(xp,pi)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8153a52abe0d341d893a72e1d603ff47026f24694bb7bd88820491d4c6adf207.png" src="../_images/8153a52abe0d341d893a72e1d603ff47026f24694bb7bd88820491d4c6adf207.png" />
+</div>
+</div>
+</section>
 <section id="uma-estimativa-para-o-erro-usando-a-formula-de-newton-de-diferencas-divididas">
-<h2>Uma estimativa para o erro usando a fórmula de Newton de diferenças divididas<a class="headerlink" href="#uma-estimativa-para-o-erro-usando-a-formula-de-newton-de-diferencas-divididas" title="Link to this heading">#</a></h2>
+<h2>Uma estimativa para o erro usando a fórmula de Newton de diferenças divididas<a class="headerlink" href="#uma-estimativa-para-o-erro-usando-a-formula-de-newton-de-diferencas-divididas" title="Link para este cabeçalho">#</a></h2>
 <p>O polinômio interpolador de Newton é dado por</p>
 <div class="math notranslate nohighlight">
 \[P(x)=f[x_0]+(x-x_0)f[x_0,x_1]+(x-x_0)(x-x_1)f[x_0,x_1,x_2]+...\]</div>
@@ -480,35 +631,188 @@ i \neq k}}^n \frac{\left(x-x_i\right)}{\left(x_k-x_i\right)}
 \[...+(x-x_0)(x-x_1)...(x-x_{n-1})f[x_0,...,x_n]\]</div>
 <p>onde <span class="math notranslate nohighlight">\(f[x_0]\)</span>, <span class="math notranslate nohighlight">\(f[x_0,x_1]\)</span>,…,<span class="math notranslate nohighlight">\(f[x_0,...,x_n]\)</span> são as <em>diferenças divididas</em>*</p>
 <p>Uma tabela de diferenças divididas é mostrado na Figura 4.3.2.</p>
-<img src="imagens/tabela_dd.png" width="800">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/tabela_dd.png"><img alt="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/tabela_dd.png" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/tabela_dd.png" style="width: 800px;" />
+</a>
 <p>Figura 4.3.2 - Tabela de diferenças divididas de Newton (Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/455">Chapra, 2016</a>)</p>
-<p>Para um polinômio interpolador de grau <span class="math notranslate nohighlight">\(n\)</span>, uma fórmula para o erro é dada por</p>
+<p>(<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/455">Chapra, 2016, p. 455</a>) Para um polinômio interpolador de grau <span class="math notranslate nohighlight">\(n\)</span>, uma fórmula para o erro é dada por</p>
 <div class="math notranslate nohighlight">
 \[
 R_n=\frac{f^{(n+1)}(\xi)}{(n+1)!}\left(x-x_0\right)\left(x-x_1\right) \ldots\left(x-x_n\right)
 \]</div>
-<p>onde <span class="math notranslate nohighlight">\(\xi\)</span> é algum ponto no intervalo contendo a variável e os dados. Para essa fórmula ser útil, a função em questão deve ser conhecida e <span class="math notranslate nohighlight">\((n + 1)\)</span> vezes diferenciável. Em geral, esse não é o caso. Felizmente, está disponível uma formulação alternativa que não requer conhecimento anterior da função. Em vez disso, ela usa diferenças divididas finitas para aproximar a <span class="math notranslate nohighlight">\((n + 1)\)</span>-ésima derivada,
+<p>onde <span class="math notranslate nohighlight">\(\xi\)</span> é algum ponto no intervalo contendo a variável e os dados. Para essa fórmula ser útil, a função em questão deve ser conhecida e <span class="math notranslate nohighlight">\((n + 1)\)</span> vezes diferenciável. <strong>Em geral, esse não é o caso</strong>. Felizmente, está disponível uma formulação alternativa que não requer conhecimento anterior da função. Em vez disso, ela usa diferenças divididas finitas para aproximar a <span class="math notranslate nohighlight">\((n + 1)\)</span>-ésima derivada,
 $<span class="math notranslate nohighlight">\(
 R_n=f\left[x, x_n, x_{n-1}, \ldots, x_0\right]\left(x-x_0\right)\left(x-x_1\right) \cdots\left(x-x_n\right)
 \)</span>$</p>
-<p>Como a esta contém a incógnita <span class="math notranslate nohighlight">\(f(x)\)</span>, ela não determina o erro. Entretanto, se estiver disponível um ponto dado adicional <span class="math notranslate nohighlight">\(f(x_{n+1})\)</span>, a equação pode ser usada para estimar o erro, como em</p>
+<p>onde <span class="math notranslate nohighlight">\(f\left[x, x_n, x_{n-1}, \ldots, x_0\right]\)</span> é a <span class="math notranslate nohighlight">\((n+1)\)</span>-ésima diferença dividida finita.</p>
+<p>Como esta expressão contém a incógnita <span class="math notranslate nohighlight">\(f(x)\)</span>, ela não determina o erro. Entretanto, se estiver disponível um ponto dado adicional <span class="math notranslate nohighlight">\(f(x_{n+1})\)</span>, a equação pode ser usada para estimar o erro, como em</p>
 <div class="math notranslate nohighlight">
 \[
 R_n \cong f\left[x_{n+1}, x_n, x_{n-1}, \ldots, x_0\right]\left(x-x_0\right)\left(x-x_1\right) \cdots\left(x-x_n\right)
 \]</div>
-<p><strong>Exemplo:</strong>
-<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/455">https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/455</a></p>
+<p><strong>Exemplo 4.3.3:</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/451">Chapra, 2016, p. 451</a>)
+Ajuste um polinômio de segundo grau aos três pontos da função <span class="math notranslate nohighlight">\(f(x)=ln(x)\)</span> dados, e use o polinômio para estimar <span class="math notranslate nohighlight">\(ln(2)\)</span>. Calcule o erro absoluto.</p>
+<p>Pontos:
+$<span class="math notranslate nohighlight">\(
+\begin{array}{ll}
+x_0=1 &amp; f\left(x_0\right)=0 \\
+x_1=4 &amp; f\left(x_1\right)=1,386294 \\
+x_2=6 &amp; f\left(x_2\right)=1,791759
+\end{array}
+\)</span>$</p>
+<p><span class="math notranslate nohighlight">\(f[x_0]=0\)</span></p>
+<p><span class="math notranslate nohighlight">\(f[x_0,x_1]=\frac{1,386294-0}{4-1}=0,4620981\)</span></p>
+<p><span class="math notranslate nohighlight">\( f[x_0,x_1,x_2]=\frac{\frac{1,791759-1,386294}{6-4}-0,4620981}{6-1}=-0,0518731\)</span></p>
+<p>Substituindo os os valores obtidos para as diferenças divididas na fórmula de Newton, obtemos o polinômio</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{rl}
+P_2(x)= &amp; 0+0,4620981(x-1)-0,0518731(x-1)(x-4)\\
+      = &amp;-0.0518731x^2 + 0.7214636x - 0.6695905
+\end{array}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.0518731</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.7214636</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mf">0.6695905</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pontos&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Polinômio&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Função&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e4386adb2afeb57d76eb7be325d7a8bbd76ff9c45bcab2a5709c2a72b8a40279.png" src="../_images/e4386adb2afeb57d76eb7be325d7a8bbd76ff9c45bcab2a5709c2a72b8a40279.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.0518731</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.7214636</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mf">0.6695905</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P(2) =&#39;</span><span class="p">,</span><span class="n">p2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(2) = 0.5658443
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Erro absoluto =&#39;</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">p2</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Erro absoluto = 0.12730288055994532
+</pre></div>
+</div>
+</div>
+</div>
+<p>Agora, adicionando um quarto ponto <span class="math notranslate nohighlight">\(x_3 = 5\)</span> , <span class="math notranslate nohighlight">\(f(x_3) = 1,609438\)</span>, vamos obter uma estimativa do erro para o polinômio interpolador de segundo grau fazendo</p>
+<div class="math notranslate nohighlight">
+\[
+R_2=f\left[x_3, x_2, x_1, x_0\right]\left(x-x_0\right)\left(x-x_1\right)\left(x-x_2\right)
+\]</div>
+<p>Para isso vamos precisar calcular as diferenças divididas incluindo o ponto <span class="math notranslate nohighlight">\(x_3\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">difdiv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">dd</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">dd</span><span class="p">[</span><span class="n">k</span><span class="p">:</span><span class="n">m</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">dd</span><span class="p">[</span><span class="n">k</span><span class="p">:</span><span class="n">m</span><span class="p">]</span><span class="o">-</span><span class="n">dd</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">:</span><span class="n">m</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">dd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">difdiv</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.          0.46209812 -0.05973864  0.00786553]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Assim,  <span class="math notranslate nohighlight">\(f[x_0,x_1,x_2, x_3]=0,00786553\)</span>. Então podemos escrever</p>
+<div class="math notranslate nohighlight">
+\[
+R_2=0,007865529(x-1)(x-4)(x-6)
+\]</div>
+<p>onde o valor da diferença dividida finita de terceira ordem é como calculado usando a função <code class="docutils literal notranslate"><span class="pre">difdiv</span></code> desenvolvida anteriormente. Essa relação pode ser calculada em <span class="math notranslate nohighlight">\(x=2\)</span> por</p>
+<div class="math notranslate nohighlight">
+\[
+R_2=0,007865529(2-1)(2-4)(2-6)=0,0629242
+\]</div>
+<p>que é da mesma ordem de grandeza que o erro verdadeiro (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/455">Chapra, 2016, p. 455</a>) .</p>
+<p>Por exemplo, arredondando com uma casa decimal obtemos:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mf">0.0629242</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mf">0.12730288055994532</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1
+</pre></div>
+</div>
+</div>
+</div>
 <p><strong>Exercícios:</strong></p>
-<p><strong>1.</strong> Para as funções <span class="math notranslate nohighlight">\(f(x)\)</span> dadas, construa polinômios interpoladores de graus entre 2 e 5 para determinar uma aproximação de <span class="math notranslate nohighlight">\(f(0,45)\)</span> e encontre o erro absoluto. Encontre um limitante limitante superior para o erro nas aproximações.</p>
+<p><strong>1.</strong> Para as funções <span class="math notranslate nohighlight">\(f(x)\)</span> dadas, construa polinômios interpoladores de graus entre 2 e 5 para determinar uma aproximação de <span class="math notranslate nohighlight">\(f(0,45)\)</span> e encontre o erro absoluto. Encontre uma estimativa para o erro.</p>
 <p>a) <span class="math notranslate nohighlight">\(f(x)=\cos x\)</span></p>
 <p>b) <span class="math notranslate nohighlight">\(f(x)=\sqrt{1+x}\)</span></p>
 <p>c) <span class="math notranslate nohighlight">\(f(x)=\ln (x+1)\)</span></p>
 <p>d) <span class="math notranslate nohighlight">\(f(x)=\operatorname{tg} x\)</span></p>
-<p><strong>2.</strong> Para as funções <span class="math notranslate nohighlight">\(f(x)\)</span>, construa polinômios interpoladores de graus entre 2 e 5 para determinar uma aproximação de <span class="math notranslate nohighlight">\(f(1,4)\)</span>, e encontre o erro absoluto. Encontre um limitante limitante superior para o erro nas aproximações.</p>
+<p><strong>2.</strong> Para as funções <span class="math notranslate nohighlight">\(f(x)\)</span>, construa polinômios interpoladores de graus entre 2 e 5 para determinar uma aproximação de <span class="math notranslate nohighlight">\(f(1,4)\)</span>, e encontre o erro absoluto. Encontre uma estimativa para o erro.</p>
 <p>a) <span class="math notranslate nohighlight">\(f(x)=\operatorname{sen} \pi x\)</span></p>
 <p>b) <span class="math notranslate nohighlight">\(f(x)=\sqrt[3]{x-1}\)</span></p>
 <p>c) <span class="math notranslate nohighlight">\(f(x)=\log _{10}(3 x-1)\)</span></p>
 <p>d) <span class="math notranslate nohighlight">\(f(x)=e^{2 x}-x\)</span></p>
+<p><strong>3.</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/141">Burden, 2016, p. 125</a>) Utilize polinômios interpoladores de Lagrange de graus dois e três adequados para aproximar cada um dos seguintes:</p>
+<p>a) <span class="math notranslate nohighlight">\(f(8,4)\)</span> se <span class="math notranslate nohighlight">\(f(8,1)=16,94410, f(8,3)=17,56492, f(8,6)=18,50515, f(8,7)=18,82091\)</span></p>
+<p>b) <span class="math notranslate nohighlight">\(f\left(-\frac{1}{3}\right)\)</span> se <span class="math notranslate nohighlight">\(f(-0,75)=-0,07181250, f(-0,5)=-0,02475000, f(-0,25)=0,33493750, f(0)= 1,10100000\)</span></p>
+<p>c) <span class="math notranslate nohighlight">\(f(0,25)\)</span> se <span class="math notranslate nohighlight">\(f(0,1)=0,62049958, f(0,2)=-0,28398668, f(0,3)=0,00660095, f(0,4)=0,24842440\)</span></p>
+<p>d) <span class="math notranslate nohighlight">\(f(0,9)\)</span> se <span class="math notranslate nohighlight">\(f(0,6)=-0,17694460, f(0,7)=0,01375227, f(0,8)=0,22363362, f(1,0)=0,65809197\)</span></p>
+<p>e) <span class="math notranslate nohighlight">\(f(0,43)\)</span> se <span class="math notranslate nohighlight">\(f(0)=1, f(0,25)=1,64872, f(0,5)=2,71828, f(0,75)=4,48169\)</span></p>
+<p>f) <span class="math notranslate nohighlight">\(f(0)\)</span> se <span class="math notranslate nohighlight">\(f(-0,5)=1,93750, f(-0,25)=1,332303, f(0,25)=0,800781, f(0,5)=0,687500\)</span></p>
+<p>g) <span class="math notranslate nohighlight">\(f(0,18)\)</span> se <span class="math notranslate nohighlight">\(f(0,1)=-0,29004986, f(0,2)=-0,56079734, f(0,3)=-0,81401972, f(0,4)=\)</span> <span class="math notranslate nohighlight">\(-1,0526302\)</span></p>
+<p>h) <span class="math notranslate nohighlight">\(f(0,25)\)</span> se <span class="math notranslate nohighlight">\(f(-1)=0,86199480, f(-0,5)=0,95802009, f(0)=1,0986123, f(0,5)=1,2943767\)</span></p>
+<p><strong>4.</strong>  (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/141">Burden, 2016, p. 125</a>) Os dados do Exercício 3 foram gerados a partir das funções a seguir. Use a fórmula de erro para encontrar um limitante para o erro e compare o limitante ao erro real para os polinômiod de grau 2</p>
+<p>a) <span class="math notranslate nohighlight">\(f(x)=x \ln x\)</span></p>
+<p>b) <span class="math notranslate nohighlight">\(f(x)=x^3+4,001 x^2+4,002 x+1,101\)</span></p>
+<p>c) <span class="math notranslate nohighlight">\(f(x)=x \cos x-2 x^2+3 x-1\)</span></p>
+<p>d) <span class="math notranslate nohighlight">\(f(x)=\operatorname{sen}\left(e^x-2\right)\)</span></p>
+<p>e) <span class="math notranslate nohighlight">\(f(x)=e^{2 x}\)</span></p>
+<p>f) <span class="math notranslate nohighlight">\(f(x)=x^4-x^3+x^2-x+1\)</span></p>
+<p>g) <span class="math notranslate nohighlight">\(f(x)=x^2 \cos x-3 x\)</span></p>
+<p>h) <span class="math notranslate nohighlight">\(f(x)=\ln \left(e^x+2\right)\)</span></p>
 </section>
 </section>
 
@@ -547,16 +851,16 @@ R_n \cong f\left[x_{n+1}, x_n, x_{n-1}, \ldots, x_0\right]\left(x-x_0\right)\lef
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-subtitle">anterior</p>
         <p class="prev-next-title">4.2 Fórmula de Newton</p>
       </div>
     </a>
     <a class="right-next"
-       href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html"
+       href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html"
        title="next page">
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">5.1 Minimos quadrados: caso discreto</p>
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">5. Ajuste por Mínimos Quadrados</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -572,10 +876,11 @@ R_n \cong f\left[x_{n+1}, x_n, x_{n-1}, \ldots, x_0\right]\left(x-x_0\right)\lef
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+    <i class="fa-solid fa-list"></i> Conteúdo
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#um-limitante-superior-para-o-erro-usando-a-formula-de-lagrange">Um limitante superior para o erro usando a fórmula de Lagrange</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uma-estimativa-para-o-erro-usando-a-formula-de-newton-de-diferencas-divididas">Uma estimativa para o erro usando a fórmula de Newton de diferenças divididas</a></li>
 </ul>
   </nav></div>
@@ -591,7 +896,7 @@ R_n \cong f\left[x_{n+1}, x_n, x_{n-1}, \ldots, x_0\right]\left(x-x_0\right)\lef
   <div class="footer-item">
     
 <p class="component-author">
-By Tiago M. Buriol
+De Tiago M. Buriol
 </p>
 
   </div>

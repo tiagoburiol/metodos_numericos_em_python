@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="pt-BR" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
@@ -41,7 +41,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/documentation_options.js?v=2efa9f5e"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,6 +51,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=000972dd"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -60,12 +61,12 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao';</script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
     <link rel="next" title="2.3 Método do ponto fixo" href="2.3_metodo_do_ponto_fixo.html" />
     <link rel="prev" title="2.1 Localização de raízes" href="2.1_localizacao_de_raizes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="pt-BR"/>
   </head>
   
   
@@ -164,9 +165,9 @@
 
  <script>
  document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
+    <span class="search-button__default-text">Buscar</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
    </button>
  `);
@@ -181,55 +182,53 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1. Introdução e erros</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básicos sobre erros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2. Aritmética de ponto flutuante</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos aplicados</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Zeros de funções</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2.2. Método da bisseção</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.2. Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Sistemas Lineares</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">4.Interpolação polinomial</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Ajuste por minimos quadrados</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_ajuste_linear_nos_parametros.html">5.2 Ajuste linear nos parâmetros</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">6.Integração Numérica</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_metodo_de_newton_cotes.html">6.2 Regras de Newton-Cotes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regra_dos_trapezios.html">6.3 Regra dos trapézios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.4_regras_de_simpson.html">6.4 Regras de Simpson</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">7. Equações diferenciais</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -286,7 +285,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
+   title="Repositório fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -303,7 +302,7 @@
       
       <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
+   title="Abra um problema"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -324,7 +323,7 @@
 
 
 <div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
     <i class="fas fa-download"></i>
   </button>
   <ul class="dropdown-menu">
@@ -333,7 +332,7 @@
       
       <li><a href="../_sources/2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
+   title="Baixar arquivo fonte"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -351,7 +350,7 @@
       <li>
 <button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Imprimir em PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -371,7 +370,7 @@
 
 <button onclick="toggleFullScreen()"
   class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
+  title="Modo tela cheia"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
@@ -397,7 +396,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -421,7 +420,7 @@ document.write(`
         <div id="jb-print-toc">
             
             <div>
-                <h2> Contents </h2>
+                <h2> Conteúdo </h2>
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
@@ -440,7 +439,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="metodo-da-bissecao">
-<h1>2.2. Método da bisseção<a class="headerlink" href="#metodo-da-bissecao" title="Link to this heading">#</a></h1>
+<h1>2.2. Método da bisseção<a class="headerlink" href="#metodo-da-bissecao" title="Link para este cabeçalho">#</a></h1>
 <p>Muitos problemas em ciências e engenharia envolvem a resolução de uma equação que pode ser colocada na forma</p>
 <div class="math notranslate nohighlight">
 \[f(x)=0\]</div>
@@ -448,9 +447,10 @@ document.write(`
 <p>Encontrar um solução para equação <span class="math notranslate nohighlight">\(f(x)=0\)</span>  por métodos numéricos consiste em gerar uma sequência de soluções aproximadas, a partir de uma aproximação inicial <span class="math notranslate nohighlight">\(x_0\)</span>. Caso os valores obtidos pelo processo iterativo estejam se aproximando da solução exata <span class="math notranslate nohighlight">\(\overline{x}\)</span>, dizemos que a sequência está convergindo para a solução.</p>
 <p>O <em>Método da Bisseção</em> é o método numérico para resolução de equações do tipo <span class="math notranslate nohighlight">\(f(x)=0\)</span>, no qual, a partir de um intervalo inicial <span class="math notranslate nohighlight">\([a,b]\)</span> contendo uma única raiz, é gerada uma sequência de subintervalos, dividindo-se, a cada iteração, o intervalo que contém a raiz em dois subintervalos de mesma amplitude. A cada passo, é verificado qual dos dois subintervalos contém a raiz utilizando o teorema de Bolzano (ou Teorema do Valor Intermediário), enunciado abaixo.</p>
 <section id="teorema-de-bolzano">
-<h2>Teorema de Bolzano:<a class="headerlink" href="#teorema-de-bolzano" title="Link to this heading">#</a></h2>
+<h2>Teorema de Bolzano:<a class="headerlink" href="#teorema-de-bolzano" title="Link para este cabeçalho">#</a></h2>
 <p>Se <span class="math notranslate nohighlight">\(f(x)\)</span> é contínua em <span class="math notranslate nohighlight">\([a,b]\)</span> e <span class="math notranslate nohighlight">\(f(a)\cdot f(b)&lt;0\)</span>, então existe pelo menos uma raíz <span class="math notranslate nohighlight">\( \overline{x} \in [a,b]\)</span> tal que <span class="math notranslate nohighlight">\(f(x)=0\)</span>.</p>
-<img src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/bolzano.png" width="480">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/bolzano.png"><img alt="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/bolzano.png" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/bolzano.png" style="width: 480px;" />
+</a>
 <p>A sequência de subintervalos será calculada até que a amplitude do intervalo obtido menor que uma tolerância pré estabelecida. Assim, podemos descrever o processo no seguinte algoritmo:</p>
 <ol class="arabic simple">
 <li><p>Determinar um intervalo inicial <span class="math notranslate nohighlight">\([a,b]\)</span> contendo uma única raíz de <span class="math notranslate nohighlight">\(f\)</span>;</p></li>
@@ -461,7 +461,7 @@ document.write(`
 </ol>
 </section>
 <section id="numero-de-iteracoes">
-<h2>Número de iterações<a class="headerlink" href="#numero-de-iteracoes" title="Link to this heading">#</a></h2>
+<h2>Número de iterações<a class="headerlink" href="#numero-de-iteracoes" title="Link para este cabeçalho">#</a></h2>
 <p>Podemos estimar o número de iterações necessárias para encontrar a aproximação para a raiz <span class="math notranslate nohighlight">\(\overline{x}\)</span> com a precisão desejada. Considerando que a cada iteração o intervalo é dividido ao meio, então na n-ésima iteração tem-se um intervalo de amplitude <span class="math notranslate nohighlight">\(\frac{b-a}{2^n}\)</span>, então, queremos que</p>
 <div class="math notranslate nohighlight">
 \[\frac{b-a}{2^{n+1}}&lt;\epsilon\]</div>
@@ -475,9 +475,12 @@ document.write(`
 <p><strong>Exemplo 2.2.1:</strong>
 Usando o método da bisseção, resolva a equação <span class="math notranslate nohighlight">\(x^2+ln(x)=0\)</span>, com <span class="math notranslate nohighlight">\(\epsilon = 0.01\)</span>.</p>
 <p><em>Solução:</em> Reescrevendo a equação como <span class="math notranslate nohighlight">\(x^2=-ln(x)\)</span> e esboçando os gráficos de <span class="math notranslate nohighlight">\(f_1(x)=x^2\)</span> e <span class="math notranslate nohighlight">\(f_2(x)=-ln(x)\)</span> observamos que existe uma raiz no intervalo <span class="math notranslate nohighlight">\([0.1,1]\)</span>.</p>
-<img src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1loc.png" width="400"><p>Então, na primeira iteração fazemos <span class="math notranslate nohighlight">\(x_m = \frac{a+b}{2}=\frac{1.0-0.1}{2}=0.55\)</span>. Como <span class="math notranslate nohighlight">\(f(a)=f(0.1)=-2.293\)</span>, <span class="math notranslate nohighlight">\(f(b)=f(1.0)=1\)</span> e <span class="math notranslate nohighlight">\(f(x_m)=f(0.55)=-0.295\)</span> temos que a raíz está no intervalo <span class="math notranslate nohighlight">\([x_m,b]\)</span>. Além disso, <span class="math notranslate nohighlight">\(\frac{|x_1-x_0|}{|x_0|}=0.2953\)</span> é maior que <span class="math notranslate nohighlight">\(\epsilon = 0.01\)</span>. Então seguimos o processo iterativo obtendo a sequên
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1loc.png"><img alt="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1loc.png" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1loc.png" style="width: 400px;" />
+</a>
+<p>Então, na primeira iteração fazemos <span class="math notranslate nohighlight">\(x_m = \frac{a+b}{2}=\frac{1.0-0.1}{2}=0.55\)</span>. Como <span class="math notranslate nohighlight">\(f(a)=f(0.1)=-2.293\)</span>, <span class="math notranslate nohighlight">\(f(b)=f(1.0)=1\)</span> e <span class="math notranslate nohighlight">\(f(x_m)=f(0.55)=-0.295\)</span> temos que a raíz está no intervalo <span class="math notranslate nohighlight">\([x_m,b]\)</span>. Além disso, <span class="math notranslate nohighlight">\(\frac{|x_1-x_0|}{|x_0|}=0.2953\)</span> é maior que <span class="math notranslate nohighlight">\(\epsilon = 0.01\)</span>. Então seguimos o processo iterativo obtendo a sequên
 cia abaixo.</p>
-<img src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1tab.png" width="400">
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1tab.png"><img alt="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1tab.png" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1tab.png" style="width: 400px;" />
+</a>
 <p>Em Python podemos fazer o gráfico como é mostrado a seguir</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -706,7 +709,7 @@ x3 = 2.828125
 </div>
 </section>
 <section id="exercicios">
-<h2>Exercícios<a class="headerlink" href="#exercicios" title="Link to this heading">#</a></h2>
+<h2>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
 <p><strong>1.</strong> Localize graficamente e determine as raízes reais das funções dadas. Estime o erro relativo a cada iteração e pare quando <span class="math notranslate nohighlight">\(\epsilon \leq 1\% \)</span>.</p>
 <p>a) <span class="math notranslate nohighlight">\(f(x) = –0.5x^2 + 2.5x + 4.5\)</span></p>
 <p>b) <span class="math notranslate nohighlight">\(f(x) = 5x^2 – 5x^2 + 6x -2\)</span></p>
@@ -722,7 +725,9 @@ x3 = 2.828125
 <div class="math notranslate nohighlight">
 \[ v = \sqrt{2gH} \tanh \left( \frac{\sqrt{2gH}}{2L}t \right)\]</div>
 <p>em que <span class="math notranslate nohighlight">\(g=9.81m/s^2\)</span>, <span class="math notranslate nohighlight">\(H\)</span> é a altura inicial <span class="math notranslate nohighlight">\((m)\)</span>, <span class="math notranslate nohighlight">\(L\)</span> é o comprimento do cano (<span class="math notranslate nohighlight">\(m\)</span>) e <span class="math notranslate nohighlight">\(t\)</span> é o tempo decorrido (<span class="math notranslate nohighlight">\(s\)</span>). Determine a altura necessária para atingir <span class="math notranslate nohighlight">\(v=5m/s\)</span> em <span class="math notranslate nohighlight">\(2.5s\)</span> para um cano de <span class="math notranslate nohighlight">\(4m\)</span> de comprimento pelo método da bisseção e pelo método do ponto-fixo com <span class="math notranslate nohighlight">\(\epsilon =  0.001\)</span></p>
-<img src="imagens/tanque_de_agua.png" width="360"><p><strong>3.</strong> Água está escoando em um canal trapezoidal a uma vazão de Q = 20 m<span class="math notranslate nohighlight">\(^3\)</span>/s. A profundidade crítica <span class="math notranslate nohighlight">\(y\)</span> para tal canal deve satisfazer a equação</p>
+<a class="reference internal image-reference" href="../_images/tanque_de_agua.png"><img alt="../_images/tanque_de_agua.png" src="../_images/tanque_de_agua.png" style="width: 360px;" />
+</a>
+<p><strong>3.</strong> Água está escoando em um canal trapezoidal a uma vazão de Q = 20 m<span class="math notranslate nohighlight">\(^3\)</span>/s. A profundidade crítica <span class="math notranslate nohighlight">\(y\)</span> para tal canal deve satisfazer a equação</p>
 <div class="math notranslate nohighlight">
 \[0=1- \frac{Q^2}{gA_c^3}B\]</div>
 <p>onde <span class="math notranslate nohighlight">\(g\)</span> = 9.81 m/s<span class="math notranslate nohighlight">\(^2\)</span>, <span class="math notranslate nohighlight">\(A_c\)</span> é a área da seção transversal (m<span class="math notranslate nohighlight">\(^2\)</span>) e <span class="math notranslate nohighlight">\(B\)</span> é a largura do canal na superfície (m). Para esse caso, a largura e a área transversal podem ser relacionadas à profundidade <span class="math notranslate nohighlight">\(y\)</span> por</p>
@@ -768,7 +773,7 @@ $B = 3+y \,\,\,\,$  e $\,\,\,\,A_c=3y+\frac{y^2}{2}$
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-subtitle">anterior</p>
         <p class="prev-next-title">2.1 Localização de raízes</p>
       </div>
     </a>
@@ -776,7 +781,7 @@ $B = 3+y \,\,\,\,$  e $\,\,\,\,A_c=3y+\frac{y^2}{2}$
        href="2.3_metodo_do_ponto_fixo.html"
        title="next page">
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-subtitle">próximo</p>
         <p class="prev-next-title">2.3 Método do ponto fixo</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
@@ -793,7 +798,7 @@ $B = 3+y \,\,\,\,$  e $\,\,\,\,A_c=3y+\frac{y^2}{2}$
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+    <i class="fa-solid fa-list"></i> Conteúdo
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
@@ -814,7 +819,7 @@ $B = 3+y \,\,\,\,$  e $\,\,\,\,A_c=3y+\frac{y^2}{2}$
   <div class="footer-item">
     
 <p class="component-author">
-By Tiago M. Buriol
+De Tiago M. Buriol
 </p>
 
   </div>
