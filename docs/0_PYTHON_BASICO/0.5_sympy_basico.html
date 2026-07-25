@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>0.5 Sympy básico &#8212; Caderno didático de Métodos Numéricos em Python</title>
+    <title>0.5 SymPy Básico &#8212; Caderno didático de Métodos Numéricos em Python</title>
   
   
   
@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -51,13 +51,15 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="../_static/translations.js?v=000972dd"></script>
+    <script src="../_static/translations.js?v=daa5921a"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '0_PYTHON_BASICO/0.5_sympy_basico';</script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Buscar" href="../search.html" />
@@ -190,16 +192,16 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2. Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2 Método da bisseção</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6. Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6 Raízes de polinômios</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1. Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1 Forma matricial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
@@ -213,11 +215,14 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_minimos_quadrados_continuo.html">5.2 Minimos quadrados: caso contínuo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_regra_dos_trapezios.html">6.2 Regra dos trapézios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regras_de_simpson.html">6.3 Regras de Simpson</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -227,6 +232,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8_EQUACOES_DIFERENCIAIS_PARCIAIS.html">8. Equações Diferenciais Parciais</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
 </ul>
 
     </div>
@@ -399,7 +411,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -410,11 +424,37 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>0.5 Sympy básico</h1>
+    <h1>0.5 SymPy Básico</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Conteúdo </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simbolos">Símbolos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constantes-simbolicas">Constantes simbólicas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplificacao-e-manipulacao-de-expressoes">Simplificação e manipulação de expressões</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expand-expandir"><code class="docutils literal notranslate"><span class="pre">expand</span></code> — expandir</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-fatorar"><code class="docutils literal notranslate"><span class="pre">factor</span></code> — fatorar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simplify-simplificar"><code class="docutils literal notranslate"><span class="pre">simplify</span></code> — simplificar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subs-substituicao"><code class="docutils literal notranslate"><span class="pre">subs</span></code> — substituição</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivadas">Derivadas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrais">Integrais</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites">Limites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series-de-taylor">Séries de Taylor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucao-de-equacoes">Resolução de equações</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convertendo-para-funcao-numerica-lambdify">Convertendo para função numérica: <code class="docutils literal notranslate"><span class="pre">lambdify</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumo-das-funcoes">Resumo das funções</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -425,17 +465,555 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="sympy-basico">
-<h1>0.5 Sympy básico<a class="headerlink" href="#sympy-basico" title="Link para este cabeçalho">#</a></h1>
+<h1>0.5 SymPy Básico<a class="headerlink" href="#sympy-basico" title="Link para este cabeçalho">#</a></h1>
+<p><strong>SymPy</strong> é uma biblioteca Python para matemática simbólica. Ao contrário do NumPy, que trabalha com valores numéricos aproximados, o SymPy manipula expressões matemáticas de forma exata — como um sistema de álgebra computacional (CAS).</p>
+<p>Isso é útil para:</p>
+<ul class="simple">
+<li><p>Simplificar e expandir expressões algébricas</p></li>
+<li><p>Calcular derivadas e integrais analiticamente</p></li>
+<li><p>Resolver equações de forma exata</p></li>
+<li><p>Calcular limites e séries de Taylor</p></li>
+<li><p>Verificar resultados de métodos numéricos</p></li>
+</ul>
+<p>Neste notebook veremos os principais recursos do SymPy com exemplos práticos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
-<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span> 
-<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+
+<span class="c1"># Ativa impressão formatada (LaTeX no Jupyter)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">init_printing</span><span class="p">(</span><span class="n">use_unicode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<section id="simbolos">
+<h2>Símbolos<a class="headerlink" href="#simbolos" title="Link para este cabeçalho">#</a></h2>
+<p>Em SymPy, as variáveis matemáticas são chamadas de <strong>símbolos</strong> e devem ser declaradas explicitamente com <code class="docutils literal notranslate"><span class="pre">sp.symbols()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y z&#39;</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a b c&#39;</span><span class="p">)</span>
+
+<span class="c1"># Uma expressão simbólica</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">expr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/24fe09dccd7495c3c0aca61e0f8fdc82cd047e0b7a08a3e992c776a50cbce46a.png" src="../_images/24fe09dccd7495c3c0aca61e0f8fdc82cd047e0b7a08a3e992c776a50cbce46a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Símbolos com restrições (positivo, inteiro, etc.)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;sympy.core.add.Add&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="constantes-simbolicas">
+<h2>Constantes simbólicas<a class="headerlink" href="#constantes-simbolicas" title="Link para este cabeçalho">#</a></h2>
+<p>O SymPy possui suas próprias constantes exatas — não use <code class="docutils literal notranslate"><span class="pre">math.pi</span></code> ou <code class="docutils literal notranslate"><span class="pre">math.e</span></code> em expressões simbólicas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>          <span class="c1"># π exato</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">E</span><span class="p">)</span>           <span class="c1"># e exato</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>     <span class="c1"># √2 exato</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># fração exata 1/3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pi
+E
+sqrt(2)
+1/3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Comparação: simbólico vs numérico</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simbólico:&#39;</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>      <span class="c1"># exato: 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Numérico: &#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>        <span class="c1"># ponto flutuante</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simbólico: 2
+Numérico:  1.189207115002721
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="simplificacao-e-manipulacao-de-expressoes">
+<h2>Simplificação e manipulação de expressões<a class="headerlink" href="#simplificacao-e-manipulacao-de-expressoes" title="Link para este cabeçalho">#</a></h2>
+<section id="expand-expandir">
+<h3><code class="docutils literal notranslate"><span class="pre">expand</span></code> — expandir<a class="headerlink" href="#expand-expandir" title="Link para este cabeçalho">#</a></h3>
+<p>Distribui produtos e potências.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/10f939b3e2da6f484fc98d23386b4765ee4b67563fe003f4ec9a57554d3c0af3.png" src="../_images/10f939b3e2da6f484fc98d23386b4765ee4b67563fe003f4ec9a57554d3c0af3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/867c4eaec9ec564ada831332ff277de4a875da82a02d1b55e633104c10270043.png" src="../_images/867c4eaec9ec564ada831332ff277de4a875da82a02d1b55e633104c10270043.png" />
+</div>
+</div>
+</section>
+<section id="factor-fatorar">
+<h3><code class="docutils literal notranslate"><span class="pre">factor</span></code> — fatorar<a class="headerlink" href="#factor-fatorar" title="Link para este cabeçalho">#</a></h3>
+<p>Operação inversa de <code class="docutils literal notranslate"><span class="pre">expand</span></code>: decompõe em fatores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bb27c85ce34e63a6d86845d1bc7f3ee2d0b99b752edddb9028abb676478ff298.png" src="../_images/bb27c85ce34e63a6d86845d1bc7f3ee2d0b99b752edddb9028abb676478ff298.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9fe3e543d48fa23a203d44acc6e49fd452938aac89b864596e2b61a76f5957fe.png" src="../_images/9fe3e543d48fa23a203d44acc6e49fd452938aac89b864596e2b61a76f5957fe.png" />
+</div>
+</div>
+</section>
+<section id="simplify-simplificar">
+<h3><code class="docutils literal notranslate"><span class="pre">simplify</span></code> — simplificar<a class="headerlink" href="#simplify-simplificar" title="Link para este cabeçalho">#</a></h3>
+<p>Tenta encontrar a forma mais simples de uma expressão (heurística geral).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/61f3e8afdb0a5deb1c8271839c0cc5fc550a8a7315ea790e7c7b3eca80fdf692.png" src="../_images/61f3e8afdb0a5deb1c8271839c0cc5fc550a8a7315ea790e7c7b3eca80fdf692.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d81096050bd44ce57b5d5fe4208dfd494a47c011aecee7a2c422785cd87b6ef4.png" src="../_images/d81096050bd44ce57b5d5fe4208dfd494a47c011aecee7a2c422785cd87b6ef4.png" />
+</div>
+</div>
+</section>
+<section id="subs-substituicao">
+<h3><code class="docutils literal notranslate"><span class="pre">subs</span></code> — substituição<a class="headerlink" href="#subs-substituicao" title="Link para este cabeçalho">#</a></h3>
+<p>Substitui um símbolo por um valor numérico ou por outra expressão.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># Substituir x por 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Substituir x por y + 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16
+2*y + (y + 1)**2 + 3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Avaliação numérica com evalf()</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">pi</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">evalf</span><span class="p">())</span>          <span class="c1"># padrão: 15 dígitos</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>        <span class="c1"># 50 dígitos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sqrt(2) + pi
+4.55580621596289
+4.5558062159628882872643321074892009627668412747521
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="derivadas">
+<h2>Derivadas<a class="headerlink" href="#derivadas" title="Link para este cabeçalho">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">sp.diff(f,</span> <span class="pre">x)</span></code> para calcular <span class="math notranslate nohighlight">\(\frac{df}{dx}\)</span>. Para derivadas de ordem superior, informe a ordem como terceiro argumento.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">5</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;f     =&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f&#39;    =&quot;</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f&#39;&#39;   =&quot;</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f&#39;&#39;&#39;  =&quot;</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f     = x**4 - 3*x**3 + 2*x - 5
+f&#39;    = 4*x**3 - 9*x**2 + 2
+f&#39;&#39;   = 6*x*(2*x - 3)
+f&#39;&#39;&#39;  = 6*(4*x - 3)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Derivadas de funções trigonométricas e exponenciais</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cos(x)
+-sin(x)
+exp(x)
+1/x
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Derivada parcial</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;∂g/∂x =&#39;</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;∂g/∂y =&#39;</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>∂g/∂x = 2*x*y + y*cos(x*y)
+∂g/∂y = x**2 + x*cos(x*y)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="integrais">
+<h2>Integrais<a class="headerlink" href="#integrais" title="Link para este cabeçalho">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">sp.integrate(f,</span> <span class="pre">x)</span></code> para integral indefinida e <code class="docutils literal notranslate"><span class="pre">sp.integrate(f,</span> <span class="pre">(x,</span> <span class="pre">a,</span> <span class="pre">b))</span></code> para integral definida.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integral indefinida</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e17e02a8a14cbf831574d7e8176bcbc86aad9ab2ca6f327773e6cf3b73ac3448.png" src="../_images/e17e02a8a14cbf831574d7e8176bcbc86aad9ab2ca6f327773e6cf3b73ac3448.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Funções elementares</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">x</span><span class="p">))</span>   <span class="c1"># função de Gauss — sem forma fechada elementar</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-cos(x)
+sqrt(pi)*erf(x)/2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integral definida</span>
+<span class="n">resultado</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;∫₀³ x² dx =&#39;</span><span class="p">,</span> <span class="n">resultado</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>∫₀³ x² dx = 9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integral com limites simbólicos</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a b&#39;</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span> <span class="o">*</span> <span class="n">x</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">oo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c6c619049f23b66b4f785ea3fb5e64ec0f8aefac05a54398bd90d26dfe9ee1a0.png" src="../_images/c6c619049f23b66b4f785ea3fb5e64ec0f8aefac05a54398bd90d26dfe9ee1a0.png" />
+</div>
+</div>
+</section>
+<section id="limites">
+<h2>Limites<a class="headerlink" href="#limites" title="Link para este cabeçalho">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">sp.limit(f,</span> <span class="pre">x,</span> <span class="pre">x0)</span></code> para calcular <span class="math notranslate nohighlight">\(\lim_{x \to x_0} f(x)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Limite clássico: sin(x)/x quando x -&gt; 0</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d81096050bd44ce57b5d5fe4208dfd494a47c011aecee7a2c422785cd87b6ef4.png" src="../_images/d81096050bd44ce57b5d5fe4208dfd494a47c011aecee7a2c422785cd87b6ef4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Limite no infinito</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">oo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b10d46a9aa0d26cbbb54a0c0878fb60fcced3d5ca7e3c6505f65fd54f063bbed.png" src="../_images/b10d46a9aa0d26cbbb54a0c0878fb60fcced3d5ca7e3c6505f65fd54f063bbed.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Limites laterais: &#39;+&#39; (direita) ou &#39;-&#39; (esquerda)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>oo
+-oo
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="series-de-taylor">
+<h2>Séries de Taylor<a class="headerlink" href="#series-de-taylor" title="Link para este cabeçalho">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">f.series(x,</span> <span class="pre">x0,</span> <span class="pre">n)</span></code> calcula a expansão em série de Taylor de <span class="math notranslate nohighlight">\(f\)</span> em torno de <span class="math notranslate nohighlight">\(x_0\)</span> até ordem <span class="math notranslate nohighlight">\(n-1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Série de Taylor de e^x em torno de x=0 até ordem 6</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6086771a78e1d58325f476fdb7530df32cd6bec3980477b49838a1d42e8a2734.png" src="../_images/6086771a78e1d58325f476fdb7530df32cd6bec3980477b49838a1d42e8a2734.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sin(x) em torno de x=0</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0490ee4cf9a4ff42ee3b3a9707389234353903f81ed0b006f45705f8aff1ea90.png" src="../_images/0490ee4cf9a4ff42ee3b3a9707389234353903f81ed0b006f45705f8aff1ea90.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remover o termo O (ordem de truncamento) com removeO()</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">removeO</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f05961ac0d6589d44ca813af62fbcc3b319720f584863953d705febdacebe2dd.png" src="../_images/f05961ac0d6589d44ca813af62fbcc3b319720f584863953d705febdacebe2dd.png" />
+</div>
+</div>
+</section>
+<section id="resolucao-de-equacoes">
+<h2>Resolução de equações<a class="headerlink" href="#resolucao-de-equacoes" title="Link para este cabeçalho">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">sp.solve(equacao,</span> <span class="pre">variavel)</span></code> para resolver equações algebricas. A equação é passada como expressão igual a zero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Equação quadrática: x² - 5x + 6 = 0</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">6</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/41b7ec2cdf54d7a1b722db7ca20fe912df7bd656293872e6e8c8cdd4efbc8973.png" src="../_images/41b7ec2cdf54d7a1b722db7ca20fe912df7bd656293872e6e8c8cdd4efbc8973.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fórmula quadrática geral: ax² + bx + c = 0</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a b c&#39;</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/de690edcf14d63955807697e02e7df87fa230038145155159e732a4027064bff.png" src="../_images/de690edcf14d63955807697e02e7df87fa230038145155159e732a4027064bff.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sistema de equações</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">5</span><span class="p">,</span>
+                <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{x: 2, y: 3}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="convertendo-para-funcao-numerica-lambdify">
+<h2>Convertendo para função numérica: <code class="docutils literal notranslate"><span class="pre">lambdify</span></code><a class="headerlink" href="#convertendo-para-funcao-numerica-lambdify" title="Link para este cabeçalho">#</a></h2>
+<p>Uma vez que tenhamos uma expressão simbólica, é comum querer avaliá-la numericamente em muitos pontos. A função <code class="docutils literal notranslate"><span class="pre">sp.lambdify()</span></code> converte uma expressão SymPy em uma função NumPy eficiente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Converter para função numérica</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+
+<span class="c1"># Avaliar em um array NumPy</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$f(x) = \sin(x)\,e^{-x/5}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/be44f71d05bcdc0cff36f30a1f7e3e60388f6b5429eeffef2268550b30c24067.png" src="../_images/be44f71d05bcdc0cff36f30a1f7e3e60388f6b5429eeffef2268550b30c24067.png" />
+</div>
+</div>
+</section>
+<section id="resumo-das-funcoes">
+<h2>Resumo das funções<a class="headerlink" href="#resumo-das-funcoes" title="Link para este cabeçalho">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operação</p></th>
+<th class="head"><p>Função SymPy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Declarar símbolos</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.symbols('x</span> <span class="pre">y')</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Expandir</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.expand(expr)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Fatorar</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.factor(expr)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Simplificar</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.simplify(expr)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Substituir</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">expr.subs(x,</span> <span class="pre">valor)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Avaliar numericamente</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">expr.evalf(n)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Derivada</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.diff(f,</span> <span class="pre">x,</span> <span class="pre">n)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Integral indefinida</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.integrate(f,</span> <span class="pre">x)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Integral definida</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.integrate(f,</span> <span class="pre">(x,</span> <span class="pre">a,</span> <span class="pre">b))</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Limite</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.limit(f,</span> <span class="pre">x,</span> <span class="pre">x0)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Série de Taylor</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">f.series(x,</span> <span class="pre">x0,</span> <span class="pre">n)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Resolver equação</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.solve(eq,</span> <span class="pre">x)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Converter para NumPy</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sp.lambdify(x,</span> <span class="pre">expr,</span> <span class="pre">'numpy')</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="exercicios">
+<h3>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h3>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>Exercício 1:</strong> Use SymPy para expandir <span class="math notranslate nohighlight">\((2x - 3)^4\)</span> e depois verifique o resultado fatorando a expressão expandida.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>Exercício 2:</strong> Calcule analiticamente a derivada de <span class="math notranslate nohighlight">\(f(x) = x^3 \ln(x) - e^{2x}\)</span> e avalie <span class="math notranslate nohighlight">\(f'(1)\)</span> numericamente.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>Exercício 3:</strong> Calcule a integral definida <span class="math notranslate nohighlight">\(\displaystyle\int_0^\pi \sin^2(x)\, dx\)</span> e confirme o resultado numericamente com <code class="docutils literal notranslate"><span class="pre">evalf()</span></code>.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>Exercício 4:</strong> Encontre os zeros da função <span class="math notranslate nohighlight">\(g(x) = x^3 - 6x^2 + 11x - 6\)</span> usando <code class="docutils literal notranslate"><span class="pre">sp.solve()</span></code> e trace o gráfico para confirmar visualmente.</p>
+</div></blockquote>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -474,6 +1052,39 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Conteúdo
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simbolos">Símbolos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constantes-simbolicas">Constantes simbólicas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplificacao-e-manipulacao-de-expressoes">Simplificação e manipulação de expressões</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expand-expandir"><code class="docutils literal notranslate"><span class="pre">expand</span></code> — expandir</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-fatorar"><code class="docutils literal notranslate"><span class="pre">factor</span></code> — fatorar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simplify-simplificar"><code class="docutils literal notranslate"><span class="pre">simplify</span></code> — simplificar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subs-substituicao"><code class="docutils literal notranslate"><span class="pre">subs</span></code> — substituição</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivadas">Derivadas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrais">Integrais</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites">Limites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series-de-taylor">Séries de Taylor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucao-de-equacoes">Resolução de equações</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convertendo-para-funcao-numerica-lambdify">Convertendo para função numérica: <code class="docutils literal notranslate"><span class="pre">lambdify</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumo-das-funcoes">Resumo das funções</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

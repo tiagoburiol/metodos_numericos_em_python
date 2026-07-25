@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -51,7 +51,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="../_static/translations.js?v=000972dd"></script>
+    <script src="../_static/translations.js?v=daa5921a"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -215,11 +215,15 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_minimos_quadrados_continuo.html">5.2 Minimos quadrados: caso contínuo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_regra_dos_trapezios.html">6.2 Regra dos trapézios</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regras_de_simpson.html">6.3 Regras de Simpson</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -227,6 +231,18 @@
 <li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8_EQUACOES_DIFERENCIAIS_PARCIAIS.html">8. Equações Diferenciais Parciais</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 </ul>
@@ -434,10 +450,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-1-somatorio">Exercício 1: Somatório</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-2-somatorio-com-limite-superior">Exercício 2: Somatório com limite superior</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-3">Exercício 3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-5">Exercício 5</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#el-contenido-de-esta-clase-usa-material-de-http-swcarpentry-github-io-python-novice-inflammation-distribuido-bajo-licencia-creative-commons-attribution-license">El contenido de esta clase usa material de: http://swcarpentry.github.io/python-novice-inflammation/ distribuido bajo licencia Creative Commons Attribution license</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-5">Exercício 5</a></li>
 </ul>
 </li>
 </ul>
@@ -557,12 +570,6 @@ x segue sendo maior que y
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 1
-x  menor que y
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -581,12 +588,6 @@ x  menor que y
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x é igual a y&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x não é menor nem igual que y&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 0
-x é igual a y
 </pre></div>
 </div>
 </div>
@@ -616,17 +617,6 @@ x é igual a y
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2
--1
-0
-1
-2
-3
-4
-</pre></div>
-</div>
-</div>
 </div>
 <div class="alert alert-info"><strong>Dica</strong>: 
 `ii += 1` equivale à `ii = ii + 1`. Outros operadores 'in-place' são: `-=`, `*=`, `/=` 
@@ -639,13 +629,6 @@ x é igual a y
     <span class="n">ii</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">if</span> <span class="n">ii</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="k">break</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-1
-2
 </pre></div>
 </div>
 </div>
@@ -664,13 +647,6 @@ x é igual a y
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-1
-2
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -682,16 +658,6 @@ x é igual a y
         <span class="c1">#break</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Terminado&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-1
-2
-3
-4
-Terminado
 </pre></div>
 </div>
 </div>
@@ -711,27 +677,11 @@ Terminado
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
-2
-3
-4
-5
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">nome</span> <span class="ow">in</span> <span class="s2">&quot;Anna&quot;</span><span class="p">,</span> <span class="s2">&quot;Joao&quot;</span><span class="p">,</span> <span class="s2">&quot;José&quot;</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">nome</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anna
-Joao
-José
 </pre></div>
 </div>
 </div>
@@ -743,25 +693,11 @@ José
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-1
-2
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
-3
-4
 </pre></div>
 </div>
 </div>
@@ -775,7 +711,7 @@ José
 <p>Escrevamos uma função que some os <code class="docutils literal notranslate"><span class="pre">n</span></code> primeiros números naturais. Escrevemos uma <strong>documentación</strong> (<em>docstring</em>) justo embaixo da definição da função para explicar (e em muitos casos nos lembrar) o que faz a função e dar um exemplo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">somatorio</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">somatorio</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Soma  os números 0+1+2+...+num.</span>
 
 <span class="sd">    Exemplo:</span>
@@ -799,11 +735,6 @@ José
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -811,23 +742,10 @@ José
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on function somatorio in module __main__:
-
-somatorio(num)
-    Soma  os números 0+1+2+...+num.
-    
-    Exemplo:
-    --------
-    &gt;&gt;&gt; somatorio(4)
-    10
-</pre></div>
-</div>
-</div>
 </div>
 <div class="alert alert-warning">Observar o que acontece no caso de esquecer  inicializar a soma:</div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">somatorio2</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">somatorio2</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">nn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">soma</span> <span class="o">=</span> <span class="n">nn</span> <span class="o">+</span> <span class="n">soma</span>
     <span class="k">return</span> <span class="n">soma</span>
@@ -841,32 +759,11 @@ somatorio(num)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">UnboundLocalError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-22-5f60dde51e57&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">somatorio2</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-
-<span class="nn">&lt;ipython-input-21-8981e48e1926&gt;</span> in <span class="ni">somatorio2</span><span class="nt">(num)</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">somatorio2</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">for</span> <span class="n">nn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">3</span>         <span class="n">soma</span> <span class="o">=</span> <span class="n">nn</span> <span class="o">+</span> <span class="n">soma</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">return</span> <span class="n">soma</span>
-
-<span class="ne">UnboundLocalError</span>: local variable &#39;soma&#39; referenced before assignment
-</pre></div>
-</div>
-</div>
 </div>
 <p>Poderiamos equivalentemente,usa a função <code class="docutils literal notranslate"><span class="pre">sum</span></code> de Python, que soma os elementos de uma lista:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4]
 </pre></div>
 </div>
 </div>
@@ -877,11 +774,6 @@ somatorio(num)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="exercicio-2-somatorio-com-limite-superior">
@@ -889,7 +781,7 @@ somatorio(num)
 <p>Suponha que queremos somar  os números naturais até alcançar um limite máximo; isto é, se queremos que a soma 1+2+3+…+N seja o maior possível sem ultrapassar 2500, qual seria a soma?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">soma_limite</span><span class="p">(</span><span class="n">lim</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">soma_limite</span><span class="p">(</span><span class="n">lim</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Soma os números 1+2+3+...+N    até que lim &gt; 1+2+...+ N.  Como resultado retorna a soma 1+2+...+ N </span>
 <span class="sd">    e o número  N</span>
 
@@ -910,11 +802,6 @@ somatorio(num)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2485, 70)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -923,21 +810,10 @@ somatorio(num)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2485
-2556
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soma_limite</span><span class="p">(</span><span class="mi">2500</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">somatorio</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 </pre></div>
 </div>
 </div>
@@ -956,16 +832,6 @@ somatorio(num)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-47-8e65ad6291de&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">assert</span> <span class="n">soma_limite</span><span class="p">(</span><span class="mi">2500</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">somatorio</span><span class="p">(</span><span class="mi">71</span><span class="p">)</span>
-
-<span class="ne">AssertionError</span>: 
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="exercicio-3">
@@ -979,7 +845,7 @@ somatorio(num)
 <p><a class="reference external" href="http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method">http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">raiz</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">raiz</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">S</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">x</span>
@@ -997,22 +863,12 @@ somatorio(num)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.162277660168379
-</pre></div>
-</div>
-</div>
 </div>
 <p>Naturalmente, é de esperar que funções tão ususais tenham alguma livraria já criada. Neste caso a livraria <code class="docutils literal notranslate"><span class="pre">math</span></code> comtém muitas funções úteis de matemáticas</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1622776601683795
 </pre></div>
 </div>
 </div>
@@ -1023,20 +879,10 @@ somatorio(num)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.999999999999998
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.000000000000002
 </pre></div>
 </div>
 </div>
@@ -1050,7 +896,7 @@ somatorio(num)
 <p>Com iteração:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>  <span class="c1"># este maravilhoso truque de atribuir múltiplas variáveis </span>
@@ -1066,16 +912,11 @@ somatorio(num)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 2, 55)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Com recursão:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fib_recursivo</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib_recursivo</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -1090,7 +931,7 @@ somatorio(num)
 <p>Imprimir uma lista com os <span class="math notranslate nohighlight">\(n\)</span> primeiros:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">n_primeiros</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">n_primeiros</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">F</span> <span class="o">=</span> <span class="n">fib_recursivo</span>
     <span class="n">lista</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -1106,203 +947,7 @@ somatorio(num)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
-</pre></div>
 </div>
-</div>
-</div>
-<hr class="docutils" />
-<p><strong>Referênças</strong></p>
-<ul class="simple">
-<li><p>Libro “How To Think Like a Computer Scientist” <a class="reference external" href="http://interactivepython.org/runestone/static/thinkcspy/toc.html">http://interactivepython.org/runestone/static/thinkcspy/toc.html</a></p></li>
-<li><p>Project Euler: ejercicios para aprender Python <a class="reference external" href="https://projecteuler.net/problems">https://projecteuler.net/problems</a></p></li>
-<li><p>Python Challenge (!) <a class="reference external" href="http://www.pythonchallenge.com/">http://www.pythonchallenge.com/</a></p></li>
-</ul>
-<p>(<strong>Este Nootebook está baseado na versão em espanhol do minicurso de Aeropython feito por  Juan Luis Cano, Mabel Delgado, Alejandro Sáez da universidade de Alicante, e cujo notebook original pode ser descarregado no link <a class="github reference external" href="https://github.com/AeroPython/Curso_AeroPython">AeroPython/Curso_AeroPython</a>, e foi modificado por Oscar Márquez para fins académicos</strong>)</p>
-<section id="el-contenido-de-esta-clase-usa-material-de-http-swcarpentry-github-io-python-novice-inflammation-distribuido-bajo-licencia-creative-commons-attribution-license">
-<h4>El contenido de esta clase usa material de: <a class="reference external" href="http://swcarpentry.github.io/python-novice-inflammation/">http://swcarpentry.github.io/python-novice-inflammation/</a> distribuido bajo licencia <a class="reference external" href="https://software-carpentry.org/license/">Creative Commons Attribution license</a><a class="headerlink" href="#el-contenido-de-esta-clase-usa-material-de-http-swcarpentry-github-io-python-novice-inflammation-distribuido-bajo-licencia-creative-commons-attribution-license" title="Link para este cabeçalho">#</a></h4>
-<hr class="docutils" />
-<p><em>Las siguientes celdas contienen configuración del Notebook</em></p>
-<p><em>Para visualizar y utlizar los enlaces a Twitter el notebook debe ejecutarse como <a class="reference external" href="http://ipython.org/ipython-doc/dev/notebook/security.html">seguro</a></em></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>File &gt; Trusted Notebook
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># preserve</span>
-<span class="c1"># Esta celda da el estilo al notebook</span>
-<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
-<span class="n">css_file</span> <span class="o">=</span> <span class="s1">&#39;../styles/aeropython.css&#39;</span>
-<span class="n">HTML</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">css_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">/* This template is inspired in the one used by Lorena Barba
-in the numerical-mooc repository: https://github.com/numerical-mooc/numerical-mooc
-We thank her work and hope you also enjoy the look of the notobooks with this style */
-
-<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Josefin+Sans:400,700,400italic|Ubuntu+Condensed' rel='stylesheet' type='text/css'>
-
-El estilo se ha aplicado =)
-
-<style>
-
-
-
-#notebook_panel { /* main background */
-    background: #f7f7f7;
-}
-
-div.cell { /* set cell width */
-    width: 900px;
-}
-
-div #notebook { /* centre the content */
-    background: #fff; /* white background for content */
-    width: 950px;
-    margin: auto;
-    padding-left: 0em;
-}
-
-#notebook li { /* More space between bullet points */
-    margin-top:0.7em;
-}
-
-/* draw border around running cells */
-div.cell.border-box-sizing.code_cell.running { 
-    border: 1px solid #111;
-}
-
-/* Put a solid color box around each cell and its output, visually linking them*/
-div.cell.code_cell {
-    font-family: 'Source Sans Pro', sans-serif;
-    background-color: rgb(256,256,256);
-    font-size: 110%;
-    border-radius: 0px; 
-    padding: 0.5em;
-    margin-left:1em;
-    margin-top: 1em;
-}
-
-div.text_cell_render{
-    font-family: 'Josefin Sans', serif;
-    line-height: 145%;
-    font-size: 125%;
-    font-weight: 500;
-    width:750px;
-    margin-left:auto;
-    margin-right:auto;
-}
-
-
-/* Formatting for header cells */
-.text_cell_render h1, .text_cell_render h2, .text_cell_render h3,
-.text_cell_render h4, .text_cell_render h5 {
-    font-family: 'Ubuntu Condensed', sans-serif;
-}
-/*
-.text_cell_render h1 {
-    font-family: Flux, 'Ubuntu Condensed', serif;
-    font-style:regular;
-    font-weight: 400;    
-    font-size: 30pt;
-    text-align: center;
-    line-height: 100%;
-    color: #335082;
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
-    display: block;
-}
-*/
-.text_cell_render h1 {
-    font-weight: 600;
-    font-size: 35pt;
-    line-height: 100%;
-    color: #000000;
-    margin-bottom: 0.1em;
-    margin-top: 0.3em;
-    display: block;
-}
-
-.text_cell_render h2 {
-    margin-top:16px;
-    font-size: 27pt;
-    font-weight: 550;
-    margin-bottom: 0.1em;
-    margin-top: 0.3em;
-    font-style: regular;
-    color: #2c6391;
-}	
-
-.text_cell_render h3 {
-    font-size: 20pt;
-    font-weight: 550
-    text-align: left;
-    margin-bottom: 0.1em;
-    margin-top: 0.3em;
-    font-style: regular;
-    color:  #387eb8;
-}
-
-.text_cell_render h4 {    /*Use this for captions*/
-    font-size: 18pt;
-    font-weight: 450
-    text-align: left;
-    margin-bottom: 0.1em;
-    margin-top: 0.3em;
-    font-style: regular;
-    color:  #5797cc;
-}
-
-.text_cell_render h5 {  /*Use this for small titles*/
-    font-size: 18pt;
-    font-weight: 550;
-    color: rgb(163,0,0);
-    font-style: italic;
-    margin-bottom: .1em;
-    margin-top: 0.8em;
-    display: block;
-    color:  #b21c0d;
-}
-
-.text_cell_render h6 { /*use this for copyright note*/
-    font-family: 'Ubuntu Condensed', sans-serif;
-    font-weight: 300;
-    font-size: 14pt;
-    line-height: 100%;
-    color: #252525;
-    text-align: right;
-    margin-bottom: 1px;
-    margin-top: 1px;
-}
-
-.CodeMirror{
-        font-family: 'Duru Sans', sans-serif;
-        font-size: 100%;
-}
-
-</style>
-<script>
-    MathJax.Hub.Config({
-                        TeX: {
-                           extensions: ["AMSmath.js"],
-                           equationNumbers: { autoNumber: "AMS", useLabelIds: true}
-                           },
-                tex2jax: {
-                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
-                },
-                displayAlign: 'center', // Change this to 'center' to center equations.
-                "HTML-CSS": {
-                    styles: {'.MathJax_Display': {"margin": 4}}
-                }
-        });
-</script>
-</div></div>
-</div>
-</section>
 </section>
 </section>
 </section>
@@ -1363,10 +1008,7 @@ div.text_cell_render{
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-1-somatorio">Exercício 1: Somatório</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-2-somatorio-com-limite-superior">Exercício 2: Somatório com limite superior</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-3">Exercício 3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-5">Exercício 5</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#el-contenido-de-esta-clase-usa-material-de-http-swcarpentry-github-io-python-novice-inflammation-distribuido-bajo-licencia-creative-commons-attribution-license">El contenido de esta clase usa material de: http://swcarpentry.github.io/python-novice-inflammation/ distribuido bajo licencia Creative Commons Attribution license</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicio-5">Exercício 5</a></li>
 </ul>
 </li>
 </ul>

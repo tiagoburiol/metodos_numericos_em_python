@@ -10,7 +10,7 @@ O material foi desenvolvido para cursos de graduação em engenharia, física, m
 
 ## Organização
 
-O livro está organizado em sete capítulos temáticos:
+O livro está organizado em oito capítulos temáticos:
 
 | Capítulo | Tema |
 |---|---|
@@ -21,6 +21,7 @@ O livro está organizado em sete capítulos temáticos:
 | 5 | Ajuste por mínimos quadrados |
 | 6 | Integração numérica |
 | 7 | Equações diferenciais ordinárias |
+| 8 | Equações diferenciais parciais |
 
 ## Como usar
 
