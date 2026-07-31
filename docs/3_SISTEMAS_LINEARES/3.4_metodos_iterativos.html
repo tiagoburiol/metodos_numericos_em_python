@@ -1,0 +1,1368 @@
+
+<!DOCTYPE html>
+
+
+<html lang="pt-BR" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.4 Métodos iterativos &#8212; Caderno didático de Métodos Numéricos em Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=2efa9f5e"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=daa5921a"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3_SISTEMAS_LINEARES/3.4_metodos_iterativos';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="next" title="4. Interpolação Polinomial" href="../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html" />
+    <link rel="prev" title="3.3 Eliminação de Gauss-Jordan e matriz inversa" href="3.3_gauss-jordan_e_matriz_inversa.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="pt-BR"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/capa.png" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
+    <script>document.write(`<img src="../_static/capa.png" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Buscar</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Caderno Didático de Métodos Numéricos em Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2 Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6 Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="3.1_forma_matricial_e_escalonamento.html">3.1 Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.4 Métodos iterativos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_minimos_quadrados_continuo.html">5.2 Minimos quadrados: caso contínuo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_regra_dos_trapezios.html">6.2 Regra dos trapézios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regras_de_simpson.html">6.3 Regras de Simpson</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8_EQUACOES_DIFERENCIAIS_PARCIAIS.html">8. Equações Diferenciais Parciais</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositório fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abra um problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/3_SISTEMAS_LINEARES/3.4_metodos_iterativos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Baixar arquivo fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir em PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo tela cheia"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3.4 Métodos iterativos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Conteúdo </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-iterativo-de-jacobi-richardson">Método iterativo de Jacobi-Richardson</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia">Convergência</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterio-de-parada">Critério de parada</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-iterativo-de-gaus-seidel">Método iterativo de Gaus-Seidel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-criterio-de-sassenfield">Convergência: critério de Sassenfield</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="metodos-iterativos">
+<h1>3.4 Métodos iterativos<a class="headerlink" href="#metodos-iterativos" title="Link para este cabeçalho">#</a></h1>
+<p>Os métodos iterativos são indicados para sistemas de grande porte com a matriz dos coeficientes esparsa, ou seja, com grande grande quantidade de zeros. Nesses casos os métodos iterativos são mais rápidos e demandam menos memória para armazenamento. Além disso, os métodos iterativos possuem a vantagem de se auto corrigir e também podem ser usados para reduzir os erros de arredondamento na solução obtida por métodos exatos. Sob certas condições, podem também ser usados para resolver um conjunto de equações não lineares.</p>
+<p>No entanto, para que o método iterativo seja convergente, é necessário atender a certas condições. Dizemos que a sequência de vetores <span class="math notranslate nohighlight">\(x^{(k)}\)</span>, <span class="math notranslate nohighlight">\(k=0,1,2,\ldots\)</span> de um espaço vetorial <span class="math notranslate nohighlight">\(V\)</span> converge para a solução exata <span class="math notranslate nohighlight">\(\bar{x} \in V\)</span> se <span class="math notranslate nohighlight">\(\|x^{(k)} - \bar{x}\|  \rightarrow 0\)</span>, quando <span class="math notranslate nohighlight">\(k \rightarrow \infty\)</span> para alguma norma <span class="math notranslate nohighlight">\( \| .\|\)</span> sobre o espaço vetorial <span class="math notranslate nohighlight">\(V\)</span>.</p>
+<p>Para determinar a solução de um sistema linear por métodos iterativos, precisamos transformar o sistema dado em um outro sistema equivalente que estabeleça um processo iterativo. Suponha então, que o sistema <span class="math notranslate nohighlight">\(Ax = b\)</span> seja reescrito na forma equivalente</p>
+<div class="math notranslate nohighlight">
+\[x = Hx + g\]</div>
+<p>tal que a solução <span class="math notranslate nohighlight">\(\bar{x}\)</span> de <span class="math notranslate nohighlight">\(x = Hx + g\)</span> é  também, solução de <span class="math notranslate nohighlight">\(Ax = b\)</span>. A partir dessa nova forma podemos obter um processo iterativo que fornecerá a sequência de soluções aproximadas que buscamos. Assim, seja <span class="math notranslate nohighlight">\(x^{(0)}\)</span> uma aproximação inicial para a solução <span class="math notranslate nohighlight">\(\bar{x}\)</span>, obtemos as aproximações sucessivas <span class="math notranslate nohighlight">\(x^{(k)}\)</span> para a solução desejada usando o processo iterativo definido por:</p>
+<div class="math notranslate nohighlight">
+\[x^{(k)} = Hx^{(k-1)} + g\]</div>
+<p><strong>Convergência:</strong>
+A condição necessária e suficiente para a convergência do processo iterativo definido por <span class="math notranslate nohighlight">\(x = Hx + g\)</span> é que <span class="math notranslate nohighlight">\(\max \{ |\lambda_i |\} &lt; 1\)</span>, onde <span class="math notranslate nohighlight">\(\lambda_i\)</span> são os autovalores da matriz <span class="math notranslate nohighlight">\(H\)</span>.</p>
+<p><strong>Critério geral de convergência:</strong>
+Como consequência do teorema acima, o processo será convergente se para qualquer norma de matrizes, <span class="math notranslate nohighlight">\(\| H \| &lt; 1\)</span>.</p>
+<p><em>Prova:</em> Na k-ésima iteração o vetor erro, dado por <span class="math notranslate nohighlight">\(e^{(k)}=\bar{x}-x^{(k)}\)</span> será</p>
+<div class="math notranslate nohighlight">
+\[ e ^{(k)} = H^ke^{(0)}\]</div>
+<p>Tomando normas consistentes, tem-se que</p>
+<div class="math notranslate nohighlight">
+\[ \| H^k e^{(0)} \| \leq \| H \|^k \|e^{(0)}\|\]</div>
+<p>portanto
+$<span class="math notranslate nohighlight">\( \| e^{(k)} \| \leq \| H \|^k \|e^{(0)}\|\)</span>$</p>
+<p>como <span class="math notranslate nohighlight">\(\| H \|&lt;1\)</span> tem-se que <span class="math notranslate nohighlight">\(\| e^{(k)} \| \rightarrow 0\)</span> quando <span class="math notranslate nohighlight">\(k \rightarrow \infty\)</span>.</p>
+<p>Assim, se <span class="math notranslate nohighlight">\(\| H \|&lt;1\)</span> para alguma norma, temos a garantia de que o processo iterativo dado por <span class="math notranslate nohighlight">\( x - x^{(k)} = H(x-x^{(k-1)})\)</span> converge para a solução exata <span class="math notranslate nohighlight">\(\bar{x}\)</span>. A matriz <span class="math notranslate nohighlight">\(H\)</span> é chamada <strong>matriz de iteração</strong>.</p>
+<section id="metodo-iterativo-de-jacobi-richardson">
+<h2>Método iterativo de Jacobi-Richardson<a class="headerlink" href="#metodo-iterativo-de-jacobi-richardson" title="Link para este cabeçalho">#</a></h2>
+<p>Considere um sistema  de equações lineares <span class="math notranslate nohighlight">\(Ax = b\)</span> em que <span class="math notranslate nohighlight">\(\det(A) \neq 0\)</span>, com a diagonal principal <span class="math notranslate nohighlight">\(a_{ii} \neq 0\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots,n\)</span> como segue</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+	         a_{11}x_1 +a_{12}x_2 + \cdots + a_{1n}x_n = b_1\\ 
+	         a_{21}x_1 +a_{22}x_2 + \cdots + a_{2n}x_n = b_2\\
+	         \vdots   \\
+	         a_{n1}x_1 +a_{n2}x_2 + \cdots + a_{nn}x_n = b_n\\
+             \end{cases} \end{split}\]</div>
+<p>Dividindo cada linha do sistema dado pelo elemento da diagonal e isolando <span class="math notranslate nohighlight">\(x_1\)</span> na <span class="math notranslate nohighlight">\(1^a\)</span> equação, <span class="math notranslate nohighlight">\(x_2\)</span> na <span class="math notranslate nohighlight">\(2^a\)</span> equação até <span class="math notranslate nohighlight">\(x_n\)</span> na n-ésima equação, temos o sistema escrito na forma equivalente:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+	         x_1 = \frac{1}{a_{11}} \left(b_1  - a_{12}x_2 - a_{13}x_3 - \cdots - a_{1n}x_n \right)\\ 
+	         x_2 = \frac{1}{a_{22}} \left(b_2  - a_{21}x_1 - a_{23}x_3 - \cdots - a_{2n}x_n \right)\\ 
+	         \vdots   \\
+	         x_n = \frac{1}{a_{nn}} \left(b_n  - a_{n1}x_1 - a_{n2}x_2 - \cdots - a_{n \, n-1}x_{n-1} \right)\\ 
+\end{cases} \end{split}\]</div>
+<p>O método iterativo de Jacobi-Richardson é dado da seguinte forma:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+             x_1^{(k+1)} = \frac{b_1}{a_{11}}  - \frac{a_{12}}{a_{11}}x_2^{(k)} - \frac{a_{13}}{a_{11}}x_3^{(k)} - \cdots - \frac{a_{1n}}{a_{11}}x_n^{(k)} \\ 
+	         x_2^{(k+1)} = \frac{b_2}{a_{22}}  - \frac{a_{21}}{a_{22}}x_1^{(k)} - \frac{a_{23}}{a_{22}}x_3^{(k)} - \cdots - \frac{a_{1n}}{a_{11}}x_n^{(k)} \\ 
+	         \vdots   \\
+	         x_n^{(k+1)} = \frac{b_n}{a_{nn}}  - \frac{a_{n1}}{a_{nn}}x_1^{(k)} - \frac{a_{n2}}{a_{nn}}x_3^{(k)} - \cdots - \frac{a_{n \, n-1}}{a_{nn}}x_{n-1}^{(k)} \\
+\end{cases} \end{split}\]</div>
+<section id="convergencia">
+<h3>Convergência<a class="headerlink" href="#convergencia" title="Link para este cabeçalho">#</a></h3>
+<p>Podemos verificar a convergência do método iterativo de Jacobi-Richardson avaliando a matriz <span class="math notranslate nohighlight">\(A\)</span>. Se a matriz <span class="math notranslate nohighlight">\(A=[a_{ij}]_{i,j=1.,,,,n}\)</span> do sistema <span class="math notranslate nohighlight">\(Ax=b\)</span> for estritamente diagonalmente dominante, ou seja,</p>
+<div class="math notranslate nohighlight">
+\[ |a_{ii}| &gt; \sum_{j=1,i\neq j} |a_{ij}| , i=1,...n\]</div>
+<p>então, a sequência será convergente.</p>
+</section>
+<section id="criterio-de-parada">
+<h3>Critério de parada<a class="headerlink" href="#criterio-de-parada" title="Link para este cabeçalho">#</a></h3>
+<p>Considerando que o processo iterativo está fornecendo uma sequência convergente, um critério de parada para o algoritmo pode ser dado por</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\parallel x^{(k)} - x^{(k-1)}\parallel }{\parallel x^{(k)}\parallel} &lt; \epsilon\]</div>
+<p>para alguma norma vetorial <span class="math notranslate nohighlight">\(\parallel . \parallel : V \rightarrow R\)</span> e alguma tolerância <span class="math notranslate nohighlight">\(\epsilon\)</span> pré estabelecida.</p>
+<p>Por conveniência, é comum utilizarmos a norma infinito:</p>
+<div class="math notranslate nohighlight">
+\[\parallel x\parallel _ \infty = \max \{ |x_0|, |x_1|,\ldots, |x_n| \}\]</div>
+<p><strong>Exemplo 3.4.1:</strong>
+Usando o método interativo de Jacobi-Richardson, determine uma solução aproximada para o seguinte sistema de equações lineares, com aproximação inicial <span class="math notranslate nohighlight">\(x^{(0)}=(0,0,0)^T\)</span> e precisão <span class="math notranslate nohighlight">\(\epsilon = 0.01\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[\begin{array}{ccc} 
+10 &amp; 2 &amp; 1\\
+1 &amp; 5 &amp; 1\\
+2 &amp; 3 &amp; 10\\
+\end{array} \right]
+\left[\begin{array}{c} 
+x_1\\
+x_2\\
+x_3\\
+\end{array} \right]
+=
+\left[\begin{array}{c} 
+14\\
+11\\
+8\\
+\end{array} \right]
+\end{split}\]</div>
+<p>Reescrevendo o sistema, obtemos:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+\begin{cases} 
+x_1^{(k+1)} = \frac{14}{10} - \frac{2}{10}x_2^{(k)} - \frac{1}{10}x_3^{(k)}\\ 
+x_2^{(k+1)} = \frac{11}{5} - \frac{1}{5}x_1^{(k)} - \frac{1}{5}x_3^{(k)}\\ 
+x_3^{(k+1)} = \frac{8}{10} - \frac{2}{10}x_1^{(k)} - \frac{3}{10}x_2^{(k)}\\ 
+\end{cases} 
+\end{split}\]</div>
+<p>A partir da primeira iteração, <span class="math notranslate nohighlight">\(k=0\)</span>, <span class="math notranslate nohighlight">\(x^{(0)}=(x_1^{(0)},x_2^{(0)},x_3^{(0)})^T=(0,0,0)^T\)</span>obtem-se:</p>
+<p><span class="math notranslate nohighlight">\(x_1^{(1)}=\frac{14}{10}-\frac{2}{10}x_2^{(0)}-\frac{1}{10}x_3^{(0)}=1,4-0,2(0)-0,1(0)=1,4\)</span></p>
+<p><span class="math notranslate nohighlight">\(x_2^{(1)}= \frac{11}{5}-\frac{1}{5}x_1^{(0)}-\frac{1}{5}x_3^{(0)}= 2,2-0,2(0)-0,2(0)=2,2\)</span></p>
+<p><span class="math notranslate nohighlight">\(x_3^{(1)}=\frac{8}{10}-\frac{2}{10}x_1^{(0)}-\frac{3}{10}x_2^{(0)}=0,8-0,2(0)-0,3(0)=0,8\)</span></p>
+<p>Para <span class="math notranslate nohighlight">\(k=0\)</span> e tomando <span class="math notranslate nohighlight">\(x^{(0)}=(0,0,0)^t\)</span>, temos <span class="math notranslate nohighlight">\(x^{(1)}=(1,4;2,2;0,8)^t\)</span>
+Teste de parada: <span class="math notranslate nohighlight">\(\frac{\left\|x^{(1)}-x^{(0)}\right\|_{\infty}}{\left\|x^{(1)}\right\|_{\infty}}=1&gt;\varepsilon\)</span></p>
+<p>Para <span class="math notranslate nohighlight">\(k=1\)</span>, temos:</p>
+<p><span class="math notranslate nohighlight">\(x_1^{(2)}=\frac{14}{10}-\frac{2}{10} x_2^{(1)}-\frac{1}{10} x_3^{(1)}=1,4-0,2(2,2)-0,1(0,8)=0,88\)</span></p>
+<p><span class="math notranslate nohighlight">\(x_2^{(2)}=\frac{11}{5}-\frac{1}{5} x_1^{(1)}-\frac{1}{5} x_3^{(1)} = 2,2-0,2(1,4)-0,2(0,8) =1,76\)</span></p>
+<p><span class="math notranslate nohighlight">\(x_3^{(2)}=\frac{8}{10}-\frac{2}{10} x_1^{(1)}-\frac{3}{10} x_2^{(1)}=0,8-0,2(1,4)-0,3(2,2)=-0,14\)</span></p>
+<p>Portanto,</p>
+<div class="math notranslate nohighlight">
+\[
+x^{(2)}=(0,8800;1,7600;-0,1400)^t, \quad \frac{\left\|x^{(2)}-x^{(1)}\right\|_{\infty}}{\left\|x^{(2)}\right\|_{\infty}}=0,5341&gt;\varepsilon
+\]</div>
+<p>Assim, sucessivamente, calculamos <span class="math notranslate nohighlight">\(x^{(3)}\)</span>, <span class="math notranslate nohighlight">\(x^{(4)}\)</span>, <span class="math notranslate nohighlight">\(x^{(5)}\)</span>, <span class="math notranslate nohighlight">\(\dots\)</span>, até que o critério de parada seja satisfeito em</p>
+<div class="math notranslate nohighlight">
+\[x^{(6)}=(0,9967;1,9955;-0,0047)^t\]</div>
+<p>em que</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\left\|x^{(6)}-x^{(5)}\right\|_{\infty}}{\left\|x^{(6)}\right\|_{\infty}}=0,0091&lt;\varepsilon\]</div>
+<p>Em python podemos fazer como é mostrado a seguir:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dados iniciais</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">])</span>
+
+<span class="n">A</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">10.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],</span>
+               <span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">5.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],</span>
+               <span class="p">[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">10.</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">14.</span><span class="p">,</span><span class="mf">11.</span><span class="p">,</span><span class="mf">8.</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># função para fazer as iterações</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">itera</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">x3</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">itera</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.4, 2.2, 0.8])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#várias iterações e o erro</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">])</span>
+
+<span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">itera</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_ant</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Solução:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 [1.4 2.2 0.8] 1.0
+3 [ 0.88  1.76 -0.14] 0.5341
+4 [1.062 2.052 0.096] 0.1423
+5 [ 0.98    1.9684 -0.028 ] 0.063
+6 [1.0091 2.0096 0.0135] 0.0206
+7 [ 0.9967  1.9955 -0.0047] 0.0091
+Solução: [ 0.9967  1.9955 -0.0047]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Uma outra forma de expressarmos as equações usadas no processo iterativo de Jacobi-Richardson éusar a expressão compactada</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x_i^{(k+1)} = \frac{1}{a_{ii}} \left(b_i - \sum_{j=1}^{i-1} a_{ij}x_j^{(k)} -\sum_{j=i+1}^{n} a_{ij}x_j^{(k)} \right), \\
+i=1,\ldots,n\end{split}\]</div>
+<p>em que o valor de <span class="math notranslate nohighlight">\(i\)</span> identifica cada uma das equações do sistema. Então, podemos obter as soluções aproximadas como é mostrado a seguir:</p>
+<p><strong>Exemplo 3.4.2:</strong> Outra forma de obter as soluções do Exemplo 3.4.1 é mostrada a seguir.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">5.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">10.</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">14.</span><span class="p">,</span><span class="mf">11.</span><span class="p">,</span><span class="mf">8.</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">])</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">xk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">xk</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]))</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># a linha acima é equivalente a:</span>
+        <span class="c1">#xk[i] = (b[i]-np.dot(A[i,0:i],x[:i])-np.dot(A[i,i+1:],x[i+1:]))/A[i,i]</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">xk</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">xk</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.4 2.2 0.8]
+[ 0.88  1.76 -0.14]
+[1.062 2.052 0.096]
+[ 0.98    1.9684 -0.028 ]
+[1.0091 2.0096 0.0135]
+[ 0.9967  1.9955 -0.0047]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Solução:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solução: [ 0.9967  1.9955 -0.0047]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Na forma matricial, o método de Jacobi-Richardson é dada por:</p>
+<div class="math notranslate nohighlight">
+\[x^{(k+1)} = Hx^{(k)} + g\]</div>
+<p>onde</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}H = 
+\left[\begin{array}{ccccc} 
+ 0 &amp; -\frac{a_{12}}{a_{11}} &amp; -\frac{a_{13}}{a_{11}} &amp;\cdots &amp; -\frac{a_{1n}}{a_{11}} \\ 
+ -\frac{a_{21}}{a_{22}} &amp; 0 &amp; -\frac{a_{23}}{a_{22}} &amp;\cdots &amp; -\frac{a_{2n}}{a_{22}} \\
+  \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+ -\frac{a_{n1}}{a_{nn}} &amp; -\frac{a_{n2}}{a_{nn}} &amp; -\frac{a_{n3}}{a_{nn}}&amp;\cdots &amp; 0 \\
+\end{array} \right]
+\quad \text{e} \quad
+g = 
+\left[\begin{array}{c} 
+\frac{b_1}{a_{11}} \\ 
+\frac{b_2}{a_{22}} \\
+\vdots \\
+\frac{b_n}{a_{nn}}\\
+\end{array} \right]\end{split}\]</div>
+<p>ou, ainda,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[\begin{array}{c} 
+x_1^{(k+1)} \\ 
+x_2^{(k+1)} \\
+\vdots \\
+x_n^{(k+1)}\\
+\end{array} \right]= 
+\left[\begin{array}{ccccc} 
+ 0 &amp; -\frac{a_{12}}{a_{11}} &amp; -\frac{a_{13}}{a_{11}} &amp;\cdots &amp; -\frac{a_{1n}}{a_{11}} \\ 
+ -\frac{a_{21}}{a_{22}} &amp; 0 &amp; -\frac{a_{23}}{a_{22}} &amp;\cdots &amp; -\frac{a_{2n}}{a_{22}} \\
+  \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+ -\frac{a_{n1}}{a_{nn}} &amp; -\frac{a_{n2}}{a_{nn}} &amp; -\frac{a_{n3}}{a_{nn}}&amp;\cdots &amp; 0 \\
+\end{array} \right]
+\left[\begin{array}{c} 
+x_1^{(k)} \\ 
+x_2^{(k)} \\
+\vdots \\
+x_n^{(k)}\\
+\end{array} \right]
++
+\left[\begin{array}{c} 
+\frac{b_1}{a_{11}} \\ 
+\frac{b_2}{a_{22}} \\
+\vdots \\
+\frac{b_n}{a_{nn}}\\
+\end{array} \right]
+\end{split}\]</div>
+<p><strong>Exemplo 3.4.3:</strong> Resolvendo novamente o exemplo 3.4.1, mas agora usando operações matriciais.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">5.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">10.</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">14.</span><span class="p">,</span><span class="mf">11.</span><span class="p">,</span><span class="mf">8.</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">-</span> <span class="n">A</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;H =&#39;</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H = [[ 0.  -0.2 -0.1]
+ [-0.2  0.  -0.2]
+ [-0.2 -0.3  0. ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">b</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;g =&#39;</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g = [1.4 2.2 0.8]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># verificando a convergẽncia com a norma inf </span>
+<span class="n">norma_inf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">H</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Norma:&#39;</span><span class="p">,</span> <span class="n">norma_inf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Norma: 0.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">H</span><span class="nd">@x</span><span class="o">+</span><span class="n">g</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.4, 2.2, 0.8])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fazendo as iterações</span>
+<span class="n">err</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Iterações:&#39;</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">err</span><span class="o">&gt;</span><span class="mf">0.01</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">g</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_ant</span><span class="p">)</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span>   
+    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">&quot;, Err=&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iterações:
+[1.4 2.2 0.8] , Err= 1.0
+[ 0.88  1.76 -0.14] , Err= 0.25
+[1.062 2.052 0.096] , Err= 0.1423
+[ 0.98    1.9684 -0.028 ] , Err= 0.04166
+[1.0091 2.0096 0.0135] , Err= 0.02064
+[ 0.9967  1.9955 -0.0047] , Err= 0.00621
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="metodo-iterativo-de-gaus-seidel">
+<h3>Método iterativo de Gaus-Seidel<a class="headerlink" href="#metodo-iterativo-de-gaus-seidel" title="Link para este cabeçalho">#</a></h3>
+<p>Considere um sistema  de equações lineares <span class="math notranslate nohighlight">\(Ax = b\)</span> em que <span class="math notranslate nohighlight">\(\det(A) \neq 0\)</span>, com a diagonal principal <span class="math notranslate nohighlight">\(a_{ii} \neq 0\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots,n\)</span> como segue</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+	         a_{11}x_1 +a_{12}x_2 + \cdots + a_{1n}x_n = b_1\\ 
+	         a_{21}x_1 +a_{22}x_2 + \cdots + a_{2n}x_n = b_2\\
+	         \vdots   \\
+	         a_{n1}x_1 +a_{n2}x_2 + \cdots + a_{nn}x_n = b_n\\
+             \end{cases} \end{split}\]</div>
+<p>Dividindo cada linha do sistema dado pelo elemento da diagonal e isolando <span class="math notranslate nohighlight">\(x_1\)</span> na <span class="math notranslate nohighlight">\(1^a\)</span> equação, <span class="math notranslate nohighlight">\(x_2\)</span> na <span class="math notranslate nohighlight">\(2^a\)</span> equação até <span class="math notranslate nohighlight">\(x_n\)</span> na n-ésima equação, temos o sistema escrito na forma equivalente:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+	         x_1 = \frac{1}{a_{11}} \left(b_1  - a_{12}x_2 - a_{13}x_3 - \cdots - a_{1n}x_n \right)\\ 
+	         x_2 = \frac{1}{a_{22}} \left(b_2  - a_{21}x_1 - a_{23}x_3 - \cdots - a_{2n}x_n \right)\\ 
+	         \vdots   \\
+	         x_n = \frac{1}{a_{nn}} \left(b_n  - a_{n1}x_1 - a_{n2}x_2 - \cdots - a_{n \, n-1}x_{n-1} \right)\\ 
+\end{cases} \end{split}\]</div>
+<p>O método iterativo de Gauss-Seidel é dado da seguinte forma:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+             x_1^{(k+1)} = \frac{b_1}{a_{11}}  - \frac{a_{12}}{a_{11}}x_2^{(k)} - \frac{a_{13}}{a_{11}}x_3^{(k)} - \cdots - \frac{a_{1n}}{a_{11}}x_n^{(k)} \\ 
+	         x_2^{(k+1)} = \frac{b_2}{a_{22}}  - \frac{a_{21}}{a_{22}}x_1^{(k+1)} - \frac{a_{23}}{a_{22}}x_3^{(k)} - \cdots - \frac{a_{1n}}{a_{11}}x_n^{(k)} \\ 
+	         \vdots   \\
+	         x_n^{(k+1)} = \frac{b_n}{a_{nn}}  - \frac{a_{n1}}{a_{nn}}x_1^{(k+1)} - \frac{a_{n2}}{a_{nn}}x_3^{(k+1)} - \cdots - \frac{a_{n \, n-1}}{a_{nn}}x_{n-1}^{(k+1)} \\
+\end{cases} \end{split}\]</div>
+<p>De forma geral, o método de Gauss-Seidel pode ser resumido como:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x_i^{(k+1)} = \frac{1}{a_{ii}} \left(b_i - \sum_{j=1}^{i-1} a_{ij}x_j^{(k+1)} -\sum_{j=i+1}^{n} a_{ij}x_j^{(k)} \right), \\
+i=1,\ldots,n\end{split}\]</div>
+<p>ou ainda, de forma equivalente:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x_i^{(k+1)} = g_i - \sum_{j=1}^{i-1} h_{ij}x_j^{(k+1)} -\sum_{j=i+1}^{n} h_{ij}x_j^{(k)}, \\
+i=1,\ldots,n\end{split}\]</div>
+<p>em que <span class="math notranslate nohighlight">\(g_i=\frac{b_i}{a_{ii}}\)</span> e <span class="math notranslate nohighlight">\(h_{ij}=\frac{a_{ij}}{a_{ii}}\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots,n\)</span>.</p>
+</section>
+<section id="convergencia-criterio-de-sassenfield">
+<h3>Convergência: critério de Sassenfield<a class="headerlink" href="#convergencia-criterio-de-sassenfield" title="Link para este cabeçalho">#</a></h3>
+<p>Sejam as constantes <span class="math notranslate nohighlight">\(\beta_i\)</span> definidas pelas seguintes fórmulas de recorrência:</p>
+<div class="math notranslate nohighlight">
+\[\beta_i = \sum_{j=1}^{i-1} |h_{ij}|\beta_i +\sum_{j=i+1}^{n} |h_{ij}| \,\,\,\,\,\, i=1,\ldots,n\]</div>
+<p>e seja</p>
+<div class="math notranslate nohighlight">
+\[\beta = \max_{1 \leq i \leq n}\ \beta_i\]</div>
+<p>Então, se <span class="math notranslate nohighlight">\(\beta &lt; 1\)</span>, a sequência <span class="math notranslate nohighlight">\(x^{(k)}\)</span>, gerada pelo método iterativo de Gauss-Seidel, converge para a solução <span class="math notranslate nohighlight">\(x\)</span> do sistema dado.</p>
+<p><strong>Exemplo 3.4.4:</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/85">Fonte</a>) Usando o método iterativo de Gauss-Seidel, determine uma solução aproximada para o sistema dado a seguir, com aproximação inicial
+<span class="math notranslate nohighlight">\(x^{(0)} =(x_1^{(0)},x_2^{(0)},x_3^{(0)})^t =(0,0,0)^t\)</span> e precisão <span class="math notranslate nohighlight">\(\epsilon = 0.01\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[\begin{array}{ccc} 
+10 &amp; 2 &amp; 1\\ 1 &amp; 5 &amp; 1\\ 2 &amp; 3 &amp; 10\\
+\end{array} \right]
+\left[\begin{array}{c} 
+x_1\\ x_2\\ x_3\\
+\end{array} \right]=
+\left[\begin{array}{c} 
+14\\ 11\\ 8\\
+\end{array} \right] \end{split}\]</div>
+<p>Uma possível solução</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Entrando com a matriz a e o vetor b</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">14.</span><span class="p">,</span> <span class="mf">11.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># obtendo a matriz H</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">-</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Matriz H:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matriz H:
+[[ 0.  -0.2 -0.1]
+ [-0.2  0.  -0.2]
+ [-0.2 -0.3  0. ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># verificando a convergência </span>
+<span class="n">beta</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">H</span><span class="p">)):</span>
+    <span class="n">bi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]))</span><span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]))</span>
+    <span class="n">beta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">bi</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Convergência:&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;max{&#39;</span><span class="p">,</span><span class="n">beta</span><span class="p">,</span><span class="s1">&#39;} =&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Convergência:
+max{ [0.3, 0.26, 0.138] } = 0.3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">])</span>
+<span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">err</span><span class="o">=</span><span class="mi">10</span>
+
+<span class="k">while</span> <span class="n">err</span><span class="o">&gt;</span><span class="mf">0.01</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">]))</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_ant</span><span class="p">)</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span>   
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;, Err=&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solução:&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 1.4    1.92  -0.056] , Err= 1.0
+[ 1.0216  2.0069 -0.0064] , Err= 0.0
+Solução: [ 1.0216  2.0069 -0.0064]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Na forma matricial, o método de Gauss-Seidel  pode ser escrito como</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[    \begin{array}{c} 
+	         x_1^{(k+1)} \\ 
+	         x_2^{(k+1)} \\
+             \vdots\\
+	         x_n^{(k+1)} \\
+	\end{array} 
+\right]=
+\left[\begin{array}{ccccc} 
+	         0                     &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\ 
+	         -\frac{a_{21}}{a_{22}} &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
+	         \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+	         -\frac{a_{n1}}{a_{nn}} &amp; -\frac{a_{n2}}{a_{nn}} &amp; \cdots &amp; -\frac{a_{n \,n-1}}{a_{nn}} &amp; 0\\
+	         \end{array} \right]
+             \left[
+    \begin{array}{c} 
+	         x_1^{(k+1)} \\ 
+	         x_2^{(k+1)} \\
+             \vdots\\
+	         x_n^{(k+1)} \\
+	\end{array} 
+\right]
++
+\left[\begin{array}{ccccc} 
+	         0&amp;  -\frac{a_{12}}{a_{11}}&amp; -\frac{a_{13}}{a_{11}}&amp; \cdots &amp;-\frac{a_{1n}}{a_{11}} \\ 
+	         0&amp; 0&amp; -\frac{a_{23}}{a_{22}} &amp; \cdots &amp; -\frac{a_{2n}}{a_{22}} \\
+	         \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+	         0&amp; 0&amp; 0&amp; \cdots&amp; 0\\
+	         \end{array} \right]
+\left[\begin{array}{c} 
+	         x_1^{(k)} \\ 
+	         x_2^{(k)} \\
+             \vdots\\
+	         x_n^{(k)} \\
+	\end{array} \right]
++
+\left[ \begin{array}{c} 
+	         \frac{b_1}{a_{11}} \\ 
+	         \frac{b_2}{a_{22}} \\
+             \vdots\\
+	         \frac{b_n}{a_{nn}} \\
+	\end{array} \right]\end{split}\]</div>
+<p>ou
+$<span class="math notranslate nohighlight">\( x^{(k+1)} = P x^{(k+1)} + Q x^{(k)} + g\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[ (I-P)x^{(k+1)} = Q x^{(k)} + g\]</div>
+<div class="math notranslate nohighlight">
+\[ x^{(k+1)} = (I-P)^{-1}Q x^{(k)} + (I-P)^{-1}g\]</div>
+<p>Fazendo-se <span class="math notranslate nohighlight">\(H' = (I-P)^{-1}Q\)</span> e <span class="math notranslate nohighlight">\(g' =(I-P)^{-1}g\)</span> o processo iterativo torna-se</p>
+<div class="math notranslate nohighlight">
+\[x^{(k+1)} = H' x^{(k)} + g'\]</div>
+<p><strong>Exemplo 3.4.5:</strong> Repetindo o Exemplo 3.4.4 mas agora utilizando operções matriciais.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">inv</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Entrando com a matriz a e o vetor b</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">14.</span><span class="p">,</span> <span class="mf">11.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">-</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">b</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tril</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+<span class="n">P</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0. ,  0. ,  0. ],
+       [-0.2,  0. ,  0. ],
+       [-0.2, -0.3,  0. ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+<span class="n">Q</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0. , -0.2, -0.1],
+       [ 0. ,  0. , -0.2],
+       [ 0. ,  0. ,  0. ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Hl</span> <span class="o">=</span> <span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">-</span><span class="n">P</span><span class="p">)</span><span class="nd">@Q</span>
+<span class="n">gl</span> <span class="o">=</span> <span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">-</span><span class="n">P</span><span class="p">)</span><span class="nd">@g</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fazendo as iterações</span>
+<span class="n">err</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Iterações:&#39;</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">err</span><span class="o">&gt;</span><span class="mf">0.01</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Hl</span><span class="nd">@x</span> <span class="o">+</span> <span class="n">gl</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_ant</span><span class="p">)</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span>   
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;, Err=&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iterações:
+[ 1.4    1.92  -0.056] , Err= 1.0
+[ 1.0216  2.0069 -0.0064] , Err= 0.04329107868930881
+[ 9.9926e-01  2.0014e+00 -2.7978e-04] , Err= 0.003049939954761819
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercicios">
+<h2>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>1.</strong> Usando algum método iterativo, determine uma solução aproximada para os sistemas dados, com aproximação inicial
+<span class="math notranslate nohighlight">\(x^{(0)} =(0,0,\ldots,0)^t\)</span> e 10 iterações.</p>
+<p>a)
+<span class="math notranslate nohighlight">\(\left[\begin{array}{ccccc}
+ 5 &amp; 1 &amp; 2 &amp; 1 &amp; -1\\
+ 0&amp;6&amp;1&amp;1&amp;-1\\
+ 0&amp;1&amp;-3&amp;2&amp;1\\
+ 3&amp;0&amp;2&amp;7&amp;0\\
+ 1&amp;1&amp;0&amp;0&amp;8\\
+ \end{array} \right]
+ \left[\begin{array}{c}
+ x_1\\ x_2\\ x_3\\x_4\\x_5\\
+ \end{array} \right]
+ =\left[\begin{array}{c}
+ 1\\ 2\\ 0\\2\\1\\
+ \end{array} \right] \quad \quad\)</span></p>
+<p>b)
+<span class="math notranslate nohighlight">\(\begin{aligned}
+ 4 x_1+x_2+x_3+\quad x_5 &amp; =6, \\
+ -x_1-3 x_2+x_3+x_4 &amp; =6, \\
+ 2 x_1+x_2+5 x_3-x_4-x_5 &amp; =6, \\
+ -x_1-x_2-x_3+4 x_4 &amp; =6, \\
+ 2 x_2-x_3+x_4+4 x_5 &amp; =6\end{aligned} \quad \quad\)</span></p>
+<p>c)
+<span class="math notranslate nohighlight">\(\begin{array}{rlr}
+ 4 x_1-x_2 &amp; =0, \\
+ -x_1+4 x_2-x_3 &amp; =5, \\
+ -x_2+4 x_3 &amp; =0, \\
+ +4 x_4-x_5 &amp; =6, \\
+ -x_4+4 x_5-x_6= &amp; -2, \\
+ -x_5+4 x_6 &amp; =6 .
+\end{array}\)</span></p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>2.</strong> Usando o método iterativo de Gauss-Seidel, determine uma solução aproximada para o sistema dado a seguir, com aproximação inicial
+<span class="math notranslate nohighlight">\(x^{(0)} =(0,0,0,0,0)^t\)</span> e 10 iterações.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[\begin{array}{ccccc}
+ 5 &amp; 1 &amp; 2 &amp; 1 &amp; -1\\
+ 0&amp;6&amp;1&amp;1&amp;-1\\
+ 0&amp;1&amp;-3&amp;2&amp;1\\
+ 3&amp;0&amp;2&amp;7&amp;0\\
+ 1&amp;1&amp;0&amp;0&amp;8\\
+ \end{array} \right]
+ \left[\begin{array}{c}
+ x_1\\ x_2\\ x_3\\x_4\\x_5\\
+ \end{array} \right]=
+ \left[\begin{array}{c}
+ 1\\ 2\\ 0\\2\\1\\
+ \end{array} \right] \end{split}\]</div>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>3.</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/521">Burden et al, 2016, p.505</a>) Use a técnica iterativa de Gauss-Seidel para encontrar soluções aproximadas de</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{aligned}
+ 10 x_1-x_2+2 x_3 &amp; =6, \\
+ -x_1+11 x_2-x_3+3 x_4 &amp; =25, \\
+ 2 x_1-x_2+10 x_3-x_4 &amp; =-11, \\
+ 3 x_2-x_3+8 x_4 &amp; =15,
+ \end{aligned}\end{split}\]</div>
+<p>começando com <span class="math notranslate nohighlight">\(\mathbf{x}=(0,0,0,0)^t \mathrm{e}\)</span> iterando até que</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\left\|\mathbf{x}^{(k)}-\mathbf{x}^{(k-1)}\right\|_{\infty}}{\left\|\mathbf{x}^{(k)}\right\|_{\infty}}&lt;10^{-3} .\]</div>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>4.</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/305">Chapra e Canale, 2016, p. 305</a>)</p>
+<p>Um problema comum na engenharia elétrica envolve a determinação das correntes e tensões em várias posições em circuitos de resistores.</p>
+<p>Considere o curcuíto mostrado abaixo</p>
+<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/MatComp_II/main/imagens/circuito.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/MatComp_II/main/imagens/circuito.png" style="width: 400px;" /></a></p>
+<p>A regra de corrente de Kirchhoff aplicada em cada nó do circuito abaixo fornece</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{aligned}
+ &amp; i_{12}+i_{52}+i_{32}=0 \\
+ &amp; i_{65}-i_{52}-i_{54}=0 \\
+ &amp; i_{43}-i_{32}=0 \\
+ &amp; i_{54}-i_{43}=0
+ \end{aligned}\end{split}\]</div>
+<p>A aplicação da regra de tensão em cada um dos dois laços dá</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{aligned}
+ &amp; -i_{54} R_{54}-i_{43} R_{43}-i_{32} R_{32}+i_{52} R_{52}=0 \\
+ &amp; -i_{65} R_{65}-i_{52} R_{52}-i_{12} R_{12}-200=0
+ \end{aligned}\end{split}\]</div>
+<p>Substituindo o valor das resistências e movendo as constantes para o lado direito, o problema se transforma em resolver o  conjunto de seis equações equações lineares para as seis correntes desconhecidas.</p>
+<p>Obtenha o sistema e encontre as correntes usando algum método de eliminação.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>5.</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/310">Chapra e Canale, 2016, p. 310</a>)
+Uma bomba peristáltica produz um escoamento unitário (<span class="math notranslate nohighlight">\(Q_i\)</span>) de um fluido altamente viscoso. A rede está descrita na figura abaixo.</p>
+<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/MatComp_II/main/imagens/bomba_peristaltica.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/MatComp_II/main/imagens/bomba_peristaltica.png" style="width: 300px;" /></a></p>
+<p>Cada seção de tubo tem os mesmos comprimento e diâmetro. Os balanços de massa e energia mecânica podem ser simplificados para se obter os escoamentos em cada tubo como solução do sistema de equações</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+ &amp;\begin{aligned}
+ &amp; Q_3+2 Q_4-2 Q_2=0 \\
+ &amp; Q_5+2 Q_6-2 Q_4=0\\
+ &amp; 3 Q_7-2 Q_6=0
+ \end{aligned}\\
+ &amp;\begin{aligned}
+ &amp; Q_1=Q_2+Q_3 \\
+ &amp; Q_3=Q_4+Q_5 \\
+ &amp; Q_5=Q_6+Q_7
+ \end{aligned}
+ \end{aligned}\end{split}\]</div>
+<p>Resolva o sistema para obter o escoamento de cada corrente.</p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./3_SISTEMAS_LINEARES"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3.3_gauss-jordan_e_matriz_inversa.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">3.3 Eliminação de Gauss-Jordan e matriz inversa</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">4. Interpolação Polinomial</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Conteúdo
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-iterativo-de-jacobi-richardson">Método iterativo de Jacobi-Richardson</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia">Convergência</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criterio-de-parada">Critério de parada</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-iterativo-de-gaus-seidel">Método iterativo de Gaus-Seidel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-criterio-de-sassenfield">Convergência: critério de Sassenfield</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+De Tiago M. Buriol
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright Universidade Federal de Santa Maria.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
