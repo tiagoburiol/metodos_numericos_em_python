@@ -1,0 +1,1308 @@
+
+<!DOCTYPE html>
+
+
+<html lang="pt-BR" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.7 Exemplos de aplicações &#8212; Caderno didático de Métodos Numéricos em Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=2efa9f5e"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=daa5921a"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="next" title="3. Sistemas Lineares" href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html" />
+    <link rel="prev" title="2.6 Raízes de polinômios" href="2.6_raizes_de_polinomios.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="pt-BR"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/capa.png" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
+    <script>document.write(`<img src="../_static/capa.png" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Buscar</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Caderno Didático de Métodos Numéricos em Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.2_metodo_da_bissecao.html">2.2 Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2.6_raizes_de_polinomios.html">2.6 Raízes de polinômios</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.7 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1 Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_minimos_quadrados_continuo.html">5.2 Minimos quadrados: caso contínuo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_regra_dos_trapezios.html">6.2 Regra dos trapézios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regras_de_simpson.html">6.3 Regras de Simpson</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8_EQUACOES_DIFERENCIAIS_PARCIAIS.html">8. Equações Diferenciais Parciais</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositório fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abra um problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Baixar arquivo fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir em PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo tela cheia"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.7 Exemplos de aplicações</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Conteúdo </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucao">Resolução</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="exemplos-de-aplicacoes">
+<h1>2.7 Exemplos de aplicações<a class="headerlink" href="#exemplos-de-aplicacoes" title="Link para este cabeçalho">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Problema 1:</strong>
+Um tanque de comprimento <span class="math notranslate nohighlight">\(L\)</span> tem uma secção transversal no formato de um semicírculo com raio <span class="math notranslate nohighlight">\(r\)</span> (veja a figura). Quando cheio de água até uma distância <span class="math notranslate nohighlight">\(h\)</span> do topo, o volume <span class="math notranslate nohighlight">\(V\)</span> da água é:</p>
+<div class="math notranslate nohighlight">
+\[V=L \left[0.5 \pi r^2 - r^2 arcsen \left(\frac{h}{r} \right)-h \sqrt{r^2-h^2} \right]\]</div>
+<p>Supondo que <span class="math notranslate nohighlight">\(L=10 ft\)</span>, <span class="math notranslate nohighlight">\(r = 1 ft\)</span> e <span class="math notranslate nohighlight">\(V=12.4 ft^3\)</span>, encontre a profundidade do tanque com precisão de <span class="math notranslate nohighlight">\(0.0001 ft\)</span> utilizando um programa em Python para o Método da Bisseção e Método de Newton. Apresente os códigos utilizados e comente os resultados obtidos.</p>
+<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/tanque_cilindrico.jpg"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/tanque_cilindrico.jpg" style="width: 400px;" /></a></p>
+<p><em>Resolução:</em>
+Substituindo os valores de <span class="math notranslate nohighlight">\(L\)</span>, <span class="math notranslate nohighlight">\(r\)</span> e <span class="math notranslate nohighlight">\(V\)</span> na equação</p>
+<div class="math notranslate nohighlight">
+\[ f(h)= \frac{V}{L} - \left[0.5 \pi r^2 - r^2 arcsen \left(\frac{h}{r} \right)-h \sqrt{r^2-h^2} \right]=0\]</div>
+<p>obtem-se a seguinte função, cuja raiz é a solução do problema</p>
+<div class="math notranslate nohighlight">
+\[ f(h) = arcsen(h)+h\sqrt{1-h^2} - 0.3308\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">+</span><span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="o">-</span><span class="mf">0.3308</span>
+
+<span class="c1"># Localização por método gráfico </span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ca8e55ebd2512ce680506582d29c898b9daaf5519a7aa41a19ad12e8d89f2797.png" src="../_images/ca8e55ebd2512ce680506582d29c898b9daaf5519a7aa41a19ad12e8d89f2797.png" />
+</div>
+</div>
+<p>Observa-se pelo gráfico que a raiz está entre 0,15 e 0,2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">+</span><span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="o">-</span><span class="mf">0.3308</span>
+
+<span class="c1">#como é uma secção transversal no formato de um semicírculo de raio r=1, h vai de 0 a 1</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.15</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">0.0001</span>
+<span class="n">err</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">h_ant</span> <span class="o">=</span> <span class="n">a</span>
+
+<span class="k">while</span> <span class="n">err</span><span class="o">&gt;</span><span class="n">eps</span><span class="p">:</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mf">2.</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="n">h_ant</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">h_ant</span> <span class="o">=</span> <span class="n">h</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;|h=</span><span class="si">%.4f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">h</span>,&quot;|err=%.4f&quot;%err)
+    
+    <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">h</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">h</span>
+<span class="c1">#foi calculada a distância h do topo, então a profundidade é o raio=1 menos h</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;A profundidade aproximada pelo método da bisseção é &quot;</span><span class="p">,</span><span class="mf">1.</span><span class="o">-</span><span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>|h=0.1750 |err=0.1429
+|h=0.1625 |err=0.0769
+|h=0.1687 |err=0.0370
+|h=0.1656 |err=0.0189
+|h=0.1672 |err=0.0093
+|h=0.1664 |err=0.0047
+|h=0.1660 |err=0.0024
+|h=0.1662 |err=0.0012
+|h=0.1661 |err=0.0006
+|h=0.1662 |err=0.0003
+|h=0.1662 |err=0.0001
+|h=0.1662 |err=0.0001
+A profundidade aproximada pelo método da bisseção é  0.8338256835937501
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">+</span><span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="o">-</span><span class="mf">0.3308</span>
+<span class="n">df</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="mf">1.</span><span class="o">-</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.</span><span class="o">-</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+                                                                       
+<span class="n">h0</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">0.0001</span>
+<span class="n">err</span> <span class="o">=</span> <span class="mf">10.</span>
+
+<span class="k">while</span> <span class="n">err</span><span class="o">&gt;</span><span class="n">eps</span><span class="p">:</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">h0</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">h0</span><span class="p">)</span><span class="o">/</span><span class="n">df</span><span class="p">(</span><span class="n">h0</span><span class="p">)</span>  
+    <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="n">h0</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">h0</span> <span class="o">=</span> <span class="n">h</span>
+    <span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;h=</span><span class="si">%.5f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">h</span>, &quot;| err=%.5f&quot;%err)
+<span class="c1">#foi calculada a distância h do topo, então a profundidade é o raio=1 menos h</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;A profundidade aproximada pelo método de Newton é &quot;</span><span class="p">,</span><span class="mf">1.</span><span class="o">-</span><span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>h=0.16540 | err=1.00000
+h=0.16617 | err=0.00462
+h=0.16617 | err=0.00000
+A profundidade aproximada pelo método de Newton é  0.8338321028459801
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Comentário</strong>
+É possível observar ambos os métodos convergem para a raiz, no entanto o método de Newton converge mais rapidamente, com apenas 3 iterações, enquanto o método da bisseção precisou de 12 iterações para atingir a precisão de 0,0001.</p>
+<p><strong>Problema 2:</strong>
+Calcule todas as raízes de f(x)=lnx−x+2=0 pelo método do Aproximações Sucessivas (Ponto-Fixo) até que o erro relativo seja inferior a 0.0001. Em seguida, use o Método de Newton para resolver a mesma equação e compare os resultados comentando sobre o que você observou.</p>
+<p><em>Resolução:</em>
+Para o método do Ponto Fixo, precisamos encontrar uma função de interação ϕ(x) escrevendo uma equação equivalente a f(x)=lnx−x+2=0 na forma x=ϕ(x). Existem muitas formas de fazer isso, as funções obtidas podem gerar sequências convergentes ou não. Se |ϕ′(x)|≤1 em torno da raiz, a sequência será convergente. Entre as equações possíveis, tem-se ϕ1(x)=ln(x)+2 e ϕ2(x)=e(x−2).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Localização por método gráfico </span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5db43dc217a81348d82e5756edf5a3ef2d7159dd08b9223d223e6054ba61772d.png" src="../_images/5db43dc217a81348d82e5756edf5a3ef2d7159dd08b9223d223e6054ba61772d.png" />
+</div>
+</div>
+<p>Observa-se pelo gráfico que a função possui 2 raízes. Uma próxima de <span class="math notranslate nohighlight">\(x=0.0\)</span> e outra próxima de <span class="math notranslate nohighlight">\(x = 3.0\)</span>. Analisando a convergência do método do ponto fixo, vemos que  <span class="math notranslate nohighlight">\(|\phi_1'(x)| = |\frac{1}{x}| \geq 1\)</span> em torno de <span class="math notranslate nohighlight">\(0.0\)</span> e <span class="math notranslate nohighlight">\(\leq 1\)</span> em torno de <span class="math notranslate nohighlight">\(3.0\)</span>. Além disso,  <span class="math notranslate nohighlight">\(|\phi_2'(x)|=e^{(x-2)}\leq 1\)</span> em torno de <span class="math notranslate nohighlight">\(0.0\)</span> e <span class="math notranslate nohighlight">\(\geq 1\)</span> em torno de <span class="math notranslate nohighlight">\(3.0\)</span>. Assim, devemos usar <span class="math notranslate nohighlight">\(\phi_1\)</span> para a maior raiz e <span class="math notranslate nohighlight">\(\phi_2\)</span> para a menor raiz.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phi1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span>
+<span class="n">phi2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ponto_fixo</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">eps</span><span class="p">):</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">while</span> <span class="n">err</span><span class="o">&gt;</span><span class="n">eps</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">phi</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>   
+        <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;| x=</span><span class="si">%.5f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">x</span>, &quot;| err=%.5f&quot;%err)
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Raiz 1:&quot;</span><span class="p">)</span>
+<span class="n">ponto_fixo</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Raiz 2:&quot;</span><span class="p">)</span>
+<span class="n">ponto_fixo</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raiz 1:
+| x=0.14957 | err=0.33141
+| x=0.15717 | err=0.04836
+| x=0.15837 | err=0.00757
+| x=0.15856 | err=0.00120
+| x=0.15859 | err=0.00019
+| x=0.15859 | err=0.00003
+Raiz 2:
+| x=3.09861 | err=0.03182
+| x=3.13095 | err=0.01033
+| x=3.14134 | err=0.00331
+| x=3.14465 | err=0.00105
+| x=3.14570 | err=0.00033
+| x=3.14604 | err=0.00011
+| x=3.14614 | err=0.00003
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para o método de Newton, usamos a mesma função de iteração <span class="math notranslate nohighlight">\(x_{i+1} = x_1 - \frac{f(x_i)}{f'(x_i)}\)</span> e variamos a aproximação inicial para obter cada uma das raízes. Para a menor fazemos <span class="math notranslate nohighlight">\(x_0 = 0,0\)</span> e para a maior fazemos <span class="math notranslate nohighlight">\(x_0=3,0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">newton</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">eps</span><span class="p">):</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="mf">10.0</span>
+    <span class="n">x_ant</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="k">while</span> <span class="n">err</span><span class="o">&gt;</span><span class="n">eps</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x_ant</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x_ant</span><span class="p">)</span><span class="o">/</span><span class="n">df</span><span class="p">(</span><span class="n">x_ant</span><span class="p">)</span>    
+        <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_ant</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
+        <span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="nb">print</span> <span class="p">(</span> <span class="s2">&quot;| x=</span><span class="si">%.5f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">x</span>, &quot;| err=%.5f&quot;%err)
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">2.0</span>
+<span class="n">df</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">x</span> <span class="o">-</span> <span class="mf">1.0</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">0.0001</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Newton x0 = 0.01&quot;</span><span class="p">)</span>
+<span class="n">newton</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Newton x0 = 3.5&quot;</span><span class="p">)</span>
+<span class="n">newton</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Newton x0 = 0.01
+| x=0.03642 | err=0.72539
+| x=0.08740 | err=0.58336
+| x=0.13765 | err=0.36503
+| x=0.15691 | err=0.12278
+| x=0.15858 | err=0.01052
+| x=0.15859 | err=0.00007
+Newton x0 = 3.5
+| x=3.15387 | err=0.10975
+| x=3.14620 | err=0.00244
+| x=3.14619 | err=0.00000
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Comentário</strong>
+Para o método do ponto fixo precisamos de duas funções de iteração diferentes. Para Newton, basta variar a aproximação inicial. Newton converge mais rápido.</p>
+<p><strong>Problema 3:</strong></p>
+<p>A tensão elétrica sobre o capacitor de um circuito RLC-paralelo é dado por</p>
+<div class="math notranslate nohighlight">
+\[u(t)=u_0e^{-\alpha t} \cos(w_d t), t \geq 0 \]</div>
+<p>onde <span class="math notranslate nohighlight">\(u_0\)</span> é a tensão inicial sobre o capacitor,
+<span class="math notranslate nohighlight">\(\alpha = \frac{1}{2RC}\)</span> é a constante de amortecimento, <span class="math notranslate nohighlight">\(w_0=\frac{1}{\sqrt{LC}}\)</span> é a frequência angular de oscilação (natural),
+<span class="math notranslate nohighlight">\(w_d=\sqrt{w_0^2-\alpha^2}\)</span> é a frequência angular de oscilação (amortecida).
+A tensão <span class="math notranslate nohighlight">\(u\)</span> é dada em volts e o tempo <span class="math notranslate nohighlight">\(t\)</span> em segundos. Considere um circuito em que <span class="math notranslate nohighlight">\(R=200 \Omega\)</span>, <span class="math notranslate nohighlight">\(L=0,3 H\)</span>, <span class="math notranslate nohighlight">\(C = 40 \mu F\)</span> e <span class="math notranslate nohighlight">\(u_0 = 50 V\)</span>. Substitua os valores na equação e determine os instantes <span class="math notranslate nohighlight">\(t_1\)</span>, <span class="math notranslate nohighlight">\(t_2\)</span> e <span class="math notranslate nohighlight">\(t_3\)</span> em que a tensão atinge o valor <span class="math notranslate nohighlight">\(10 V\)</span>. Use o método das secantes e mais algum outro de sua escolha. Comente os resultados.</p>
+<section id="resolucao">
+<h2>Resolução<a class="headerlink" href="#resolucao" title="Link para este cabeçalho">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="mf">200.0</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">C</span> <span class="o">=</span> <span class="mf">0.000040</span>
+<span class="n">u0</span> <span class="o">=</span> <span class="mf">50.0</span>
+<span class="c1">#Ti = 300</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="n">C</span><span class="p">)</span>
+<span class="n">w0</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">C</span><span class="p">)</span>
+<span class="n">wd</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">w0</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mi">10</span><span class="o">-</span><span class="n">u0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">alpha</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">wd</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">secantes</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">x1</span><span class="p">):</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="mf">10.0</span>
+    <span class="k">while</span> <span class="n">err</span><span class="o">&gt;</span> <span class="mf">0.0001</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x0</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span><span class="o">-</span><span class="n">x1</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">))</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="c1"># calcula o erro relativo</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="n">x1</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;| x=</span><span class="si">%.10f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">x</span>)
+
+
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Buscando t1:&quot;</span><span class="p">)</span>
+<span class="n">secantes</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">x1</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Buscando t2&quot;</span><span class="p">)</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">secantes</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">x1</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Buscando t3&quot;</span><span class="p">)</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="mf">0.03</span>
+<span class="n">secantes</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">x1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/838abdbe0529c6a3a944304e66669633ede3898efe325b6203f77884df67261c.png" src="../_images/838abdbe0529c6a3a944304e66669633ede3898efe325b6203f77884df67261c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Buscando t1:
+| x=0.0053066982
+| x=0.0040857456
+| x=0.0046245866
+| x=0.0046151446
+| x=0.0046150592
+Buscando t2
+| x=0.0207432848
+| x=0.0188853104
+| x=0.0195069191
+| x=0.0193390109
+| x=0.0193208301
+| x=0.0193216099
+Buscando t3
+| x=0.0220852171
+| x=0.0232817083
+| x=0.0243766968
+| x=0.0239041166
+| x=0.0239452287
+| x=0.0239476194
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Comentário</strong>
+Como pode ser visto no gráfico, a função possui 3 raízes, que correspondem aos tempos <span class="math notranslate nohighlight">\(t_1\)</span>, <span class="math notranslate nohighlight">\(t_2\)</span> e <span class="math notranslate nohighlight">\(t_3\)</span> em que a tensão atinge o valor de 10V. Assim, precisamos executar o método das secantes 3 vezes, com aproximações iniciais próximas a 0.01, 0.02 e 0.03 para obter as raízes.</p>
+<p><strong>Problema 4:</strong>
+Em Termodinâmica sob determinadas condições a relação entre o calor <span class="math notranslate nohighlight">\(Q\)</span> fornecido a um gás e sua variação de temperatura <span class="math notranslate nohighlight">\(T_f - T_i\)</span> é dada por
+$<span class="math notranslate nohighlight">\( Q = nR \left[ A (T_f-T_i)+ \frac{B}{2}(T_f^2-T_i^2) + \frac{C}{3}(T_f^3-T_i^3) \right].\)</span><span class="math notranslate nohighlight">\(
+Para o gás metano \)</span>R=8,314  J/mol.K<span class="math notranslate nohighlight">\( , \)</span>A=1,702<span class="math notranslate nohighlight">\(, \)</span>B=9,081 \times 10^{-3}K^{-1}<span class="math notranslate nohighlight">\(, \)</span>C=-2,164 \times 10^{-6} K^{-2}<span class="math notranslate nohighlight">\(. Em uma câmara tem-se \)</span>n=2 mol<span class="math notranslate nohighlight">\( de metano a temperatura \)</span>T_i = 300 K<span class="math notranslate nohighlight">\( qual será a temperatura final \)</span>T_f<span class="math notranslate nohighlight">\( se \)</span>20 kJ$ de energia é absorvido pelo gás?</p>
+<p><em>Resolução:</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mf">1.702</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mf">0.009081</span>
+<span class="n">C</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.164</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">T_i</span> <span class="o">=</span> <span class="mf">300.0</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="mf">20000.0</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">n</span><span class="o">*</span><span class="n">R</span><span class="o">*</span><span class="p">((</span><span class="n">A</span><span class="o">*</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">T_i</span><span class="p">))</span><span class="o">+</span><span class="p">((</span><span class="n">B</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">T_i</span> <span class="o">*</span> <span class="n">T_i</span><span class="p">)</span><span class="o">+</span><span class="p">((</span><span class="n">C</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">T_i</span><span class="o">*</span><span class="n">T_i</span><span class="o">*</span><span class="n">T_i</span><span class="p">))))</span><span class="o">-</span><span class="n">Q</span>
+
+<span class="n">erro</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">x_m</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">x_ant</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="n">erro</span> <span class="o">&gt;</span> <span class="mf">0.001</span><span class="p">:</span>
+    <span class="n">x_m</span> <span class="o">=</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x_m</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">x_m</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">x_m</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="nb">print</span> <span class="p">(</span> <span class="n">i</span><span class="p">,</span> <span class="s1">&#39;| x =&#39;</span><span class="p">,</span> <span class="n">x_m</span><span class="p">)</span>
+    <span class="n">erro</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_m</span> <span class="o">-</span> <span class="n">x_ant</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_m</span><span class="p">)</span>
+    <span class="n">x_ant</span> <span class="o">=</span> <span class="n">x_m</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 | x = 550.0
+1 | x = 525.0
+2 | x = 537.5
+3 | x = 531.25
+4 | x = 534.375
+5 | x = 535.9375
+6 | x = 535.15625
+7 | x = 535.546875
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Comentário</strong> <br>
+Usando o método da bisseção, com a=500 e b=600 precisamos de 7 iteraçõespara chegar na solução com erro menor que 0,001.</p>
+<p><strong>Problema 5:</strong></p>
+<p>A resisitividade <span class="math notranslate nohighlight">\(\rho\)</span> do silício dopado é baseada na carga <span class="math notranslate nohighlight">\(q\)</span> de um elétron, na densidade eletrônica <span class="math notranslate nohighlight">\(n\)</span> e na mobilidade de elétron <span class="math notranslate nohighlight">\(\mu\)</span>. A densidade eletrônica é dada em termos da densidade da dopagem <span class="math notranslate nohighlight">\(N\)</span> e da densidade de transporte intríseca <span class="math notranslate nohighlight">\(n_i\)</span>. A mobilidade do elétron é descrita pela temperatura <span class="math notranslate nohighlight">\(T\)</span>, pela temperatura de referência <span class="math notranslate nohighlight">\(T_0\)</span> e pela mobilidade de referência <span class="math notranslate nohighlight">\(\mu_0\)</span>. As equações necessárias para o cálculo da resistividade são
+$<span class="math notranslate nohighlight">\( \rho = \frac{1}{qn\mu}\)</span>$
+onde</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{1}{2} \left( N+\sqrt{N^2+4n^2_i} \right)\]</div>
+<p>e</p>
+<div class="math notranslate nohighlight">
+\[\mu=\mu_0 \left(\frac{T}{T_0} \right)^{-2{,}42}\]</div>
+<p>Determine <span class="math notranslate nohighlight">\(N\)</span>, dado que <span class="math notranslate nohighlight">\(T_0=300 K\)</span>, <span class="math notranslate nohighlight">\(T = 1000 K\)</span>, <span class="math notranslate nohighlight">\(\mu_0=1300 cm^2 (V s)^{-1}\)</span>, <span class="math notranslate nohighlight">\(q = 1,6\times10^{-19} C\)</span>,
+<span class="math notranslate nohighlight">\(n_ i = 6,21 \times 10^9 cm^{-3}\)</span> e uma resistividade desejada de <span class="math notranslate nohighlight">\(\rho=6\times10^6\)</span> <span class="math notranslate nohighlight">\(V\)</span> <span class="math notranslate nohighlight">\(s\)</span> <span class="math notranslate nohighlight">\(cm/C\)</span>. Use o Método das Secantes e outro de sua escolha e compare os resultados.</p>
+<p><em>Resolução:</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T0</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">mu0</span> <span class="o">=</span> <span class="mi">1300</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mf">1.6</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">19</span><span class="p">)</span>
+<span class="n">ni</span> <span class="o">=</span> <span class="mf">6.21</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
+<span class="n">rho</span><span class="o">=</span><span class="mi">6</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">mu0</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">T0</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">2.42</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">(</span><span class="n">rho</span><span class="o">*</span><span class="n">q</span><span class="o">*</span><span class="n">mu</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">ni</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.21</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">10</span><span class="p">,</span> <span class="mf">1.22</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mf">1.214</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">1.216</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">10</span>
+<span class="n">x_ant</span> <span class="o">=</span> <span class="n">a</span>
+<span class="n">erro</span> <span class="o">=</span> <span class="mf">1000.</span>
+<span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">while</span> <span class="n">erro</span> <span class="o">&gt;</span> <span class="mf">0.0000001</span><span class="p">:</span>
+    <span class="n">x_m</span> <span class="o">=</span><span class="p">((</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x_m</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">x_m</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">x_m</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="nb">print</span> <span class="p">(</span> <span class="n">i</span><span class="p">,</span> <span class="s1">&#39;| x =&#39;</span><span class="p">,</span> <span class="n">x_m</span><span class="p">)</span>
+    <span class="n">erro</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_m</span> <span class="o">-</span> <span class="n">x_ant</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_m</span><span class="p">)</span>
+    <span class="n">x_ant</span> <span class="o">=</span> <span class="n">x_m</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9f16bf40dba6c0b09fac9a23276f95d0617f3f3bce6510d4bcbe4eb77f156613.png" src="../_images/9f16bf40dba6c0b09fac9a23276f95d0617f3f3bce6510d4bcbe4eb77f156613.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 | x = 12150000000.0
+1 | x = 12145000000.0
+2 | x = 12147500000.0
+3 | x = 12148750000.0
+4 | x = 12149375000.0
+5 | x = 12149687500.0
+6 | x = 12149843750.0
+7 | x = 12149921875.0
+8 | x = 12149882812.5
+9 | x = 12149863281.25
+10 | x = 12149873046.875
+11 | x = 12149877929.6875
+12 | x = 12149880371.09375
+13 | x = 12149881591.796875
+14 | x = 12149880981.445312
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T0</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">mu0</span> <span class="o">=</span> <span class="mi">1300</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mf">1.6</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">19</span><span class="p">)</span>
+<span class="n">ni</span> <span class="o">=</span> <span class="mf">6.21</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
+<span class="n">rho</span><span class="o">=</span><span class="mi">6</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">mu0</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">T0</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">2.42</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="p">(</span><span class="n">rho</span><span class="o">*</span><span class="n">q</span><span class="o">*</span><span class="n">mu</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">ni</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">err</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">1.2</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">10</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="mf">1.3</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">10</span>
+
+<span class="k">while</span> <span class="n">err</span><span class="o">&gt;</span> <span class="mf">0.000001</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x0</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span><span class="o">-</span><span class="n">x1</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">))</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="c1"># calcula o erro relativo</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">x1</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;| x=</span><span class="si">%.9f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">x</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| x=12148815088.399784088
+| x=12149873683.437911987
+| x=12149881211.855869293
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Comentário</strong> <br>
+Esse é um problema que possui uma escala atípica, mas como método de Newton chega-se a solução com apenas 3 iterações.</p>
+<p><strong>Problema 6:</strong>
+De acordo com o <em>princípio de Arquimedes</em>, a força de <em>flutuação</em> é igual ao peso do fluido deslocado pela parte submersa de um objeto. Para o tronco de cone mostrado abaixo, use o método da bisseção e mais algum método de sua escolha para determinar a altura <span class="math notranslate nohighlight">\(h_1\)</span> da parte que está acima da água. Use os seguintes valores para seus cálculos: <span class="math notranslate nohighlight">\(r_1 = 0,5 m\)</span>, <span class="math notranslate nohighlight">\(r_2 = 1 m\)</span>, <span class="math notranslate nohighlight">\(h = 1 m\)</span>, <span class="math notranslate nohighlight">\(\rho_f=densidade do tronco=200 kg/m^3\)</span> e <span class="math notranslate nohighlight">\(\rho_w=densidade da água=1000 kg/m^3\)</span>. O volume do trondo de cone é dado por: $<span class="math notranslate nohighlight">\(V=\frac{\pi h}{3}(r_1^2+r_2^2+r_1 r_2)\)</span>$</p>
+<p><em>Resolução:</em>
+A equação a ser resolvida é</p>
+<div class="math notranslate nohighlight">
+\[200 \frac{\pi1.0}{3} (0.5^2+1.0^2+1.0 \times 0.5) = 1000\frac{\pi (1-h_1)}{3}((0.5+h_1/2)^2+1.0^2+1.0 \times (0.5+h_1/2))\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">err</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x_ant</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="mf">1.75</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">h</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mf">2.</span><span class="p">))</span>
+
+<span class="k">while</span> <span class="n">err</span> <span class="o">&gt;</span> <span class="mf">0.001</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
+    <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_ant</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;| h1=</span><span class="si">%.10f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">x</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| h1=0.5500000000
+| h1=0.7750000000
+| h1=0.8875000000
+| h1=0.8312500000
+| h1=0.8593750000
+| h1=0.8734375000
+| h1=0.8804687500
+| h1=0.8769531250
+| h1=0.8751953125
+| h1=0.8760742188
+| h1=0.8756347656
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">err</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="mf">1.75</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">h</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mf">2.</span><span class="p">))</span>
+
+<span class="k">while</span> <span class="n">err</span><span class="o">&gt;</span><span class="mf">0.001</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x0</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span><span class="o">-</span><span class="n">x1</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">))</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">x1</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span> 
+
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;| h1=</span><span class="si">%.10f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">x</span>)  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| h1=0.8486486486
+| h1=0.8740418082
+| h1=0.8758028171
+| h1=0.8757774319
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Problema 7:</strong> Lei dos gases ideais e não ideais (engenharia química)</p>
+<p>A lei dos gases ideais é dada por</p>
+<div class="math notranslate nohighlight">
+\[ pV = nRT \]</div>
+<p>Essa equação é mais apropriada para alguns gases do que outros. Além disso, é acurada apenas para um intervalo limitado de pressão e temperatura.</p>
+<p>Uma equação de estado alternativa, conhecida como <em>equação de Van der Waals</em> é dada por</p>
+<div class="math notranslate nohighlight">
+\[ \left( p + \frac{a}{v^2} \right) (v-b) = RT\]</div>
+<p>onde <span class="math notranslate nohighlight">\(v = V/n \)</span> é o volume molar, <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> são constantes empíricas que dependem do gás.</p>
+<p>Considere o problema de se fazer uma estimattiva acurada do volume <span class="math notranslate nohighlight">\(v\)</span> do dióxido de carbono e do oxigênio, para diversas combinações de temperatura e pressão. Também deseja-se examidar o quão precisamente esses gases obedecem à lei dos gases ideais.</p>
+<p>São fornecidos os seguntes dados:</p>
+<p><span class="math notranslate nohighlight">\(R = 0,082054 L \,atm/(mol \,K)\)</span></p>
+<p>Dióxido de carbono: <span class="math notranslate nohighlight">\(a=3,592\)</span> e <span class="math notranslate nohighlight">\(b = 0,04267\)</span></p>
+<p>Oxigênio: <span class="math notranslate nohighlight">\( a= 1,360\)</span> e <span class="math notranslate nohighlight">\(b = 0,03183\)</span></p>
+<p>As pressões de interesse são 1, 10 e 100 atm , e  as temperaturas de 300, 500 e 700.</p>
+<p><em>Solução:</em></p>
+<p>Considerando a lei dos gases ideais tem-se</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">press</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span><span class="mi">700</span><span class="p">]</span> 
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calcula_vol</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">T</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="mf">0.082054</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Para T=&quot;</span><span class="p">,</span><span class="n">T</span><span class="p">,</span> <span class="s2">&quot;e p=&quot;</span><span class="p">,</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;o volume é v=&quot;</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="s2">&quot;L/mol&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">press</span><span class="p">:</span>
+        <span class="n">calcula_vol</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Para T= 300 e p= 1 o volume é v= 24.6162 L/mol
+Para T= 300 e p= 10 o volume é v= 2.46162 L/mol
+Para T= 300 e p= 100 o volume é v= 0.246162 L/mol
+Para T= 500 e p= 1 o volume é v= 41.027 L/mol
+Para T= 500 e p= 10 o volume é v= 4.1027000000000005 L/mol
+Para T= 500 e p= 100 o volume é v= 0.41027 L/mol
+Para T= 700 e p= 1 o volume é v= 57.4378 L/mol
+Para T= 700 e p= 10 o volume é v= 5.74378 L/mol
+Para T= 700 e p= 100 o volume é v= 0.574378 L/mol
+</pre></div>
+</div>
+</div>
+</div>
+<p>Considerando a <em>equação de Van der Waals</em>, tem-se, pelo método da bissecao</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># bisseção</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">300</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mf">3.592</span><span class="o">/</span><span class="n">v</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="mf">0.04267</span><span class="p">)</span><span class="o">-</span><span class="mf">0.082054</span><span class="o">*</span><span class="n">T</span>     <span class="c1">#dioxido</span>
+<span class="c1">#f = lambda v: (p + 1.360/v**2)*(v-0.03183)-0.082054*T    #oxigenio</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mf">24.</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">25.</span>
+
+<span class="n">v_ant</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">err</span> <span class="o">=</span> <span class="mf">10.</span>
+
+<span class="k">while</span> <span class="n">err</span> <span class="o">&gt;</span> <span class="mf">0.0001</span><span class="p">:</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
+    <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="n">v_ant</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">v_ant</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="nb">print</span> <span class="p">(</span> <span class="n">v</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.5
+24.75
+24.625
+24.5625
+24.53125
+24.515625
+24.5078125
+24.51171875
+24.513671875
+24.5126953125
+24.51220703125
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pelo método de Newton-Raphson</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">300</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mf">3.592</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.04267</span>
+
+<span class="c1">#a = 1.360</span>
+<span class="c1">#b = 0.03183</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">a</span><span class="o">/</span><span class="n">v</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">-</span><span class="mf">0.082054</span><span class="o">*</span><span class="n">T</span>
+<span class="n">flinha</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">p</span> <span class="o">-</span> <span class="n">a</span><span class="o">/</span><span class="n">v</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">/</span><span class="n">v</span><span class="o">**</span><span class="mi">3</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mf">30.0</span>
+<span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">0.0001</span>
+<span class="n">err</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="n">err</span><span class="o">&gt;</span><span class="n">eps</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">flinha</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_ant</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x_ant</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;| x=</span><span class="si">%.9f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">x</span>, &quot;| err=%.9f&quot;%err)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 | x=24.517487897 | err=0.223616389
+2 | x=24.512588134 | err=0.000199888
+3 | x=24.512588128 | err=0.000000000
+</pre></div>
+</div>
+</div>
+</div>
+<p>Método da bissecao para todos os casos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># bisseção</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="n">v</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">x_ant</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mf">3.592</span><span class="o">/</span><span class="n">v</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="mf">0.04267</span><span class="p">)</span><span class="o">-</span><span class="mf">0.082054</span><span class="o">*</span><span class="n">T</span>
+<span class="n">o</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mf">1.360</span><span class="o">/</span><span class="n">v</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="mf">0.03183</span><span class="p">)</span><span class="o">-</span><span class="mf">0.082054</span><span class="o">*</span><span class="n">T</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">bissecao</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="n">v_ant</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="mf">10.</span>
+    <span class="k">while</span> <span class="n">err</span> <span class="o">&gt;</span> <span class="n">eps</span><span class="p">:</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
+        <span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">v</span>
+
+        <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="n">v_ant</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">v_ant</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">return</span> <span class="n">v</span>
+
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Dióxido de Carbono&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">press</span><span class="p">:</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">bissecao</span><span class="p">(</span><span class="mf">0.00001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Para T=&quot;</span><span class="p">,</span><span class="n">T</span><span class="p">,</span> <span class="s2">&quot;e p=&quot;</span><span class="p">,</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;o volume é v=&quot;</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="s2">&quot;L/mol&quot;</span><span class="p">)</span> 
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Oxigênio&quot;</span><span class="p">)</span>        
+<span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">press</span><span class="p">:</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">bissecao</span><span class="p">(</span><span class="mf">0.00001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Para T=&quot;</span><span class="p">,</span><span class="n">T</span><span class="p">,</span> <span class="s2">&quot;e p=&quot;</span><span class="p">,</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;o volume é v=&quot;</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="s2">&quot;L/mol&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dióxido de Carbono
+Para T= 300 e p= 1 o volume é v= 24.51259252548218 L/mol
+Para T= 300 e p= 10 o volume é v= 2.354504963159561 L/mol
+Para T= 300 e p= 100 o volume é v= 0.07951069049537182 L/mol
+Para T= 500 e p= 1 o volume é v= 40.982235984802244 L/mol
+Para T= 500 e p= 10 o volume é v= 4.057775762081146 L/mol
+Para T= 500 e p= 100 o volume é v= 0.36630179435014726 L/mol
+Para T= 700 e p= 1 o volume é v= 57.418122749328596 L/mol
+Para T= 700 e p= 10 o volume é v= 5.724178814888001 L/mol
+Para T= 700 e p= 100 o volume é v= 0.5575539723038672 L/mol
+Oxigênio
+Para T= 300 e p= 1 o volume é v= 24.59269315719605 L/mol
+Para T= 300 e p= 10 o volume é v= 2.4384079909324647 L/mol
+Para T= 300 e p= 100 o volume é v= 0.2263596136868 L/mol
+Para T= 500 e p= 1 o volume é v= 41.02571918487549 L/mol
+Para T= 500 e p= 10 o volume é v= 4.1016403937339785 L/mol
+Para T= 500 e p= 100 o volume é v= 0.4116146740317345 L/mol
+Para T= 700 e p= 1 o volume é v= 57.446348686218265 L/mol
+Para T= 700 e p= 10 o volume é v= 5.752118678092956 L/mol
+Para T= 700 e p= 100 o volume é v= 0.5841945841908454 L/mol
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/tab01.PNG"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/tab01.PNG" style="width: 600px;" /></a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./2_ZEROS_DE_FUNCOES"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2.6_raizes_de_polinomios.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">2.6 Raízes de polinômios</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">3. Sistemas Lineares</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Conteúdo
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucao">Resolução</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+De Tiago M. Buriol
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright Universidade Federal de Santa Maria.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
