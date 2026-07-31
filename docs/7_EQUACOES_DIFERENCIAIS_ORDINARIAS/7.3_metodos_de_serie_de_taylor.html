@@ -1,0 +1,774 @@
+
+<!DOCTYPE html>
+
+
+<html lang="pt-BR" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7.3 Métodos de Série de Taylor &#8212; Caderno didático de Métodos Numéricos em Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=2efa9f5e"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=daa5921a"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="next" title="7.4 Métodos de Runge-Kutta" href="7.4_metodos_de_runge_kutta.html" />
+    <link rel="prev" title="7.2 Método de Euler" href="7.2_metodo_de_euler.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="pt-BR"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/capa.png" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
+    <script>document.write(`<img src="../_static/capa.png" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Buscar</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Caderno Didático de Métodos Numéricos em Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2 Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6 Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1 Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_minimos_quadrados_continuo.html">5.2 Minimos quadrados: caso contínuo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_regra_dos_trapezios.html">6.2 Regra dos trapézios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regras_de_simpson.html">6.3 Regras de Simpson</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8_EQUACOES_DIFERENCIAIS_PARCIAIS.html">8. Equações Diferenciais Parciais</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositório fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abra um problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Baixar arquivo fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir em PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo tela cheia"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>7.3 Métodos de Série de Taylor</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Conteúdo </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-taylor-de-ordem-p-2">Método de Taylor de ordem p=2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="metodos-de-serie-de-taylor">
+<h1>7.3 Métodos de Série de Taylor<a class="headerlink" href="#metodos-de-serie-de-taylor" title="Link para este cabeçalho">#</a></h1>
+<p>Consideremos o Problema de Valor Inicial (PVI) descrito por
+$<span class="math notranslate nohighlight">\(\begin{cases} 
+   y' = f(x,y) \\
+   y(x_0)=y_0
+  \end{cases}\)</span>$</p>
+<p>Supondo que a solução <span class="math notranslate nohighlight">\(y(x)\)</span> do PVI possui todas as derivadas contínuas no intervalo <span class="math notranslate nohighlight">\([a,b]\)</span> que contém os pontos de discretização <span class="math notranslate nohighlight">\(x_0\)</span>,<span class="math notranslate nohighlight">\(x_1\)</span>,…,<span class="math notranslate nohighlight">\(x_n\)</span> , o desenvolvimento em série de Taylor da função <span class="math notranslate nohighlight">\(y(x)\)</span> em torno do ponto <span class="math notranslate nohighlight">\(x_n\)</span> é dado por</p>
+<div class="math notranslate nohighlight">
+\[ y(x) = y(x_n) + y'(x_n)(x−x_n) + y''(x_n)\frac{(x-x_n)^2}{2!}+\cdots+y^{(p)}(x_n)\frac{(x-x_n)^p}{p!}+y^{(p+1)}(\xi)\frac{(x-\xi)^{p+1}}{(p+1)!}\]</div>
+<p>com <span class="math notranslate nohighlight">\( x_0&lt;\xi&lt;x\)</span>.</p>
+<p>Tomando <span class="math notranslate nohighlight">\(x = x_n + h\)</span>, denotado por <span class="math notranslate nohighlight">\(x_n+1\)</span> , assim, <span class="math notranslate nohighlight">\(h = x_n+1 − x_n\)</span> e temos:</p>
+<div class="math notranslate nohighlight">
+\[ y(x) = y(x_n) + y'(x_n)h + y''(x_n)\frac{h^2}{2!}+\cdots+y^{(p)}(x_n)\frac{h^p}{p!}+y^{(p+1)}(\xi)\frac{(x-\xi)^{p+1}}{(p+1)!}\]</div>
+<p>Se truncarmos a série de Taylor no p-ésimo termo, temos:</p>
+<div class="math notranslate nohighlight">
+\[ y(x) = y(x_n) + y'(x_n)h + y''(x_n)\frac{h^2}{2!}+\cdots+y^{(p)}(x_n)\frac{h^p}{p!}\]</div>
+<p>com um <strong>erro de truncamento</strong> dado pelo último termo da série de Taylor</p>
+<div class="math notranslate nohighlight">
+\[e(x_n)=y^{(p+1)}(\xi)\frac{(x-\xi)^{p+1}}{(p+1)!}\]</div>
+<p>Se a função <span class="math notranslate nohighlight">\(y(x)\)</span> possui a derivada de ordem <span class="math notranslate nohighlight">\((p + 1)\)</span> contínua no intervalo <span class="math notranslate nohighlight">\([a,b]\)</span>, então existe <span class="math notranslate nohighlight">\(M = \max \left\{ \left|y^{(p+1)}(x)\right|, x \in [a,b] \right\}\)</span>, e temos uma estimativa para o erro dada por um limitante superior, de ordem <span class="math notranslate nohighlight">\((p + 1)\)</span>, como segue:</p>
+<div class="math notranslate nohighlight">
+\[ |E| \leq \frac{h^{p+1}}{(p+1)!}M\]</div>
+<p>Assim, usando a série de Taylor, podemos calcular aproximações para <span class="math notranslate nohighlight">\(y(x)\)</span> da seguinte forma:</p>
+<div class="math notranslate nohighlight">
+\[ y(x_{n+1}) = y_n + y'_nh + y''_n\frac{h^2}{2!}+\cdots+y^{(p)}_n\frac{h^p}{p!}\]</div>
+<p>onde</p>
+<p><span class="math notranslate nohighlight">\( y'_n = f(x_n, y_n)\)</span></p>
+<p><span class="math notranslate nohighlight">\( y''_n = f_x(x_n, y_n) + f_y(x_n, y_n)y'_n\)</span></p>
+<p><span class="math notranslate nohighlight">\(y'''_n = f_{xx}(x_n, y_n) + 2f_{xy}(x_n, y_n)f(x_n, y_n) + f^2(x_n, y_n)f_{yy}(x_n, y_n) + f^2_y(x_n, y_n)f(x_n, y_n)\)</span></p>
+<p><span class="math notranslate nohighlight">\(\vdots \)</span></p>
+<section id="metodo-de-taylor-de-ordem-p-2">
+<h2>Método de Taylor de ordem p=2<a class="headerlink" href="#metodo-de-taylor-de-ordem-p-2" title="Link para este cabeçalho">#</a></h2>
+<p><strong>Exemplo 7.3.1:</strong> Use o método de Taylor de ordem 2 para integrar numericamente a equação:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin {cases}
+   \frac{dy}{dx} = x-y+2 \\
+    y(0)=2
+    \end{cases}\end{split}\]</div>
+<p>de <span class="math notranslate nohighlight">\(x = 0\)</span> a <span class="math notranslate nohighlight">\(x = 1\)</span> com <span class="math notranslate nohighlight">\(N = 5\)</span> subintervalos. Compare os valores e plote o resultado considerando a solução exata <span class="math notranslate nohighlight">\(y(x)=e^{-x} + x + 1\)</span>.</p>
+<p><em>Solução:</em></p>
+<p>Precisamos usar a fórmula de recorrência</p>
+<div class="math notranslate nohighlight">
+\[ y_{n+1} = y_n + y'_nh + y''_n\frac{h^2}{2!} \]</div>
+<p>em que</p>
+<div class="math notranslate nohighlight">
+\[ y' = x - y + 2 \]</div>
+<div class="math notranslate nohighlight">
+\[ y'' = 1-y' = 1-(x-y+2) = -x+y-1\]</div>
+<p>então</p>
+<div class="math notranslate nohighlight">
+\[ y_{n+1} = y_n + (x_n - y_n + 2)h + (-x_n+y_n-1) \frac{h^2}{2!} \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="o">+</span><span class="mi">2</span>
+<span class="n">df</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">xn</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#subintervalos</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">xn</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">h</span><span class="o">=</span><span class="p">(</span><span class="n">xn</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">df</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Sol. aprox.:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Sol. exata.:&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="p">)</span> <span class="o">+</span> <span class="n">X</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">Xe</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">21</span><span class="p">)</span>
+<span class="n">Ye</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Xe</span><span class="p">)</span> <span class="o">+</span> <span class="n">Xe</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="c1"># plotando</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="s2">&quot;xr&quot;</span><span class="p">,</span><span class="n">Xe</span><span class="p">,</span> <span class="n">Ye</span><span class="p">,</span> <span class="s1">&#39;b--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Y 1 = 2.02
+Y 2 = 2.0724
+Y 3 = 2.1513679999999997
+Y 4 = 2.2521217599999996
+Y 5 = 2.3707398431999995
+[0.  0.2 0.4 0.6 0.8 1. ]
+Sol. aprox.: [2.     2.02   2.0724 2.1514 2.2521 2.3707]
+Sol. exata.: [2.     2.0187 2.0703 2.1488 2.2493 2.3679]
+</pre></div>
+</div>
+<img alt="../_images/ac5b1c5e9e5e02695b3a7bc4d958bc540dee8b79755e0cac4dfafea0110dd560.png" src="../_images/ac5b1c5e9e5e02695b3a7bc4d958bc540dee8b79755e0cac4dfafea0110dd560.png" />
+</div>
+</div>
+</section>
+<section id="exercicios">
+<h2>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>1.</strong> Considere o problema de valor inicial</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases} \dfrac{dy}{dx} = 2x - y \\ y(0) = 1\end{cases}\end{split}\]</div>
+<p>cuja solução exata é <span class="math notranslate nohighlight">\(y(x) = 2x - 2 + 3e^{-x}\)</span>.</p>
+<p>a) Calcule analiticamente <span class="math notranslate nohighlight">\(y''(x)\)</span> em função de <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>b) Implemente o método de Taylor de ordem 2 com <span class="math notranslate nohighlight">\(N=5\)</span> subintervalos no intervalo <span class="math notranslate nohighlight">\([0,2]\)</span>.</p>
+<p>c) Compare a solução aproximada com a solução exata plotando ambas no mesmo gráfico.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>2.</strong> Considere o problema de valor inicial</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases} \dfrac{dy}{dx} = x^2 - y \\ y(0) = 1\end{cases}\end{split}\]</div>
+<p>cuja solução exata é <span class="math notranslate nohighlight">\(y(x) = x^2 - 2x + 2 - e^{-x}\)</span>.</p>
+<p>a) Obtenha <span class="math notranslate nohighlight">\(y''(x)\)</span> derivando a equação diferencial em relação a <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>b) Use o método de Taylor de ordem 2 com <span class="math notranslate nohighlight">\(h=0,2\)</span> para aproximar <span class="math notranslate nohighlight">\(y\)</span> no intervalo <span class="math notranslate nohighlight">\([0,2]\)</span>.</p>
+<p>c) Plote a solução numérica e a solução exata no mesmo gráfico e calcule o erro absoluto em cada ponto.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>3.</strong> Considere o problema de valor inicial</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases} \dfrac{dy}{dx} = x + 2y \\ y(0) = 0\end{cases}\end{split}\]</div>
+<p>cuja solução exata é <span class="math notranslate nohighlight">\(y(x) = \dfrac14 e^{2x} - \dfrac{x}{2} - \dfrac14\)</span>.</p>
+<p>a) Calcule <span class="math notranslate nohighlight">\(y''(x)\)</span>.</p>
+<p>b) Implemente o método de Taylor de ordem 2 com <span class="math notranslate nohighlight">\(N = 8\)</span> subintervalos em <span class="math notranslate nohighlight">\([0,1]\)</span>.</p>
+<p>c) Compare, em um mesmo gráfico, a solução numérica com a solução exata.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>4.</strong> Considere o problema de valor inicial não linear</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases} \dfrac{dy}{dx} = xy^2 \\ y(1) = 1\end{cases}\end{split}\]</div>
+<p>cuja solução exata é <span class="math notranslate nohighlight">\(y(x) = \dfrac{2}{3-x^2}\)</span>, definida para <span class="math notranslate nohighlight">\(x &lt; \sqrt{3}\)</span>.</p>
+<p>a) Calcule <span class="math notranslate nohighlight">\(y''(x)\)</span> usando as derivadas parciais de <span class="math notranslate nohighlight">\(f(x,y)=xy^2\)</span>.</p>
+<p>b) Implemente o método de Taylor de ordem 2 com <span class="math notranslate nohighlight">\(h=0,1\)</span> no intervalo <span class="math notranslate nohighlight">\([1;\,1,7]\)</span>.</p>
+<p>c) Compare a solução numérica com a solução exata e discuta o que ocorre quando <span class="math notranslate nohighlight">\(x\)</span> se aproxima de <span class="math notranslate nohighlight">\(\sqrt{3}\)</span>.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>5.</strong> Considere o problema de valor inicial</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases} \dfrac{dy}{dx} = y - x^2 + 1 \\ y(0) = 0,5\end{cases}\end{split}\]</div>
+<p>cuja solução exata é <span class="math notranslate nohighlight">\(y(x) = (x+1)^2 - 0,5e^x\)</span>.</p>
+<p>a) Obtenha <span class="math notranslate nohighlight">\(y''(x)\)</span>.</p>
+<p>b) Resolva numericamente usando o método de Taylor de ordem 2 com <span class="math notranslate nohighlight">\(N=10\)</span> subintervalos em <span class="math notranslate nohighlight">\([0,2]\)</span>.</p>
+<p>c) Plote a solução numérica, a solução exata e o erro absoluto ao longo do intervalo.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>6.</strong> Para o problema de valor inicial do Exercício 1,</p>
+<p>a) Resolva numericamente com <span class="math notranslate nohighlight">\(h = 0,4\)</span>; <span class="math notranslate nohighlight">\(0,2\)</span>; <span class="math notranslate nohighlight">\(0,1\)</span> e <span class="math notranslate nohighlight">\(0,05\)</span>.</p>
+<p>b) Para cada tamanho de passo, calcule o erro máximo em relação à solução exata.</p>
+<p>c) Faça um gráfico de <span class="math notranslate nohighlight">\(\log(h)\)</span> versus <span class="math notranslate nohighlight">\(\log(\text{erro máximo})\)</span> e estime a ordem de convergência do método a partir da inclinação da reta. O resultado é compatível com a ordem teórica <span class="math notranslate nohighlight">\(O(h^2)\)</span>?</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>7.</strong> Considere novamente o problema de valor inicial do Exercício 2.</p>
+<p>a) Resolva-o usando o método de Euler, o método de Heun (ambos da Seção 7.2) e o método de Taylor de ordem 2, todos com o mesmo passo <span class="math notranslate nohighlight">\(h=0,25\)</span>.</p>
+<p>b) Plote as três soluções numéricas junto com a solução exata no mesmo gráfico.</p>
+<p>c) Compare os erros máximos dos três métodos e discuta as vantagens e desvantagens do método de Taylor em relação aos demais, considerando a necessidade de calcular <span class="math notranslate nohighlight">\(y''\)</span> analiticamente.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>8.</strong> Considere o problema de valor inicial do Exercício 3.</p>
+<p>a) Calcule <span class="math notranslate nohighlight">\(y'''(x)\)</span> derivando <span class="math notranslate nohighlight">\(y''(x)\)</span> em relação a <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>b) Implemente o método de Taylor de ordem 3, isto é,</p>
+<div class="math notranslate nohighlight">
+\[y_{n+1} = y_n + y_n'h + y_n''\frac{h^2}{2!} + y_n'''\frac{h^3}{3!}\]</div>
+<p>com <span class="math notranslate nohighlight">\(N=8\)</span> subintervalos em <span class="math notranslate nohighlight">\([0,1]\)</span>.</p>
+<p>c) Compare, no mesmo gráfico, as soluções obtidas pelos métodos de Taylor de ordem 2 e de ordem 3 com a solução exata, e compare os respectivos erros máximos.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>9.</strong> A lei do resfriamento de Newton estabelece que a temperatura <span class="math notranslate nohighlight">\(T(t)\)</span> de um corpo varia proporcionalmente à diferença entre sua temperatura e a temperatura ambiente <span class="math notranslate nohighlight">\(T_{amb}\)</span>, isto é,</p>
+<div class="math notranslate nohighlight">
+\[\frac{dT}{dt} = -k(T - T_{amb})\]</div>
+<p>Considere <span class="math notranslate nohighlight">\(k=0,4\)</span>, <span class="math notranslate nohighlight">\(T_{amb}=25°C\)</span> e a condição inicial <span class="math notranslate nohighlight">\(T(0) = 90°C\)</span>.</p>
+<p>a) Calcule <span class="math notranslate nohighlight">\(T''(t)\)</span> em função de <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>b) Use o método de Taylor de ordem 2 com <span class="math notranslate nohighlight">\(h=0,5\)</span> para estimar a temperatura do corpo entre <span class="math notranslate nohighlight">\(t=0\)</span> e <span class="math notranslate nohighlight">\(t=10\)</span> minutos.</p>
+<p>c) Compare com a solução exata <span class="math notranslate nohighlight">\(T(t) = T_{amb} + (T_0 - T_{amb})e^{-kt}\)</span> e determine, numericamente, em quanto tempo o corpo atinge <span class="math notranslate nohighlight">\(30°C\)</span>.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>10.</strong> Implemente uma função <code class="docutils literal notranslate"><span class="pre">taylor_ordem2(f,</span> <span class="pre">df,</span> <span class="pre">x0,</span> <span class="pre">y0,</span> <span class="pre">xn,</span> <span class="pre">n)</span></code> que receba a função <span class="math notranslate nohighlight">\(f(x,y)\)</span>, sua derivada <span class="math notranslate nohighlight">\(y''=df(x,y)\)</span> (calculada analiticamente por você), o ponto inicial, o ponto final e o número de subintervalos, retornando os arrays <code class="docutils literal notranslate"><span class="pre">X</span></code> e <code class="docutils literal notranslate"><span class="pre">Y</span></code> da solução aproximada.</p>
+<p>a) Teste sua função nos problemas de valor inicial dos Exercícios 1, 3 e 5, fornecendo em cada caso as expressões de <span class="math notranslate nohighlight">\(f\)</span> e <span class="math notranslate nohighlight">\(y''\)</span> já obtidas.</p>
+<p>b) Verifique se os resultados coincidem com os obtidos ao resolver cada exercício individualmente.</p>
+<p>c) Generalize sua função para aceitar também <span class="math notranslate nohighlight">\(y'''\)</span> como parâmetro opcional, implementando o método de Taylor de ordem 3 quando esse argumento for fornecido, e teste-a no problema do Exercício 8.</p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./7_EQUACOES_DIFERENCIAIS_ORDINARIAS"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="7.2_metodo_de_euler.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">7.2 Método de Euler</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="7.4_metodos_de_runge_kutta.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">7.4 Métodos de Runge-Kutta</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Conteúdo
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-taylor-de-ordem-p-2">Método de Taylor de ordem p=2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+De Tiago M. Buriol
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright Universidade Federal de Santa Maria.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

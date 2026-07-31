@@ -1,0 +1,1238 @@
+
+<!DOCTYPE html>
+
+
+<html lang="pt-BR" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9. EDOs de 2ª ordem e diferenças finitas &#8212; Caderno didático de Métodos Numéricos em Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=2efa9f5e"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/translations.js?v=daa5921a"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '7_EQUACOES_DIFERENCIAIS_ORDINARIAS/olds/09_EDOs_2a_ordem_diferencas_finitas';</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Buscar" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="pt-BR"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/capa.png" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
+    <script>document.write(`<img src="../../_static/capa.png" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Buscar</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Caderno Didático de Métodos Numéricos em Python
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2 Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6 Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1 Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../5_MINIMOS_QUADRADOS/5.2_minimos_quadrados_continuo.html">5.2 Minimos quadrados: caso contínuo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../6_INTEGRACAO_NUMERICA/6.2_regra_dos_trapezios.html">6.2 Regra dos trapézios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../6_INTEGRACAO_NUMERICA/6.3_regras_de_simpson.html">6.3 Regras de Simpson</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8_EQUACOES_DIFERENCIAIS_PARCIAIS.html">8. Equações Diferenciais Parciais</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../referencias.html">Referências</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositório fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F7_EQUACOES_DIFERENCIAIS_ORDINARIAS/olds/09_EDOs_2a_ordem_diferencas_finitas.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abra um problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/olds/09_EDOs_2a_ordem_diferencas_finitas.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Baixar arquivo fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir em PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo tela cheia"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>9. EDOs de 2ª ordem e diferenças finitas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Conteúdo </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivada-de-1a-ordem-em-uma-variavel">9.1 Derivada de 1ª ordem em uma variável</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivada-de-2a-ordem-em-uma-variavel">9.2 Derivada de 2ª ordem em uma variável</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-diferencas-finitas-para-edos-de-2a-ordem">9.3 Método de diferenças finitas para EDOs de 2ª ordem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios:</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="edos-de-2a-ordem-e-diferencas-finitas">
+<h1>9. EDOs de 2ª ordem e diferenças finitas<a class="headerlink" href="#edos-de-2a-ordem-e-diferencas-finitas" title="Link para este cabeçalho">#</a></h1>
+<section id="derivada-de-1a-ordem-em-uma-variavel">
+<h2>9.1 Derivada de 1ª ordem em uma variável<a class="headerlink" href="#derivada-de-1a-ordem-em-uma-variavel" title="Link para este cabeçalho">#</a></h2>
+<p>A aproximação numérica para a derivada de 1ª ordem de uma função <span class="math notranslate nohighlight">\(y=f(x)\)</span> em um ponto <span class="math notranslate nohighlight">\(x_i\)</span> pode ser obtida por diferença finita, em que a inclinação da função é estimada usando valores da função na vizinhança do ponto.</p>
+<p>Chamamos aproximação <em><strong>para frente</strong></em> quando se estima <span class="math notranslate nohighlight">\(f'(x_i)\)</span> usando a inclinação da reta secante que passa pelos pontos <span class="math notranslate nohighlight">\((x_i, f(x_i))\)</span> e <span class="math notranslate nohighlight">\((x_{i+1}, f(x_{i+1}))\)</span>. A aproximação <em><strong>para trás</strong></em> é quando usamos a inclinação da reta que passa pelos pontos <span class="math notranslate nohighlight">\((x_{i-1}, f(x_{i-1}))\)</span> e <span class="math notranslate nohighlight">\((x_{i}, f(x_{i}))\)</span>. E a aproximação <em><strong>central</strong></em> é quando usamos a inclinação da reta que passa pelos pontos <span class="math notranslate nohighlight">\((x_{i-1}, f(x_{i-1}))\)</span> e <span class="math notranslate nohighlight">\((x_{i+1}, f(x_{i+1}))\)</span>.</p>
+<p>A seguir são mostradas as fórmulas e uma representação geométrica  que ilustra a aproximação de <span class="math notranslate nohighlight">\(f'(x_i)\)</span> <em>para frente</em>, <em>para trás</em> e <em>central</em> respectivamente:</p>
+<div class="math notranslate nohighlight">
+\[f'(x_i) \simeq \frac{f(x_{i+1}) - f(x_i)}{x_{i+1}-x_i} \quad\quad\quad\quad\quad
+f'(x_i) \simeq \frac{f(x_{i}) - f(x_{i-1})}{x_i-x_{i-1}} \quad\quad\quad\quad\quad
+f'(x_i) \simeq \frac{f(x_{i+1}) - f(x_{i-1})}{x_{i+1}-x_{i-1}}\]</div>
+<img src="imagens/diffs.png" width="960">
+<p>As fórmulas de diferenças finitas mostradas acima podem ser obtidas a partir da série de Taylor para a função <span class="math notranslate nohighlight">\(f(x)\)</span> desenvolvida em torno de <span class="math notranslate nohighlight">\(x=x_i\)</span> o que nos fornece</p>
+<div class="math notranslate nohighlight">
+\[f(x) = f(x_i) + f'(x_i)(x - x_i) + f''(x_i)\frac{(x - x_i)^2}{2!} + f'''(x_i)\frac{(x - x_i)^3}{3!} + \cdots\]</div>
+<p>Ao aproximarmos <span class="math notranslate nohighlight">\(x_{i+1}\)</span> por <span class="math notranslate nohighlight">\(x_i\)</span>, se considerarmos <span class="math notranslate nohighlight">\(h=x_{i+1}-x_i\)</span> suficientemente pequeno, podemos desprezar os termos de ordem mais alta, proporcionais a <span class="math notranslate nohighlight">\((x_{i+1}-x_i)^2\)</span>, <span class="math notranslate nohighlight">\((x_{i+1}-x_i)^3\)</span>,<span class="math notranslate nohighlight">\( \dots\)</span>.</p>
+<p>Assim, a derivada de <span class="math notranslate nohighlight">\(f(x)\)</span> em <span class="math notranslate nohighlight">\(x_i\)</span> pode ser aproximada por</p>
+<div class="math notranslate nohighlight">
+\[f'(x_i) \approx \frac{f(x_{i+1}) - f(x_i)}{h} \]</div>
+<p>Que é exatamente a fórmula para a aproximação <em>para frente</em> da derivada 1ª de <span class="math notranslate nohighlight">\(f\)</span>. Observe que nessa aproximação foram desprezados os termos</p>
+<div class="math notranslate nohighlight">
+\[ O(h^2) = \frac{f''(x_i)h^2}{2} + \frac{f'''(x_i)h^3}{6} + \frac{f''''(x_i)h^4}{24} + \frac{f'''''(x_i)h^5}{120} +\cdots\]</div>
+<p>o que mostra que o erro de truncamento depende de <span class="math notranslate nohighlight">\(h\)</span>. Quanto menor o <em>passo</em> <span class="math notranslate nohighlight">\(h\)</span> menor será o erro, no entanto maior será o esforço computacional, o que impossibilita o cálculo com valores de <span class="math notranslate nohighlight">\(h\)</span> próximos de zero.</p>
+<p><strong>Exemplo 9.1:</strong> A derivada  de <span class="math notranslate nohighlight">\(f(x)=sen^2(x)\)</span> é dada por <span class="math notranslate nohighlight">\(f'(x)=2\sin(x)\cos (x)\)</span>. Vamos calcular as derivadas de primeira ordem numericamente usando 2 pontos em torno de <span class="math notranslate nohighlight">\(x_i\)</span> (diferença finita central) em um conjunto de 25 pontos de discretização do intervalo <span class="math notranslate nohighlight">\([0, 2\pi]\)</span> e comparar os gráficos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 2 \sin{\left(x \right)} \cos{\left(x \right)}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># criando uma lista de pontos para o gráfico </span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">h</span><span class="o">=</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">xi</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># calculando as derivadas 2ªs numéricas com 2 pontos</span>
+<span class="n">dxi</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dxi</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5bca56e7e2e697ab19bad1a22640948280a7a81473f6c431062e12b5ef2348c9.png" src="../../_images/5bca56e7e2e697ab19bad1a22640948280a7a81473f6c431062e12b5ef2348c9.png" />
+</div>
+</div>
+</section>
+<section id="derivada-de-2a-ordem-em-uma-variavel">
+<h2>9.2 Derivada de 2ª ordem em uma variável<a class="headerlink" href="#derivada-de-2a-ordem-em-uma-variavel" title="Link para este cabeçalho">#</a></h2>
+<p>Da mesma forma que a derivada primeira pode ser aproximada em termos da variação da função em dois pontos, a derivada segunda pode ser aproximada em termos da variação na derivada primeira em dois pontos. Por exemplo, considerando as expanções em série de Taylor de <span class="math notranslate nohighlight">\(f\)</span> em torno de <span class="math notranslate nohighlight">\(x_i\)</span> e calculando a função em <span class="math notranslate nohighlight">\(x_{i-1}\)</span> e <span class="math notranslate nohighlight">\(x_{i+1}\)</span> obtemos:</p>
+<div class="math notranslate nohighlight">
+\[f(x_{i-1}) = f(x_i) - hf'(x_i) + \frac{h^2f''(x_i)}{2} - \frac{h^3f'''(x_i)}{6} + \dots\]</div>
+<p>e</p>
+<div class="math notranslate nohighlight">
+\[f(x_{i+1}) = f(x_i) + hf'(x_i) + \frac{h^2f''(x_i)}{2} + \frac{h^3f'''(x_i)}{6} + \dots\]</div>
+<p>Somando as duas equações acima obtemos:</p>
+<div class="math notranslate nohighlight">
+\[f(x_{i-1}) + f(x_{i+1}) = 2f(x_i) + h^2f''(x_i) + \frac{h^4f''''(x_i)}{24} + \dots\]</div>
+<p>que, desprezando os termos com derivadas de 4ª ordem ou maiores, nos dá a seguinte aproximação para a derivada
+segunda:</p>
+<div class="math notranslate nohighlight">
+\[ f''(x_i) \approx \frac{f(x_{i+1}) - 2f(x_i) + f(x_{i-1})}{h^2}\]</div>
+<p><strong>Exemplo 9.2:</strong> A derivada segunda de <span class="math notranslate nohighlight">\(f(x)=sen^2(x)\)</span> é dada por <span class="math notranslate nohighlight">\(f''(x)=2\left(-\sin ^2(x)+\cos ^2(x)\right)\)</span>. Vamos calcular as derivadas numericamente usando 2 pontos em torno de <span class="math notranslate nohighlight">\(x_i\)</span>  em um conjunto de 21 pontos de discretização do intervalo <span class="math notranslate nohighlight">\([0, 2\pi]\)</span> e comparar os gráficos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 2 \left(- \sin^{2}{\left(x \right)} + \cos^{2}{\left(x \right)}\right)\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># criando uma lista de pontos para o gráfico </span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">h</span><span class="o">=</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">xi</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># calculando as derivadas 2ªs numéricas com 2 pontos</span>
+<span class="n">dxi2</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span><span class="o">/</span><span class="p">(</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dxi2</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3168c239796d39ef87d7601522c2d5b054f4e68aa01a0150d399cc7802ec83eb.png" src="../../_images/3168c239796d39ef87d7601522c2d5b054f4e68aa01a0150d399cc7802ec83eb.png" />
+</div>
+</div>
+</section>
+<section id="metodo-de-diferencas-finitas-para-edos-de-2a-ordem">
+<h2>9.3 Método de diferenças finitas para EDOs de 2ª ordem<a class="headerlink" href="#metodo-de-diferencas-finitas-para-edos-de-2a-ordem" title="Link para este cabeçalho">#</a></h2>
+<p>Consiste na reformulação do problema contínuo em um problema discreto usando fórmulas de diferenças finitas tomadas sobre uma malha discretizada do domínio do problema.</p>
+<p>Vamos apresentar esse método por meio de um exemplo (adaptado de <a class="reference external" href="https://www.ufrgs.br/reamat/CalculoNumerico">https://www.ufrgs.br/reamat/CalculoNumerico</a>).</p>
+<p><strong>Exemplo 9.3:</strong> Seja o problema de valor de contorno <span class="math notranslate nohighlight">\(-y'' = 100(x-1)^2\)</span>, <span class="math notranslate nohighlight">\(0&lt;x&lt;1\)</span>, <span class="math notranslate nohighlight">\(y(0)=0\)</span> e <span class="math notranslate nohighlight">\(y(1)=0\)</span>.</p>
+<p>Vamos usar a fórmula de diferenças finitas central de ordem 2 para discretizar a derivada em uma malha uniforme de 11 pontos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1. ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>A fórmula de diferenças finitas de ordem 2 nos diz que</p>
+<div class="math notranslate nohighlight">
+\[ y''(x_i) \approx \frac{y_{i-1} - 2y_i + y_{i+1}}{h^2}\]</div>
+<p>substituindo na equação <span class="math notranslate nohighlight">\(-y'' = 100(x-1)^2\)</span>, obtemos:</p>
+<div class="math notranslate nohighlight">
+\[-\frac{y_{i-1} - 2y_i + y_{i+1}}{h^2} = 100(x_i-1)^2\]</div>
+<p>como <span class="math notranslate nohighlight">\(h = 0,1\)</span> podemos escrever</p>
+<div class="math notranslate nohighlight">
+\[y_{i-1} - 2y_i + y_{i+1} = (x_i-1)^2\]</div>
+<p>fazendo <span class="math notranslate nohighlight">\(i=1,...,9\)</span> na equação acima, juntamente com as condições de contorno <span class="math notranslate nohighlight">\(y_0=0\)</span> e <span class="math notranslate nohighlight">\(y_{10}= 0\)</span>, obtemos o seguinte sistema linear 11x11.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+y_{0} = 0\\
+y_{0} -2 y_{1} + y_{2}  = (-0,9)^2\\ 
+y_{1} -2 y_{2} + y_{3}  = (-0,8)^2\\ 
+y_{2} -2 y_{3} + y_{4}  = (-0,7)^2\\ 
+\vdots\\
+y_{8} -2 y_{9} + y_{10}  = (-0,1)^2\\ 
+y_{10} = 0\\ 
+\end{cases} \end{split}\]</div>
+<p>cujas matrizes podem ser obtidas como é mostrado a seguir</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
+ [ 1. -2.  1.  0.  0.  0.  0.  0.  0.  0.  0.]
+ [ 0.  1. -2.  1.  0.  0.  0.  0.  0.  0.  0.]
+ [ 0.  0.  1. -2.  1.  0.  0.  0.  0.  0.  0.]
+ [ 0.  0.  0.  1. -2.  1.  0.  0.  0.  0.  0.]
+ [ 0.  0.  0.  0.  1. -2.  1.  0.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0.  1. -2.  1.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0.  0.  1. -2.  1.  0.  0.]
+ [ 0.  0.  0.  0.  0.  0.  0.  1. -2.  1.  0.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  1. -2.  1.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">xi</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.  , -0.81, -0.64, -0.49, -0.36, -0.25, -0.16, -0.09, -0.04,
+       -0.01, -0.  ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>A solução pode ser obtida fazendo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yi</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="n">yi</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.   ,  2.025,  3.24 ,  3.815,  3.9  ,  3.625,  3.1  ,  2.415,
+        1.64 ,  0.825, -0.   ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esta é a solução numérica do problema de valor de contorno dado. Podemos obter a solução analítica usando SymPy e plotar os fráficos para comparar os resultados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">init_printing</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="mi">0</span><span class="p">})</span>
+<span class="n">sol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/085ac82a4f58287f8311612e2a803f0c44ff9a2bec5cb7577375dab57b5a89c8.png" src="../../_images/085ac82a4f58287f8311612e2a803f0c44ff9a2bec5cb7577375dab57b5a89c8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># converte de simbólico para numérico</span>
+<span class="n">y_ex</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">sol</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+<span class="c1"># plota</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span><span class="s1">&#39;.-&#39;</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">y_ex</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b5032a0fff31ba9e93e788e87f5dd2e6e91ea0c0c0d59984f6dea97915f91390.png" src="../../_images/b5032a0fff31ba9e93e788e87f5dd2e6e91ea0c0c0d59984f6dea97915f91390.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">yi</span><span class="o">-</span><span class="n">y_ex</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Erro quadrático médio:&#39;</span><span class="p">,</span><span class="n">err</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Erro quadrático médio: 0.0002104166666666658
+</pre></div>
+</div>
+</div>
+</div>
+<p>Agora, juntando tudo em um único script, usando um número maior de pontos, obtemos:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">101</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">xi</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="n">yi</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="n">y_ex</span> <span class="o">=</span> <span class="o">-</span><span class="mi">25</span><span class="o">*</span><span class="n">xi</span><span class="o">**</span><span class="mi">4</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">100</span><span class="o">*</span><span class="n">xi</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">50</span><span class="o">*</span><span class="n">xi</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">25</span><span class="o">*</span><span class="n">xi</span>
+
+<span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">yi</span><span class="o">-</span><span class="n">y_ex</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Erro quadrático médio (101 pontos):&#39;</span><span class="p">,</span><span class="n">err</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">y_ex</span><span class="p">,</span><span class="s1">&#39;b,&#39;</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Erro quadrático médio (101 pontos): 2.2918958339434085e-08
+</pre></div>
+</div>
+<img alt="../../_images/0bafc6e8c0c873f60afb4678d6d2bc769bcaf87259900bc7746655a4a0396e49.png" src="../../_images/0bafc6e8c0c873f60afb4678d6d2bc769bcaf87259900bc7746655a4a0396e49.png" />
+</div>
+</div>
+<p><strong>Exemplo 9.4:</strong> Use o método de diferenças finitas para resolver o seguinte problema de valor de contorno:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+-y'' + y= e^{-x} \,\text{, } \,\,\,0,5&lt;x&lt;1,5\\
+y(0,5)= 1\\ 
+y(1,5)= 2
+\end{cases} \end{split}\]</div>
+<p>Para tanto, use a fórmula de diferenças finitas central de ordem 2 para discretizar a derivada em uma malha uniforme com passo <span class="math notranslate nohighlight">\(h=0,1\)</span>. Faça, então, um esboço do gráfico da solução computada.</p>
+<p>Substituindo <span class="math notranslate nohighlight">\( y''(x_i)\)</span> por <span class="math notranslate nohighlight">\(\frac{y_{i-1}-2y_i+y_{i+1}}{h^2}\)</span>, com <span class="math notranslate nohighlight">\(h=0,1\)</span>, na equação e simplificando obtém-se um sistema linear.</p>
+<p>As equações do sistema serão dadas por</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+y_0 = 1\\
+-y_0 + 2,01y_1 - y_1= 0,01e^{-0,1}\\ 
+-y_1 + 2,01y_2 - y_3= 0,01e^{-0,2}\\ 
+-y_2 + 2,01y_3 - y_4= 0,01e^{-0,3}\\ 
+\vdots \\
+-y_8 + 2,01y_9 + y_{10}= 0,01e^{-0,9}\\
+y_{10}= 2
+\end{cases} \end{split}\]</div>
+<p>Computacionalmente podemos encontrar a solução seguindo os passos descritos a seguir. Primeiro entramos com os dados do problema.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">xn</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">xn</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">xn</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p>Então construímos as matrizes <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>  
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  
+ 
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">+</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  
+    <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  
+<span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  
+<span class="n">b</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.  ]
+ [-1.    2.01 -1.    0.    0.    0.    0.    0.    0.    0.    0.  ]
+ [ 0.   -1.    2.01 -1.    0.    0.    0.    0.    0.    0.    0.  ]
+ [ 0.    0.   -1.    2.01 -1.    0.    0.    0.    0.    0.    0.  ]
+ [ 0.    0.    0.   -1.    2.01 -1.    0.    0.    0.    0.    0.  ]
+ [ 0.    0.    0.    0.   -1.    2.01 -1.    0.    0.    0.    0.  ]
+ [ 0.    0.    0.    0.    0.   -1.    2.01 -1.    0.    0.    0.  ]
+ [ 0.    0.    0.    0.    0.    0.   -1.    2.01 -1.    0.    0.  ]
+ [ 0.    0.    0.    0.    0.    0.    0.   -1.    2.01 -1.    0.  ]
+ [ 0.    0.    0.    0.    0.    0.    0.    0.   -1.    2.01 -1.  ]
+ [ 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    1.  ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.         0.00548812 0.00496585 0.00449329 0.0040657  0.00367879
+ 0.00332871 0.00301194 0.00272532 0.00246597 2.        ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>resolvendo o sistema</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">yi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.         1.06189437 1.12891956 1.2022681  1.28314602 1.37278972
+ 1.47248251 1.58357142 1.7074841  1.8457463  2.        ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Antes de plotar a solução numérica obtida, vamos encontrar a solução analítica usando <code class="docutils literal notranslate"><span class="pre">sympy</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="o">-</span><span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">y</span><span class="o">-</span><span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">):</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">):</span> <span class="mi">2</span><span class="p">})</span>
+<span class="n">sol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a07930399c981a6b4da638ab97391bd7a5d460809b3d93857baf93ae3434af82.png" src="../../_images/a07930399c981a6b4da638ab97391bd7a5d460809b3d93857baf93ae3434af82.png" />
+</div>
+</div>
+<p>Calculando o erro quadrático médio</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_ex</span> <span class="o">=</span><span class="p">(</span><span class="n">xi</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.332107241263667</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">xi</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.392385373094705</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+
+<span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">yi</span><span class="o">-</span><span class="n">y_ex</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Erro quadrático médio (11 pontos):&#39;</span><span class="p">,</span><span class="n">err</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Erro quadrático médio (11 pontos): 1.8502912502771752e-09
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plotando a solução numérica e a solução analítica</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span><span class="s1">&#39;rx&#39;</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">y_ex</span><span class="p">,</span><span class="s1">&#39;b--&#39;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/528048b96adbb7c16a622d20b9ca58d8631f278b91b34e309d584fd29110fd3c.png" src="../../_images/528048b96adbb7c16a622d20b9ca58d8631f278b91b34e309d584fd29110fd3c.png" />
+</div>
+</div>
+<p><strong>Exemplo 9.5:</strong> Considere o seguinte problema de valor de contorno para a equação de calor no estado estacionário</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+-y'' = 200e^{-(x-1)^2} \,\text{, } \,\,\,0&lt;x&lt;2\\
+y'(0)=0\\ 
+y(2)=100
+\end{cases} \end{split}\]</div>
+<p>Aproxime a derivada segunda por um esquema de segunda ordem, a derivada primeira na fronteira por um esquema de primeira ordem e transforme a equação diferencial em um sistema de equações lineares. Resolva o sistema linear obtido.</p>
+<p><em>Solução exata com</em> <code class="docutils literal notranslate"><span class="pre">sympy</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">200</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">100</span><span class="p">})</span>
+<span class="n">sol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4dfc78f8c480eb4ce9f64d011bb6248ae421ca5e9f6faeb730b8a834a314d366.png" src="../../_images/4dfc78f8c480eb4ce9f64d011bb6248ae421ca5e9f6faeb730b8a834a314d366.png" />
+</div>
+</div>
+<p>Observe que a solução não pode ser expressa em termos de funções elementares. Nesse caso, a resolução numérica é a abordagem mais indicada.</p>
+<p><em>Solução numérica:</em></p>
+<p>Escolhendo uma discretização em 21 pontos no intervalo de 0 a 2, temos <span class="math notranslate nohighlight">\(h=0,2\)</span>. O esquema de fiferenças finitas de 1ª ordem na fronteira esquerda será dado pela equação</p>
+<div class="math notranslate nohighlight">
+\[y'(x_i)\approx\ \frac{f(x_{i+1})-f(x_i)}{h}  \,\,\,\,\,\text{ou} \,\,\,\, y'_0=0\approx\frac{y_1-y_0}{0,1}\]</div>
+<p>assim as equações fornecidas pelas condições de contorno são</p>
+<div class="math notranslate nohighlight">
+\[ y_1-y_0 = 0 \,\,\,\,\,\text{e} \,\,\,\, y_{20}=100\]</div>
+<p>As demais equações serão fornecidas pelo esquema de segunda ordem, ou seja, serão dadas por</p>
+<div class="math notranslate nohighlight">
+\[ y''(x_i)= 200e^{-(xi-1)^2} \approx \frac{y_{i-1}-2y_i+y_{i+1}}{h^2}\]</div>
+<p>que leva a</p>
+<div class="math notranslate nohighlight">
+\[ y_{i-1}-2y_i+y_{i+1}=2e^{-(xi-1)^2}  \,\,\,\,\,\text{para} \,\,\,\, i=1,...,19\]</div>
+<p>Temos, portanto</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+y_0 - y_1 = 0\\
+y_1 - 2y_1 + y_1= 2e^{-(0,2-1)^2}\\
+y_2 - 2y_2 + y_3= 2e^{-(0,4-1)^2}\\
+\vdots \\
+y_{18} - 2y_{18} + y_{19}= 2e^{-(1,6-1)^2}\\
+y_{19} - 2y_{18} + y_{19}= 2e^{-(1,8-1)^2}\\
+y_{20}= 100
+\end{cases} \end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">xn</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">xn</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">xn</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;xi=&#39;</span><span class="p">,</span><span class="n">xi</span><span class="p">)</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>  
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  
+ 
+<span class="c1"># Condições de contorno</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># montando as matrizes A e b</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  
+    <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A=&#39;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1">#resolvendo o sistema</span>
+<span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;yi=&#39;</span><span class="p">,</span><span class="n">yi</span><span class="p">)</span>
+
+<span class="c1">#plotando</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>xi= [0.  0.2 0.4 0.6 0.8 1.  1.2 1.4 1.6 1.8 2. ]
+A= [[ 1. -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
+ [ 1. -2.  1.  0.  0.  0.  0.  0.  0.  0.  0.]
+ [ 0.  1. -2.  1.  0.  0.  0.  0.  0.  0.  0.]
+ [ 0.  0.  1. -2.  1.  0.  0.  0.  0.  0.  0.]
+ [ 0.  0.  0.  1. -2.  1.  0.  0.  0.  0.  0.]
+ [ 0.  0.  0.  0.  1. -2.  1.  0.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0.  1. -2.  1.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0.  0.  1. -2.  1.  0.  0.]
+ [ 0.  0.  0.  0.  0.  0.  0.  1. -2.  1.  0.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  1. -2.  1.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.]]
+yi= [ 29.24196044  29.24196044  30.29654528  32.74648278  36.90070786
+  42.97651182  51.05231577  61.04969861  72.75136902  85.84839209
+ 100.        ]
+</pre></div>
+</div>
+<img alt="../../_images/ba4f8e4f3d6b5c033a8a94a3d23887cb923707b7867e24443124be1d244a0384.png" src="../../_images/ba4f8e4f3d6b5c033a8a94a3d23887cb923707b7867e24443124be1d244a0384.png" />
+</div>
+</div>
+<p><strong>Exemplo 9.6:</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/783">Burden, Richard, L. et al., 2016</a>) Dado o problema de contorno de segunda ordem linear</p>
+<div class="math notranslate nohighlight">
+\[
+y^{\prime \prime}=p(x) y^{\prime}+q(x) y+r(x), \quad \text { para } a \leq x \leq b \operatorname{com} y(a)=\alpha \text { e } y(b)=\beta,
+\]</div>
+<p>a resolução pelo método das diferenças finitas requer aproximações numéricas para <span class="math notranslate nohighlight">\(y'\)</span> e <span class="math notranslate nohighlight">\(y''\)</span> em um conjunto pontos que dividem o intervalo <span class="math notranslate nohighlight">\([a,b]\)</span> em <span class="math notranslate nohighlight">\(N+1\)</span> subintervalos cujos extremos são os pontos <span class="math notranslate nohighlight">\(x_i=a+ih\)</span>, com <span class="math notranslate nohighlight">\(i=0,1,2,...,N+1\)</span> da malha, e <span class="math notranslate nohighlight">\(h=(b-a)/(N+1))\)</span>.</p>
+<p>Aproximando <span class="math notranslate nohighlight">\(y'\)</span> e <span class="math notranslate nohighlight">\(y''\)</span> pela fórmula de diferenças centradas obtemos uma equação na forma</p>
+<div class="math notranslate nohighlight">
+\[
+\left(\frac{-y_{i+1}+2 y_i-y_{i-1}}{h^2}\right)+p\left(x_i\right)\left(\frac{y_{i+1}-y_{i-1}}{2 h}\right)+q\left(x_i\right) y_i=-r\left(x_i\right)
+\]</div>
+<p>para cada <span class="math notranslate nohighlight">\(i=1,2,...,N\)</span>.</p>
+<p>As equações podem ser reescritas na forma
+$<span class="math notranslate nohighlight">\(
+-\left(1+\frac{h}{2} p\left(x_i\right)\right) y_{i-1}+\left(2+h^2 q\left(x_i\right)\right) y_i-\left(1-\frac{h}{2} p\left(x_i\right)\right) y_{i+1}=-h^2 r\left(x_i\right),
+\)</span>$</p>
+<p>que vai gerar o sistema linear tridiagonal <span class="math notranslate nohighlight">\(N \times N\)</span> cuja solução dará a solução numérica do problema de valor de contorno.</p>
+<p>Use método apresentado para obter uma aproximação para a solução do problema de contorno</p>
+<div class="math notranslate nohighlight">
+\[
+y^{\prime \prime}=-\frac{2}{x} y^{\prime}+\frac{2}{x^2} y+\frac{\operatorname{sen}(\ln x)}{x^2}, \quad \text { para } 1 \leq x \leq 2, \operatorname{com} y(1)=1 \text { e } y(2)=2.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">ya</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">yb</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="mf">2.</span><span class="o">/</span><span class="n">x</span>
+<span class="n">q</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">2.</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">r</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="n">h</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">+</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">q</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">ya</span>
+<span class="c1">#print(x)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">+</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">q</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1">#print(x)</span>
+    
+<span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">*</span><span class="n">h</span>
+<span class="c1">#print (x)</span>
+<span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">A</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">+</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">q</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">b</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">yb</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 2.017 -1.091  0.     0.     0.     0.     0.     0.     0.   ]
+ [-0.917  2.014 -1.083  0.     0.     0.     0.     0.     0.   ]
+ [ 0.    -0.923  2.012 -1.077  0.     0.     0.     0.     0.   ]
+ [ 0.     0.    -0.929  2.01  -1.071  0.     0.     0.     0.   ]
+ [ 0.     0.     0.    -0.933  2.009 -1.067  0.     0.     0.   ]
+ [ 0.     0.     0.     0.    -0.938  2.008 -1.062  0.     0.   ]
+ [ 0.     0.     0.     0.     0.    -0.941  2.007 -1.059  0.   ]
+ [ 0.     0.     0.     0.     0.     0.    -0.944  2.006 -1.056]
+ [ 0.     0.     0.     0.     0.     0.     0.    -0.947  2.006]]
+[ 9.080e-01 -1.000e-03 -2.000e-03 -2.000e-03 -2.000e-03 -2.000e-03
+ -2.000e-03 -2.000e-03  2.104e+00]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.09260052, 1.18704313, 1.28333687, 1.38140205, 1.48112026,
+       1.5823599 , 1.68498902, 1.78888175, 1.8939211 ])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercicios">
+<h2>Exercícios:<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
+<p>(Adaptados de <a class="reference external" href="https://www.ufrgs.br/reamat/CalculoNumerico">https://www.ufrgs.br/reamat/CalculoNumerico</a>)<strong>:</strong></p>
+<p><strong>1.</strong> Considere o seguinte problema de valor de contorno para a equação de calor no estado estacionário</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{cases} 
+-y'' = 200e^{-(x-1)^2} \,\text{, } \,\,\,0&lt;x&lt;2\\
+y(0)=120\\ 
+y(2)=100
+\end{cases} \end{split}\]</div>
+<p>Aproxime a derivada segunda por um esquema de segunda ordem, a derivada primeira na fronteira por um esquema de primeira ordem e transforme a equação diferencial em um sistema de equações lineares. Resolva o sistema linear obtido. Use uma discretização com 21 pontos.</p>
+<p><strong>2.</strong> Considere o seguinte problema de valor de contorno para a equação de calor no estado estacionário com um termo não linear de radiação</p>
+<div class="math notranslate nohighlight">
+\[-y'' = 100 - \frac{y^4}{10000} \,\text{, } \,\,\,0&lt;x&lt;2\]</div>
+<div class="math notranslate nohighlight">
+\[y(0)=0 \,\,\,\text{e}\,\,\, y(2)=10\]</div>
+<p>Aproxime a derivada segunda por um esquema de segunda ordem, a derivada primeira na fronteira por um esquema de primeira ordem e transforme a equação diferencial em um sistema de equações lineares. Resolva o sistema linear obtido.</p>
+<p><strong>3.</strong> Considere o seguinte problema de valor de contorno para a equação de calor no estado estacionário com um termo não linear de radiação e um termo de convecção</p>
+<div class="math notranslate nohighlight">
+\[-y'' +3y'= 100 - \frac{y^4}{10000} \,\text{, } \,\,\,0&lt;x&lt;2\]</div>
+<div class="math notranslate nohighlight">
+\[y'(0)=0 \,\,\,\text{e}\,\,\, y(2)=10\]</div>
+<p>Aproxime a derivada segunda por um esquema de segunda ordem, a derivada primeira na fronteira por um esquema de primeira ordem e transforme a equação diferencial em um sistema de equações lineares. Resolva o sistema linear obtido.</p>
+<p><strong>4.</strong> O problema de contorno (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/789">fonte</a>)</p>
+<div class="math notranslate nohighlight">
+\[
+y^{\prime \prime}=y^{\prime}+2 y+\cos x, \quad 0 \leq x \leq \frac{\pi}{2}, \quad y(0)=-0,3, \quad y\left(\frac{\pi}{2}\right)=-0,1,
+\]</div>
+<p>tem a solução <span class="math notranslate nohighlight">\(y(x)=-\frac{1}{10}(\operatorname{sen} x+3 \cos x)\)</span>. Use o método das diferenças finitas linear para obter uma aproximação para a solução e compare os resultados com a solução real. Repita para diferentes valores de <span class="math notranslate nohighlight">\(h\)</span>.</p>
+<p><strong>5.</strong> O problema de contorno (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/789">fonte</a>)</p>
+<div class="math notranslate nohighlight">
+\[
+y^{\prime \prime}=4(y-x), \quad 0 \leq x \leq 1, \quad y(0)=0, \quad y(1)=2
+\]</div>
+<p>tem a solução <span class="math notranslate nohighlight">\(y(x)=e^2\left(e^4-1\right)^{-1}\left(e^{2 x}-e^{-2 x}\right)+x\)</span>. Use o método das diferenças finitas linear para obter uma aproximação para a solução e compare os resultados com a solução real. Repita para diferentes valores de <span class="math notranslate nohighlight">\(h\)</span>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./7_EQUACOES_DIFERENCIAIS_ORDINARIAS/olds"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Conteúdo
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivada-de-1a-ordem-em-uma-variavel">9.1 Derivada de 1ª ordem em uma variável</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivada-de-2a-ordem-em-uma-variavel">9.2 Derivada de 2ª ordem em uma variável</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-diferencas-finitas-para-edos-de-2a-ordem">9.3 Método de diferenças finitas para EDOs de 2ª ordem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios:</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+De Tiago M. Buriol
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright Universidade Federal de Santa Maria.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

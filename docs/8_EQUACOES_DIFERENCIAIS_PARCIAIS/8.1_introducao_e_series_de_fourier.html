@@ -1,0 +1,1209 @@
+
+<!DOCTYPE html>
+
+
+<html lang="pt-BR" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>8.1 Introdução e Séries de Fourier &#8212; Caderno didático de Métodos Numéricos em Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=2efa9f5e"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=daa5921a"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="next" title="8.2 Classificação e discretização de EDPs" href="8.2_classificacao_e_discretizacao.html" />
+    <link rel="prev" title="8. Equações Diferenciais Parciais" href="8_EQUACOES_DIFERENCIAIS_PARCIAIS.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="pt-BR"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/capa.png" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
+    <script>document.write(`<img src="../_static/capa.png" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Buscar</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Caderno Didático de Métodos Numéricos em Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2 Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6 Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1 Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_minimos_quadrados_continuo.html">5.2 Minimos quadrados: caso contínuo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.2_regra_dos_trapezios.html">6.2 Regra dos trapézios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6_INTEGRACAO_NUMERICA/6.3_regras_de_simpson.html">6.3 Regras de Simpson</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="8_EQUACOES_DIFERENCIAIS_PARCIAIS.html">8. Equações Diferenciais Parciais</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">8.1 Introdução e Séries de Fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositório fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abra um problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Baixar arquivo fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir em PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo tela cheia"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>8.1 Introdução e Séries de Fourier</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Conteúdo </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series-de-fourier">Séries de Fourier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conducao-de-calor-em-uma-barra">Condução de calor em uma barra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equacao-da-onda">Equação da onda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introducao-e-series-de-fourier">
+<h1>8.1 Introdução e Séries de Fourier<a class="headerlink" href="#introducao-e-series-de-fourier" title="Link para este cabeçalho">#</a></h1>
+<p>Problemas físicos importantes tais como aqueles ligados à condução de calor, à propagação de ondas e à teoria do potencial envolvem duas ou mais variáveis independentes e, portanto, são modelados por meio de Equações Diferenciais Parciais (EDPs).</p>
+<p>Uma EDP de ordem <span class="math notranslate nohighlight">\(m\)</span> é uma igualdade envolvendo uma função de <span class="math notranslate nohighlight">\(n\)</span> variáveis ( <span class="math notranslate nohighlight">\(n \geq 2\)</span> ) e suas respectivas derivadas parciais de até ordem <span class="math notranslate nohighlight">\(m(m \geq 1)\)</span>, ou seja é uma igualdade do tipo</p>
+<div class="math notranslate nohighlight">
+\[F\left(x_1, \ldots, x_n, u, \frac{\partial u}{\partial x_1}, \ldots, \frac{\partial u}{\partial x_n}, \frac{\partial^2 u}{\partial x_1^2}, \frac{\partial^2 u}{\partial x_1 \partial x_2}, \ldots, \frac{\partial^m u}{\partial x_n^m}\right)=0\]</div>
+<p>onde <span class="math notranslate nohighlight">\(u=u\left(x_1, \ldots, x_n\right)\)</span> e <span class="math notranslate nohighlight">\(F\)</span> é uma função qualquer.</p>
+<p>As equações diferenciais parciais básicas de condução de calor, propagação de ondas e teoria do potencial, estão associadas a três tipos distintos de fenômenos físicos: processos de difusão, processos oscilatórios e processos independentes do tempo ou estacionários.</p>
+<p>Um método importante para resolver equações diferenciais parciais, conhecido como <strong>método de separação de variáveis</strong>, transforma a equação diferencial parcial por um conjunto de equações diferenciais ordinárias. A resolução muitas vezes requer condições iniciais ou de contorno e série em senos e/ou cossenos conhecidas como <strong>séries de Fourier</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788521638841/epubcfi/6/44%5B%3Bvnd.vst.idref%3Dchapter10%5D!/4/406/162/13:44%5BFou%2Crie%5D">Boyce e Diprima, 2024</a>).</p>
+<section id="series-de-fourier">
+<h2>Séries de Fourier<a class="headerlink" href="#series-de-fourier" title="Link para este cabeçalho">#</a></h2>
+<p>As funçōes</p>
+<div class="math notranslate nohighlight">
+\[
+\sin \left(\frac{n \pi x}{L}\right) \quad \mathrm{e} \quad \cos \left(\frac{n \pi x}{L}\right), \quad n=1,2, \ldots,
+\]</div>
+<p>sāo periódicas com período fundamental <span class="math notranslate nohighlight">\(T=2L/n\)</span> e formam, juntamente com a funçāo constante <span class="math notranslate nohighlight">\(1\)</span>, um conjunto ortogonal no intervalo <span class="math notranslate nohighlight">\([-L,L]\)</span>. Assim, toda funçāo periódica de período <span class="math notranslate nohighlight">\(2L\)</span> que satisfaça as condiçōes usuais de Fourier pode ser representada por sua <strong>série de Fourier</strong></p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{a_0}{2}+\sum_{n=1}^{\infty}\left(a_n \cos \left(\frac{n \pi x}{L}\right)+b_n \sin \left(\frac{n \pi x}{L}\right)\right),
+\]</div>
+<p>com os coeficientes de Fourier de <span class="math notranslate nohighlight">\(f(x)\)</span> dados pelas <strong>fórmulas de Euler</strong></p>
+<div class="math notranslate nohighlight">
+\[a_0=\frac{1}{2 L} \int_{-L}^L f(x) d x,\]</div>
+<div class="math notranslate nohighlight">
+\[a_n=\frac{1}{L} \int_{-L}^L f(x) \cos \frac{n \pi x}{L} d x\]</div>
+<div class="math notranslate nohighlight">
+\[b_n=\frac{1}{L} \int_{-L}^L f(x) \operatorname{sen} \frac{n \pi x}{L} d x
+\]</div>
+<p>com <span class="math notranslate nohighlight">\(n=1,2,3,\dots\)</span> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788521638841/epubcfi/6/44%5B%3Bvnd.vst.idref%3Dchapter10%5D!/4/166/2/2">Boyce, 2020</a>).</p>
+<p>Vamos ver alguns exemplos, mas antes vamos importar algumas funções e a constante <span class="math notranslate nohighlight">\(\pi\)</span> usano a linha de código abaixo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">exp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exemplo 8.1.1:</strong> Suponha que existe uma série de Fourier convergindo para a função <span class="math notranslate nohighlight">\(f\)</span> definida por</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{gathered}
+f(x)=\left\{\begin{array}{cc}
+-x, &amp; -2 \leq x&lt;0 \\
+x, &amp; 0 \leq x&lt;2
+\end{array}\right. \qquad \text{com} \qquad f(x+4)=f(x)
+\end{gathered}
+\end{split}\]</div>
+<p>Vamos ver como são os coeficientes nesta série de Fourier e fazer o gráfico.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># definindo a função f</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">&gt;=</span><span class="mi">2</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">&lt;-</span><span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">&gt;=-</span><span class="mi">2</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># importando as bibliotecas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plotando a função f</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,[</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f0cb6f31070b5e3b6f680e6c21bb33f7a9bacad766feeafe0617327fc4803c2a.png" src="../_images/f0cb6f31070b5e3b6f680e6c21bb33f7a9bacad766feeafe0617327fc4803c2a.png" />
+</div>
+</div>
+<p>Os coeficientes são dados por</p>
+<div class="math notranslate nohighlight">
+\[
+a_0=\frac{1}{2} \int_{-2}^0(-x) d x+\frac{1}{2} \int_0^2 x d x = 2
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+a_n=\frac{1}{2} \int_{-2}^0(-x) \cos \left(\frac{n \pi x}{2}\right) d x+\frac{1}{2} \int_0^2 x \cos \left(\frac{n \pi x}{2}\right) dx
+=\left\{\begin{array}{cl}
+-\frac{8}{(n \pi)^2}, &amp; n \text { ímpar } \\
+0, &amp; n \text { par. }
+\end{array}\right.
+\end{split}\]</div>
+<p>e</p>
+<div class="math notranslate nohighlight">
+\[
+b_n=\frac{1}{2} \int_{-2}^0(-x) \operatorname{sen} \left(\frac{n \pi x}{2}\right) dx+\frac{1}{2} \int_0^2 x\operatorname{sen} \left(\frac{n \pi x}{2}\right)dx=0
+\]</div>
+<p>Calculando as integrais, substituindo e simplificando, obtemos
+$<span class="math notranslate nohighlight">\(
+f(x)=1-\frac{8}{\pi^2} \sum_{n=1}^{\infty} \frac{1}{(2 n-1)^2} \cos \left(\frac{(2 n-1) \pi x}{2}\right) .
+\)</span>$</p>
+<p>O gráfico da função e da série de Fourier com 3 termos é mostrado abaixo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plotando a função</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,[</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># gerando a série</span>
+<span class="n">n_max</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">soma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n_max</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">soma</span><span class="o">=</span> <span class="n">soma</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">serie</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">soma</span>
+
+<span class="c1"># plotando a série</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">serie</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e31f41efb7cffd53b0f375ed6fe50e1219cbb495821f7a3ad6d2d14db60c7c7e.png" src="../_images/e31f41efb7cffd53b0f375ed6fe50e1219cbb495821f7a3ad6d2d14db60c7c7e.png" />
+</div>
+</div>
+<p><strong>Exemplo 8.1.2:</strong>
+A seguir é mostrado como usar <strong>integração numérica</strong> por meio da função <code class="docutils literal notranslate"><span class="pre">quad</span></code> de <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code> para obter uma aproximação por série de Fourier da função do primeiro exemplo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">quad</span>
+
+<span class="n">soma</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">An</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span>\
+                    <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">Bn</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span>\
+                    <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">soma</span> <span class="o">+=</span> <span class="n">An</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">Bn</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,[</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">soma</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e340e85a11bbff951683f6e444dbbf8d62329eb9276416e5b122a7a1eabf63f2.png" src="../_images/e340e85a11bbff951683f6e444dbbf8d62329eb9276416e5b122a7a1eabf63f2.png" />
+</div>
+</div>
+<p><strong>Exemplo 8.1.3:</strong> Os coeficientes de Fourier da onda retangular periódica</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x)=\left\{\begin{array}{rcc}
+-2 &amp; \text { se } &amp; -\pi&lt;x&lt;0 \\
+2 &amp; \text { se } &amp; 0&lt;x&lt;\pi
+\end{array} \quad \text { e } \quad f(x+2 \pi)=f(x) .\right.
+\end{split}\]</div>
+<p>São tais que <span class="math notranslate nohighlight">\(a_0 = 0\)</span>, <span class="math notranslate nohighlight">\(a_n=0\)</span>. Além disso, quando <span class="math notranslate nohighlight">\(n\)</span> é par, <span class="math notranslate nohighlight">\(b_n=0\)</span>, quando <span class="math notranslate nohighlight">\(n\)</span> é impar, <span class="math notranslate nohighlight">\(b_n=\frac{8}{n\pi}\)</span>. Assim a série de Fourier é dada por</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{8}{\pi}\left(\operatorname{sen} x+\frac{1}{3} \operatorname{sen} 3 x+\frac{1}{5} \operatorname{sen} 5 x+\cdots\right).
+\]</div>
+<p>Podemos plotar o gráfico da função e da série como é mostrado a seguir.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># definindo a função f</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">&gt;=</span><span class="n">pi</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">&lt;-</span><span class="n">pi</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">&gt;=-</span><span class="n">pi</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="o">-</span><span class="mi">2</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="n">pi</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">n_max</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">soma</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_max</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">soma</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">xi</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,[</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xi</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">soma</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/247e0f939f756594d2f5647e26857bd7a05554b17ee16d6d23e60efbaaf43000.png" src="../_images/247e0f939f756594d2f5647e26857bd7a05554b17ee16d6d23e60efbaaf43000.png" />
+</div>
+</div>
+<p><strong>Exemplo 8.1.4:</strong> Usando integração numérica para obter uma aproximação por série de Fourier da função <span class="math notranslate nohighlight">\(f(x)=sen(e^x)\)</span> no intervalo <span class="math notranslate nohighlight">\((-3,3)\)</span>. Plote o gráfico da função <span class="math notranslate nohighlight">\(f\)</span> e da função aproximadora com 10 termos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">sin</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fourier</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">A0</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">x</span><span class="p">),</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">301</span><span class="p">)</span>
+    <span class="n">yi</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">soma</span> <span class="o">=</span> <span class="n">A0</span><span class="o">/</span><span class="mi">2</span>
+
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xi</span><span class="p">:</span>
+        <span class="n">soma</span> <span class="o">=</span> <span class="n">A0</span><span class="o">/</span><span class="mi">2</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">An</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">x</span><span class="p">),</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">Bn</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">x</span><span class="p">),</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">soma</span> <span class="o">+=</span>  <span class="n">An</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">Bn</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">yi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">soma</span><span class="p">)</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourier</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5c4b3221ace65f4b77addf7f2fa186596d8d25b6ec1bc5ebf112505bc3be8f23.png" src="../_images/5c4b3221ace65f4b77addf7f2fa186596d8d25b6ec1bc5ebf112505bc3be8f23.png" />
+</div>
+</div>
+<p>Agora vamos estudar a relação da série de Fourier com a solução da equação do calor unidimensional.</p>
+</section>
+<section id="conducao-de-calor-em-uma-barra">
+<h2>Condução de calor em uma barra<a class="headerlink" href="#conducao-de-calor-em-uma-barra" title="Link para este cabeçalho">#</a></h2>
+<p>Considere o problema de condução de calor em uma barra de seção reta uniforme, feita de material homogêneo, com um eixo <span class="math notranslate nohighlight">\(x\)</span> coincidindo com o eixo da barra, sendo <span class="math notranslate nohighlight">\(x = 0\)</span> e <span class="math notranslate nohighlight">\(x = L\)</span> as extremidades.</p>
+<p>Suponha que os lados da barra estão perfeitamente isolados e que as dimensões da seção reta são tão pequenas que a temperatura <span class="math notranslate nohighlight">\(u\)</span> pode ser considerada constante em qualquer seção. Então, <span class="math notranslate nohighlight">\(u\)</span> só depende da coordenada axial <span class="math notranslate nohighlight">\(x\)</span> e do instante <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/MatComp_IV/refs/heads/main/imagens/barra.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/MatComp_IV/refs/heads/main/imagens/barra.png" style="width: 400px;" /></a></p>
+<p>(Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788521638841/epubcfi/6/44%5B%3Bvnd.vst.idref%3Dchapter10%5D!/4/406/162/13:44%5BFou%2Crie%5D">Boyce e Diprima, 2024</a>)</p>
+<p>A variação da temperatura na barra é governada pela <strong>equação diferencial parcial</strong> (EDP) conhecida como a <strong>equação do calor</strong>, que pode ser escrita na forma</p>
+<div class="math notranslate nohighlight">
+\[\alpha^2 u_{xx} = u_t, \quad 0&lt;x&lt;L \quad\text{e}\quad t&gt;0 ,\]</div>
+<p>em que  <span class="math notranslate nohighlight">\(\alpha^2\)</span> é difusividade térmica, uma constante que depende do material. Alguns valores típicos são mostrados como exemplo na tabela abaixo</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Material</p></th>
+<th class="head"><p>cm<span class="math notranslate nohighlight">\(^2\)</span>/s</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Cobre</p></td>
+<td><p>18,5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Aluminio</p></td>
+<td><p>0,8418</p></td>
+</tr>
+<tr class="row-even"><td><p>Ferro</p></td>
+<td><p>0,23</p></td>
+</tr>
+<tr class="row-odd"><td><p>Aço carbono</p></td>
+<td><p>0,1172</p></td>
+</tr>
+<tr class="row-even"><td><p>Aço inox</p></td>
+<td><p>0,03352</p></td>
+</tr>
+<tr class="row-odd"><td><p>Madeira pinus</p></td>
+<td><p>0,00082</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>O problema fundamental de condução de calor é encontrar <span class="math notranslate nohighlight">\(u(x, t)\)</span> que satisfaz a equação diferencial para <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span> e para <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, com a condição inicial
+$<span class="math notranslate nohighlight">\(
+u(x, 0)=f(x), \quad 0 \leq x \leq L,
+\)</span><span class="math notranslate nohighlight">\(
+quando \)</span>t = 0<span class="math notranslate nohighlight">\( e as condições de contorno \)</span>T_1<span class="math notranslate nohighlight">\( em \)</span>x = 0<span class="math notranslate nohighlight">\( e \)</span>T_2<span class="math notranslate nohighlight">\( em \)</span>x = L<span class="math notranslate nohighlight">\(. Começaremos com as contições de contorno \)</span>T_1=T_2=0$,então,</p>
+<div class="math notranslate nohighlight">
+\[u(0, t)=0, \quad u(L, t)=0, \quad t&gt;0.\]</div>
+<p>Pelo <strong>método de separação de variáveis</strong>, iniciamos supondo que <span class="math notranslate nohighlight">\(u(x, t)\)</span> é um produto de duas outras funções, uma dependendo só de <span class="math notranslate nohighlight">\(x\)</span> e a outra dependendo só de <span class="math notranslate nohighlight">\(t\)</span>. Assim,</p>
+<div class="math notranslate nohighlight">
+\[
+u(x, t)=X(x) T(t) .
+\]</div>
+<p>Substituindo na equação diferencial , obtemos</p>
+<div class="math notranslate nohighlight">
+\[
+\alpha^2 X^{\prime \prime}(x) T(t)=X(x) T^{\prime}(t)
+\]</div>
+<p>ou, simplesmente
+$<span class="math notranslate nohighlight">\(
+\alpha^2 X^{\prime \prime} T=X T^{\prime},
+\)</span><span class="math notranslate nohighlight">\(
+Dividindo os dois lados por \)</span>\alpha^2 X T$, obtemos a equação equivalente</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{X^{\prime \prime}}{X}=\frac{1}{\alpha^2} \frac{T^{\prime}}{T},
+\]</div>
+<p>Para que a equação acima seja válida para cada ponto <span class="math notranslate nohighlight">\((x, t)\)</span> em <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span>, <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, é preciso que ambos os lados sejam iguais à mesma constante, então escrevemos</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{X^{\prime \prime}}{X}=\frac{1}{\alpha^2} \frac{T^{\prime}}{T}=-\lambda
+\]</div>
+<p>Obtemos, então, as duas equações diferenciais ordinárias a seguir para <span class="math notranslate nohighlight">\(X(x)\)</span> e <span class="math notranslate nohighlight">\(T(t)\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[X^{\prime \prime}+\lambda X=0 \quad \quad \text{e} \quad \quad T^{\prime}+\alpha^2 \lambda T=0\]</div>
+<p>Substituindo <span class="math notranslate nohighlight">\(u(x, t)\)</span> na condição de contorno em <span class="math notranslate nohighlight">\(x=0\)</span>, obtemos <span class="math notranslate nohighlight">\(u(0, t)=X(0) T(t)=0\)</span>,
+o que leva a <span class="math notranslate nohighlight">\(X(0)=0\)</span>.  A condição de contorno em <span class="math notranslate nohighlight">\(x = L\)</span> implica que
+<span class="math notranslate nohighlight">\(X(L)=0\)</span>.</p>
+<p>As únicas soluções não triviais de <span class="math notranslate nohighlight">\(X^{\prime \prime}+\lambda X=0\)</span> sob as condições <span class="math notranslate nohighlight">\(X(0)=0\)</span> e <span class="math notranslate nohighlight">\(X(L)=0\)</span>, são as autofunções</p>
+<div class="math notranslate nohighlight">
+\[
+X_n(x)=\operatorname{sen}\left(\frac{n \pi x}{L}\right), \quad n=1,2,3,\ldots\]</div>
+<p>Associadas aos autovalores
+$<span class="math notranslate nohighlight">\(\lambda_n=\frac{n^2 \pi^2}{L^2}, \quad n=1,2,3,\ldots
+\)</span>$</p>
+<p>Voltando para a equação para <span class="math notranslate nohighlight">\(T^{\prime}+\alpha^2 \lambda T=0\)</span> e substituindo <span class="math notranslate nohighlight">\(\lambda\)</span> por <span class="math notranslate nohighlight">\(n^2 \pi^2 / L^2\)</span>, temos</p>
+<div class="math notranslate nohighlight">
+\[
+T^{\prime}+\frac{n^2 \pi^2 \alpha^2}{L^2} T=0
+\]</div>
+<p>Logo, <span class="math notranslate nohighlight">\(T(t)\)</span> é proporcional a <span class="math notranslate nohighlight">\(e^{-n^2 \pi^2 \alpha^2 t / L^2}\)</span>. Portanto, multiplicando as soluções, e desprezando as constantes arbitrárias de proporcionalidade, concluímos que as funções</p>
+<div class="math notranslate nohighlight">
+\[
+u_n(x, t)=e^{-n^2 \pi^2 \alpha^2 t / L^2} \operatorname{sen}\left(\frac{n \pi x}{L}\right), \quad n=1,2,3, \ldots
+\]</div>
+<p>são as soluções fundamentais do problema da condução do calor <span class="math notranslate nohighlight">\(\alpha^2 u_{x x}=u_t, \quad 0&lt;x&lt;L, \quad t&gt;0\)</span> com as condições de contorno <span class="math notranslate nohighlight">\(u(0, t)=0, \quad u(L, t)=0, \quad t&gt;0\)</span>.</p>
+<p>Formando combinações lineares do conjunto fundamental de soluções da equação diferencial obtemos uma solução na forma de uma série infinita</p>
+<div class="math notranslate nohighlight">
+\[
+u(x, t)=\sum_{n=1}^{\infty} c_n u_n(x, t)=\sum_{n=1}^{\infty} c_n e^{-n^2 \pi^2 \alpha^2 t / L^2} \operatorname{sen}\left(\frac{n \pi x}{L}\right),
+\]</div>
+<p>em que os coeficientes <span class="math notranslate nohighlight">\(c_n\)</span> ainda estão indeterminados.
+Para satisfazer a condição inicial <span class="math notranslate nohighlight">\(u(x, 0)=f(x), \quad 0 \leq x \leq L\)</span>, temos que ter</p>
+<div class="math notranslate nohighlight">
+\[
+u(x, 0)=\sum_{n=1}^{\infty} c_n \operatorname{sen}\left(\frac{n \pi x}{L}\right)=f(x)
+\]</div>
+<p>Assim, precisamos escolher os coeficientes <span class="math notranslate nohighlight">\(c_n\)</span> tais que a série em senos na equação acima convirja para a distribuição inicial de temperatura <span class="math notranslate nohighlight">\(f (x)\)</span> para <span class="math notranslate nohighlight">\(0 ≤ x ≤ L\)</span>. Ou seja, são os coeficientes da  série de Fourier em senos de <span class="math notranslate nohighlight">\(f\)</span>, dados por</p>
+<div class="math notranslate nohighlight">
+\[
+c_n=\frac{2}{L} \int_0^L f(x) \operatorname{sen}\left(\frac{n \pi x}{L}\right) d x
+\]</div>
+<p><strong>Exemplo 8.1.5:</strong> Encontre a temperatura <span class="math notranslate nohighlight">\(u(x, t)\)</span> em qualquer instante em uma barra de metal com 50 cm de comprimento <span class="math notranslate nohighlight">\(\alpha^2 = 1\)</span>, isolada nos lados, inicialmente a uma temperatura uniforme de 20 °C em toda a barra e cujas extremidades são mantidas a 0 °C para todo t &gt; 0.</p>
+<p>Fazendo <span class="math notranslate nohighlight">\(L=50\)</span> e <span class="math notranslate nohighlight">\(f(x)=20\)</span> para <span class="math notranslate nohighlight">\(0&lt;x&lt;50\)</span>, a solução será dada por</p>
+<div class="math notranslate nohighlight">
+\[u_n(x,t) = \sum_{n=1}^\infty c_n e^{-n^2\pi^2t/2500} \operatorname{sen}\left(\frac{n\pi x}{50} \right)\]</div>
+<p>com</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}c_n = \frac{2}{50} \int_{0}^{50} 20 \operatorname{sen}\left(\frac{n\pi x}{50} \right) dx = \frac{40}{n\pi}(1-\cos n\pi) = \begin{cases}
+\frac{80}{n\pi}, \,\,\,  n \,\,\,  ímpar; \\
+0, \,\,\, n  \,\,\, par.\\ 
+\end{cases}\end{split}\]</div>
+<p>Substituindo, a solução fica</p>
+<div class="math notranslate nohighlight">
+\[u_n(x,t) =\frac{80}{\pi} \sum_{n=1,3,5,...}^\infty \frac{1}{n}e^{-n^2\pi^2t/2500} \operatorname{sen}\left(\frac{n\pi x}{50} \right)\]</div>
+<p>O fator exponencial com potência negativa em cada termo da série faz com que ela convirja rapidamente, exceto para valores pequenos de <span class="math notranslate nohighlight">\(t\)</span>. Portanto, resultados precisos podem ser obtidos, em geral, usando-se apenas alguns poucos termos da série.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">u</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">soma</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">soma</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">((</span><span class="o">-</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="mi">2500</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">80</span><span class="o">/</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">soma</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">u</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">N</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span><span class="p">],</span>
+             <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/067d9069fd25e017aa602bf2aa3acbc1ce7194b521c6d794ddf5c6ece50beea2.png" src="../_images/067d9069fd25e017aa602bf2aa3acbc1ce7194b521c6d794ddf5c6ece50beea2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">800</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">[</span><span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">ti</span><span class="p">,</span><span class="n">N</span><span class="p">)</span> <span class="k">for</span> <span class="n">ti</span> <span class="ow">in</span> <span class="n">t</span><span class="p">],</span>
+             <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bfc69f77b9e1de22fe18d38c4aeb54a548e73b00a18d0e011020a451c5c01943.png" src="../_images/bfc69f77b9e1de22fe18d38c4aeb54a548e73b00a18d0e011020a451c5c01943.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">cm</span>  <span class="c1"># color map</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+
+    
+<span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">101</span><span class="p">),</span>
+                   <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">101</span><span class="p">))</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span> 
+<span class="n">ui</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
+        <span class="n">ui</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">],</span><span class="n">N</span><span class="p">)</span>
+
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">,</span><span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ui</span><span class="p">,</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">jet</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ui</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="n">linewidths</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/438a76eed3068490d70fa7eaa5ac9f2ca9f19254077d67033c78138a2f00cdf2.png" src="../_images/438a76eed3068490d70fa7eaa5ac9f2ca9f19254077d67033c78138a2f00cdf2.png" />
+</div>
+</div>
+</section>
+<section id="equacao-da-onda">
+<h2>Equação da onda<a class="headerlink" href="#equacao-da-onda" title="Link para este cabeçalho">#</a></h2>
+<p>Dada a EDP</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial^2 u}{\partial t^2}=c^2 \frac{\partial^2 u}{\partial x^2}
+\]</div>
+<p>sob as condições</p>
+<div class="math notranslate nohighlight">
+\[
+u(0, t)=0, \quad u(L, t)=0 \quad \text { para todo } t \quad \text { e}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+u(x, 0)=f(x), \quad u_t(x, 0)=g(x) \quad(0 \leqq x \leqq L)
+\]</div>
+<p>Sabe-se que a solução analítica é dada por</p>
+<div class="math notranslate nohighlight">
+\[
+u(x, t)=\sum_{n=1}^{\infty} u_n(x, t)=\sum_{n=1}^{\infty}\left(B_n \cos \lambda_n t+B_n^* \operatorname{sen} \lambda_n t\right) \operatorname{sen} \frac{n \pi}{L} x
+\]</div>
+<p>com <span class="math notranslate nohighlight">\(\lambda_n =\frac{c n \pi}{L}\)</span> e</p>
+<div class="math notranslate nohighlight">
+\[B_n=\frac{2}{L} \int_0^L f(x) \operatorname{sen} \frac{n \pi x}{L} d x \quad \text{e} \quad B_n^*=\frac{2}{c n \pi} \int_0^L g(x) \operatorname{sen} \frac{n \pi x}{L} d x\]</div>
+<p><strong>Exemplo 8.1.6:</strong> A solução da equação da onda correspondente à deflexão inicial triangular</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(x)=\left\{\begin{array}{lll}
+\frac{2 k}{L} x &amp; \text { se } &amp; 0&lt;x&lt;\frac{L}{2} \\
+\frac{2 k}{L}(L-x) &amp; \text { se } &amp; \frac{L}{2}&lt;x&lt;L
+\end{array}\right.
+\end{split}\]</div>
+<p>e à velocidade inicial nula.</p>
+<p>A solução será uma série dada por</p>
+<div class="math notranslate nohighlight">
+\[u(x, t)=\frac{8 k}{\pi^2}\left[\frac{1}{1^2} \operatorname{sen} \frac{\pi}{L} x \cos \frac{\pi c}{L} t-\frac{1}{3^2} \operatorname{sen} \frac{3 \pi}{L} x \cos \frac{3 \pi c}{L} t+\cdots\right]\]</div>
+<p>Considerando <span class="math notranslate nohighlight">\(c=1\)</span>, <span class="math notranslate nohighlight">\(k = 1\)</span> e <span class="math notranslate nohighlight">\(L = 2\)</span> e plote gráficos para alguns valores de <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">pi</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x t c L k i&#39;</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">lamb</span> <span class="o">=</span> <span class="n">c</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="n">L</span>
+
+<span class="n">f1</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">L</span>
+
+<span class="n">Bn</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">L</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f1</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">L</span><span class="p">),(</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> \
+            <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f2</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">L</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">Bna</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">g</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">L</span><span class="p">),(</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="p">)))</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">Bna</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 0\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">un</span> <span class="o">=</span> <span class="p">(</span><span class="n">Bn</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lamb</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">Bna</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lamb</span><span class="o">*</span><span class="n">t</span><span class="p">))</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">un</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{8 k \sin{\left(\frac{\pi n}{2} \right)} \sin{\left(\frac{\pi n x}{L} \right)} \cos{\left(\frac{\pi c n t}{L} \right)}}{\pi^{2} n^{2}}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">un</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{8 k \sin{\left(\frac{\pi x}{L} \right)} \cos{\left(\frac{\pi c t}{L} \right)}}{\pi^{2}}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 0\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle - \frac{8 k \sin{\left(\frac{3 \pi x}{L} \right)} \cos{\left(\frac{3 \pi c t}{L} \right)}}{9 \pi^{2}}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 0\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{8 k \sin{\left(\frac{5 \pi x}{L} \right)} \cos{\left(\frac{5 \pi c t}{L} \right)}}{25 \pi^{2}}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 0\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">un</span> <span class="o">=</span> <span class="n">un</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">c</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">L</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">un</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{8 \sin{\left(\frac{\pi n}{2} \right)} \sin{\left(\frac{\pi n x}{2} \right)} \cos{\left(\frac{\pi n t}{2} \right)}}{\pi^{2} n^{2}}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">),</span> <span class="n">un</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ui</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">ti</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">ui</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
+        <span class="n">ui</span> <span class="o">+=</span> <span class="n">u</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span><span class="n">xi</span><span class="p">,</span><span class="n">ti</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">ui</span><span class="p">)</span>
+<span class="c1">#plt.grid()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/711f8728fe50337a4f6ae20f25edc9eb91af5274788148dd8e69bdd5fe18bfcc.png" src="../_images/711f8728fe50337a4f6ae20f25edc9eb91af5274788148dd8e69bdd5fe18bfcc.png" />
+</div>
+</div>
+</section>
+<section id="exercicios">
+<h2>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
+<p>(Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788521638841/epubcfi/6/44%5B%3Bvnd.vst.idref%3Dchapter10%5D!/4/406/162/13:44%5BFou%2Crie%5D">Boyce e Diprima, 2024</a>)</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>1.</strong> Encontre a solução do problema de condução de calor</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{aligned}
+ &amp; 100 u_{x x}=u_t, \quad 0&lt;x&lt;1, \quad t&gt;0 \\
+ &amp; u(0, t)=0, \quad u(1, t)=0, \quad t&gt;0 \\
+ &amp; u(x, 0)=\operatorname{sen}(2 \pi x)-\operatorname{sen}(5 \pi x), \quad 0 \leq x \leq 1
+ \end{aligned}\end{split}\]</div>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>2.</strong> Encontre a solução do problema de condução de calor</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{aligned}
+ &amp; u_{x x}=4 u_t, \quad 0&lt;x&lt;2, \quad t&gt;0 \\
+ &amp; u(0, t)=0, \quad u(2, t)=0, \quad t&gt;0 \\
+ &amp; u(x, 0)=2 \operatorname{sen}(\pi x / 2)-\operatorname{sen}(\pi x)+4 \operatorname{sen}(2 \pi x), \quad 0 \leq x \leq 2
+ \end{aligned}\end{split}\]</div>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p>Considere a condução de calor em uma barra com 40 cm de comprimento cujas extremidades são mantidas à temperatura <span class="math notranslate nohighlight">\(0{ }^{\circ} \mathrm{C}\)</span> para todo <span class="math notranslate nohighlight">\(t&gt;0\)</span>. Em cada um dos Problemas 3 a 6, encontre uma expressão para a temperatura <span class="math notranslate nohighlight">\(u(x, t)\)</span> quando a distribuição de temperatura inicial na barra for igual à função dada. Suponha que <span class="math notranslate nohighlight">\(\alpha^2=1\)</span></p>
+<p><strong>3.</strong> <span class="math notranslate nohighlight">\(u(x, 0)=50, \quad 0&lt;x&lt;40\)</span></p>
+<p><strong>4.</strong> <span class="math notranslate nohighlight">\(u(x, 0)=\left\{\begin{array}{lrl}x, &amp; 0 &amp; \leq x&lt;20 \\ 40-x, &amp; 20 &amp; \leq x \leq 40\end{array}\right.\)</span></p>
+<p><strong>5.</strong> <span class="math notranslate nohighlight">\(u(x, 0)=\left\{\begin{array}{rrl}0, &amp; 0 &amp; \leq x&lt;10 \\ 50, &amp; &amp; 10 \leq x \leq 30 \\ 0, &amp; &amp; 30&lt;x \leq 40\end{array}\right.\)</span></p>
+<p><strong>6.</strong> <span class="math notranslate nohighlight">\(u(x, 0)=x, \quad 0 \leq x&lt;40\)</span></p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>7.</strong> Considere novamente a barra do Problema 3. Para <span class="math notranslate nohighlight">\(t = 5\)</span> e <span class="math notranslate nohighlight">\(x = 20\)</span>, determine quantos termos são necessários para encontrar a solução correta até três casas decimais. Um modo razoável de fazer isso é encontrar <span class="math notranslate nohighlight">\(n\)</span> tal que a inclusão de mais um termo não muda as três primeiras casas decimais de <span class="math notranslate nohighlight">\(u(20, 5)\)</span>. Repita para <span class="math notranslate nohighlight">\(t = 20\)</span> e <span class="math notranslate nohighlight">\(t = 80\)</span>. Chegue a alguma conclusão sobre a velocidade de convergência da série que representa <span class="math notranslate nohighlight">\(u(x, t)\)</span>.</p>
+<p><strong>8.</strong> Repita o Problema 7 para a barra no Problema 4.</p>
+<p><strong>9.</strong> Repita o Problema 7 para a barra no Problema 5.</p>
+<p><strong>10.</strong> Repita o Problema 7 para a barra no Problema 6.</p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./8_EQUACOES_DIFERENCIAIS_PARCIAIS"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="8_EQUACOES_DIFERENCIAIS_PARCIAIS.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">8. Equações Diferenciais Parciais</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="8.2_classificacao_e_discretizacao.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">8.2 Classificação e discretização de EDPs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Conteúdo
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series-de-fourier">Séries de Fourier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conducao-de-calor-em-uma-barra">Condução de calor em uma barra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equacao-da-onda">Equação da onda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+De Tiago M. Buriol
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright Universidade Federal de Santa Maria.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
