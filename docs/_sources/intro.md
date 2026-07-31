@@ -10,7 +10,7 @@ Este caderno didático apresenta o conteúdo típico de cursos de **cálculo num
 
 O material foi desenvolvido para ser utilizado em cursos de graduação da **Universidade Federal de Santa Maria (UFSM)**, particularmente nos cursos de engenharia e matemática. Pressupõe-se que o leitor tenha familiaridade com cálculo diferencial e integral, álgebra linear e programação em Python.
 
-Uma versão online, em HTML, contendo todos os exemplos e código, permitindo "copiar" e "colar" facilmente, para a execução e teste dos progrma em Python, está disponível no endereço <https://tiagoburiol.github.io/metodos_numericos_em_python/> ou a partir do qr-code abaixo:
+Uma versão online, em HTML, contendo todos os exemplos e código, permitindo "copiar" e "colar" facilmente, para a execução e teste dos programas em Python, está disponível [neste link](https://tiagoburiol.github.io/metodos_numericos_em_python/) ou a partir do qr-code abaixo:
 
 ```{image} qr-code.png
 :width: 150px
