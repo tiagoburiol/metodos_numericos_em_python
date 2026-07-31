@@ -178,7 +178,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Métodos Numéricos em Python
+                    Caderno Didático de Métodos Numéricos em Python
                 </a>
             </li>
         </ul>
@@ -464,8 +464,8 @@ document.write(`
 <li><p>A resolução do modelo matemático por métodos numéricos ou analíticos.</p></li>
 </ol>
 <p>As duas primeiras etapas consistem na <strong>fase de modelagem</strong> e a terceira é a <strong>fase de resolução</strong>. Tanto na fase de modelagem quanto na fase de resolução podem ocorrer erros, mesmo que esses erros não tornem a resposta obtida inválida ou inútil. Em geral busca-se uma solução aproximada, dentro de uma precisão pré-estabelecida.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/erros.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/erros.png" style="width: 600px;" /></a></p>
-<p>Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/14">Arenalles e Darezzo, 2016</a>.</p>
+<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/erros.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/erros.png" style="width: 500px;" /></a></p>
+<p>Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/14">Arenalles e Darezzo (2016)</a>.</p>
 <p>Os erros na fase de modelagem podem ser decorrentes de medições imprecisas, erros de anotação, simplificações e deduções equivocadas. Os erros na fase de resolução ocorrem devido a erros de cálculo, escolha de um método ineficaz, aproximações numéricas ou arredondamentos. Dizemos que métodos analíticos de resolução geram soluções exatas e métodos numéricos geram soluções aproximadas.</p>
 <p>A maioria dos problemas envolvendo fenômenos reais produzem modelos matemáticos cuja solução analítica é difícil (ou impossível) de se obter, mesmo quando provamos que a solução existe. Nesses casos usamos <strong>métodos numéricos</strong>, os quais fornecem <strong>soluções aproximadas</strong>, que apesar de, em geral, serem diferentes da solução exata, podem ser suficientemente próximas para que sejam úteis em suas aplicações.</p>
 <section id="representacao-de-numeros-em-ponto-flutuante">
@@ -568,15 +568,17 @@ document.write(`
 <section id="base-binaria">
 <h3>Base binária<a class="headerlink" href="#base-binaria" title="Link para este cabeçalho">#</a></h3>
 <div class="math notranslate nohighlight">
-\[ N_2=\sum_{i=n}^m a_ i \times 2^i, \,\,\,\,\ a_2 \in \{0,1\}\]</div>
+\[ N_2=\sum_{i=n}^m a_ i \times 2^i, \,\,\,\,\ a_i \in \{0,1\}\]</div>
 <p><strong>Exemplos 1.1.3:</strong> (Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/15">Arenalles e Darezzo, 2016</a>)</p>
 <p>a) <span class="math notranslate nohighlight">\((1011)_2 = 1 \times 2^0 + 1 \times 2^1 + 0 \times 2^2 + 1 \times 2^3\)</span></p>
+<p>Neste caso, o binário só tem a parte inteira, com <span class="math notranslate nohighlight">\(i=0,1,2,3\)</span>, isto é, <span class="math notranslate nohighlight">\(n=0\)</span> e <span class="math notranslate nohighlight">\(m=3\)</span>.</p>
 <p>b) <span class="math notranslate nohighlight">\((111.01)_2 = 1 \times 2^{-2} + 0 \times 2^{-1} + 1 \times 2^0 + 1 \times 2^1 + 1 \times 2^2 \)</span></p>
+<p>Neste caso, o binário tem parte inteira e parte fracionária, com <span class="math notranslate nohighlight">\(i=-2,-1,0,1,2\)</span>, isto é, <span class="math notranslate nohighlight">\(n=-2\)</span> e <span class="math notranslate nohighlight">\(m=2\)</span>.</p>
 </section>
 <section id="base-decimal">
 <h3>Base decimal<a class="headerlink" href="#base-decimal" title="Link para este cabeçalho">#</a></h3>
 <div class="math notranslate nohighlight">
-\[ N_{10}=\sum_{i=n}^m a_ i \times 10^i, \,\,\,\,\ a_{10} \in \{0,1,2,3,...,9 \}\]</div>
+\[ N_{10}=\sum_{i=n}^m a_ i \times 10^i, \,\,\,\,\ a_i \in \{0,1,2,3,...,9 \}\]</div>
 <p><strong>Exemplo 1.1.4:</strong> (Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522112821/pageid/15">Arenalles e Darezzo, 2016</a>)</p>
 <p>a) <span class="math notranslate nohighlight">\((231)_{10} = 1 \times 10^0 + 3 \times 10^1 + 2 \times 10^2\)</span></p>
 <p>b) <span class="math notranslate nohighlight">\((231.35)_{10} = 5 \times 10^{-2} +3\times 10^{-1} +1 \times 10^0 + 3 \times 10^1 + 2 \times 10^2\)</span></p>
@@ -893,7 +895,7 @@ De Tiago M. Buriol
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright Universidade Federal de Santa Maria.
       <br/>
     
   </p>

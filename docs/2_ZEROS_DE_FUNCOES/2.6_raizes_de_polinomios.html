@@ -178,7 +178,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Métodos Numéricos em Python
+                    Caderno Didático de Métodos Numéricos em Python
                 </a>
             </li>
         </ul>
@@ -696,6 +696,52 @@ x= -8.4455889629375 Erro: 0.0006972765606359088
 <p>c) <span class="math notranslate nohighlight">\(P(x) = – 12 – 21x + 18x^2 – 2.75x^3\)</span></p>
 </div></blockquote>
 <hr class="docutils" />
+<blockquote>
+<div><p><strong>2.</strong> Use o método de Briot-Ruffini para calcular <span class="math notranslate nohighlight">\(P(2)\)</span> e <span class="math notranslate nohighlight">\(P'(2)\)</span> do polinômio</p>
+<div class="math notranslate nohighlight">
+\[P(x) = 2x^4 - 3x^3 + x^2 - 5x + 4\]</div>
+<p>Mostre, a cada divisão, os coeficientes do polinômio quociente <span class="math notranslate nohighlight">\(Q(x)\)</span> obtido. Confira o resultado comparando <span class="math notranslate nohighlight">\(P(2)\)</span> com <code class="docutils literal notranslate"><span class="pre">np.polyval</span></code> e <span class="math notranslate nohighlight">\(P'(2)\)</span> com a derivada calculada simbolicamente (por exemplo, usando <code class="docutils literal notranslate"><span class="pre">sympy</span></code> ou à mão).</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>3.</strong> O polinômio <span class="math notranslate nohighlight">\(P(x)=x^3-4x^2+5x-2\)</span> tem uma raiz simples em <span class="math notranslate nohighlight">\(x=2\)</span> e uma raiz dupla em <span class="math notranslate nohighlight">\(x=1\)</span> (verifique fatorando <span class="math notranslate nohighlight">\(P(x)=(x-1)^2(x-2)\)</span>).</p>
+<p>a) Aplique o método de Newton com Briot-Ruffini partindo de <span class="math notranslate nohighlight">\(x_0=1{,}5\)</span> com <span class="math notranslate nohighlight">\(\varepsilon=10^{-4}\)</span> e observe para qual raiz o método converge.</p>
+<p>b) Repita partindo de <span class="math notranslate nohighlight">\(x_0=0{,}9\)</span> e de <span class="math notranslate nohighlight">\(x_0=1{,}1\)</span>, comparando o número de iterações necessárias para atingir a mesma precisão nos dois casos.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>4.</strong> O polinômio <span class="math notranslate nohighlight">\(P(x)=x^4-2x^3-13x^2+14x+24\)</span> tem quatro raízes reais e inteiras.</p>
+<p>a) Plote o gráfico de <span class="math notranslate nohighlight">\(P(x)\)</span> em um intervalo adequado para localizar visualmente as quatro raízes.</p>
+<p>b) Encontre cada uma das raízes usando o método de Newton com Briot-Ruffini, escolhendo uma aproximação inicial diferente para cada uma.</p>
+<p>c) Verifique o resultado fatorando <span class="math notranslate nohighlight">\(P(x)\)</span> com os valores encontrados.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>5. (Deflação de polinômios)</strong> Sabendo que <span class="math notranslate nohighlight">\(x=2\)</span> é raiz do polinômio <span class="math notranslate nohighlight">\(P(x)=x^3-3x^2-4x+12\)</span>,</p>
+<p>a) Use <code class="docutils literal notranslate"><span class="pre">BriotRuffini</span></code> para dividir <span class="math notranslate nohighlight">\(P(x)\)</span> por <span class="math notranslate nohighlight">\((x-2)\)</span> e obter os coeficientes do polinômio quociente <span class="math notranslate nohighlight">\(Q(x)\)</span>, de grau 2.</p>
+<p>b) Encontre as raízes restantes de <span class="math notranslate nohighlight">\(P(x)\)</span> resolvendo <span class="math notranslate nohighlight">\(Q(x)=0\)</span> com a fórmula de Bhaskara.</p>
+<p>c) Confirme que as três raízes encontradas satisfazem <span class="math notranslate nohighlight">\(P(x)=(x-r_1)(x-r_2)(x-r_3)\)</span>.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>6. (Convergência perto de uma raiz múltipla)</strong> Considere <span class="math notranslate nohighlight">\(P(x)=(x-2)^2(x+1)=x^3-3x^2+4\)</span>, que tem uma raiz dupla em <span class="math notranslate nohighlight">\(x=2\)</span> e uma raiz simples em <span class="math notranslate nohighlight">\(x=-1\)</span>.</p>
+<p>a) Aplique o método de Newton com Briot-Ruffini partindo de <span class="math notranslate nohighlight">\(x_0=3\)</span> (próximo da raiz dupla) e de <span class="math notranslate nohighlight">\(x_0=-2\)</span> (próximo da raiz simples), ambos com <span class="math notranslate nohighlight">\(\varepsilon=10^{-6}\)</span>, e imprima o erro a cada iteração.</p>
+<p>b) Compare a velocidade de convergência nos dois casos. Qual delas converge mais lentamente?</p>
+<p>c) Sabe-se que, perto de uma raiz de multiplicidade <span class="math notranslate nohighlight">\(m\)</span>, o método de Newton perde a convergência quadrática e passa a convergir linearmente. Os resultados obtidos são compatíveis com essa afirmação?</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>7.</strong> Considere o polinômio <span class="math notranslate nohighlight">\(P(x)=x^2+1\)</span>, que não possui raízes reais (suas raízes são <span class="math notranslate nohighlight">\(\pm i\)</span>).</p>
+<p>a) Aplique o método de Newton com Briot-Ruffini partindo de <span class="math notranslate nohighlight">\(x_0=1\)</span> por 10 iterações e observe o comportamento da sequência gerada.</p>
+<p>b) O método converge? Explique, em termos geométricos (o gráfico de <span class="math notranslate nohighlight">\(P(x)\)</span> nunca cruza o eixo <span class="math notranslate nohighlight">\(x\)</span>), por que isso acontece.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>8. (Eficiência computacional)</strong> O método de Briot-Ruffini avalia <span class="math notranslate nohighlight">\(P(\alpha)\)</span> usando apenas <span class="math notranslate nohighlight">\(n\)</span> multiplicações e <span class="math notranslate nohighlight">\(n\)</span> somas para um polinômio de grau <span class="math notranslate nohighlight">\(n\)</span> (esquema de Horner).</p>
+<p>a) Escreva uma função <code class="docutils literal notranslate"><span class="pre">avaliacao_ingenua(a,</span> <span class="pre">x)</span></code> que calcule <span class="math notranslate nohighlight">\(P(x)=\sum_{i=0}^n a_i x^{n-i}\)</span> termo a termo, usando <code class="docutils literal notranslate"><span class="pre">x**k</span></code> para cada potência, e conte o número de multiplicações realizadas.</p>
+<p>b) Compare esse número de multiplicações com o número de multiplicações usadas por <code class="docutils literal notranslate"><span class="pre">BriotRuffini</span></code> para o mesmo polinômio, para graus <span class="math notranslate nohighlight">\(n=5, 10, 20\)</span> e <span class="math notranslate nohighlight">\(50\)</span>.</p>
+<p>c) Discuta como essa diferença de custo se torna relevante ao aplicar o método de Newton em polinômios de grau elevado.</p>
+</div></blockquote>
 </section>
 </section>
 
@@ -790,7 +836,7 @@ De Tiago M. Buriol
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright Universidade Federal de Santa Maria.
       <br/>
     
   </p>

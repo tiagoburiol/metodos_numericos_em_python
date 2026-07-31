@@ -1,31 +1,27 @@
-# Métodos Numéricos em Python
+# Caderno Didático de Métodos Numéricos em Python
 
-**Prof. Tiago M. Buriol** — Universidade Federal de Santa Maria (UFSM)
+**Tiago M. Buriol** — Universidade Federal de Santa Maria (UFSM)
 
 ---
+```{rubric} Apresentação
+```
 
-Este caderno didático apresenta os principais **métodos numéricos** utilizados na solução computacional de problemas de engenharia e ciências, com implementações em **Python**.
+Este caderno didático apresenta o conteúdo típico de cursos de **cálculo numérico** e **métodos numéricos computacionais**, em nível de graduação, com ênfase na aplicação e implementação, em **Python**, de métodos para a soluções numéricas de problemas comuns às ciências exatas.
 
-O material foi desenvolvido para cursos de graduação em engenharia, física, matemática e áreas afins, e pressupõe familiaridade básica com cálculo diferencial e integral, álgebra linear e programação em Python.
+O material foi desenvolvido para ser utilizado em cursos de graduação da **Universidade Federal de Santa Maria (UFSM)**, particularmente nos cursos de engenharia e matemática. Pressupõe-se que o leitor tenha familiaridade com cálculo diferencial e integral, álgebra linear e programação em Python.
 
-## Organização
+Uma versão online, em HTML, contendo todos os exemplos e código, permitindo "copiar" e "colar" facilmente, para a execução e teste dos progrma em Python, está disponível no endereço <https://tiagoburiol.github.io/metodos_numericos_em_python/> ou a partir do qr-code abaixo:
 
-O livro está organizado em oito capítulos temáticos:
+```{image} qr-code.png
+:width: 150px
+:align: center
+```
+---
+```{rubric} Como usar os notebooks Jupyter
+```
 
-| Capítulo | Tema |
-|---|---|
-| 1 | Introdução e erros |
-| 2 | Zeros de funções |
-| 3 | Sistemas lineares |
-| 4 | Interpolação polinomial |
-| 5 | Ajuste por mínimos quadrados |
-| 6 | Integração numérica |
-| 7 | Equações diferenciais ordinárias |
-| 8 | Equações diferenciais parciais |
 
-## Como usar
-
-Cada capítulo é composto por notebooks Jupyter interativos. Para executar os exemplos localmente:
+Cada capítulo é composto por notebooks Jupyter interativos. Para baixar e executar os exemplos localmente:
 
 ```bash
 git clone https://github.com/tiagoburiol/metodos_numericos_em_python

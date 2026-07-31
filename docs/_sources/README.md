@@ -6,6 +6,9 @@ O *Caderno didático de Métodos Numéricos em Python* foi produzido para ser us
 <img src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/docs/_static/capa.png" width="400">
 </a>
 
+<a href="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/docs/TMBuriol_M%C3%A9todos_Num%C3%A9ricos_em_Python.pdf"> Clique aqui para o download do Jupyter Book completo em PDF.
+</a>
+
 
 ## Conteúdo
 

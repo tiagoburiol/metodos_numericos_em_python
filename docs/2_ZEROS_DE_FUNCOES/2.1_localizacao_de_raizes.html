@@ -178,7 +178,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Métodos Numéricos em Python
+                    Caderno Didático de Métodos Numéricos em Python
                 </a>
             </li>
         </ul>
@@ -434,7 +434,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#isolamento-da-raiz-localizacao-por-metodos-metodos-graficos">Isolamento da raiz: Localização por métodos métodos gráficos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#isolamento-da-raiz-localizacao-por-metodos-graficos">Isolamento da raiz: Localização por métodos gráficos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#localizacao-de-raizes-de-polinomios">Localização de raízes de polinômios</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-localizacao-de-raizes-no-circulo">Teorema: Localização de raízes no círculo</a></li>
 </ul>
@@ -458,7 +458,7 @@ document.write(`
 <p>Em ciências e engenharias frequentemente a solução de um problema real é obtida resolvendo uma equação em uma variável real, a qual sempre pode ser escrita na forma</p>
 <div class="math notranslate nohighlight">
 \[f(x)=0\]</div>
-<p>Dada uma função <span class="math notranslate nohighlight">\(f:R \rightarrow R\)</span> dizemos que <span class="math notranslate nohighlight">\(\overline{x} \in R\)</span>, tal que <span class="math notranslate nohighlight">\(f(\overline{x})=0\)</span> é um <em>zero</em> (ou <em>raiz</em>) da função <span class="math notranslate nohighlight">\(f\)</span>. Graficamente, uma raíz é o ponto onde a função <span class="math notranslate nohighlight">\(f(x)\)</span> cruza ou toca o eixo <span class="math notranslate nohighlight">\(x\)</span>. Uma equação <span class="math notranslate nohighlight">\(f(x)=0\)</span> pode não ter solução (raiz) real, ter uma única raiz ou várias.</p>
+<p>Dada uma função <span class="math notranslate nohighlight">\(f:R \rightarrow R\)</span> dizemos que <span class="math notranslate nohighlight">\(\overline{x} \in R\)</span>, tal que <span class="math notranslate nohighlight">\(f(\overline{x})=0\)</span> é um <em>zero</em> (ou <em>raiz</em>) da função <span class="math notranslate nohighlight">\(f\)</span>. Graficamente, uma raiz é o ponto onde a função <span class="math notranslate nohighlight">\(f(x)\)</span> cruza ou toca o eixo <span class="math notranslate nohighlight">\(x\)</span>. Uma equação <span class="math notranslate nohighlight">\(f(x)=0\)</span> pode não ter solução (raiz) real, ter uma única raiz ou várias.</p>
 <p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/raizes.jpg"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/raizes.jpg" style="width: 600px;" /></a></p>
 <p>Quando a equação é simples, o valor de <span class="math notranslate nohighlight">\(x\)</span> pode ser determinado analiticamente. Esse é o caso quando se escreve <span class="math notranslate nohighlight">\(x\)</span> explicitamente após a aplicação de operações matemáticas, ou quando uma fórmula conhecida (como a fórmula de Bháskara para resolução de equações quadráticas) pode ser usada para determinar o valor exato de <span class="math notranslate nohighlight">\(x\)</span>. Em muitas situações, no entanto, é impossível determinar analiticamente a raiz de uma equação.</p>
 <p>Por exemplo, é relativamente fácil obter analiticamente as raízes das equações</p>
@@ -474,7 +474,7 @@ Em termodinâmica, sob determinadas condições, a relação entre o calor <span
 <div class="math notranslate nohighlight">
 \[ Q = nR \left[ A (T_f-T_i)+ \frac{B}{2}(T_f^2-T_i^2) + \frac{C}{3}(T_f^3-T_i^3) \right].\]</div>
 <p>Para o gás metano tem-se <span class="math notranslate nohighlight">\(R=8,314 J/mol.K\)</span>, <span class="math notranslate nohighlight">\(A=1,702\)</span>, <span class="math notranslate nohighlight">\(B=9,081 \times 10^{-3}K^{-1}\)</span>, <span class="math notranslate nohighlight">\(C=-2,164 \times 10^{-6} K^{-2}\)</span>.</p>
-<p>Considere o problema de calcular a temperatura final <span class="math notranslate nohighlight">\(T_f\)</span> se <span class="math notranslate nohighlight">\(20 kJ\)</span> de energia que é absorvido pelo gás, supondo estar contido em uma uma câmara com <span class="math notranslate nohighlight">\(n=2 mol\)</span> de metano a temperatura <span class="math notranslate nohighlight">\(T_i = 300 K\)</span>.</p>
+<p>Considere o problema de calcular a temperatura final <span class="math notranslate nohighlight">\(T_f\)</span> se <span class="math notranslate nohighlight">\(20 kJ\)</span> de energia forem absorvidos pelo gás, supondo estar contido em uma câmara com <span class="math notranslate nohighlight">\(n=2 mol\)</span> de metano a temperatura <span class="math notranslate nohighlight">\(T_i = 300 K\)</span>.</p>
 <p><strong>Exemplo 2.1.2:</strong>
 A área do segmento <span class="math notranslate nohighlight">\(A_S\)</span> de um círculo de raio <span class="math notranslate nohighlight">\(r\)</span> (ver figura abaixo) é dada por <span class="math notranslate nohighlight">\(A_S=\frac{1}{2}r^2(\theta-\operatorname{sen}\theta).\)</span></p>
 <p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/circulo_de_raio_r.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/circulo_de_raio_r.png" style="width: 260px;" /></a></p>
@@ -494,8 +494,8 @@ A área do segmento <span class="math notranslate nohighlight">\(A_S\)</span> de
 <p>Observe que poderíamos ter multiplicado ambos os lados da equação por <span class="math notranslate nohighlight">\(\frac{3}{\pi}\)</span>, o que nos daria</p>
 <div class="math notranslate nohighlight">
 \[d^3-30d^2+2552=0\]</div>
-<p>que é uma equação mais precisa, uma vez que não tivemos que usar aproximações, no entanto esse tipo de simplificaçao requer manipular o número <span class="math notranslate nohighlight">\(\pi\)</span> como um símbolo. Veremos que frequentemente soluções numéricas geral soluções aproximadas</p>
-<p><strong>Exemplo 2.1.4:</strong> Podemos utilizar uma abordagem numérica para obter soluções aproximadas de equações, vejamos por exemplo a equação <span class="math notranslate nohighlight">\(f(d) = 1.047d^3-31.415d^2+2672.369\)</span> do exemplo descrito anteriormente. Dos dados do problema, podemos inferir que a solução é um número entre 0 e 20, então, calculamos valores da função nesse intervalo e tentar encontrar uma aproximação. Buscamos o valor de <span class="math notranslate nohighlight">\(d\)</span> que anula a função <span class="math notranslate nohighlight">\(f\)</span>, então, observando os resultados na tabera abaixo, podemos concluir que a solução é um número entre 11 e 12 cm pois é o intervalo onde a função muda de sinal.</p>
+<p>que é uma equação mais precisa, uma vez que não tivemos que usar aproximações, no entanto esse tipo de simplificação requer manipular o número <span class="math notranslate nohighlight">\(\pi\)</span> como um símbolo. Veremos que frequentemente soluções numéricas geram soluções aproximadas</p>
+<p><strong>Exemplo 2.1.4:</strong> Podemos utilizar uma abordagem numérica para obter soluções aproximadas de equações, vejamos por exemplo a equação <span class="math notranslate nohighlight">\(f(d) = 1.047d^3-31.415d^2+2672.369\)</span> do exemplo descrito anteriormente. Dos dados do problema, podemos inferir que a solução é um número entre 0 e 20, então, calculamos valores da função nesse intervalo e tentar encontrar uma aproximação. Buscamos o valor de <span class="math notranslate nohighlight">\(d\)</span> que anula a função <span class="math notranslate nohighlight">\(f\)</span>, então, observando os resultados na tabela abaixo, podemos concluir que a solução é um número entre 11 e 12 cm pois é o intervalo onde a função muda de sinal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
@@ -583,11 +583,11 @@ f( 12.0 )= -42.175
 <li><p><strong>Refinamento da aproximação:</strong> consiste em reduzir sucessivamente o intervalo que contém a raiz até que a precisão desejada seja alcançada.</p></li>
 </ol>
 <p>Para isolar as raízes de uma função, podemos utilizar métodos gráficos ou avaliar a função em diferentes pontos do domínio, identificando intervalos nos quais ocorre mudança de sinal.</p>
-<section id="isolamento-da-raiz-localizacao-por-metodos-metodos-graficos">
-<h2>Isolamento da raiz: Localização por métodos métodos gráficos<a class="headerlink" href="#isolamento-da-raiz-localizacao-por-metodos-metodos-graficos" title="Link para este cabeçalho">#</a></h2>
-<p>Graficamente as raízes da equação <span class="math notranslate nohighlight">\(f(x)=0\)</span> (ou zeros da função <span class="math notranslate nohighlight">\(f\)</span> correspondem aos pontos onde o gráfico de <span class="math notranslate nohighlight">\(f\)</span> intercepta o eixo <span class="math notranslate nohighlight">\(x\)</span>. Na figura abaixo, a função <span class="math notranslate nohighlight">\(f\)</span> possui 5 zeros representados por <span class="math notranslate nohighlight">\(\overline{x}_1\)</span>, <span class="math notranslate nohighlight">\(\overline{x}_2\)</span>, <span class="math notranslate nohighlight">\(\overline{x}_3\)</span>, <span class="math notranslate nohighlight">\(\overline{x}_4\)</span> e <span class="math notranslate nohighlight">\(\overline{x}_5\)</span>.</p>
+<section id="isolamento-da-raiz-localizacao-por-metodos-graficos">
+<h2>Isolamento da raiz: Localização por métodos gráficos<a class="headerlink" href="#isolamento-da-raiz-localizacao-por-metodos-graficos" title="Link para este cabeçalho">#</a></h2>
+<p>Graficamente as raízes da equação <span class="math notranslate nohighlight">\(f(x)=0\)</span> (ou zeros da função <span class="math notranslate nohighlight">\(f\)</span>) correspondem aos pontos onde o gráfico de <span class="math notranslate nohighlight">\(f\)</span> intercepta o eixo <span class="math notranslate nohighlight">\(x\)</span>. Na figura abaixo, a função <span class="math notranslate nohighlight">\(f\)</span> possui 5 zeros representados por <span class="math notranslate nohighlight">\(\overline{x}_1\)</span>, <span class="math notranslate nohighlight">\(\overline{x}_2\)</span>, <span class="math notranslate nohighlight">\(\overline{x}_3\)</span>, <span class="math notranslate nohighlight">\(\overline{x}_4\)</span> e <span class="math notranslate nohighlight">\(\overline{x}_5\)</span>.</p>
 <p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/localizacao.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/localizacao.png" style="width: 350px;" /></a></p>
-<p>Nem sempre é fácil esboçar o gráfico de uma função sem a ajuda de um computador. Em muitos casos é conveniente rescrever a equação <span class="math notranslate nohighlight">\(f(x)=0\)</span> numa forma equivamente <span class="math notranslate nohighlight">\(f_1(x)=f_2(x)\)</span> e esboçar os gráficos de <span class="math notranslate nohighlight">\(f_1\)</span> e <span class="math notranslate nohighlight">\(f_2\)</span> para verificar onde eles se interceptam. Outra abordagem seria atribuir valores arbitrários para a variável <span class="math notranslate nohighlight">\(x\)</span> e encontrar um par <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> tal que <span class="math notranslate nohighlight">\(f(a)\cdot f(b)&lt;0\)</span>.</p>
+<p>Nem sempre é fácil esboçar o gráfico de uma função sem a ajuda de um computador. Em muitos casos é conveniente reescrever a equação <span class="math notranslate nohighlight">\(f(x)=0\)</span> numa forma equivalente <span class="math notranslate nohighlight">\(f_1(x)=f_2(x)\)</span> e esboçar os gráficos de <span class="math notranslate nohighlight">\(f_1\)</span> e <span class="math notranslate nohighlight">\(f_2\)</span> para verificar onde eles se interceptam. Outra abordagem seria atribuir valores arbitrários para a variável <span class="math notranslate nohighlight">\(x\)</span> e encontrar um par <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> tal que <span class="math notranslate nohighlight">\(f(a)\cdot f(b)&lt;0\)</span>.</p>
 <p><strong>Exemplo 2.1.6:</strong></p>
 <p>A equação <span class="math notranslate nohighlight">\(f(x)=e^x-\operatorname{sen}(x)-2=0\)</span> pode ser escrita como <span class="math notranslate nohighlight">\(e^x=senx+2\)</span> então, esboçando os gráficos de <span class="math notranslate nohighlight">\(f_1(x)=e^x\)</span> e <span class="math notranslate nohighlight">\(f_2(x)=senx+2\)</span>, observamos que
 a raiz procurada está entre  <span class="math notranslate nohighlight">\(0.5\)</span> e <span class="math notranslate nohighlight">\(1.5\)</span>, como pode ser visto no gráfico a seguir.</p>
@@ -651,7 +651,7 @@ f(2.0) = 4.4798
 f(2.5) = 9.5840 
 </pre></div>
 </div>
-<p>Como <span class="math notranslate nohighlight">\(f(1.0) f(1.5)&lt;0\)</span>, podemos concluir que existe pelo menos uma raíz entre <span class="math notranslate nohighlight">\(1.0\)</span> e <span class="math notranslate nohighlight">\(1.5\)</span>.</p>
+<p>Como <span class="math notranslate nohighlight">\(f(1.0) f(1.5)&lt;0\)</span>, podemos concluir que existe pelo menos uma raiz entre <span class="math notranslate nohighlight">\(1.0\)</span> e <span class="math notranslate nohighlight">\(1.5\)</span>.</p>
 <p>Para plotar apenas o gráfico de <span class="math notranslate nohighlight">\(f(x)=e^x - \operatorname{sen}(x) -2\)</span>, com <span class="math notranslate nohighlight">\(0 \leq x \leq 2.5\)</span>, podemos usar o seguinte script:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -825,8 +825,7 @@ P(-3)=-8 &amp; P^{(1)}(-3)=14 &amp; P^{(2)}(-3)=-14 &amp; P^{(3)}(-3)=6
 N(-3,3)=3-2 k, \quad k=0,1
 \end{gathered}
 \end{split}\]</div>
-<p>Portanto, temos uma ou três raízes no intervalo
-Pela regra de sinais de Descartes, observamos que a equação possui uma raiz positiva e, portanto, a equação pode ter duas raízes no intervalo <span class="math notranslate nohighlight">\((-3,0)\)</span> ou não ter nenhuma raiz real negativa.</p>
+<p>Portanto, temos uma ou três raízes no intervalo. Pela regra de sinais de Descartes, observamos que a equação possui uma raiz positiva e, portanto, a equação pode ter duas raízes no intervalo <span class="math notranslate nohighlight">\((-3,0)\)</span> ou não ter nenhuma raiz real negativa.</p>
 </section>
 <section id="exercicios">
 <h2>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
@@ -948,7 +947,7 @@ Pela regra de sinais de Descartes, observamos que a equação possui uma raiz po
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#isolamento-da-raiz-localizacao-por-metodos-metodos-graficos">Isolamento da raiz: Localização por métodos métodos gráficos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#isolamento-da-raiz-localizacao-por-metodos-graficos">Isolamento da raiz: Localização por métodos gráficos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#localizacao-de-raizes-de-polinomios">Localização de raízes de polinômios</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-localizacao-de-raizes-no-circulo">Teorema: Localização de raízes no círculo</a></li>
 </ul>
@@ -980,7 +979,7 @@ De Tiago M. Buriol
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright Universidade Federal de Santa Maria.
       <br/>
     
   </p>
