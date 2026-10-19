@@ -16,6 +16,9 @@ Uma versão online, em HTML, contendo todos os exemplos e código, permitindo "c
 :width: 150px
 :align: center
 ```
+
+**Nota sobre as fontes.** Estas notas foram elaboradas a partir da experiência do autor com a disciplina MTM1013 – Métodos Numéricos e Computacionais, ministrada nos cursos de Matemática – Bacharelado e Licenciatura da UFSM. Seu conteúdo baseia-se na bibliografia da disciplina, em especial em Chapra e Canale, *Métodos Numéricos para Engenharia*, Burden e Faires, *Análise Numérica*, e Arenales e Darezzo, *Cálculo Numérico: Aprendizagem com Apoio de Software*, cuja leitura se recomenda como complemento. A organização, a redação, os exemplos e os exercícios são do autor, exceto quando indicado no texto. Trechos, exercícios ou figuras adaptados de outras obras trazem a indicação da fonte. Nas seções em que a exposição segue de perto uma obra específica, isso é informado no início da seção.
+
 ---
 ```{rubric} Como usar os notebooks Jupyter
 ```
