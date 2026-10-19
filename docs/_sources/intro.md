@@ -38,4 +38,4 @@ Os notebooks podem também ser executados diretamente no navegador via Binder ou
 
 ## Licença
 
-Este material está disponível sob a licença [MIT](https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/LICENSE).
+O texto desta obra é distribuído sob a licença [Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br), e os códigos-fonte, sob a licença [MIT](https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/LICENSE). Exercícios, exemplos e figuras de outras obras, identificados no texto pela indicação da fonte, não estão cobertos por essas licenças e permanecem sob os direitos de seus respectivos titulares.

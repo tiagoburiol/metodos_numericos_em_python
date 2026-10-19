@@ -153,9 +153,13 @@ sphinx:
           \small
           \noindent © 2026 Tiago M. Buriol.\par
           \medskip
-          \noindent Este material é distribuído sob a licença MIT. É permitido
-          copiar, distribuir e adaptar o conteúdo, desde que mantido este
-          aviso de direitos autorais.\par
+          \noindent O texto desta obra é distribuído sob a licença Creative
+          Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional
+          (CC BY-NC-SA 4.0), e os códigos-fonte, sob a licença MIT.
+          Exercícios, exemplos e figuras de outras obras, identificados no
+          texto pela indicação da fonte, não estão cobertos por essas
+          licenças e permanecem sob os direitos de seus respectivos
+          titulares.\par
           \medskip
           \noindent Versão online, com todos os exemplos e códigos:\\
           \url{https://tiagoburiol.github.io/metodos_numericos_em_python/}\par

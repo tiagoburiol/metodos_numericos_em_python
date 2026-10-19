@@ -1,6 +1,28 @@
+Caderno Didático de Métodos Numéricos em Python
+Copyright (c) 2024-2026 Tiago M. Buriol
+
+Este repositório usa duas licenças:
+
+1. Texto, figuras e demais conteúdos didáticos (inclusive o texto dos
+   notebooks e o livro em PDF e HTML): licença Creative Commons
+   Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional
+   (CC BY-NC-SA 4.0).
+   Resumo: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br
+   Texto legal: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.pt
+
+2. Códigos-fonte (células de código dos notebooks e scripts em Python):
+   licença MIT, reproduzida abaixo.
+
+Materiais de terceiros: exercícios, exemplos e figuras de outras obras,
+identificados no texto pela indicação da fonte, não estão cobertos por
+essas licenças e permanecem sob os direitos de seus respectivos
+titulares.
+
+--------------------------------------------------------------------------
+
 MIT License
 
-Copyright (c) 2024 Tiago Buriol
+Copyright (c) 2024-2026 Tiago M. Buriol
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
