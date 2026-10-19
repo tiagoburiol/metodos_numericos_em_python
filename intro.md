@@ -6,7 +6,7 @@
 ```{rubric} Apresentação
 ```
 
-Este caderno didático apresenta o conteúdo típico de cursos de **cálculo numérico** e **métodos numéricos computacionais**, em nível de graduação, com ênfase na aplicação e implementação, em **Python**, de métodos para a soluções numéricas de problemas comuns às ciências exatas.
+Este caderno didático apresenta o conteúdo típico de cursos de **cálculo numérico** e **métodos numéricos computacionais**, em nível de graduação e de mestrado profissional, com ênfase na aplicação e implementação, em **Python**, de métodos para a soluções numéricas de problemas comuns às ciências exatas.
 
 O material foi desenvolvido para ser utilizado em cursos de graduação da **Universidade Federal de Santa Maria (UFSM)**, particularmente nos cursos de engenharia e matemática, e também no Mestrado Profissional em Matemática (PROFMAT). Pressupõe-se que o leitor tenha familiaridade com cálculo diferencial e integral, álgebra linear e programação em Python.
 
