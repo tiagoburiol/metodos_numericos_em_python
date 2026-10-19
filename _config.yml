@@ -4,7 +4,7 @@
 title: Caderno didático de Métodos Numéricos em Python
 author: Tiago M. Buriol
 copyright: Universidade Federal de Santa Maria
-logo: capa.png
+logo: capa_web.jpg  # versão leve da capa para o site
 
 # Arquivos e pastas que não fazem parte do livro (rascunhos, versões
 # antigas, saídas de build e o próprio site publicado em docs/)
