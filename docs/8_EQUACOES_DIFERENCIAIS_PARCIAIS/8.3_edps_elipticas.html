@@ -156,8 +156,8 @@
       
     
     
-    <img src="../_static/capa.png" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
-    <script>document.write(`<img src="../_static/capa.png" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
+    <img src="../_static/capa_web.jpg" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
+    <script>document.write(`<img src="../_static/capa_web.jpg" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
   
   
 </a></div>
@@ -238,9 +238,6 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">8.3 EDPs Elípticas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -439,7 +436,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucao-numerica-de-edps-elipticas-equacao-de-poisson">Resolução numérica de EDPs elípticas: equação de Poisson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-malha-e-o-estencil-de-cinco-pontos">A malha e o estêncil de cinco pontos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#montagem-do-sistema-linear">Montagem do sistema linear</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-iterativo-de-gauss-seidel">Método iterativo de Gauss-Seidel</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sobrerelaxacao-sor">Sobrerelaxação (SOR)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-e-fluxo-de-calor">Gradiente e fluxo de calor</a></li>
@@ -458,415 +456,233 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="edps-elipticas">
 <h1>8.3 EDPs Elípticas<a class="headerlink" href="#edps-elipticas" title="Link para este cabeçalho">#</a></h1>
-<p>Consideremos uma EDP geral de segunda ordem em duas variáveis independentes <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>, que é escrita como</p>
+<p>Equações elípticas descrevem situações de <strong>equilíbrio</strong>: a distribuição de temperatura em uma placa depois que o regime transiente terminou, o potencial elétrico em uma região sem cargas livres ou a deflexão de uma membrana sob carga estática. Nesses problemas não há variável tempo, e o valor da solução em cada ponto depende do que é imposto em toda a fronteira do domínio. Na Seção 8.2 vimos que uma EDP linear de segunda ordem é elíptica quando <span class="math notranslate nohighlight">\(B^2-4AC&lt;0\)</span>; o exemplo mais importante é o operador laplaciano.</p>
+<p>Nesta seção vamos tratar a <strong>equação de Poisson</strong> em um retângulo <span class="math notranslate nohighlight">\(\Omega=[a,b]\times[c,d]\)</span>,</p>
 <div class="math notranslate nohighlight">
-\[A(x, y) \frac{\partial^2 u}{\partial x^2}+B(x, y) \frac{\partial^2 u}{\partial x \partial y}+C(x, y) \frac{\partial^2 u}{\partial y^2}=f\left(x, y, u, \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}\right)\]</div>
-<p>para</p>
+\[\frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2}=f(x,y), \qquad (x,y)\in\Omega, \tag{1}\]</div>
+<p>com o valor de <span class="math notranslate nohighlight">\(u\)</span> prescrito em toda a fronteira <span class="math notranslate nohighlight">\(\partial\Omega\)</span> (condição de Dirichlet):</p>
 <div class="math notranslate nohighlight">
-\[
-x_0 \leq x \leq x_f, y_0 \leq y \leq y_f
-\]</div>
-<p>com as condições de contorno dadas por</p>
+\[u(x,y)=g(x,y), \qquad (x,y)\in\partial\Omega. \tag{2}\]</div>
+<p>Quando <span class="math notranslate nohighlight">\(f\equiv 0\)</span>, a Eq. (1) é a <strong>equação de Laplace</strong>. Na condução de calor em regime permanente, por exemplo, <span class="math notranslate nohighlight">\(u\)</span> é a temperatura e <span class="math notranslate nohighlight">\(f=-q/k\)</span>, em que <span class="math notranslate nohighlight">\(q\)</span> é a taxa de geração interna de calor (em W/m³) e <span class="math notranslate nohighlight">\(k\)</span> é a condutividade térmica do material.</p>
+<section id="a-malha-e-o-estencil-de-cinco-pontos">
+<h2>A malha e o estêncil de cinco pontos<a class="headerlink" href="#a-malha-e-o-estencil-de-cinco-pontos" title="Link para este cabeçalho">#</a></h2>
+<p>Dividimos o intervalo <span class="math notranslate nohighlight">\([a,b]\)</span> em <span class="math notranslate nohighlight">\(n_x\)</span> subintervalos de comprimento <span class="math notranslate nohighlight">\(h_x=(b-a)/n_x\)</span> e o intervalo <span class="math notranslate nohighlight">\([c,d]\)</span> em <span class="math notranslate nohighlight">\(n_y\)</span> subintervalos de comprimento <span class="math notranslate nohighlight">\(h_y=(d-c)/n_y\)</span>, obtendo os nós</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{array}{ll}
-u\left(x, y_0\right)=b_{y 0}(x), &amp; u\left(x, y_f\right)=b_{y f}(x),  \\
-u\left(x_0, y\right)=b_{x 0}(y), &amp; \text{e} \quad u\left(x_f, y\right)=b_{x f}(y)
-\end{array}
-\end{split}\]</div>
-<p>As EDP elípticas são aquelas em que <span class="math notranslate nohighlight">\(B^2-4 A C&lt;0\)</span> e estāo associadas a estados de equilíbrio.</p>
-<p>Como exemplo, iremos tratar um tipo especial de equação elíptica chamada <strong>equação de Helmholtz</strong>, escrita como</p>
+\[x_i=a+i\,h_x,\quad i=0,1,\ldots,n_x, \qquad\qquad y_j=c+j\,h_y,\quad j=0,1,\ldots,n_y.\]</div>
+<p>Denotamos por <span class="math notranslate nohighlight">\(u_{i,j}\)</span> a aproximação de <span class="math notranslate nohighlight">\(u(x_i,y_j)\)</span> e escrevemos <span class="math notranslate nohighlight">\(f_{i,j}=f(x_i,y_j)\)</span>. Os nós com <span class="math notranslate nohighlight">\(i\in\{0,n_x\}\)</span> ou <span class="math notranslate nohighlight">\(j\in\{0,n_y\}\)</span> estão na fronteira, onde <span class="math notranslate nohighlight">\(u\)</span> é conhecido pela Eq. (2). Os <span class="math notranslate nohighlight">\((n_x-1)(n_y-1)\)</span> nós restantes são as incógnitas do problema.</p>
+<p><img alt="" src="../_images/estencil_cinco_pontos.png" /></p>
+<p>Figura 8.3.1 - Malha retangular e estêncil de cinco pontos em torno do nó <span class="math notranslate nohighlight">\((x_i,y_j)\)</span>.</p>
+<p>Em cada nó interno, aproximamos as derivadas segundas por diferenças centrais. Somando as expansões de Taylor</p>
 <div class="math notranslate nohighlight">
-\[\nabla^2 u(x, y)+g(x, y)\,u(x, y)=f(x, y)\]</div>
-<p>ou</p>
+\[u(x_i\pm h_x,y_j)=u \pm h_x\frac{\partial u}{\partial x}+\frac{h_x^2}{2}\frac{\partial^2 u}{\partial x^2}\pm\frac{h_x^3}{6}\frac{\partial^3 u}{\partial x^3}+\frac{h_x^4}{24}\frac{\partial^4 u}{\partial x^4}+\cdots,\]</div>
+<p>em que <span class="math notranslate nohighlight">\(u\)</span> e suas derivadas são calculadas em <span class="math notranslate nohighlight">\((x_i,y_j)\)</span>, os termos de ordem ímpar se cancelam e obtemos</p>
 <div class="math notranslate nohighlight">
-\[
-\frac{\partial^2 u(x, y)}{\partial x^2}+\frac{\partial^2 u(x, y)}{\partial y^2}
-+g(x, y)\,u(x, y) =f(x, y)
-\tag{1}
-\]</div>
-<p>sobre um domínio</p>
+\[\frac{\partial^2 u}{\partial x^2}(x_i,y_j)=\frac{u(x_{i+1},y_j)-2u(x_i,y_j)+u(x_{i-1},y_j)}{h_x^2}-\frac{h_x^2}{12}\frac{\partial^4 u}{\partial x^4}(\xi,y_j)\]</div>
+<p>para algum <span class="math notranslate nohighlight">\(\xi\in(x_{i-1},x_{i+1})\)</span>. O mesmo vale na direção <span class="math notranslate nohighlight">\(y\)</span>, com <span class="math notranslate nohighlight">\(h_y\)</span> no lugar de <span class="math notranslate nohighlight">\(h_x\)</span>. Substituindo essas aproximações na Eq. (1) e desprezando os termos de erro, chegamos às equações de diferenças finitas</p>
 <div class="math notranslate nohighlight">
-\[
-D=\left\{(x, y)\mid x_0 \leq x \leq x_f,\; y_0 \leq y \leq y_f\right\}
-\]</div>
-<p>com as seguintes condições de contorno:</p>
+\[\frac{u_{i+1,j}-2u_{i,j}+u_{i-1,j}}{h_x^2}+\frac{u_{i,j+1}-2u_{i,j}+u_{i,j-1}}{h_y^2}=f_{i,j}, \qquad i=1,\ldots,n_x-1,\quad j=1,\ldots,n_y-1. \tag{3}\]</div>
+<p>Cada equação envolve apenas o nó <span class="math notranslate nohighlight">\((x_i,y_j)\)</span> e seus quatro vizinhos, que formam o <strong>estêncil de cinco pontos</strong> da Figura 8.3.1. Como os termos desprezados são proporcionais a <span class="math notranslate nohighlight">\(h_x^2\)</span> e <span class="math notranslate nohighlight">\(h_y^2\)</span>, esperamos que o erro da solução numérica diminua como <span class="math notranslate nohighlight">\(h^2\)</span>: ao dividir o espaçamento por 2, o erro deve cair aproximadamente por 4.</p>
+<p>Quando <span class="math notranslate nohighlight">\(h_x=h_y=h\)</span>, a Eq. (3) assume a forma</p>
 <div class="math notranslate nohighlight">
-\[u(x_0,y) = b_{x0}(y), \quad u(x_f,y) = b_{xf}(y)
-\tag {2}\]</div>
-<p>e</p>
+\[u_{i+1,j}+u_{i-1,j}+u_{i,j+1}+u_{i,j-1}-4u_{i,j}=h^2 f_{i,j}.\]</div>
+<p>Para a equação de Laplace (<span class="math notranslate nohighlight">\(f=0\)</span>), isso diz que cada <span class="math notranslate nohighlight">\(u_{i,j}\)</span> é a média dos valores nos quatro vizinhos. É a versão discreta da propriedade do valor médio das funções harmônicas, e ajuda a entender por que a solução da equação de Laplace é sempre “suave” e não tem máximos nem mínimos no interior do domínio.</p>
+</section>
+<section id="montagem-do-sistema-linear">
+<h2>Montagem do sistema linear<a class="headerlink" href="#montagem-do-sistema-linear" title="Link para este cabeçalho">#</a></h2>
+<p>As Eqs. (3) formam um sistema linear <span class="math notranslate nohighlight">\(A\mathbf{u}=\mathbf{b}\)</span> com uma incógnita para cada nó interno. Para escrevê-lo, numeramos os nós internos percorrendo primeiro a direção <span class="math notranslate nohighlight">\(y\)</span>: o nó <span class="math notranslate nohighlight">\((i,j)\)</span> recebe o índice <span class="math notranslate nohighlight">\(k=(i-1)(n_y-1)+(j-1)\)</span>. Com essa ordenação, a matriz pode ser escrita de forma compacta com o <strong>produto de Kronecker</strong> <span class="math notranslate nohighlight">\(\otimes\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[ u(x,y_0) = b_{y0}(x), \quad u(x,y_f) = b_{yf}(x).\]</div>
-<p>A Equação (1) é chamada de <strong>equação de Poisson</strong> quando <span class="math notranslate nohighlight">\(g(x,y)=0\)</span> e é chamada de <strong>equação de Laplace</strong> quando <span class="math notranslate nohighlight">\(g(x,y)=0\)</span> e <span class="math notranslate nohighlight">\(f(x,y)=0\)</span>.</p>
-<p>Para aplicar o método das diferenças finitas, dividimos o domínio em <span class="math notranslate nohighlight">\(M_x\)</span> seções ao longo do eixo <span class="math notranslate nohighlight">\(x\)</span>, cada uma com comprimento</p>
-<div class="math notranslate nohighlight">
-\[
-\Delta x=\frac{x_f-x_0}{M_x},
-\]</div>
-<p>e em <span class="math notranslate nohighlight">\(M_y\)</span> seções ao longo do eixo <span class="math notranslate nohighlight">\(y\)</span>, cada uma com comprimento</p>
-<div class="math notranslate nohighlight">
-\[
-\Delta y=\frac{y_f-y_0}{M_y}.
-\]</div>
-<p>Em seguida, substituímos as derivadas de segunda ordem pela aproximação de diferença central de três pontos:</p>
-<div class="math notranslate nohighlight">
-\[
-\left.\frac{\partial^2 u(x,y)}{\partial x^2}\right|_{x_j,y_i}
-\cong \frac{u_{i,j+1}-2u_{i,j}+u_{i,j-1}}{\Delta x^2}
-\tag{3a}
-\]</div>
-<p>e</p>
-<div class="math notranslate nohighlight">
-\[
-\left.\frac{\partial^2 u(x,y)}{\partial y^2}\right|_{x_j,y_i}
-\cong
-\frac{u_{i+1,j}-2u_{i,j}+u_{i-1,j}}{\Delta y^2}
-\tag{3b}
-\]</div>
-<p>com <span class="math notranslate nohighlight">\(x_j=x_0+j\Delta x\)</span>, <span class="math notranslate nohighlight">\(y_i=y_0+i\Delta y\)</span> e <span class="math notranslate nohighlight">\(u_{i,j}=u(x_j,y_i)\)</span>.</p>
-<p>Assim, para cada ponto interno <span class="math notranslate nohighlight">\((x_j,y_i)\)</span>, com</p>
-<div class="math notranslate nohighlight">
-\[
-1 \leq i \leq M_y-1
-\quad \text{e} \quad
-1 \leq j \leq M_x-1,
-\]</div>
-<p>obtemos a equação de diferenças finitas</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{u_{i,j+1}-2u_{i,j}+u_{i,j-1}}{\Delta x^2}
-+
-\frac{u_{i+1,j}-2u_{i,j}+u_{i-1,j}}{\Delta y^2}
-+
-g_{i,j}u_{i,j}
-=f_{i,j}.
-\tag{4}
-\]</div>
-<p>onde</p>
-<div class="math notranslate nohighlight">
-\[
-u_{i,j}=u(x_j,y_i),
-\qquad
-f_{i,j}=f(x_j,y_i),
-\qquad
-g_{i,j}=g(x_j,y_i).
-\]</div>
-<p>Essas equações podem ser organizadas em um sistema de equações simultâneas em relação às</p>
-<div class="math notranslate nohighlight">
-\[
-(M_y-1)(M_x-1)
-\]</div>
-<p>variáveis</p>
-<div class="math notranslate nohighlight">
-\[
-\{
-u_{1,1}, u_{1,2}, \ldots, u_{1,M_x-1},
-u_{2,1}, \ldots, u_{2,M_x-1},
-\ldots,
-u_{M_y-1,1}, u_{M_y-1,2}, \ldots, u_{M_y-1,M_x-1}
-\}.
-\]</div>
-<p>Entretanto, trabalhar diretamente com esse sistema pode se tornar bastante complicado, especialmente quando <span class="math notranslate nohighlight">\(M_x\)</span> e <span class="math notranslate nohighlight">\(M_y\)</span> assumem valores grandes.</p>
-<p>Uma abordagem mais simples consiste em utilizar os métodos iterativos. Para isso, primeiro reescrevemos as equações e as condições de contorno na seguinte forma:</p>
-<div class="math notranslate nohighlight">
-\[
-u_{i,j}=
-r_y\left(u_{i,j+1}+u_{i,j-1}\right)
-+
-r_x\left(u_{i+1,j}+u_{i-1,j}\right)
-+
-r_{xy}\left(g_{i,j}u_{i,j}-f_{i,j}\right),
-\tag{5a}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-u_{i,0}=b_{x0}(y_i),
-\qquad
-u_{i,M_x}=b_{xf}(y_i),
-\qquad
-u_{0,j}=b_{y0}(x_j),
-\qquad
-u_{M_y,j}=b_{yf}(x_j).
-\tag{5b}
-\]</div>
-<p>onde</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\Delta y^2}{2(\Delta x^2+\Delta y^2)}=r_y,
-\qquad
-\frac{\Delta x^2}{2(\Delta x^2+\Delta y^2)}=r_x,
-\qquad
-\frac{\Delta x^2\Delta y^2}{2(\Delta x^2+\Delta y^2)}=r_{xy}.
-\tag{6}
-\]</div>
-<p>Como inicializamos esse algoritmo?</p>
-<p>Se não tivermos nenhum conhecimento prévio sobre a solução, é razoável utilizar a média dos valores de contorno como valores iniciais para <span class="math notranslate nohighlight">\(u_{i,j}\)</span>.</p>
-<section id="resolucao-numerica-de-edps-elipticas-equacao-de-poisson">
-<h2>Resolução numérica de EDPs elípticas: equação de Poisson<a class="headerlink" href="#resolucao-numerica-de-edps-elipticas-equacao-de-poisson" title="Link para este cabeçalho">#</a></h2>
-<p>O programa a seguir resolve a equação</p>
-<div class="math notranslate nohighlight">
-\[
-u_{xx}+u_{yy}+g(x, y)\,u =f(x, y)
-\]</div>
-<p>sobre um domínio
-$<span class="math notranslate nohighlight">\(
-D=\left\{(x, y)\mid x_0 \leq x \leq x_f,\; y_0 \leq y \leq y_f\right\}
-\)</span><span class="math notranslate nohighlight">\(
-com as seguintes condições de contorno:
-\)</span><span class="math notranslate nohighlight">\(u(x_0,y) = b_{x0}(y), \quad u(x_f,y) = b_{xf}(y)\)</span><span class="math notranslate nohighlight">\(
-e
-\)</span><span class="math notranslate nohighlight">\( u(x,y_0) = b_{y0}(x), \quad u(x,y_f) = b_{yf}(x).\)</span>$</p>
+\[A=\frac{1}{h_x^2}\,T_{n_x-1}\otimes I_{n_y-1}+\frac{1}{h_y^2}\,I_{n_x-1}\otimes T_{n_y-1}, \tag{4}\]</div>
+<p>em que <span class="math notranslate nohighlight">\(I_m\)</span> é a matriz identidade de ordem <span class="math notranslate nohighlight">\(m\)</span> e <span class="math notranslate nohighlight">\(T_m\)</span> é a matriz tridiagonal de ordem <span class="math notranslate nohighlight">\(m\)</span> com <span class="math notranslate nohighlight">\(-2\)</span> na diagonal principal e <span class="math notranslate nohighlight">\(1\)</span> nas diagonais vizinhas, que representa a segunda diferença em uma dimensão. Lembre que <span class="math notranslate nohighlight">\(P\otimes Q\)</span> é a matriz em blocos cujo bloco <span class="math notranslate nohighlight">\((r,s)\)</span> é <span class="math notranslate nohighlight">\(p_{rs}\,Q\)</span>. O primeiro termo da Eq. (4) acopla cada nó a seus vizinhos na direção <span class="math notranslate nohighlight">\(x\)</span>, e o segundo, aos vizinhos na direção <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>O vetor <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> contém os valores <span class="math notranslate nohighlight">\(f_{i,j}\)</span>, corrigidos nos nós vizinhos à fronteira: quando um dos quatro vizinhos de <span class="math notranslate nohighlight">\((x_i,y_j)\)</span> está na fronteira, seu valor é conhecido e passa para o lado direito da equação. Por exemplo, para <span class="math notranslate nohighlight">\(i=1\)</span>, o termo <span class="math notranslate nohighlight">\(u_{0,j}/h_x^2\)</span> é subtraído de <span class="math notranslate nohighlight">\(f_{1,j}\)</span>.</p>
+<p>A matriz <span class="math notranslate nohighlight">\(A\)</span> tem ordem <span class="math notranslate nohighlight">\((n_x-1)(n_y-1)\)</span>, mas no máximo cinco elementos não nulos por linha. Em uma malha com <span class="math notranslate nohighlight">\(n_x=n_y=100\)</span>, são cerca de <span class="math notranslate nohighlight">\(10^4\)</span> incógnitas e <span class="math notranslate nohighlight">\(5\times 10^4\)</span> elementos não nulos, em uma matriz com quase <span class="math notranslate nohighlight">\(10^8\)</span> posições. Por isso, armazenamos <span class="math notranslate nohighlight">\(A\)</span> no formato <strong>esparso</strong> do módulo <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code>, que guarda apenas os elementos não nulos, e resolvemos o sistema com <code class="docutils literal notranslate"><span class="pre">scipy.sparse.linalg.spsolve</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.sparse.linalg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">spla</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Para visualizar a estrutura da matriz, vamos montá-la para uma malha pequena, com <span class="math notranslate nohighlight">\(n_x=5\)</span>, <span class="math notranslate nohighlight">\(n_y=6\)</span> e <span class="math notranslate nohighlight">\(h_x=h_y=1\)</span>, e marcar os elementos não nulos com a função <code class="docutils literal notranslate"><span class="pre">plt.spy</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">poisson</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">bx0</span><span class="p">,</span> <span class="n">bxf</span><span class="p">,</span> <span class="n">by0</span><span class="p">,</span> <span class="n">byf</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">Mx</span><span class="p">,</span> <span class="n">My</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">MaxIter</span><span class="p">):</span>
-    
-    <span class="n">x0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">yf</span> <span class="o">=</span> <span class="n">D</span>  <span class="c1">#Com D = [x0, xf, y0, yf]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">segunda_diferenca</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Matriz tridiagonal de ordem n com (1, -2, 1) nas diagonais.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">diags</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
-    <span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">xf</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span> <span class="o">/</span> <span class="n">Mx</span>
-    <span class="n">dy</span> <span class="o">=</span> <span class="p">(</span><span class="n">yf</span> <span class="o">-</span> <span class="n">y0</span><span class="p">)</span> <span class="o">/</span> <span class="n">My</span>
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">segunda_diferenca</span><span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">sp</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">ny</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+     <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">segunda_diferenca</span><span class="p">(</span><span class="n">ny</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
 
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">Mx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">yf</span><span class="p">,</span> <span class="n">My</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ordem da matriz: </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, elementos não nulos: </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">nnz</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="n">Mx1</span> <span class="o">=</span> <span class="n">Mx</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="n">My1</span> <span class="o">=</span> <span class="n">My</span> <span class="o">+</span> <span class="mi">1</span>
-
-    <span class="c1"># Inicializa matriz solução</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">My1</span><span class="p">,</span> <span class="n">Mx1</span><span class="p">))</span>
-
-    <span class="c1"># -----------------------------</span>
-    <span class="c1"># Condições de contorno</span>
-    <span class="c1"># -----------------------------</span>
-
-    <span class="c1"># esquerda/direita</span>
-    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">My1</span><span class="p">):</span>
-        <span class="n">u</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">bx0</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
-        <span class="n">u</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">Mx</span><span class="p">]</span> <span class="o">=</span> <span class="n">bxf</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
-
-    <span class="c1"># inferior/superior</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Mx1</span><span class="p">):</span>
-        <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">by0</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-        <span class="n">u</span><span class="p">[</span><span class="n">My</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">byf</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-
-    <span class="c1"># -----------------------------</span>
-    <span class="c1"># Inicialização interna</span>
-    <span class="c1"># -----------------------------</span>
-    <span class="n">sum_of_bv</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">My</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">My</span><span class="p">,</span> <span class="n">Mx</span><span class="p">])</span> <span class="o">+</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">Mx</span><span class="p">])</span> <span class="o">+</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">My</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">Mx</span><span class="p">])</span>
-    <span class="p">)</span>
-
-    <span class="n">avg</span> <span class="o">=</span> <span class="n">sum_of_bv</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">Mx</span> <span class="o">+</span> <span class="n">My</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
-
-    <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">My</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">Mx</span><span class="p">]</span> <span class="o">=</span> <span class="n">avg</span>
-
-    <span class="c1"># -----------------------------</span>
-    <span class="c1"># Matrizes F e G</span>
-    <span class="c1"># -----------------------------</span>
-    <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">My1</span><span class="p">,</span> <span class="n">Mx1</span><span class="p">))</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">My1</span><span class="p">,</span> <span class="n">Mx1</span><span class="p">))</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">My1</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Mx1</span><span class="p">):</span>
-            <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-    <span class="c1"># -----------------------------</span>
-    <span class="c1"># Constantes</span>
-    <span class="c1"># -----------------------------</span>
-    <span class="n">dx2</span> <span class="o">=</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">dx</span>
-    <span class="n">dy2</span> <span class="o">=</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span>
-
-    <span class="n">dxy2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">dx2</span> <span class="o">+</span> <span class="n">dy2</span><span class="p">)</span>
-
-    <span class="n">rx</span> <span class="o">=</span> <span class="n">dx2</span> <span class="o">/</span> <span class="n">dxy2</span>
-    <span class="n">ry</span> <span class="o">=</span> <span class="n">dy2</span> <span class="o">/</span> <span class="n">dxy2</span>
-    <span class="n">rxy</span> <span class="o">=</span> <span class="n">rx</span> <span class="o">*</span> <span class="n">dy2</span>
-
-    <span class="c1"># -----------------------------</span>
-    <span class="c1"># Iteração de Gauss-Seidel</span>
-    <span class="c1"># -----------------------------</span>
-    <span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MaxIter</span><span class="p">):</span>
-
-        <span class="n">u0</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Mx</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">My</span><span class="p">):</span>
-
-                <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="n">ry</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
-                    <span class="o">+</span> <span class="n">rx</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
-                    <span class="o">+</span> <span class="n">rxy</span> <span class="o">*</span> <span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
-                <span class="p">)</span>
-
-        <span class="n">erro</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">u0</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">erro</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Convergência atingida em </span><span class="si">{</span><span class="n">itr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> iterações.&quot;</span><span class="p">)</span>
-            <span class="k">break</span>
-
-    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Exemplo 8.3.1:</strong> Equação de Laplace: Distribuição de Temperatura em Regime Permanente</p>
-<p>Considere a equação de Laplace</p>
-<div class="math notranslate nohighlight">
-\[\nabla^2 u(x,y)=
-\frac{\partial^2 u(x,y)}{\partial x^2}
-+
-\frac{\partial^2 u(x,y)}{\partial y^2}
-=0,
-\quad
-\text{para }
-0 \leq x \leq 4,
-\;
-0 \leq y \leq 4.
-\]</div>
-<p>com as condições de contorno</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{array}{lll}
-u(0,y)=e^y-\cos y,
-&amp;
-u(4,y)=e^y\cos 4-e^4\cos y,
-\\
-u(x,0)=\cos x-e^x,
-&amp;
-u(x,4)=e^4\cos x-e^x\cos 4.
-\end{array}
-\end{split}\]</div>
-<p>O que obtemos ao resolver essa equação é a função</p>
-<div class="math notranslate nohighlight">
-\[
-u(x,y),
-\]</div>
-<p>que descreve a distribuição de temperatura sobre uma placa quadrada com lados de comprimento igual a 4 unidades (Figura abaixo).</p>
-<p>Agora, consideremos as chamadas <strong>condições de contorno de Neumann</strong>, descritas por</p>
-<div class="math notranslate nohighlight">
-\[
-\left.
-\frac{\partial u(x,y)}{\partial x}
-\right|_{x=x_0}
-=b_{x_0}'(y),
-\quad
-\text{para }
-x=x_0
-\;
-(\text{contorno do lado esquerdo}).
-\]</div>
-<p><img alt="" src="../_images/fig01_EDPs_Elipticas.png" /></p>
-<p>Substituindo a derivada de primeira ordem na fronteira do lado esquerdo <span class="math notranslate nohighlight">\(\left(x=x_0\right)\)</span> por sua aproximação de diferença central de três pontos</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{u_{i, 1}-u_{i,-1}}{2 \Delta x} \approx b_{x_0}^{\prime}\left(y_i\right), \quad u_{i,-1} \approx u_{i, 1}-2 b_{x_0}^{\prime}\left(y_i\right) \Delta x \quad \text{para} i=1,2, \ldots, M_y-1 
-\]</div>
-<p>e então substituindo essa restrição na Eq. (5a) nos pontos de fronteira, temos</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{aligned}
-u_{i, 0}= &amp; r_y\left(u_{i, 1}+u_{i,-1}\right)+r_x\left(u_{i+1,0}+u_{i-1,0}\right)+r_{x y}\left(g_{i, 0} u_{i, 0}-f_{i, 0}\right) \\
-= &amp; r_y\left(u_{i, 1}+u_{i, 1}-2 b_{x_0}^{\prime}\left(y_i\right) \Delta x\right)+r_x\left(u_{i+1,0}+u_{i-1,0}\right)+r_{x y}\left(g_{i, 0} u_{i, 0}-f_{i, 0}\right) \\
-= &amp; 2 r_y u_{i, 1}+r_x\left(u_{i+1,0}+u_{i-1,0}\right)+r_{x y}\left(g_{i, 0} u_{i, 0}-f_{i, 0}-2 b_{x_0}^{\prime}\left(y_i\right) / \Delta x\right)
-\end{aligned}
-\end{split}\]</div>
-<p>para <span class="math notranslate nohighlight">\(i=1,2, \ldots, M_y-1\)</span>.</p>
-<p>Se a condição de contorno no lado inferior ( <span class="math notranslate nohighlight">\(y=y_0\)</span> ) também for do tipo de Neumann, então precisamos escrever equações semelhantes para <span class="math notranslate nohighlight">\(j=1,2, \ldots, M_x-1\)</span></p>
-<div class="math notranslate nohighlight">
-\[
-u_{0, j}=r_y\left(u_{0, j+1}+u_{0, j-1}\right)+2 r_x u_{1, j}+r_{x y}\left(g_{0, j} u_{0, j}-f_{0, j}-2 b_{y_0}^{\prime}\left(x_j\right) / \Delta y\right)
-\]</div>
-<p>e, adicionalmente, para o ponto de canto inferior esquerdo <span class="math notranslate nohighlight">\(\left(x_0, y_0\right)\)</span>,</p>
-<div class="math notranslate nohighlight">
-\[
-u_{0,0}=2\left(r_y u_{0,1}+r_x u_{1,0}\right)+r_{x y}\left(g_{0,0} u_{0,0}-f_{0,0}-2\left(b_{x_0}^{\prime}\left(y_0\right) / \Delta x+2 b_{y_0}^{\prime}\left(x_0\right) / \Delta y\right)\right).
-\]</div>
-<p>Agora podemos usar o programa para resolver o problema do Exemplo 8.3.1 fazendo:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">exp</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resolve</span>
-<span class="n">U</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>                            <span class="c1">#f</span>
-                  <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>                            <span class="c1">#g</span>
-                  <span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>                   <span class="c1">#bx0</span>
-                  <span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>   <span class="c1">#bxf</span>
-                  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>                 <span class="c1">#by0</span>
-                  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">exp</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>   <span class="c1">#byf</span>
-                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>                              <span class="c1">#D = [x0, xf, y0, yf]</span>
-                  <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span>                                    <span class="c1">#Mx, My</span>
-                  <span class="mf">1e-4</span><span class="p">,</span>                                      <span class="c1">#tol</span>
-                  <span class="mi">500</span><span class="p">,</span>                                      <span class="c1">#MaxIter</span>
-                 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Convergência atingida em 141 iterações.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
-
-<span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Temperatura&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/911201d9d0c04a45c10e4cd2fc20e7a35b6f49dda7d423dbe1d9ba21f2a546b0.png" src="../_images/911201d9d0c04a45c10e4cd2fc20e7a35b6f49dda7d423dbe1d9ba21f2a546b0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;u(x,y)&#39;</span><span class="p">)</span>
-
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Elementos não nulos de A&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2f6685216bfc1a51621b3b02555b1e7fbf09c61035fefe79bf8e8e13a09195c3.png" src="../_images/2f6685216bfc1a51621b3b02555b1e7fbf09c61035fefe79bf8e8e13a09195c3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ordem da matriz: 20, elementos não nulos: 82
+</pre></div>
+</div>
+<img alt="../_images/d653e06f5cd530676188ace76ae86e3a1b28a24908152f879a38da0c0bff3e92.png" src="../_images/d653e06f5cd530676188ace76ae86e3a1b28a24908152f879a38da0c0bff3e92.png" />
 </div>
 </div>
+<p>A matriz é <strong>tridiagonal por blocos</strong>: os blocos da diagonal, de ordem <span class="math notranslate nohighlight">\(n_y-1=5\)</span>, são tridiagonais e ligam cada nó aos vizinhos na direção <span class="math notranslate nohighlight">\(y\)</span>; os blocos imediatamente acima e abaixo são múltiplos da identidade e ligam os vizinhos na direção <span class="math notranslate nohighlight">\(x\)</span>. Além disso, <span class="math notranslate nohighlight">\(A\)</span> é simétrica e <span class="math notranslate nohighlight">\(-A\)</span> é definida positiva, o que garante que o sistema tem solução única.</p>
+<p>A rotina a seguir reúne todos esses passos. As funções <code class="docutils literal notranslate"><span class="pre">f</span></code> e <code class="docutils literal notranslate"><span class="pre">g</span></code> devem aceitar arrays do NumPy, e <code class="docutils literal notranslate"><span class="pre">g</span></code> é avaliada apenas nos nós da fronteira. A solução é devolvida em uma matriz <code class="docutils literal notranslate"><span class="pre">U</span></code> em que <code class="docutils literal notranslate"><span class="pre">U[i,</span> <span class="pre">j]</span></code> aproxima <span class="math notranslate nohighlight">\(u(x_i,y_j)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">poisson_dirichlet</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Resolve u_xx + u_yy = f(x, y) no retângulo [a, b] x [c, d], com</span>
+<span class="sd">    u = g(x, y) na fronteira, pelo método de diferenças finitas com o</span>
+<span class="sd">    estêncil de cinco pontos.</span>
+
+<span class="sd">    Retorna os vetores x e y dos nós e a matriz U, com U[i, j] ~ u(x[i], y[j]).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ny</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+    <span class="n">hx2</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">hy2</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="c1"># valores prescritos na fronteira</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ny</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">U</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">U</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">U</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># matriz do sistema, Eq. (4)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">segunda_diferenca</span><span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">sp</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">ny</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">hx2</span>
+         <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">segunda_diferenca</span><span class="p">(</span><span class="n">ny</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">hy2</span><span class="p">)</span>
+
+    <span class="c1"># lado direito: f nos nós internos menos a contribuição da fronteira</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ny</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-=</span> <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">hx2</span>
+    <span class="n">B</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-=</span> <span class="n">U</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">hx2</span>
+    <span class="n">B</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">U</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">hy2</span>
+    <span class="n">B</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">U</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">hy2</span>
+
+    <span class="c1"># resolve e devolve os valores aos nós internos</span>
+    <span class="n">U</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">spla</span><span class="o">.</span><span class="n">spsolve</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">tocsr</span><span class="p">(),</span> <span class="n">B</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ny</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">U</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exemplo 8.3.1:</strong> Verificação com uma solução conhecida</p>
+<p>Uma boa maneira de testar um programa como esse é escolher uma função <span class="math notranslate nohighlight">\(u\)</span>, calcular o lado direito <span class="math notranslate nohighlight">\(f=\nabla^2 u\)</span> correspondente e verificar se a solução numérica reproduz a função escolhida. Tomemos</p>
+<div class="math notranslate nohighlight">
+\[u(x,y)=\sin(\pi x)\sin(\pi y)+xy, \qquad 0\leq x\leq 1,\quad 0\leq y\leq 1.\]</div>
+<p>Como <span class="math notranslate nohighlight">\(\nabla^2(xy)=0\)</span>, temos <span class="math notranslate nohighlight">\(f(x,y)=-2\pi^2\sin(\pi x)\sin(\pi y)\)</span>. Os valores na fronteira são os da própria <span class="math notranslate nohighlight">\(u\)</span>: <span class="math notranslate nohighlight">\(u=0\)</span> nas bordas <span class="math notranslate nohighlight">\(x=0\)</span> e <span class="math notranslate nohighlight">\(y=0\)</span>, <span class="math notranslate nohighlight">\(u=y\)</span> na borda <span class="math notranslate nohighlight">\(x=1\)</span> e <span class="math notranslate nohighlight">\(u=x\)</span> na borda <span class="math notranslate nohighlight">\(y=1\)</span>. Vamos resolver o problema em malhas cada vez mais finas e medir o erro máximo nos nós.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u_exata</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">malhas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>
+<span class="n">erros</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;n&#39;</span><span class="si">:</span><span class="s2">&gt;4</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;h&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;erro máximo&#39;</span><span class="si">:</span><span class="s2">&gt;13</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;razão&#39;</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">malhas</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">poisson_dirichlet</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">u_exata</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+    <span class="n">erros</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">U</span> <span class="o">-</span> <span class="n">u_exata</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">))))</span>
+    <span class="n">razao</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">erros</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">erros</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">7.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">erros</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="si">:</span><span class="s2">8.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">erros</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">13.3e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">razao</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   n        h   erro máximo   razão
+  10   0.1000     8.265e-03 
+  20   0.0500     2.059e-03    4.01
+  40   0.0250     5.142e-04    4.00
+  80   0.0125     1.285e-04    4.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">malhas</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Solução numérica (n = </span><span class="si">{</span><span class="n">malhas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">erros</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;erro máximo&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">erros</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;inclinação 2 ($h^2$)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;erro&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Convergência&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6702bfdb9ac327dba14777742c02866698e0b3dec4b65d602978293f37dce4c0.png" src="../_images/6702bfdb9ac327dba14777742c02866698e0b3dec4b65d602978293f37dce4c0.png" />
+</div>
+</div>
+<p>Cada vez que <span class="math notranslate nohighlight">\(h\)</span> é dividido por 2, o erro é dividido por 4, e no gráfico em escala logarítmica os pontos ficam sobre uma reta de inclinação 2. Isso confirma que o método tem <strong>ordem 2</strong>, como previsto pela análise do erro de truncamento.</p>
+<p><strong>Exemplo 8.3.2:</strong> Placa com geração interna de calor</p>
+<p>Uma placa de aço inoxidável de <span class="math notranslate nohighlight">\(20\,\text{cm}\times 10\,\text{cm}\)</span>, com condutividade térmica <span class="math notranslate nohighlight">\(k=15\,\text{W/(m·K)}\)</span>, tem uma resistência elétrica embutida que gera calor de modo uniforme, à taxa <span class="math notranslate nohighlight">\(q=5\times 10^5\,\text{W/m}^3\)</span>. A borda inferior está em contato com uma superfície a <span class="math notranslate nohighlight">\(60\,°C\)</span>, e as outras três bordas são mantidas a <span class="math notranslate nohighlight">\(20\,°C\)</span>. Supondo que as faces da placa estejam isoladas, de modo que o calor flua apenas no plano da placa, a temperatura em regime permanente satisfaz</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial^2 T}{\partial x^2}+\frac{\partial^2 T}{\partial y^2}=-\frac{q}{k}, \qquad 0\leq x\leq 0{,}2,\quad 0\leq y\leq 0{,}1,\]</div>
+<p>com <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span> em metros. Qual é a temperatura máxima na placa e onde ela ocorre?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mf">15.0</span>      <span class="c1"># condutividade térmica, W/(m.K)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mf">5e5</span>       <span class="c1"># geração de calor, W/m^3</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">T_contorno</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="c1"># 60 graus C na borda inferior (y = 0) e 20 graus C nas demais</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">poisson_dirichlet</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="o">-</span><span class="n">q</span><span class="o">/</span><span class="n">k</span><span class="p">,</span> <span class="n">T_contorno</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperatura máxima: </span><span class="si">{</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> graus C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Posição: x = </span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> m, y = </span><span class="si">{</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">))</span>
+<span class="n">cf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="s1">&#39;w*&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x (m)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y (m)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Temperatura (graus C)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temperatura máxima: 78.6 graus C
+Posição: x = 0.100 m, y = 0.035 m
+</pre></div>
+</div>
+<img alt="../_images/7d45c22229a057b915b1fc68aa2fdf8aa8083c11fb404cf84f98dadb63a6f221.png" src="../_images/7d45c22229a057b915b1fc68aa2fdf8aa8083c11fb404cf84f98dadb63a6f221.png" />
+</div>
+</div>
+<p>A temperatura máxima, de cerca de <span class="math notranslate nohighlight">\(78{,}6\,°C\)</span>, ocorre no eixo de simetria vertical da placa (<span class="math notranslate nohighlight">\(x=0{,}1\)</span> m), mas abaixo do centro geométrico, deslocada na direção da borda inferior, que é a mais quente. Sem a fonte de calor (<span class="math notranslate nohighlight">\(q=0\)</span>), a temperatura ficaria entre <span class="math notranslate nohighlight">\(20\,°C\)</span> e <span class="math notranslate nohighlight">\(60\,°C\)</span> em toda a placa: uma solução da equação de Laplace atinge seus valores máximo e mínimo na fronteira do domínio (<strong>princípio do máximo</strong>), o que está de acordo com a propriedade do valor médio vista acima.</p>
 </section>
 <section id="metodo-iterativo-de-gauss-seidel">
 <h2>Método iterativo de Gauss-Seidel<a class="headerlink" href="#metodo-iterativo-de-gauss-seidel" title="Link para este cabeçalho">#</a></h2>
-<p>À medida que a malha é refinada, o sistema linear cresce <strong>quadraticamente</strong> — uma malha <span class="math notranslate nohighlight">\(n\times n\)</span> gera um sistema de <span class="math notranslate nohighlight">\((n-2)^2\)</span> equações. Resolver esse sistema diretamente torna-se caro para malhas finas.</p>
+<p>A rotina <code class="docutils literal notranslate"><span class="pre">poisson_dirichlet()</span></code> resolve o sistema (3) por um método direto. Como o número de incógnitas cresce com o quadrado do número de subdivisões, em malhas muito finas, e sobretudo em problemas tridimensionais, a eliminação torna-se cara em tempo e memória, mesmo aproveitando a esparsidade. Além disso, nem sempre é conveniente montar a matriz explicitamente.</p>
 <p>Uma alternativa eficiente é o <strong>método iterativo de Gauss-Seidel</strong> (também chamado de método de Liebmann no contexto de EDPs). Para a equação de Laplace, a equação de diferenças finitas</p>
 <div class="math notranslate nohighlight">
 \[T_{i-1,j} + T_{i+1,j} + T_{i,j-1} + T_{i,j+1} - 4T_{i,j} = 0\]</div>
@@ -876,7 +692,7 @@ u_{0,0}=2\left(r_y u_{0,1}+r_x u_{1,0}\right)+r_{x y}\left(g_{0,0} u_{0,0}-f_{0,
 <p>O algoritmo inicializa o campo com um valor estimado (por exemplo, a média das temperaturas de contorno), aplica essa fórmula repetidamente para cada nó interno — usando sempre os valores mais recentes disponíveis — e itera até que o erro relativo entre iterações consecutivas seja menor que uma tolerância <span class="math notranslate nohighlight">\(\varepsilon\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\text{err} = \frac{\|\,T^{(k+1)} - T^{(k)}\,\|}{\|\,T^{(k+1)}\,\|} &lt; \varepsilon\]</div>
-<p><strong>Exemplo 8.3.2:</strong> Placa aquecida — método de Gauss-Seidel</p>
+<p><strong>Exemplo 8.3.3:</strong> Placa aquecida — método de Gauss-Seidel</p>
 <p>Considere uma placa quadrada (Chapra, 2016) com temperaturas constantes nas bordas:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1061,7 +877,7 @@ SOR (omega=1.5): 78 iterações
 <div class="math notranslate nohighlight">
 \[q_x = -k'\frac{T_{i+1,j} - T_{i-1,j}}{2\,\Delta x}, \qquad q_y = -k'\frac{T_{i,j+1} - T_{i,j-1}}{2\,\Delta y}\]</div>
 <p>O módulo do fluxo resultante é <span class="math notranslate nohighlight">\(q_n = \sqrt{q_x^2 + q_y^2}\)</span> e sua direção é <span class="math notranslate nohighlight">\(\theta = \arctan(q_y / q_x)\)</span>.</p>
-<p><strong>Exemplo 8.3.3:</strong> Placa aquecida com borda inferior isolada</p>
+<p><strong>Exemplo 8.3.4:</strong> Placa aquecida com borda inferior isolada</p>
 <p>(Fonte: Chapra e Canale, 2016) Placa de <span class="math notranslate nohighlight">\(4\,\text{cm} \times 4\,\text{cm}\)</span> com as seguintes condições de contorno:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1170,99 +986,41 @@ SOR (omega=1.5): 78 iterações
 <section id="exercicios">
 <h2>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
 <blockquote>
-<div><p><strong>1.</strong> Use a rotina “poisson()” para resolver os seguintes problemas</p>
-<p>(a)</p>
+<div><p><strong>1.</strong> Use a rotina <code class="docutils literal notranslate"><span class="pre">poisson_dirichlet()</span></code> nos problemas a seguir.</p>
+<p>(a) Resolva <span class="math notranslate nohighlight">\(\nabla^2 u=6(x+y)\)</span> em <span class="math notranslate nohighlight">\([0,1]\times[0,1]\)</span>, com <span class="math notranslate nohighlight">\(u=x^3+y^3\)</span> na fronteira, para <span class="math notranslate nohighlight">\(n_x=n_y=4\)</span>, <span class="math notranslate nohighlight">\(8\)</span> e <span class="math notranslate nohighlight">\(16\)</span>, e calcule o erro máximo em relação à solução exata <span class="math notranslate nohighlight">\(u(x,y)=x^3+y^3\)</span>. Por que o erro fica no nível do erro de arredondamento, mesmo em uma malha tão grosseira? (Sugestão: observe o termo de erro da aproximação das derivadas segundas.)</p>
+<p>(b) Resolva a equação de Laplace em <span class="math notranslate nohighlight">\([0,2]\times[0,1]\)</span>, com <span class="math notranslate nohighlight">\(u=0\)</span> nas bordas <span class="math notranslate nohighlight">\(x=0\)</span>, <span class="math notranslate nohighlight">\(y=0\)</span> e <span class="math notranslate nohighlight">\(y=1\)</span>, e <span class="math notranslate nohighlight">\(u(2,y)=\sin(\pi y)\)</span>. A solução exata é</p>
 <div class="math notranslate nohighlight">
-\[\nabla^2 u(x, y)=\frac{\partial^2 u(x, y)}{\partial x^2}+\frac{\partial^2 u(x, y)}{\partial y^2}=x+y\]</div>
-<div class="math notranslate nohighlight">
-\[\text { para } 0 \leq x \leq 1,0 \leq y \leq 1\]</div>
-<p>com as condições de contorno</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{array}{ll}
-u(0, y)=y^2, &amp; u(1, y)=1 \\
-u(x, 0)=x^2, &amp; u(x, 1)=1 
-\end{array}\end{split}\]</div>
-<p>Divida o domínio em  <span class="math notranslate nohighlight">\(M_x \times M_y=5 \times 10\)</span> seções.
-<br></br></p>
-</div></blockquote>
-<blockquote>
-<div><p>(b)</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial^2 u(x, y)}{\partial x^2}+\frac{\partial^2 u(x, y)}{\partial y^2}-12.5 \pi^2 u(x, y)=-25 \pi^2 \cos \left(\frac{5 \pi}{2} x\right) \cos \left(\frac{5 \pi}{2} y\right)\]</div>
-<div class="math notranslate nohighlight">
-\[\text{para} \quad 0 \leq x, y \leq 0.4\]</div>
-<p>com as condições de contorno</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{array}{ll}
-u(0, y)=\cos \left(\frac{5 \pi}{2} y\right), &amp; u(0.4, y)=-\cos \left(\frac{5 \pi}{2} y\right) \\
-u(x, 0)=\cos \left(\frac{5 \pi}{2} x\right), &amp; u(x, 0.4)=-\cos \left(\frac{5 \pi}{2} x\right) 
-\end{array}\end{split}\]</div>
-<p>Divida o domínio em   <span class="math notranslate nohighlight">\(M_x \times M_y=40 \times 40\)</span> seções.</p>
-</div></blockquote>
-<blockquote>
-<div><p>(c)</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial^2 u(x, y)}{\partial x^2}+\frac{\partial^2 u(x, y)}{\partial y^2}+4 \pi\left(x^2+y^2\right) u(x, y) =4 \pi \cos \left(\pi\left(x^2+y^2\right)\right)\]</div>
-<div class="math notranslate nohighlight">
-\[\quad \text{ para } \quad 0 \leq x \leq 1,0 \leq y \leq 1 \]</div>
-<p>com as condições de contorno</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{array}{lll}
-u(0, y)=\sin \left(\pi y^2\right), &amp; u(1, y)=\sin \left(\pi\left(y^2+1\right)\right) \\
-u(x, 0)=\sin \left(\pi x^2\right), &amp; u(x, 1)=\sin \left(\pi\left(x^2+1\right)\right) 
-\end{array}\end{split}\]</div>
-<p>Divida o domínio em <span class="math notranslate nohighlight">\(M_x \times M_y=40 \times 40\)</span> seções.</p>
-</div></blockquote>
-<blockquote>
-<div><p>(d)</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial^2 u(x, y)}{\partial x^2}+\frac{\partial^2 u(x, y)}{\partial y^2}=10 e^{2 x+y} \quad \text{ para} \quad 0 \leq x \leq 1,0 \leq y \leq 2\]</div>
-<p>com as condições de contorno</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{array}{ll}
-&gt;u(0, y)=2 e^y, &amp; u(1, y)=2 e^{2 x+y}, \\
-&gt;u(x, 0)=2 e^{2 x}, &amp; u(x, 2)=2 e^{2 x+2} 
-&gt;\end{array}\end{split}\]</div>
-<p>Divida o domínio em <span class="math notranslate nohighlight">\(M_x \times M_y=20 \times 40\)</span> seções.</p>
-</div></blockquote>
-<blockquote>
-<div><p>(e)</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial^2 u(x,y)}{\partial x^2}+\frac{\partial^2 u(x,y)}{\partial y^2}=0 \quad \text{ para} \quad 0 \leq x \leq 1,0 \leq y \leq \pi / 2\]</div>
-<p>com as condições de contorno</p>
-<div class="math notranslate nohighlight">
-\[u(0, y) =4 \cos (3 y), \quad u(1, y) =4 e^{-3} \cos (3 y),\]</div>
-<div class="math notranslate nohighlight">
-\[u(x, 0) =4 e^{-3 x}, \quad u(x, \pi / 2) =0\]</div>
-<p>Divida o domínio em <span class="math notranslate nohighlight">\(M_x \times M_y=20 \times 20\)</span> seções.</p>
+\[u(x,y)=\frac{\sinh(\pi x)\sin(\pi y)}{\sinh(2\pi)}.\]</div>
+<p>Use <span class="math notranslate nohighlight">\(n_x=2n_y\)</span> com <span class="math notranslate nohighlight">\(n_y=10\)</span>, <span class="math notranslate nohighlight">\(20\)</span> e <span class="math notranslate nohighlight">\(40\)</span>, e verifique numericamente a ordem de convergência do método.</p>
+<p>(c) A deflexão de uma membrana quadrada de lado 1, presa nas bordas e submetida a uma pressão uniforme, é proporcional à solução de <span class="math notranslate nohighlight">\(\nabla^2 u=-1\)</span> com <span class="math notranslate nohighlight">\(u=0\)</span> na fronteira. Calcule <span class="math notranslate nohighlight">\(u(0{,}5;\,0{,}5)\)</span> com <span class="math notranslate nohighlight">\(n_x=n_y=20\)</span>, <span class="math notranslate nohighlight">\(40\)</span> e <span class="math notranslate nohighlight">\(80\)</span> e compare com o valor de referência <span class="math notranslate nohighlight">\(0{,}073671\)</span>. Faça um gráfico de superfície da solução.</p>
 </div></blockquote>
 <hr class="docutils" />
 <blockquote>
-<div><p><strong>2.</strong> Retome a placa aquecida do <strong>Exemplo 8.3.2</strong> (bordas a <span class="math notranslate nohighlight">\(75\,°C\)</span>, <span class="math notranslate nohighlight">\(50\,°C\)</span>, <span class="math notranslate nohighlight">\(0\,°C\)</span> e <span class="math notranslate nohighlight">\(100\,°C\)</span>, malha <span class="math notranslate nohighlight">\(20\times 20\)</span>).</p>
+<div><p><strong>2.</strong> Retome a placa aquecida do <strong>Exemplo 8.3.3</strong> (bordas a <span class="math notranslate nohighlight">\(75\,°C\)</span>, <span class="math notranslate nohighlight">\(50\,°C\)</span>, <span class="math notranslate nohighlight">\(0\,°C\)</span> e <span class="math notranslate nohighlight">\(100\,°C\)</span>, malha <span class="math notranslate nohighlight">\(20\times 20\)</span>).</p>
 <p>(a) Resolva o problema com o método de SOR para <span class="math notranslate nohighlight">\(\omega = 1{,}0\)</span>; <span class="math notranslate nohighlight">\(1{,}2\)</span>; <span class="math notranslate nohighlight">\(1{,}5\)</span>; <span class="math notranslate nohighlight">\(1{,}7\)</span> e <span class="math notranslate nohighlight">\(1{,}9\)</span>, contando o número de iterações até a convergência (<span class="math notranslate nohighlight">\(\varepsilon = 10^{-4}\)</span>) em cada caso.</p>
 <p>(b) Plote o número de iterações em função de <span class="math notranslate nohighlight">\(\omega\)</span>.</p>
 <p>(c) Com base no gráfico, estime o valor de <span class="math notranslate nohighlight">\(\omega\)</span> que minimiza o número de iterações para esse problema.</p>
 </div></blockquote>
 <hr class="docutils" />
 <blockquote>
-<div><p><strong>3.</strong> Considere a mesma placa de <span class="math notranslate nohighlight">\(4\,\text{cm}\times 4\,\text{cm}\)</span> do <strong>Exemplo 8.3.3</strong>, com <span class="math notranslate nohighlight">\(\Delta x=\Delta y=1\,\text{cm}\)</span>, mas agora com a borda <strong>direita</strong> isolada (condição de Neumann, fluxo nulo) em vez da borda inferior. As demais bordas permanecem com condição de Dirichlet: esquerda <span class="math notranslate nohighlight">\(=75\,°C\)</span>, superior <span class="math notranslate nohighlight">\(=100\,°C\)</span>, inferior <span class="math notranslate nohighlight">\(=50\,°C\)</span>.</p>
+<div><p><strong>3.</strong> Considere a mesma placa de <span class="math notranslate nohighlight">\(4\,\text{cm}\times 4\,\text{cm}\)</span> do <strong>Exemplo 8.3.4</strong>, com <span class="math notranslate nohighlight">\(\Delta x=\Delta y=1\,\text{cm}\)</span>, mas agora com a borda <strong>direita</strong> isolada (condição de Neumann, fluxo nulo) em vez da borda inferior. As demais bordas permanecem com condição de Dirichlet: esquerda <span class="math notranslate nohighlight">\(=75\,°C\)</span>, superior <span class="math notranslate nohighlight">\(=100\,°C\)</span>, inferior <span class="math notranslate nohighlight">\(=50\,°C\)</span>.</p>
 <p>(a) Adapte a estratégia do ponto fictício (apresentada para a borda inferior) para eliminar o nó fictício na borda direita, obtendo a equação modificada para os nós dessa borda.</p>
 <p>(b) Monte o sistema linear <span class="math notranslate nohighlight">\(12\times 12\)</span> correspondente e resolva com <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>.</p>
 <p>(c) Plote a distribuição de temperatura resultante.</p>
 </div></blockquote>
 <hr class="docutils" />
 <blockquote>
-<div><p><strong>4.</strong> Utilize a solução obtida no item (a) do <strong>Exercício 1</strong> (equação de Poisson <span class="math notranslate nohighlight">\(\nabla^2 u = x+y\)</span>, malha <span class="math notranslate nohighlight">\(5\times 10\)</span>).</p>
-<p>(a) Calcule numericamente o vetor fluxo <span class="math notranslate nohighlight">\(\mathbf{q}=-k'\nabla u\)</span> a partir da solução discreta, usando <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code> (tome <span class="math notranslate nohighlight">\(k'=1\)</span>).</p>
-<p>(b) Plote a distribuição de <span class="math notranslate nohighlight">\(u(x,y)\)</span> com um mapa de cores e sobreponha o campo vetorial de <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> com <code class="docutils literal notranslate"><span class="pre">plt.quiver</span></code>, como feito para a placa aquecida na Seção 8.3.</p>
-<p>(c) Identifique a região do domínio onde o módulo do fluxo <span class="math notranslate nohighlight">\(q_n=\sqrt{q_x^2+q_y^2}\)</span> é máximo.</p>
+<div><p><strong>4.</strong> Utilize a solução obtida no <strong>Exemplo 8.3.2</strong> (placa com geração interna de calor).</p>
+<p>(a) Calcule o fluxo de calor <span class="math notranslate nohighlight">\(\mathbf{q}=-k\nabla T\)</span> a partir da solução discreta, usando <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code> com os espaçamentos da malha.</p>
+<p>(b) Plote a distribuição de temperatura e sobreponha o campo vetorial de <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> com <code class="docutils literal notranslate"><span class="pre">plt.quiver</span></code>, como foi feito no Exemplo 8.3.3.</p>
+<p>(c) Por qual das bordas sai mais calor? Justifique com base no gráfico.</p>
 </div></blockquote>
 <hr class="docutils" />
 <blockquote>
-<div><p><strong>5.</strong> A convergência da iteração de Gauss-Seidel usada na rotina <code class="docutils literal notranslate"><span class="pre">poisson()</span></code> depende do termo <span class="math notranslate nohighlight">\(g(x,y)\)</span> da equação de Helmholtz: quanto maior o valor de <span class="math notranslate nohighlight">\(g\)</span>, menos dominante fica o coeficiente diagonal na Eq. (5a).</p>
-<p>(a) Usando o domínio <span class="math notranslate nohighlight">\(0\leq x,y\leq 1\)</span> com <span class="math notranslate nohighlight">\(f(x,y)=0\)</span> e condições de contorno <span class="math notranslate nohighlight">\(u=0\)</span> em três lados e <span class="math notranslate nohighlight">\(u=100\)</span> no quarto lado, resolva a equação com <code class="docutils literal notranslate"><span class="pre">poisson()</span></code> para <span class="math notranslate nohighlight">\(g\)</span> constante igual a <span class="math notranslate nohighlight">\(0\)</span>, <span class="math notranslate nohighlight">\(10\)</span>, <span class="math notranslate nohighlight">\(50\)</span>, <span class="math notranslate nohighlight">\(100\)</span> e <span class="math notranslate nohighlight">\(200\)</span> (malha <span class="math notranslate nohighlight">\(Mx=My=20\)</span>, <code class="docutils literal notranslate"><span class="pre">tol=1e-4</span></code>, <code class="docutils literal notranslate"><span class="pre">MaxIter=2000</span></code>).</p>
-<p>(b) Para cada valor de <span class="math notranslate nohighlight">\(g\)</span>, registre se houve convergência dentro do número máximo de iterações e, em caso afirmativo, quantas iterações foram necessárias.</p>
-<p>(c) A partir da constante <span class="math notranslate nohighlight">\(r_{xy}\)</span> definida na Eq. (6), explique (em termos de dominância diagonal do sistema linear original) por que valores grandes de <span class="math notranslate nohighlight">\(g\)</span> prejudicam ou impedem a convergência do método.</p>
+<div><p><strong>5.</strong> Compare o método direto com o método de Gauss-Seidel na placa do <strong>Exemplo 8.3.3</strong> (bordas a <span class="math notranslate nohighlight">\(75\,°C\)</span>, <span class="math notranslate nohighlight">\(50\,°C\)</span>, <span class="math notranslate nohighlight">\(0\,°C\)</span> e <span class="math notranslate nohighlight">\(100\,°C\)</span>).</p>
+<p>(a) Escreva uma função <code class="docutils literal notranslate"><span class="pre">fronteira(x,</span> <span class="pre">y)</span></code> que reproduza essas condições de contorno e resolva o problema com <code class="docutils literal notranslate"><span class="pre">poisson_dirichlet()</span></code> para <span class="math notranslate nohighlight">\(n_x=n_y=10\)</span>, <span class="math notranslate nohighlight">\(20\)</span>, <span class="math notranslate nohighlight">\(40\)</span> e <span class="math notranslate nohighlight">\(80\)</span>.</p>
+<p>(b) Resolva os mesmos problemas com o método de Gauss-Seidel do Exemplo 8.3.3 e meça o tempo gasto por cada método com <code class="docutils literal notranslate"><span class="pre">time.perf_counter()</span></code>.</p>
+<p>(c) Como cresce o número de iterações do Gauss-Seidel com o número de subdivisões? Qual dos métodos é mais vantajoso nas malhas finas?</p>
 </div></blockquote>
 </section>
 </section>
@@ -1331,7 +1089,8 @@ u(x, 0)=\sin \left(\pi x^2\right), &amp; u(x, 1)=\sin \left(\pi\left(x^2+1\right
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucao-numerica-de-edps-elipticas-equacao-de-poisson">Resolução numérica de EDPs elípticas: equação de Poisson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-malha-e-o-estencil-de-cinco-pontos">A malha e o estêncil de cinco pontos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#montagem-do-sistema-linear">Montagem do sistema linear</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-iterativo-de-gauss-seidel">Método iterativo de Gauss-Seidel</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sobrerelaxacao-sor">Sobrerelaxação (SOR)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-e-fluxo-de-calor">Gradiente e fluxo de calor</a></li>

@@ -156,8 +156,8 @@
       
     
     
-    <img src="../_static/capa.png" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
-    <script>document.write(`<img src="../_static/capa.png" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
+    <img src="../_static/capa_web.jpg" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
+    <script>document.write(`<img src="../_static/capa_web.jpg" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
   
   
 </a></div>
@@ -238,9 +238,6 @@
 <li class="toctree-l2"><a class="reference internal" href="8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -896,14 +893,10 @@ Considere a equação de Laplace com condições de contorno de Dirichlet, com o
 <div><p><strong>Exercicio 1:</strong> Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/823">Burden(2016</a>) Determine a distribuição de calor estacionária em uma placa de metal fina com dimensões <span class="math notranslate nohighlight">\(0,5 \mathrm{~m}\)</span> por <span class="math notranslate nohighlight">\(0,5 \mathrm{~m}\)</span> usando <span class="math notranslate nohighlight">\(n=m=4\)</span>. Dois lados adjacentes são mantidos a <span class="math notranslate nohighlight">\(0^{\circ} \mathrm{C}\)</span> e o calor nos outros lados aumenta linearmente de <span class="math notranslate nohighlight">\(0{ }^{\circ} \mathrm{C}\)</span> em um canto a <span class="math notranslate nohighlight">\(100{ }^{\circ} \mathrm{C}\)</span> onde os lados se encontram. Coloque os lados com condições de contorno nulas ao longo dos eixos <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>.</p>
 <p><em>Solução:</em> Nesse caso o problema será expresso como</p>
 <div class="math notranslate nohighlight">
-\[
-&gt; \frac{\partial^2 u}{\partial x^2}(x, y)+\frac{\partial^2 u}{\partial y^2}(x, y)=0,
-&gt; \]</div>
+\[\frac{\partial^2 u}{\partial x^2}(x, y)+\frac{\partial^2 u}{\partial y^2}(x, y)=0,\]</div>
 <p>para <span class="math notranslate nohighlight">\((x, y)\)</span> no conjunto <span class="math notranslate nohighlight">\(R=\{(x, y) \mid 0&lt;x&lt;0,5,0&lt;y&lt;0,5\}\)</span>, com as condições de contorno</p>
 <div class="math notranslate nohighlight">
-\[
-&gt; u(0, y)=0, u(x, 0)=0, u(x, 0,5)=200 x \text { e } u(0,5, y)=200 y .
-&gt; \]</div>
+\[u(0, y)=0, u(x, 0)=0, u(x, 0,5)=200 x \text { e } u(0,5, y)=200 y .\]</div>
 <p>Se <span class="math notranslate nohighlight">\(n=m=4\)</span>  a equação diferença  é</p>
 <div class="math notranslate nohighlight">
 \[u_{i-1,j}+u_{i+1,j}-4u_{i,j}+ u_{i,j-1}+u_{i,j+1} = 0\]</div>
@@ -913,26 +906,14 @@ Considere a equação de Laplace com condições de contorno de Dirichlet, com o
 <blockquote>
 <div><p><strong>Exercicio 2:</strong> (<a class="reference external" href="https://app.minhabiblioteca.com.br/reader/books/9788522123414/pageid/828">Burden,2016</a>) Determine uma solução aproximada da equação diferencial parcial elíptica</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-&gt; \begin{gathered}
-&gt; \frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2}=4, \quad 0&lt;x&lt;1, \quad 0&lt;y&lt;2 \\
-&gt; u(x, 0)=x^2, \quad u(x, 2)=(x-2)^2, \quad 0 \leq x \leq 1 \\
-&gt; u(0, y)=y^2, \quad u(1, y)=(y-1)^2, \quad 0 \leq y \leq 2
-&gt; \end{gathered}
-&gt; \end{split}\]</div>
+\[\begin{split}\begin{gathered} \frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2}=4, \quad 0&lt;x&lt;1, \quad 0&lt;y&lt;2 \\ u(x, 0)=x^2, \quad u(x, 2)=(x-2)^2, \quad 0 \leq x \leq 1 \\ u(0, y)=y^2, \quad u(1, y)=(y-1)^2, \quad 0 \leq y \leq 2 \end{gathered}\end{split}\]</div>
 <p>Use <span class="math notranslate nohighlight">\(h=k=\frac{1}{2}\)</span> e compare os resultados com a solução real <span class="math notranslate nohighlight">\(u(x, y)=(x-y)^2\)</span>.</p>
 </div></blockquote>
 <hr class="docutils" />
 <blockquote>
 <div><p><strong>Exercicio 3:</strong> (<a class="reference external" href="https://app.minhabiblioteca.com.br/reader/books/9788522123414/pageid/828">Burden,2016</a>) Determine uma solução aproximada da equação diferencial parcial elíptica</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-&gt; \begin{array}{cc}
-&gt; \frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2}=0, &amp; 1&lt;x&lt;2, \quad 0&lt;y&lt;1 ; \\
-&gt; u(x, 0)=2 \ln x, &amp; u(x, 1)=\ln \left(x^2+1\right), \quad 1 \leq x \leq 2 ; \\
-&gt; u(1, y)=\ln \left(y^2+1\right), &amp; u(2, y)=\ln \left(y^2+4\right), \quad 0 \leq y \leq 1 .
-&gt; \end{array}
-&gt; \end{split}\]</div>
+\[\begin{split}\begin{array}{cc} \frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2}=0, &amp; 1&lt;x&lt;2, \quad 0&lt;y&lt;1 ; \\ u(x, 0)=2 \ln x, &amp; u(x, 1)=\ln \left(x^2+1\right), \quad 1 \leq x \leq 2 ; \\ u(1, y)=\ln \left(y^2+1\right), &amp; u(2, y)=\ln \left(y^2+4\right), \quad 0 \leq y \leq 1 . \end{array}\end{split}\]</div>
 <p>Use <span class="math notranslate nohighlight">\(h=k=\frac{1}{3}\)</span> e compare os resultados com a solução real <span class="math notranslate nohighlight">\(u(x, y)=\ln \left(x^2+y^2\right)\)</span>.</p>
 </div></blockquote>
 <hr class="docutils" />

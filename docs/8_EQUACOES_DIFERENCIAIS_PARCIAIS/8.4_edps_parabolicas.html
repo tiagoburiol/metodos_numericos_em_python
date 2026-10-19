@@ -156,8 +156,8 @@
       
     
     
-    <img src="../_static/capa.png" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
-    <script>document.write(`<img src="../_static/capa.png" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
+    <img src="../_static/capa_web.jpg" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
+    <script>document.write(`<img src="../_static/capa_web.jpg" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
   
   
 </a></div>
@@ -238,9 +238,6 @@
 <li class="toctree-l2"><a class="reference internal" href="8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">8.4 EDPs Parabólicas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -439,10 +436,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-metodo-explicito-de-euler-para-frente">1. O Método Explícito de Euler para Frente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discretizacao-no-espaco-o-metodo-das-linhas">Discretização no espaço: o método das linhas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-metodo-explicito">O método explícito</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forma-matricial-do-metodo-explicito">Forma matricial do método explícito</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-euler-implicito-regressivo">2. Método de Euler Implícito Regressivo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-metodo-de-crank-nicholson">3. O Método de Crank-Nicholson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estabilidade">Estabilidade</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-implicitos-euler-implicito-e-crank-nicolson">Métodos implícitos: Euler implícito e Crank-Nicolson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uma-rotina-para-os-tres-metodos">Uma rotina para os três métodos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condicao-de-contorno-de-neumann">Condição de contorno de Neumann</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equacao-do-calor-2d-transiente">Equação do calor 2D (transiente)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
 </ul>
@@ -458,89 +458,64 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="edps-parabolicas">
 <h1>8.4 EDPs Parabólicas<a class="headerlink" href="#edps-parabolicas" title="Link para este cabeçalho">#</a></h1>
-<p>Consideremos uma EDP geral de segunda ordem em duas variáveis independentes <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>, que é escrita como</p>
-<p>\begin{gather*}
-A(x, y) \frac{\partial^2 u}{\partial x^2}+B(x, y) \frac{\partial^2 u}{\partial x \partial y}+C(x, y) \frac{\partial^2 u}{\partial y^2}=f\left(x, y, u, \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}\right) \
-\text{para} \ x_0 \leq x \leq x_f, y_0 \leq y \leq y_f
-\end{gather*}</p>
-<p>com as condições de contorno dadas por</p>
+<p>Equações parabólicas descrevem processos de <strong>difusão</strong> que evoluem no tempo: a condução de calor em uma barra, a dispersão de um poluente em um canal, a passagem de uma substância através de uma membrana. O modelo mais simples é a <strong>equação do calor</strong> unidimensional</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{array}{ll}
-u\left(x, y_0\right)=b_{y 0}(x), &amp; u\left(x, y_f\right)=b_{y f}(x),  \\
-u\left(x_0, y\right)=b_{x 0}(y), &amp; \text{e} \quad u\left(x_f, y\right)=b_{x f}(y)
-\end{array}
-\end{split}\]</div>
-<p>As EDP elípticas são aquelas em que <span class="math notranslate nohighlight">\(B^2-4 A C=0\)</span> e estāo associadas estados de difusão.</p>
-<p>Um exemplo de uma EDP (equação diferencial parcial) parabólica é a equação do calor unidimensional, que descreve a distribuição de temperatura <span class="math notranslate nohighlight">\(u(x, t)\)</span> ( <span class="math notranslate nohighlight">\(x\)</span> é a posição, <span class="math notranslate nohighlight">\(t\)</span> é o tempo), dada por:</p>
-<p>\begin{equation*}
-A \frac{\partial^2 u(x, t)}{\partial x^2}=\frac{\partial u(x, t)}{\partial t} \quad \text { para } 0 \leq x \leq x_f, \quad 0 \leq t \leq T
-\tag{1}
-\end{equation*}</p>
-<p>Para que essa equação possa ser resolvida, devem ser fornecidas as condições de contorno <span class="math notranslate nohighlight">\(u(0, t)= b_0(t)\)</span> e <span class="math notranslate nohighlight">\(u\left(x_f, t\right)=b_{x f}(t)\)</span> , bem como a condição inicial <span class="math notranslate nohighlight">\(u(x, 0)=i_0(x)\)</span></p>
-<p>A constante <span class="math notranslate nohighlight">\(A\)</span> (ou <span class="math notranslate nohighlight">\(\alpha^2\)</span>) é a <strong>difusividade térmica</strong> do material, relacionada à condutividade térmica <span class="math notranslate nohighlight">\(k'\)</span>, à densidade <span class="math notranslate nohighlight">\(\rho\)</span> e ao calor específico <span class="math notranslate nohighlight">\(C\)</span> por</p>
+\[\frac{\partial u}{\partial t}=\alpha\,\frac{\partial^2 u}{\partial x^2},\qquad 0&lt;x&lt;L,\quad t&gt;0, \tag{1}\]</div>
+<p>em que <span class="math notranslate nohighlight">\(u(x,t)\)</span> é a temperatura no ponto <span class="math notranslate nohighlight">\(x\)</span> de uma barra de comprimento <span class="math notranslate nohighlight">\(L\)</span>, no instante <span class="math notranslate nohighlight">\(t\)</span>, e <span class="math notranslate nohighlight">\(\alpha&gt;0\)</span> é a difusividade térmica do material. Escrevendo a Eq. (1) na forma geral da Seção 8.2, com <span class="math notranslate nohighlight">\(t\)</span> no papel de <span class="math notranslate nohighlight">\(y\)</span>, temos <span class="math notranslate nohighlight">\(A=\alpha\)</span> e <span class="math notranslate nohighlight">\(B=C=0\)</span>, de modo que <span class="math notranslate nohighlight">\(B^2-4AC=0\)</span>: é o caso parabólico.</p>
+<p>Ao contrário do que acontece no caso elíptico, aqui a solução não fica determinada apenas pelos valores na fronteira: precisamos também do estado inicial. Um problema bem posto para a Eq. (1) é formado por uma <strong>condição inicial</strong> e por uma condição em cada extremidade da barra, por exemplo</p>
 <div class="math notranslate nohighlight">
-\[\alpha^2 = \frac{k'}{\rho\, C}\]</div>
-<p>A tabela abaixo apresenta valores típicos para materiais de uso comum em engenharia:</p>
+\[u(x,0)=u_0(x), \qquad u(0,t)=g_0(t), \qquad u(L,t)=g_L(t). \tag{2}\]</div>
+<p>Quando <span class="math notranslate nohighlight">\(g_0\)</span> e <span class="math notranslate nohighlight">\(g_L\)</span> são constantes, a solução tende, para <span class="math notranslate nohighlight">\(t\to\infty\)</span>, a um estado estacionário: a solução da equação de Laplace em uma dimensão, que é a reta que liga os valores impostos nas extremidades.</p>
+<p>A difusividade <span class="math notranslate nohighlight">\(\alpha=k/(\rho c)\)</span> combina a condutividade térmica <span class="math notranslate nohighlight">\(k\)</span>, a densidade <span class="math notranslate nohighlight">\(\rho\)</span> e o calor específico <span class="math notranslate nohighlight">\(c\)</span> do material, e mede a rapidez com que uma variação de temperatura se espalha. Alguns valores aproximados, à temperatura ambiente:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Material</p></th>
-<th class="head"><p><span class="math notranslate nohighlight">\(\alpha^2\)</span> (cm²/s)</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\alpha\)</span> (cm²/s)</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Cobre</p></td>
-<td><p>18,5</p></td>
+<td><p>1,17</p></td>
 </tr>
 <tr class="row-odd"><td><p>Alumínio</p></td>
-<td><p>0,8418</p></td>
+<td><p>0,97</p></td>
 </tr>
 <tr class="row-even"><td><p>Ferro</p></td>
 <td><p>0,23</p></td>
 </tr>
 <tr class="row-odd"><td><p>Aço carbono</p></td>
-<td><p>0,1172</p></td>
+<td><p>0,19</p></td>
 </tr>
-<tr class="row-even"><td><p>Aço inox</p></td>
-<td><p>0,03352</p></td>
+<tr class="row-even"><td><p>Aço inoxidável</p></td>
+<td><p>0,04</p></td>
 </tr>
-<tr class="row-odd"><td><p>Madeira pinus</p></td>
-<td><p>0,00082</p></td>
+<tr class="row-odd"><td><p>Madeira (pinho)</p></td>
+<td><p>0,0017</p></td>
+</tr>
+<tr class="row-even"><td><p>Água</p></td>
+<td><p>0,0015</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>A difusividade do cobre é cerca de <strong>22 000 vezes</strong> maior que a da madeira, o que explica por que metais atingem equilíbrio térmico muito mais rapidamente que materiais isolantes.</p>
-<section id="o-metodo-explicito-de-euler-para-frente">
-<h2>1. O Método Explícito de Euler para Frente<a class="headerlink" href="#o-metodo-explicito-de-euler-para-frente" title="Link para este cabeçalho">#</a></h2>
-<p>Para aplicar o método das diferenças finitas, dividimos o domínio espacial <span class="math notranslate nohighlight">\(\left[0, x_f\right]\)</span> em <span class="math notranslate nohighlight">\(M\)</span> partes, cada uma com comprimento <span class="math notranslate nohighlight">\(\Delta x=x_f / M\)</span>, e dividimos o domínio temporal <span class="math notranslate nohighlight">\([0, T]\)</span> em <span class="math notranslate nohighlight">\(N\)</span> intervalos cada um com duração <span class="math notranslate nohighlight">\(\Delta t=T / N\)</span>.</p>
-<p>Em seguida, substituímos a derivada parcial de segunda ordem no lado esquerdo e a derivada parcial de primeira ordem no lado direito da equação (1) pela aproximação de diferenças centrais e pela aproximação de diferenças progressivas, respectivamente, obtendo:</p>
-<p>\begin{equation*}
-A \frac{u_{i+1}^k-2 u_i^k+u_{i-1}^k}{\Delta x^2}=\frac{u_i^{k+1}-u_i^k}{\Delta t}
-\tag{2}
-\end{equation*}</p>
-<p>Isso pode ser reescrito no seguinte algoritmo, chamado de método explícito de Euler para frente, que deve ser resolvido iterativamente:</p>
-<p>\begin{equation*}
-u_i^{k+1}=r\left(u_{i+1}^k+u_{i-1}^k\right)+(1-2 r) u_i^k \quad \text{com} \ r=A \frac{\Delta t}{\Delta x^2} \tag{3}
-\end{equation*}</p>
-<p>para <span class="math notranslate nohighlight">\(i=1,2, \ldots, M-1\)</span>.</p>
-<p>Para encontrar a condiçāo de estabilidade desse algoritmo, substituímos uma soluçāo tentativa
-\begin{equation*}
-u_i^k=\lambda^k e^{j i \pi / P} \quad(P \text { é qualquer inteiro não nulo })
-\tag{4}
-\end{equation*}
-na Eq. (3), obtendo:
-\begin{equation*}
-\lambda=r\left(e^{j \pi / P}+e^{-j \pi / P}\right)+(1-2 r)=1-2 r(1-\cos (\pi / P))
-\tag{5}
-\end{equation*}
-Como devemos ter <span class="math notranslate nohighlight">\(|\lambda| \leq 1\)</span> para evitar divergência, a condiçāo de estabilidade resulta em:
-\begin{equation*}
-r=A \frac{\Delta t}{\Delta x^2} \leq \frac{1}{2}
-\tag{6}
-\end{equation*}
-Isso implica que, à medida que diminuímos o intervalo espacial <span class="math notranslate nohighlight">\(\Delta x\)</span> para obter maior precisāo, também precisamos diminuir o passo de tempo <span class="math notranslate nohighlight">\(\Delta t\)</span>, ao custo de mais computaçōes, para nāo perder a estabilidade.</p>
-<p>A rotina em Python <code class="docutils literal notranslate"><span class="pre">heat_exp(</span> <span class="pre">)</span></code> foi desenvolvida para implementar esse algoritmo.</p>
+<p>O cobre espalha calor cerca de 700 vezes mais depressa que a madeira. Como <span class="math notranslate nohighlight">\(\alpha\)</span> tem dimensão de comprimento² por tempo, o tempo característico para que o calor atravesse uma distância <span class="math notranslate nohighlight">\(\ell\)</span> é da ordem de <span class="math notranslate nohighlight">\(\ell^2/\alpha\)</span>: dobrar a espessura de uma parede multiplica esse tempo por quatro.</p>
+<section id="discretizacao-no-espaco-o-metodo-das-linhas">
+<h2>Discretização no espaço: o método das linhas<a class="headerlink" href="#discretizacao-no-espaco-o-metodo-das-linhas" title="Link para este cabeçalho">#</a></h2>
+<p>Dividimos <span class="math notranslate nohighlight">\([0,L]\)</span> em <span class="math notranslate nohighlight">\(n_x\)</span> subintervalos de comprimento <span class="math notranslate nohighlight">\(\Delta x=L/n_x\)</span>, com nós <span class="math notranslate nohighlight">\(x_i=i\,\Delta x\)</span>, e denotamos por <span class="math notranslate nohighlight">\(v_i(t)\)</span> uma aproximação de <span class="math notranslate nohighlight">\(u(x_i,t)\)</span>. Nos nós internos, substituímos a derivada segunda em <span class="math notranslate nohighlight">\(x\)</span> pela diferença central, como na Seção 8.3, mas mantemos o tempo contínuo:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dv_i}{dt}=\frac{\alpha}{\Delta x^2}\left(v_{i-1}-2v_i+v_{i+1}\right), \qquad i=1,\ldots,n_x-1, \tag{3}\]</div>
+<p>com <span class="math notranslate nohighlight">\(v_0(t)=g_0(t)\)</span> e <span class="math notranslate nohighlight">\(v_{n_x}(t)=g_L(t)\)</span>. Reunindo as incógnitas no vetor <span class="math notranslate nohighlight">\(\mathbf{v}=(v_1,\ldots,v_{n_x-1})^T\)</span>, as Eqs. (3) formam um <strong>sistema de equações diferenciais ordinárias</strong></p>
+<div class="math notranslate nohighlight">
+\[\frac{d\mathbf{v}}{dt}=\frac{\alpha}{\Delta x^2}\left(K\mathbf{v}+\mathbf{c}(t)\right), \tag{4}\]</div>
+<p>em que <span class="math notranslate nohighlight">\(K\)</span> é a matriz tridiagonal de ordem <span class="math notranslate nohighlight">\(n_x-1\)</span> com <span class="math notranslate nohighlight">\(-2\)</span> na diagonal e <span class="math notranslate nohighlight">\(1\)</span> nas diagonais vizinhas (a mesma matriz de segunda diferença da Seção 8.3), e <span class="math notranslate nohighlight">\(\mathbf{c}(t)=(g_0(t),0,\ldots,0,g_L(t))^T\)</span> traz os valores de fronteira. Cada componente <span class="math notranslate nohighlight">\(v_i(t)\)</span> descreve a temperatura ao longo da reta vertical <span class="math notranslate nohighlight">\(x=x_i\)</span> do plano <span class="math notranslate nohighlight">\((x,t)\)</span>, daí o nome <strong>método das linhas</strong>.</p>
+<p>A Eq. (4) é um problema de valor inicial, com <span class="math notranslate nohighlight">\(\mathbf{v}(0)\)</span> dado pelos valores de <span class="math notranslate nohighlight">\(u_0\)</span> nos nós internos, e pode ser resolvida com os métodos do Capítulo 7. Com um passo <span class="math notranslate nohighlight">\(\Delta t\)</span> e <span class="math notranslate nohighlight">\(t_n=n\,\Delta t\)</span>, escrevemos <span class="math notranslate nohighlight">\(u_i^n\approx u(x_i,t_n)\)</span> e <span class="math notranslate nohighlight">\(\mathbf{u}^n\)</span> para o vetor dos valores internos. Cada método para EDOs dá origem a um esquema para a equação do calor.</p>
+</section>
+<section id="o-metodo-explicito">
+<h2>O método explícito<a class="headerlink" href="#o-metodo-explicito" title="Link para este cabeçalho">#</a></h2>
+<p>Aplicando o método de Euler explícito à Eq. (4) e escrevendo o resultado componente a componente, obtemos</p>
+<div class="math notranslate nohighlight">
+\[u_i^{n+1}=u_i^n+r\left(u_{i-1}^n-2u_i^n+u_{i+1}^n\right), \qquad r=\frac{\alpha\,\Delta t}{\Delta x^2}. \tag{5}\]</div>
+<p>O valor em cada nó no novo instante é calculado diretamente a partir dos valores do instante anterior, sem resolver nenhum sistema; por isso o método é chamado <strong>explícito</strong>. O parâmetro adimensional <span class="math notranslate nohighlight">\(r\)</span> compara o passo de tempo com o tempo de difusão através de uma célula da malha e, como veremos, controla a estabilidade do método. O erro de truncamento é de primeira ordem no tempo e de segunda ordem no espaço, <span class="math notranslate nohighlight">\(O(\Delta t+\Delta x^2)\)</span>.</p>
 </section>
 <section id="forma-matricial-do-metodo-explicito">
 <h2>Forma matricial do método explícito<a class="headerlink" href="#forma-matricial-do-metodo-explicito" title="Link para este cabeçalho">#</a></h2>
@@ -622,557 +597,249 @@ r &amp; 1{-}2r &amp; r &amp; &amp; \\
 </div>
 </div>
 <p><strong>Experimento de instabilidade:</strong> aumente <code class="docutils literal notranslate"><span class="pre">ht</span></code> para <code class="docutils literal notranslate"><span class="pre">0.013</span></code> (<span class="math notranslate nohighlight">\(r \approx 0{,}52 &gt; 1/2\)</span>) e execute novamente para observar a divergência da solução.</p>
+</section>
+<section id="estabilidade">
+<h2>Estabilidade<a class="headerlink" href="#estabilidade" title="Link para este cabeçalho">#</a></h2>
+<p>O experimento acima mostra que o método explícito pode produzir oscilações que crescem sem controle quando <span class="math notranslate nohighlight">\(r\)</span> passa de <span class="math notranslate nohighlight">\(1/2\)</span>. Para entender por quê, consideremos a Eq. (4) com fronteiras nulas (<span class="math notranslate nohighlight">\(g_0=g_L=0\)</span>). Os autovalores e autovetores da matriz <span class="math notranslate nohighlight">\(K\)</span> são conhecidos explicitamente:</p>
+<div class="math notranslate nohighlight">
+\[\mu_m=-4\sin^2\!\left(\frac{m\pi}{2n_x}\right), \qquad \mathbf{w}_m=\left(\sin\frac{m\pi i}{n_x}\right)_{i=1}^{n_x-1}, \qquad m=1,\ldots,n_x-1,\]</div>
+<p>como se verifica calculando <span class="math notranslate nohighlight">\(K\mathbf{w}_m\)</span> com a identidade <span class="math notranslate nohighlight">\(\sin(\theta(i-1))+\sin(\theta(i+1))=2\cos\theta\,\sin(\theta i)\)</span>. Os autovetores são as versões discretas dos modos de Fourier <span class="math notranslate nohighlight">\(\sin(m\pi x/L)\)</span> da Seção 8.1, e todos os autovalores estão no intervalo <span class="math notranslate nohighlight">\((-4,0)\)</span>.</p>
+<p>Se escrevermos <span class="math notranslate nohighlight">\(\mathbf{u}^0\)</span> como combinação dos autovetores <span class="math notranslate nohighlight">\(\mathbf{w}_m\)</span>, cada modo evolui de forma independente. No método explícito, <span class="math notranslate nohighlight">\(\mathbf{u}^{n+1}=(I+rK)\,\mathbf{u}^n\)</span>, e o modo <span class="math notranslate nohighlight">\(m\)</span> é multiplicado, a cada passo, pelo <strong>fator de amplificação</strong></p>
+<div class="math notranslate nohighlight">
+\[G_m=1+r\mu_m=1-4r\sin^2\!\left(\frac{m\pi}{2n_x}\right).\]</div>
+<p>Na solução exata todos os modos decaem; para que o mesmo aconteça na solução numérica, é preciso que <span class="math notranslate nohighlight">\(|G_m|\leq 1\)</span> para todo <span class="math notranslate nohighlight">\(m\)</span>. O modo mais oscilante, <span class="math notranslate nohighlight">\(m=n_x-1\)</span>, tem <span class="math notranslate nohighlight">\(\sin^2(m\pi/2n_x)\)</span> muito próximo de 1, e a exigência se torna <span class="math notranslate nohighlight">\(1-4r\geq -1\)</span>, isto é,</p>
+<div class="math notranslate nohighlight">
+\[r=\frac{\alpha\,\Delta t}{\Delta x^2}\leq\frac{1}{2}. \tag{6}\]</div>
+<p>(Como <span class="math notranslate nohighlight">\(\sin^2(m\pi/2n_x)\)</span> nunca chega exatamente a 1, em uma malha fixa o limite verdadeiro fica um pouco acima de <span class="math notranslate nohighlight">\(1/2\)</span>, mas ele se aproxima de <span class="math notranslate nohighlight">\(1/2\)</span> à medida que a malha é refinada.)</p>
+<p>A condição (6) é bastante restritiva: se reduzirmos <span class="math notranslate nohighlight">\(\Delta x\)</span> à metade para ganhar precisão, o passo <span class="math notranslate nohighlight">\(\Delta t\)</span> precisa ser dividido por 4, e o número total de operações cresce por um fator 8.</p>
+</section>
+<section id="metodos-implicitos-euler-implicito-e-crank-nicolson">
+<h2>Métodos implícitos: Euler implícito e Crank-Nicolson<a class="headerlink" href="#metodos-implicitos-euler-implicito-e-crank-nicolson" title="Link para este cabeçalho">#</a></h2>
+<p>Para escapar da restrição (6), usamos métodos implícitos. O <strong>método de Euler implícito</strong> avalia o lado direito da Eq. (4) no novo instante <span class="math notranslate nohighlight">\(t_{n+1}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathbf{u}^{n+1}-\mathbf{u}^n}{\Delta t}=\frac{\alpha}{\Delta x^2}\left(K\mathbf{u}^{n+1}+\mathbf{c}^{n+1}\right) \quad\Longleftrightarrow\quad (I-rK)\,\mathbf{u}^{n+1}=\mathbf{u}^n+r\,\mathbf{c}^{n+1}. \tag{7}\]</div>
+<p>Em cada nó interno, isso corresponde à equação</p>
+<div class="math notranslate nohighlight">
+\[-r\,u_{i-1}^{n+1}+(1+2r)\,u_i^{n+1}-r\,u_{i+1}^{n+1}=u_i^n.\]</div>
+<p>Agora os valores no novo instante aparecem acoplados, e a cada passo é preciso resolver um sistema linear tridiagonal. Em troca, o fator de amplificação do modo <span class="math notranslate nohighlight">\(m\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[G_m=\frac{1}{1-r\mu_m}=\frac{1}{1+4r\sin^2(m\pi/2n_x)},\]</div>
+<p>está no intervalo <span class="math notranslate nohighlight">\((0,1]\)</span> para qualquer <span class="math notranslate nohighlight">\(r&gt;0\)</span>: o método é <strong>incondicionalmente estável</strong>. Ele continua, porém, sendo de primeira ordem no tempo, com erro <span class="math notranslate nohighlight">\(O(\Delta t+\Delta x^2)\)</span>.</p>
+<p>O <strong>método de Crank-Nicolson</strong> corresponde a aplicar à Eq. (4) a regra do trapézio, isto é, a usar a média dos lados direitos nos instantes <span class="math notranslate nohighlight">\(t_n\)</span> e <span class="math notranslate nohighlight">\(t_{n+1}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\left(I-\tfrac{r}{2}K\right)\mathbf{u}^{n+1}=\left(I+\tfrac{r}{2}K\right)\mathbf{u}^n+\tfrac{r}{2}\left(\mathbf{c}^n+\mathbf{c}^{n+1}\right). \tag{8}\]</div>
+<p>Como a regra do trapézio é de segunda ordem, o erro passa a ser <span class="math notranslate nohighlight">\(O(\Delta t^2+\Delta x^2)\)</span>. O fator de amplificação</p>
+<div class="math notranslate nohighlight">
+\[G_m=\frac{1+r\mu_m/2}{1-r\mu_m/2}=\frac{1-2r\sin^2(m\pi/2n_x)}{1+2r\sin^2(m\pi/2n_x)}\]</div>
+<p>também satisfaz <span class="math notranslate nohighlight">\(|G_m|\leq 1\)</span> para todo <span class="math notranslate nohighlight">\(r&gt;0\)</span>. Observe, no entanto, que para <span class="math notranslate nohighlight">\(r\)</span> grande os modos mais oscilantes têm <span class="math notranslate nohighlight">\(G_m\)</span> próximo de <span class="math notranslate nohighlight">\(-1\)</span>: eles não crescem, mas são amortecidos lentamente e trocam de sinal a cada passo. Isso pode produzir pequenas oscilações espúrias quando a condição inicial tem descontinuidades.</p>
+</section>
+<section id="uma-rotina-para-os-tres-metodos">
+<h2>Uma rotina para os três métodos<a class="headerlink" href="#uma-rotina-para-os-tres-metodos" title="Link para este cabeçalho">#</a></h2>
+<p>Os três esquemas cabem em uma única fórmula, conhecida como <strong>método θ</strong>:</p>
+<div class="math notranslate nohighlight">
+\[(I-\theta\,rK)\,\mathbf{u}^{n+1}=\left(I+(1-\theta)\,rK\right)\mathbf{u}^n+r\left(\theta\,\mathbf{c}^{n+1}+(1-\theta)\,\mathbf{c}^n\right), \tag{9}\]</div>
+<p>com <span class="math notranslate nohighlight">\(\theta=0\)</span> para o método explícito, <span class="math notranslate nohighlight">\(\theta=1\)</span> para o Euler implícito e <span class="math notranslate nohighlight">\(\theta=1/2\)</span> para o Crank-Nicolson. A rotina <code class="docutils literal notranslate"><span class="pre">calor_1d()</span></code> implementa a Eq. (9). Como a matriz do lado esquerdo não muda de um passo para o outro, ela é fatorada uma única vez com a decomposição LU esparsa (<code class="docutils literal notranslate"><span class="pre">splu</span></code>), e cada passo custa apenas duas substituições triangulares; é o mesmo princípio discutido na Seção 3.2. No método explícito essa matriz é a identidade e a resolução é imediata. O argumento <code class="docutils literal notranslate"><span class="pre">direita</span></code> permite trocar a condição de Dirichlet na extremidade <span class="math notranslate nohighlight">\(x=L\)</span> por uma condição de Neumann, como veremos adiante.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">heat_exp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">it0</span><span class="p">,</span> <span class="n">bx0</span><span class="p">,</span> <span class="n">bxf</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.sparse.linalg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">spla</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calor_1d</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">g0</span><span class="p">,</span> <span class="n">gL</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="n">metodo</span><span class="o">=</span><span class="s1">&#39;crank-nicolson&#39;</span><span class="p">,</span>
+             <span class="n">direita</span><span class="o">=</span><span class="s1">&#39;dirichlet&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Resolve a * u_xx = u_t para 0 &lt;= x &lt;= xf, 0 &lt;= t &lt;= T</span>
+<span class="sd">    Resolve u_t = alpha*u_xx em 0 &lt; x &lt; L, 0 &lt; t &lt;= T, pelo método theta.</span>
 
-<span class="sd">    it0(x): condição inicial</span>
-<span class="sd">    bx0(t): condição de contorno em x = 0</span>
-<span class="sd">    bxf(t): condição de contorno em x = xf</span>
+<span class="sd">    u0(x)  : condição inicial</span>
+<span class="sd">    g0(t)  : valor de u em x = 0</span>
+<span class="sd">    gL(t)  : valor de u em x = L (direita=&#39;dirichlet&#39;) ou</span>
+<span class="sd">             valor de u_x em x = L (direita=&#39;neumann&#39;)</span>
+<span class="sd">    metodo : &#39;explicito&#39;, &#39;implicito&#39; ou &#39;crank-nicolson&#39;</span>
+
+<span class="sd">    Retorna x, t e a matriz U, com U[n, i] ~ u(x[i], t[n]).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;explicito&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;implicito&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;crank-nicolson&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}[</span><span class="n">metodo</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">nt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">dx</span><span class="p">,</span> <span class="n">dt</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">/</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
 
-    <span class="n">dx</span> <span class="o">=</span> <span class="n">xf</span> <span class="o">/</span> <span class="n">M</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># incógnitas: nós 1..nx-1 (Dirichlet) ou 1..nx (Neumann em x = L)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">direita</span> <span class="o">==</span> <span class="s1">&#39;dirichlet&#39;</span> <span class="k">else</span> <span class="n">nx</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diags</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;lil&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">direita</span> <span class="o">==</span> <span class="s1">&#39;neumann&#39;</span><span class="p">:</span>
+        <span class="n">K</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>          <span class="c1"># nó fictício eliminado</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">tocsc</span><span class="p">()</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csc&#39;</span><span class="p">)</span>
 
-    <span class="n">dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">N</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">tn</span><span class="p">):</span>
+        <span class="c1"># termos de fronteira da Eq. (4)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">g0</span><span class="p">(</span><span class="n">tn</span><span class="p">)</span>
+        <span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gL</span><span class="p">(</span><span class="n">tn</span><span class="p">)</span> <span class="k">if</span> <span class="n">direita</span> <span class="o">==</span> <span class="s1">&#39;dirichlet&#39;</span> <span class="k">else</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">gL</span><span class="p">(</span><span class="n">tn</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span>
 
-    <span class="c1"># matriz solução (linhas: espaço, colunas: tempo)</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">lu</span> <span class="o">=</span> <span class="n">spla</span><span class="o">.</span><span class="n">splu</span><span class="p">((</span><span class="n">I</span> <span class="o">-</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">K</span><span class="p">)</span><span class="o">.</span><span class="n">tocsc</span><span class="p">())</span>   <span class="c1"># fatorada uma única vez</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">I</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">K</span>
 
-    <span class="c1"># condição inicial</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">it0</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-    <span class="c1"># condições de contorno</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">bx0</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-        <span class="n">u</span><span class="p">[</span><span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">bxf</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-
-    <span class="n">r</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">/</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
-    <span class="n">r1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span>
-
-    <span class="c1"># esquema explícito de Euler</span>
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
-            <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="n">r1</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">u0</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="p">):</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">B</span> <span class="o">@</span> <span class="n">u</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta</span> <span class="o">*</span> <span class="n">c</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">c</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">]))</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">lu</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">U</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+        <span class="n">U</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">g0</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">direita</span> <span class="o">==</span> <span class="s1">&#39;dirichlet&#39;</span><span class="p">:</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">gL</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">U</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="metodo-de-euler-implicito-regressivo">
-<h2>2. Método de Euler Implícito Regressivo<a class="headerlink" href="#metodo-de-euler-implicito-regressivo" title="Link para este cabeçalho">#</a></h2>
-<p>Nesta seçāo, consideramos outro algoritmo chamado método implícito de Euler para trás, que surge ao substituir a aproximaçāo por diferenças regressivas (backward difference) para a derivada parcial de primeira ordem no lado direito da Eq. (1), resultando em:</p>
-<p>\begin{equation*}
-A \frac{u_{i+1}^k-2 u_i^k+u_{i-1}^k}{\Delta x^2}=\frac{u_i^k-u_i^{k-1}}{\Delta t}
-\tag{7}
-\end{equation*}</p>
-<p>ou, equivalentemente,</p>
-<p>\begin{equation*}
--r u_{i-1}^k+(1+2 r) u_i^k-r u_{i+1}^k=u_i^{k-1} \quad \operatorname{com} r=A \frac{\Delta t}{\Delta x^2}
-\tag{8}
-\end{equation*}</p>
-<p>para <span class="math notranslate nohighlight">\(i=1,2, \ldots, M-1\)</span>.</p>
-<p>Se os valores de <span class="math notranslate nohighlight">\(u_0^k\)</span> e <span class="math notranslate nohighlight">\(u_M^k\)</span> nas extremidades sāo dados por condiçōes de contorno do tipo Dirichlet, entāo a equaçāo acima pode ser escrita como um sistema de equações lineares simultâneas:</p>
-<p>\begin{equation*}
-\left[\begin{array}{cccccc}
-1+2 r &amp; -r &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \
--r &amp; 1+2 r &amp; -r &amp; \cdots &amp; 0 &amp; 0 \
-0 &amp; -r &amp; 1+2 r &amp; \cdots &amp; 0 &amp; 0 \
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \
-0 &amp; 0 &amp; 0 &amp; \cdots &amp; 1+2 r &amp; -r \
-0 &amp; 0 &amp; 0 &amp; \cdots &amp; -r &amp; 1+2 r
-\end{array}\right]\left[\begin{array}{c}
-u_1^k \
-u_2^k \
-u_3^k \
-\vdots \
-u_{M-2}^k \
-u_{M-1}^k
-\end{array}\right]=\left[\begin{array}{c}
-u_1^{k-1}+r u_0^k \
-u_2^{k-1} \
-u_3^{k-1} \
-\vdots \
-u_{M-2}^{k-1} \
-u_{M-1}^{k-1}+r u_M^k
-\end{array}\right]
-\tag{9}
-\end{equation*}</p>
-<p>A matriz dos coeficientes é tridiagonal e, portanto, o sistema linear pode ser resolvido eficientemente por métodos especializados para matrizes tridiagonais, como o algoritmo de Thomas.</p>
-<p>E quanto ao caso em que são fornecidos os valores de <span class="math notranslate nohighlight">\(\left.\frac{\partial u}{\partial x}\right|_{x=0}=b_0^{\prime}(t)\)</span> em uma das extremidades?</p>
-<p>Nesse caso, aproximamos essa condiçāo de contorno do tipo Neumann por</p>
-<p>\begin{equation*}
-\frac{u_1^k-u_{-1}^k}{2 \Delta x}=b_0^{\prime}(k),
-\tag{10}
-\end{equation*}</p>
-<p>e a combinamos com uma equaçāo adicional associada à variável desconhecida <span class="math notranslate nohighlight">\(u_0^k\)</span>,</p>
-<p>\begin{equation*}
--r u_{-1}^k+(1+2 r) u_0^k-r u_1^k=u_0^{k-1},
-\tag{11}
-\end{equation*}</p>
-<p>para obter</p>
-<p>\begin{equation*}
-(1+2 r) u_0^k-2 r u_1^k=u_0^{k-1}-2 r b_0^{\prime}(k) \Delta x .
-\tag{12}
-\end{equation*}</p>
-<p>Acrescentamos essa equaçāo ao sistema dado pela Eq. (9), obtendo</p>
+<p><strong>Exemplo 8.4.2:</strong> Comparação dos três métodos</p>
+<p>Considere a equação <span class="math notranslate nohighlight">\(u_t=u_{xx}\)</span> em <span class="math notranslate nohighlight">\(0&lt;x&lt;1\)</span>, com <span class="math notranslate nohighlight">\(u(0,t)=u(1,t)=0\)</span> e condição inicial</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\left[\begin{array}{ccccccc}
-1+2 r &amp; -2 r &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\
--r &amp; 1+2 r &amp; -r &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\
-0 &amp; -r &amp; 1+2 r &amp; -r &amp; \cdots &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp; -r &amp; 1+2 r &amp; \cdots &amp; 0 &amp; 0 \\
-\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
-0 &amp; 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; 1+2 r &amp; -r \\
-0 &amp; 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; -r &amp; 1+2 r
-\end{array}\right]\left[\begin{array}{c}
-u_0^k \\
-u_1^k \\
-u_2^k \\
-u_3^k \\
-\vdots \\
-u_{M-2}^k \\
-u_{M-1}^k
-\end{array}\right]=\left[\begin{array}{c}
-u_0^{k-1}-2 r b_0^{\prime}(k) \Delta x \\
-u_1^{k-1} \\
-u_2^{k-1} \\
-u_3^{k-1} \\
-\vdots \\
-u_{M-2}^{k-1} \\
-u_{M-1}^{k-1}+r u_M^k
-\end{array}\right] .
-\end{split}\]</div>
-<p>Observe que a condiçāo de Neumann é incorporada eliminando-se o ponto fictício <span class="math notranslate nohighlight">\(u_{-1}^k\)</span>. Como consequência, a primeira linha da matriz tridiagonal é modificada: o coeficiente <span class="math notranslate nohighlight">\(-r\)</span> que apareceria em frente a <span class="math notranslate nohighlight">\(u_1^k\)</span> torna-se <span class="math notranslate nohighlight">\(-2 r\)</span>, enquanto o termo independente passa a conter a contribuiçāo da derivada prescrita na fronteira, <span class="math notranslate nohighlight">\(-2 r b_0^{\prime}(k) \Delta x\)</span>. Dessa forma, a condiçāo de fluxo (ou gradiente) na extremidade é incorporada diretamente ao sistema linear implícito.</p>
-<p>Equaçōes como a Eq. (9) ou a Eq. (13) sāo particularmente interessantes porque podem ser resolvidas de forma muito eficiente, explorando sua estrutura tridiagonal, e têm estabilidade garantida devido à sua dominância diagonal. A estabilidade incondicional da Eq. (9) pode ser demonstrada substituindo a Eq. (4) na Eq. (8):</p>
+\[u(x,0)=\sin(\pi x)+0{,}3\,\sin(4\pi x).\]</div>
+<p>Como vimos na Seção 8.1, cada modo de Fourier decai de forma independente, e a solução exata é</p>
 <div class="math notranslate nohighlight">
-\[
--r e^{-j \pi / P}+(1+2 r)-r e^{j \pi / P}=\frac{1}{\lambda},
-\]</div>
-<p>ou, equivalentemente,</p>
-<p>\begin{equation*}
-\lambda=\frac{1}{1+2 r(1-\cos (\pi / P))}, \quad|\lambda| \leq 1 . \tag{9.2.14}
-\end{equation*}</p>
-<p>Como <span class="math notranslate nohighlight">\(r \geq 0\)</span> e <span class="math notranslate nohighlight">\(1-\cos (\pi / P) \geq 0\)</span>, o denominador é sempre maior ou igual a 1 . Consequentemente,</p>
-<div class="math notranslate nohighlight">
-\[
-0&lt;\lambda \leq 1,
-\]</div>
-<p>o que implica que <span class="math notranslate nohighlight">\(|\lambda| \leq 1\)</span> para qualquer escolha de <span class="math notranslate nohighlight">\(\Delta t\)</span> e <span class="math notranslate nohighlight">\(\Delta x\)</span>. Portanto, o método é incondicionalmente estável, isto é, nāo exige nenhuma restriçāo entre o passo temporal e o espaçamento da malha para manter a estabilidade numérica.</p>
-<p>A rotina a seguir, denominada <code class="docutils literal notranslate"><span class="pre">heat_imp(</span> <span class="pre">)</span></code>, implementa esse algoritmo para resolver a EDP (1) com condiçōes de contorno usuais (do tipo Dirichlet), utilizando o sistema linear dado pela Eq. (9).</p>
+\[u(x,t)=e^{-\pi^2 t}\sin(\pi x)+0{,}3\,e^{-16\pi^2 t}\sin(4\pi x).\]</div>
+<p>Vamos calcular a solução no instante <span class="math notranslate nohighlight">\(T=0{,}1\)</span> refinando a malha no espaço e no tempo ao mesmo tempo, com <span class="math notranslate nohighlight">\(\Delta t\)</span> proporcional a <span class="math notranslate nohighlight">\(\Delta x\)</span> (tomamos <span class="math notranslate nohighlight">\(n_t=2n_x\)</span>), e medir o erro máximo em <span class="math notranslate nohighlight">\(t=T\)</span> para cada método.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">heat_imp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">it0</span><span class="p">,</span> <span class="n">bx0</span><span class="p">,</span> <span class="n">bxf</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Resolve a*u_xx = u_t para 0 &lt;= x &lt;= xf e 0 &lt;= t &lt;= T</span>
-<span class="sd">    usando o método implícito de Euler.</span>
-
-<span class="sd">    Parâmetros</span>
-<span class="sd">    ----------</span>
-<span class="sd">    a   : coeficiente de difusão</span>
-<span class="sd">    xf  : comprimento do domínio espacial</span>
-<span class="sd">    T   : tempo final</span>
-<span class="sd">    it0 : função da condição inicial u(x,0)</span>
-<span class="sd">    bx0 : função da condição de contorno em x=0</span>
-<span class="sd">    bxf : função da condição de contorno em x=xf</span>
-<span class="sd">    M   : número de subintervalos espaciais</span>
-<span class="sd">    N   : número de subintervalos temporais</span>
-
-<span class="sd">    Retorna</span>
-<span class="sd">    -------</span>
-<span class="sd">    u : matriz (M+1) x (N+1)</span>
-<span class="sd">    x : vetor espacial</span>
-<span class="sd">    t : vetor temporal</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">dx</span> <span class="o">=</span> <span class="n">xf</span> <span class="o">/</span> <span class="n">M</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">N</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="c1"># solução</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-
-    <span class="c1"># condição inicial</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">it0</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-    <span class="c1"># condições de contorno</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">bx0</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-        <span class="n">u</span><span class="p">[</span><span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">bxf</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-
-    <span class="n">r</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">/</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
-    <span class="n">r2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span>
-
-    <span class="c1"># matriz tridiagonal A</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">r2</span>
-
-        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">r</span>
-            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">r</span>
-
-    <span class="c1"># avanço temporal</span>
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-
-        <span class="n">b</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">M</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-        <span class="c1"># contribuição das fronteiras</span>
-        <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
-        <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="n">M</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
-
-        <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">M</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="o-metodo-de-crank-nicholson">
-<h2>3. O Método de Crank-Nicholson<a class="headerlink" href="#o-metodo-de-crank-nicholson" title="Link para este cabeçalho">#</a></h2>
-<p>Voltemos agora à Eq. (7) e tentemos aprimorar o método implícito de Euler regressivo. A aproximaçāo por diferenças no lado esquerdo é tomada no instante de tempo <span class="math notranslate nohighlight">\(k\)</span>, enquanto a aproximaçāo por diferenças no lado direito é tomada no ponto médio entre os instantes <span class="math notranslate nohighlight">\(k\)</span> e <span class="math notranslate nohighlight">\(k-1\)</span>, se a interpretarmos como uma aproximaçāo por diferença central com passo temporal <span class="math notranslate nohighlight">\(\Delta t / 2\)</span>. Isso nāo parece inconsistente?</p>
-<p>Que tal tomar as aproximaçōes por diferenças de ambos os lados no mesmo instante de tempo — por exemplo, no ponto médio entre <span class="math notranslate nohighlight">\(k+1\)</span> e <span class="math notranslate nohighlight">\(k\)</span> - para manter um equilíbrio? Para isso, tomamos a média das aproximaçōes por diferenças centrais do lado esquerdo nos instantes <span class="math notranslate nohighlight">\(k+1\)</span> e <span class="math notranslate nohighlight">\(k\)</span>, obtendo</p>
-<p>\begin{equation*}
-\frac{A}{2}\left(\frac{u_{i+1}^{k+1}-2 u_i^{k+1}+u_{i-1}^{k+1}}{\Delta x^2}+\frac{u_{i+1}^k-2 u_i^k+u_{i-1}^k}{\Delta x^2}\right)=\frac{u_i^{k+1}-u_i^k}{\Delta t} . \tag{15}
-\end{equation*}</p>
-<p>Essa expressāo conduz ao chamado método de Crank-Nicholson:</p>
-<p>\begin{equation*}
--r u_{i+1}^{k+1}+2(1+r) u_i^{k+1}-r u_{i-1}^{k+1}=r u_{i+1}^k+2(1-r) u_i^k+r u_{i-1}^k,
-\tag{16}
-\end{equation*}</p>
-<p>com</p>
-<div class="math notranslate nohighlight">
-\[
-r=A \frac{\Delta t}{\Delta x^2} .
-\]</div>
-<p>O método de Crank-Nicholson pode ser visto como uma combinaçāo dos métodos explícito e implícito, utilizando a média entre os operadores espaciais avaliados nos tempos <span class="math notranslate nohighlight">\(k\)</span> e <span class="math notranslate nohighlight">\(k+1\)</span>. Como resultado, ele mantém a estabilidade incondicional do método implícito e alcança segunda ordem de precisão no tempo, enquanto os métodos de Euler direto e regressivo possuem apenas primeira ordem de precisão temporal. Por essa razāo, o método de Crank-Nicholson é amplamente utilizado na resoluçāo numérica da equaçāo do calor e de outras equaçōes parabólicas.</p>
-<p>Com condições de contorno de Dirichlet/Neumann em <span class="math notranslate nohighlight">\(x_0\)</span> e <span class="math notranslate nohighlight">\(x_M\)</span>, respectivamente A Eq. (16) pode ser escrita no seguinte sistema tridiagonal de equaçōes:</p>
-<p>\begin{align*}
-&amp; {\left[\begin{array}{cccccc}
-2(1+r) &amp; -r &amp; 0 &amp; \cdot &amp; 0 &amp; 0 \
--r &amp; 2(1+r) &amp; -r &amp; \cdot &amp; 0 &amp; 0 \
-0 &amp; -r &amp; 2(1+r) &amp; \cdot &amp; 0 &amp; 0 \
-\cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot \
-0 &amp; 0 &amp; 0 &amp; \cdot &amp; 2(1+r) &amp; -r \
-0 &amp; 0 &amp; 0 &amp; \cdot &amp; -2 r &amp; 2(1+r)
-\end{array}\right]\left[\begin{array}{c}
-u_1^{k+1} \
-u_2^{k+1} \
-u_3^{k+1} \
-\cdot \
-u_{M-1}^{k+1} \
-u_M^{k+1}
-\end{array}\right]} \
-&amp; =\left[\begin{array}{cccccc}
-2(1-r) &amp; r &amp; 0 &amp; \cdot &amp; 0 &amp; 0 \
-r &amp; 2(1-r) &amp; r &amp; \cdot &amp; 0 &amp; 0 \
-0 &amp; r &amp; 2(1-r) &amp; \cdot &amp; 0 &amp; 0 \
-\cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot &amp; \cdot \
-0 &amp; 0 &amp; 0 &amp; \cdot &amp; 2(1-r) &amp; r \
-0 &amp; 0 &amp; 0 &amp; \cdot &amp; 2 r &amp; 2(1-r)
-\end{array}\right]\left[\begin{array}{c}
-u_1^k \
-u_2^k \
-u_3^k \
-\cdot \
-u_{M-1}^k \
-u_M^k
-\end{array}\right]+\left[\begin{array}{c}
-r\left(u_0^{k+1}+u_0^k\right) \
-0 \
-0 \
-\cdot \
-0 \
-2 r\left(b_M^{\prime}(k+1)+b_M^{\prime}(k)\right)
-\end{array}\right] \tag{9.2.17}
-\end{align*}</p>
-<p>Esse sistema também pode ser resolvido de maneira muito eficiente devido à sua estrutura tridiagonal. Além disso, sua estabilidade incondicional pode ser demonstrada substituindo a Eq. (4) na Eq. (16), obtendo-se</p>
-<div class="math notranslate nohighlight">
-\[
-2 \lambda(1+r(1-\cos (\pi / P)))=2(1-r(1-\cos (\pi / P))),
-\]</div>
-<p>ou seja,</p>
-<p>\begin{equation*}
-\lambda=\frac{1-r(1-\cos (\pi / P))}{1+r(1-\cos (\pi / P))}, \quad|\lambda| \leq 1 .
-\tag{18}
-\end{equation*}</p>
-<p>O algoritmo <code class="docutils literal notranslate"><span class="pre">heat_CN()</span></code> implementa o método de Crank-Nicholson.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">heat_CN</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">it0</span><span class="p">,</span> <span class="n">bx0</span><span class="p">,</span> <span class="n">bxf</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Método de Crank-Nicolson para a equação do calor</span>
-
-<span class="sd">        u_t = a u_xx</span>
-
-<span class="sd">    em 0 &lt;= x &lt;= xf, 0 &lt;= t &lt;= T.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">dx</span> <span class="o">=</span> <span class="n">xf</span> <span class="o">/</span> <span class="n">M</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">N</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-
-    <span class="c1"># condição inicial</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">it0</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-
-    <span class="c1"># condições de contorno</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">bx0</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-        <span class="n">u</span><span class="p">[</span><span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">bxf</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-
-    <span class="n">r</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">/</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
-
-    <span class="n">r1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span>
-    <span class="n">r2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span>
-
-    <span class="c1"># matriz tridiagonal</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">r1</span>
-
-        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">r</span>
-            <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">r</span>
-
-    <span class="c1"># avanço temporal</span>
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-
-        <span class="n">b</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span>
-                <span class="p">[</span><span class="n">r</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">]],</span>
-                <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span>
-                <span class="p">[</span><span class="n">r</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="n">M</span><span class="p">,</span> <span class="n">k</span><span class="p">]]</span>
-            <span class="p">))</span>
-            <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-            <span class="o">+</span> <span class="n">r2</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">M</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="p">)</span>
-
-        <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">M</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Exemplo 8.4.2:</strong> EDP Parabólica Unidimensional: Equação do Fluxo de Calor</p>
-<p>Considere a EDP parabólica</p>
-<p>\begin{equation*}
-\frac{\partial^2 u(x, t)}{\partial x^2}=\frac{\partial u(x, t)}{\partial t}, \quad 0 \leq x \leq 1, \quad 0 \leq t \leq 0.1 . \tag{E.1}
-\end{equation*}</p>
-<p>com a condiçāo inicial e as condiçōes de contorno</p>
-<p>\begin{equation*}
-u(x, 0)=\sin (\pi x), \quad u(0, t)=0, \quad u(1, t)=0 . \tag{E9.2.2}
-\end{equation*}</p>
-<p>Construímos o programa <code class="docutils literal notranslate"><span class="pre">solve_heat</span></code> para utilizar as rotinas <code class="docutils literal notranslate"><span class="pre">heat_exp()</span></code> , <code class="docutils literal notranslate"><span class="pre">heat_imp()</span></code> e <code class="docutils literal notranslate"><span class="pre">heat_CN()</span></code> na resoluçāo dessa equaçāo.</p>
-<p>Observe que, com o espaçamento espacial</p>
-<div class="math notranslate nohighlight">
-\[
-\Delta x=\frac{x_f}{M}=\frac{1}{20}
-\]</div>
-<p>e o passo temporal</p>
-<div class="math notranslate nohighlight">
-\[
-\Delta t=\frac{T}{N}=\frac{0.1}{100}=0.001
-\]</div>
-<p>temos</p>
-<p>\begin{equation*}
-r=A \frac{\Delta t}{\Delta x^2}=1 \cdot \frac{0.001}{(1 / 20)^2}=0.4 . \tag{E9.2.3}
-\end{equation*}</p>
-<p>Como esse valor satisfaz a condiçāo de estabilidade</p>
-<div class="math notranslate nohighlight">
-\[
-r \leq \frac{1}{2},
-\]</div>
-<p>dada pela Eq. (6), os três métodos produzem resultados satisfatórios, apresentando um erro relativo de aproximadamente 0.013 .</p>
-<p>Entretanto, se diminuirmos o espaçamento espacial para</p>
-<div class="math notranslate nohighlight">
-\[
-\Delta x=\frac{1}{25},
-\]</div>
-<p>a fim de obter uma resoluçāo espacial mais refinada, obtemos</p>
-<div class="math notranslate nohighlight">
-\[
-r=0.625,
-\]</div>
-<p>o que viola a condiçāo de estabilidade do método explícito. Nessa situaçāo, o método de Euler direto ( <code class="docutils literal notranslate"><span class="pre">heat_exp(</span> <span class="pre">)</span></code> ) torna-se instável e a soluçāo diverge. Em contraste, o método implícito de Euler regressivo ( <code class="docutils literal notranslate"><span class="pre">heat_imp(</span> <span class="pre">)</span></code> ) e o método de Crank-Nicholson ( <code class="docutils literal notranslate"><span class="pre">heat_CN(</span> <span class="pre">)</span></code> ) continuam funcionando adequadamente, conforme pode ser vistos nos gráficos.</p>
-<p>Por outro lado, se mantivermos o espaçamento espacial em</p>
-<div class="math notranslate nohighlight">
-\[
-\Delta x=\frac{1}{25}
-\]</div>
-<p>e reduzirmos o passo temporal para</p>
-<div class="math notranslate nohighlight">
-\[
-\Delta t=\frac{0.1}{120},
-\]</div>
-<p>temos</p>
-<div class="math notranslate nohighlight">
-\[
-r=\frac{0.1 / 120}{(1 / 25)^2} \approx 0.521 .
-\]</div>
-<p>Esse valor ainda está muito próximo do limite de estabilidade do método explícito. Ao utilizar um passo temporal suficientemente pequeno (de forma que a condiçāo <span class="math notranslate nohighlight">\(r \leq 1 / 2\)</span> seja efetivamente satisfeita), o método explícito volta a apresentar comportamento estável. Nessas condiçōes, tanto o método explícito quanto os métodos implícitos produzem soluçōes bastante precisas, com erro relativo inferior a 0.001.</p>
-<p>Isso significa que, com cerca de 30% a mais de esforço computacional, obtém-se uma soluçāo mais precisa, apesar de o valor</p>
-<div class="math notranslate nohighlight">
-\[
-r=0.5208
-\]</div>
-<p>nāo satisfazer rigorosamente a condiçāo de estabilidade.
-Esse resultado sugere que a condiçāo</p>
-<div class="math notranslate nohighlight">
-\[
-r \leq \frac{1}{2}
-\]</div>
-<p>para a estabilidade do método explícito de Euler direto nāo é uma condiçāo necessária, mas apenas uma condiçāo suficiente.</p>
-<p>Além disso, quando o método explícito converge, sua precisāo pode ser superior à do método implícito de Euler regressivo. Entretanto, de modo geral, ela nāo supera a precisāo obtida pelo método de CrankNicholson.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#solve_heat</span>
-
-<span class="c1"># parâmetro da equação u_t = a*u_xx</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span>
-
-<span class="c1"># condição inicial</span>
-<span class="n">it0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
-
-<span class="c1"># condições de contorno</span>
-<span class="n">bx0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">0.0</span>
-<span class="n">bxf</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">0.0</span>
-
-<span class="c1"># parâmetros da malha</span>
-<span class="n">xf</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">M</span> <span class="o">=</span> <span class="mi">25</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u_exata</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+                        <span class="o">+</span> <span class="mf">0.3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">16</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+<span class="n">u0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">u_exata</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">zero</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">0.0</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
 
-<span class="c1"># solução analítica</span>
-<span class="n">uo</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">metodo</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;explicito&#39;</span><span class="p">,</span> <span class="s1">&#39;implicito&#39;</span><span class="p">,</span> <span class="s1">&#39;crank-nicolson&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Método </span><span class="si">{</span><span class="n">metodo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;nx&#39;</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;nt&#39;</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;r&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;erro máximo&#39;</span><span class="si">:</span><span class="s2">&gt;13</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;razão&#39;</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">erro_ant</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">nx</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">]:</span>
+        <span class="n">nt</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">nx</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">calor_1d</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">nt</span><span class="p">,</span> <span class="n">metodo</span><span class="p">)</span>
+        <span class="n">erro</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">u_exata</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">)))</span>
+        <span class="n">razao</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">erro_ant</span><span class="o">/</span><span class="n">erro</span><span class="si">:</span><span class="s2">7.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">erro_ant</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nx</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">nt</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">T</span><span class="o">/</span><span class="n">nt</span><span class="o">*</span><span class="n">nx</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s2">6.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">erro</span><span class="si">:</span><span class="s2">13.3e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">razao</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">erro_ant</span> <span class="o">=</span> <span class="n">erro</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Método explicito
+   nx    nt      r   erro máximo   razão
+   10    20   0.50     6.164e-03 
+   20    40   1.00     1.948e+02    0.00
+   40    80   2.00     8.187e+50    0.00
+   80   160   4.00    7.518e+171    0.00
 
-<span class="c1"># Método explícito</span>
-<span class="n">u1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">heat_exp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">it0</span><span class="p">,</span> <span class="n">bx0</span><span class="p">,</span> <span class="n">bxf</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+Método implicito
+   nx    nt      r   erro máximo   razão
+   10    20   0.50     1.185e-02 
+   20    40   1.00     5.239e-03    2.26
+   40    80   2.00     2.445e-03    2.14
+   80   160   4.00     1.179e-03    2.07
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
-<span class="n">Tgrid</span><span class="p">,</span> <span class="n">Xgrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">Tgrid</span><span class="p">,</span> <span class="n">Xgrid</span><span class="p">,</span> <span class="n">u1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Método Explícito&#39;</span><span class="p">)</span>
+Método crank-nicolson
+   nx    nt      r   erro máximo   razão
+   10    20   0.50     2.954e-03 
+   20    40   1.00     7.379e-04    4.00
+   40    80   2.00     1.844e-04    4.00
+   80   160   4.00     4.611e-05    4.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">calor_1d</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="s1">&#39;crank-nicolson&#39;</span><span class="p">)</span>
+<span class="n">xf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 
-<span class="c1"># Método implícito</span>
-<span class="n">u2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">heat_imp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">it0</span><span class="p">,</span> <span class="n">bx0</span><span class="p">,</span> <span class="n">bxf</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">Tgrid</span><span class="p">,</span> <span class="n">Xgrid</span><span class="p">,</span> <span class="n">u2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Método Implícito&#39;</span><span class="p">)</span>
-
-<span class="c1"># Método de Crank-Nicolson</span>
-<span class="n">u3</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">heat_CN</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">it0</span><span class="p">,</span> <span class="n">bx0</span><span class="p">,</span> <span class="n">bxf</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">Tgrid</span><span class="p">,</span> <span class="n">Xgrid</span><span class="p">,</span> <span class="n">u3</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Método de Crank-Nicolson&#39;</span><span class="p">)</span>
-
-<span class="c1"># solução analítica na malha</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">Tm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
-<span class="n">Uo</span> <span class="o">=</span> <span class="n">uo</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Tm</span><span class="p">)</span>
-
-<span class="c1"># evitar divisão por zero</span>
-<span class="n">aUo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Uo</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
-
-<span class="n">MN</span> <span class="o">=</span> <span class="n">M</span> <span class="o">*</span> <span class="n">N</span>
-
-<span class="c1"># erros relativos normalizados</span>
-<span class="n">err1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">((</span><span class="n">u1</span> <span class="o">-</span> <span class="n">Uo</span><span class="p">)</span> <span class="o">/</span> <span class="n">aUo</span><span class="p">)</span> <span class="o">/</span> <span class="n">MN</span>
-<span class="n">err2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">((</span><span class="n">u2</span> <span class="o">-</span> <span class="n">Uo</span><span class="p">)</span> <span class="o">/</span> <span class="n">aUo</span><span class="p">)</span> <span class="o">/</span> <span class="n">MN</span>
-<span class="n">err3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">((</span><span class="n">u3</span> <span class="o">-</span> <span class="n">Uo</span><span class="p">)</span> <span class="o">/</span> <span class="n">aUo</span><span class="p">)</span> <span class="o">/</span> <span class="n">MN</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Erro método explícito      = </span><span class="si">{</span><span class="n">err1</span><span class="si">:</span><span class="s2">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Erro método implícito      = </span><span class="si">{</span><span class="n">err2</span><span class="si">:</span><span class="s2">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Erro Crank-Nicolson        = </span><span class="si">{</span><span class="n">err3</span><span class="si">:</span><span class="s2">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">tn</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]:</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">tn</span> <span class="o">/</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+    <span class="n">linha</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">U</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">u_exata</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">tn</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">linha</span><span class="o">.</span><span class="n">get_color</span><span class="p">(),</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;t = </span><span class="si">{</span><span class="n">tn</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;u(x, t)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Crank-Nicolson (pontos) e solução exata (linhas)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Erro método explícito      = 1.762968e-02
-Erro método implícito      = 1.053045e-03
-Erro Crank-Nicolson        = 1.050821e-03
+<img alt="../_images/198ec06b6c22fc42b562d93fb4fbb6171d9baa5721d7e3651928c2e2bfe9d04b.png" src="../_images/198ec06b6c22fc42b562d93fb4fbb6171d9baa5721d7e3651928c2e2bfe9d04b.png" />
+</div>
+</div>
+<p>Com <span class="math notranslate nohighlight">\(\Delta t\)</span> proporcional a <span class="math notranslate nohighlight">\(\Delta x\)</span>, o parâmetro <span class="math notranslate nohighlight">\(r\)</span> dobra a cada refinamento. O método explícito só funciona na malha mais grosseira, em que <span class="math notranslate nohighlight">\(r=0{,}5\)</span>; a partir daí a condição (6) é violada e a solução explode. Os dois métodos implícitos permanecem estáveis em todas as malhas. No Euler implícito o erro cai aproximadamente pela metade a cada refinamento, porque o termo <span class="math notranslate nohighlight">\(O(\Delta t)\)</span> domina; no Crank-Nicolson ele cai por 4, o que confirma a segunda ordem no tempo e no espaço. Para obter com o método explícito a mesma precisão do Crank-Nicolson na malha mais fina, seria preciso usar <span class="math notranslate nohighlight">\(\Delta t\leq\Delta x^2/2\)</span>, isto é, mais de 1200 passos de tempo em vez de 160.</p>
+<p>O gráfico mostra também o comportamento típico da difusão: o modo <span class="math notranslate nohighlight">\(\sin(4\pi x)\)</span>, mais oscilante, decai <span class="math notranslate nohighlight">\(16\)</span> vezes mais depressa que o modo <span class="math notranslate nohighlight">\(\sin(\pi x)\)</span> e praticamente desaparece antes de <span class="math notranslate nohighlight">\(t=0{,}05\)</span>.</p>
+</section>
+<section id="condicao-de-contorno-de-neumann">
+<h2>Condição de contorno de Neumann<a class="headerlink" href="#condicao-de-contorno-de-neumann" title="Link para este cabeçalho">#</a></h2>
+<p>Em muitos problemas, o que se conhece em uma extremidade é o fluxo de calor, e não a temperatura. Pela lei de Fourier, o fluxo é proporcional a <span class="math notranslate nohighlight">\(-\partial u/\partial x\)</span>; uma extremidade isolada corresponde, portanto, a <span class="math notranslate nohighlight">\(u_x(L,t)=0\)</span> e, de modo geral, podemos ter <span class="math notranslate nohighlight">\(u_x(L,t)=q(t)\)</span>. Nesse caso, <span class="math notranslate nohighlight">\(u\)</span> em <span class="math notranslate nohighlight">\(x=L\)</span> deixa de ser conhecido e passa a ser uma incógnita.</p>
+<p>Para escrever a Eq. (3) no nó <span class="math notranslate nohighlight">\(i=n_x\)</span>, precisamos do vizinho <span class="math notranslate nohighlight">\(v_{n_x+1}\)</span>, que está fora do domínio. Introduzimos então um <strong>nó fictício</strong> em <span class="math notranslate nohighlight">\(x_{n_x+1}=L+\Delta x\)</span> e aproximamos a derivada na fronteira pela diferença central:</p>
+<div class="math notranslate nohighlight">
+\[\frac{v_{n_x+1}-v_{n_x-1}}{2\Delta x}=q(t) \quad\Longrightarrow\quad v_{n_x+1}=v_{n_x-1}+2\Delta x\,q(t).\]</div>
+<p>Substituindo na Eq. (3) com <span class="math notranslate nohighlight">\(i=n_x\)</span>, o nó fictício desaparece:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dv_{n_x}}{dt}=\frac{\alpha}{\Delta x^2}\left(2v_{n_x-1}-2v_{n_x}+2\Delta x\,q(t)\right).\]</div>
+<p>O sistema (4) ganha uma incógnita: a matriz <span class="math notranslate nohighlight">\(K\)</span> passa a ter ordem <span class="math notranslate nohighlight">\(n_x\)</span>, com a última linha igual a <span class="math notranslate nohighlight">\((0,\ldots,0,2,-2)\)</span>, e a última componente de <span class="math notranslate nohighlight">\(\mathbf{c}(t)\)</span> passa a ser <span class="math notranslate nohighlight">\(2\Delta x\,q(t)\)</span>. Como a derivada foi aproximada por diferença central, a precisão de segunda ordem no espaço é mantida. Na rotina <code class="docutils literal notranslate"><span class="pre">calor_1d()</span></code>, essa opção é ativada com <code class="docutils literal notranslate"><span class="pre">direita='neumann'</span></code>, e a função <code class="docutils literal notranslate"><span class="pre">gL</span></code> passa a fornecer <span class="math notranslate nohighlight">\(q(t)\)</span>.</p>
+<p><strong>Exemplo 8.4.3:</strong> Barra com uma extremidade isolada</p>
+<p>Uma barra de comprimento <span class="math notranslate nohighlight">\(L=1\)</span>, com <span class="math notranslate nohighlight">\(\alpha=1\)</span>, tem a extremidade <span class="math notranslate nohighlight">\(x=0\)</span> mantida a temperatura zero e a extremidade <span class="math notranslate nohighlight">\(x=1\)</span> isolada, isto é, <span class="math notranslate nohighlight">\(u(0,t)=0\)</span> e <span class="math notranslate nohighlight">\(u_x(1,t)=0\)</span>. A temperatura inicial é <span class="math notranslate nohighlight">\(u(x,0)=\sin(\pi x/2)\)</span>, que já satisfaz as duas condições de contorno. Nesse caso a solução exata é</p>
+<div class="math notranslate nohighlight">
+\[u(x,t)=e^{-\pi^2 t/4}\sin\left(\frac{\pi x}{2}\right).\]</div>
+<p>Vamos resolver o problema até <span class="math notranslate nohighlight">\(T=0{,}5\)</span> com o método de Crank-Nicolson e verificar a ordem de convergência.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u_exata2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">T2</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">erro_ant</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">nx</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">]:</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">calor_1d</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">u_exata2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">zero</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span>
+                       <span class="n">nx</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">nx</span><span class="p">,</span> <span class="s1">&#39;crank-nicolson&#39;</span><span class="p">,</span> <span class="n">direita</span><span class="o">=</span><span class="s1">&#39;neumann&#39;</span><span class="p">)</span>
+    <span class="n">erro</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">u_exata2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T2</span><span class="p">)))</span>
+    <span class="n">razao</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;   razão = </span><span class="si">{</span><span class="n">erro_ant</span><span class="o">/</span><span class="n">erro</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">erro_ant</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;nx = </span><span class="si">{</span><span class="n">nx</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">   erro máximo = </span><span class="si">{</span><span class="n">erro</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}{</span><span class="n">razao</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">erro_ant</span> <span class="o">=</span> <span class="n">erro</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">tn</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]:</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">tn</span> <span class="o">/</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">U</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;t = </span><span class="si">{</span><span class="n">tn</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;u(x, t)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Extremidade x = 1 isolada&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/1640d3d02adf3e39fa6270f89f37fbda7ed35c21293b86a30563d391cda30fa9.png" src="../_images/1640d3d02adf3e39fa6270f89f37fbda7ed35c21293b86a30563d391cda30fa9.png" />
-<img alt="../_images/3711f423e32da1245f505b47db71c40cf4cc1a3e67fe11466dd36250a24881dc.png" src="../_images/3711f423e32da1245f505b47db71c40cf4cc1a3e67fe11466dd36250a24881dc.png" />
-<img alt="../_images/f6234959b278a25f93f44a41b41c13be227bb9bc566801f68bb468ed7fc1357d.png" src="../_images/f6234959b278a25f93f44a41b41c13be227bb9bc566801f68bb468ed7fc1357d.png" />
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nx =  10   erro máximo = 7.107e-04
+nx =  20   erro máximo = 1.776e-04   razão = 4.00
+nx =  40   erro máximo = 4.439e-05   razão = 4.00
+nx =  80   erro máximo = 1.110e-05   razão = 4.00
+</pre></div>
+</div>
+<img alt="../_images/9ba75baef458f5148d7c32e1ac9e55eb4a952bcecc781615d00a191fd48c8989.png" src="../_images/9ba75baef458f5148d7c32e1ac9e55eb4a952bcecc781615d00a191fd48c8989.png" />
 </div>
 </div>
-<p><strong>Comentário:</strong></p>
-<p>Este exemplo evidencia a principal diferença entre os três métodos:</p>
-<ul class="simple">
-<li><p><strong>Euler explícito (Forward Euler):</strong></p>
-<ul>
-<li><p>Simples de implementar;</p></li>
-<li><p>Exige a condição de estabilidade: <span class="math notranslate nohighlight">\(r=A \frac{\Delta t}{\Delta x^2} \leq \frac{1}{2}\)</span></p></li>
-<li><p>Pode divergir quando a malha espacial é refinada sem uma reduçāo correspondente do passo temporal.</p></li>
-</ul>
-</li>
-<li><p><strong>Euler implícito (Backward Euler):</strong></p>
-<ul>
-<li><p>Incondicionalmente estável;</p></li>
-<li><p>Requer a soluçāo de um sistema linear a cada passo de tempo;</p></li>
-<li><p>Possui precisāo temporal de primeira ordem.</p></li>
-</ul>
-</li>
-<li><p><strong>Crank-Nicholson:</strong></p>
-<ul>
-<li><p>Também é incondicionalmente estável;</p></li>
-<li><p>Requer a soluçāo de um sistema linear tridiagonal;</p></li>
-<li><p>Possui precisāo temporal de segunda ordem;</p></li>
-<li><p>Geralmente oferece a melhor combinaçāo entre estabilidade e precisāo.</p></li>
-</ul>
-</li>
-</ul>
-<p>Para este problema específico, a soluçāo analítica é</p>
-<div class="math notranslate nohighlight">
-\[
-u(x, t)=\sin (\pi x) e^{-\pi^2 t}
-\]</div>
-<p>que é a expressāo utilizada para calcular os erros relativos das aproximaçōes numéricas.</p>
+<p>O erro diminui por um fator 4 a cada refinamento, como no caso de Dirichlet. No gráfico, todos os perfis chegam à extremidade <span class="math notranslate nohighlight">\(x=1\)</span> com tangente horizontal: como não há fluxo através dela, o calor só pode deixar a barra pela extremidade <span class="math notranslate nohighlight">\(x=0\)</span>.</p>
 </section>
 <section id="equacao-do-calor-2d-transiente">
 <h2>Equação do calor 2D (transiente)<a class="headerlink" href="#equacao-do-calor-2d-transiente" title="Link para este cabeçalho">#</a></h2>
@@ -1183,7 +850,7 @@ u(x, t)=\sin (\pi x) e^{-\pi^2 t}
 <div class="math notranslate nohighlight">
 \[u_{i,j}^{k+1} = \gamma\left(u_{i+1,j}^k + u_{i-1,j}^k + u_{i,j+1}^k + u_{i,j-1}^k - 4\,u_{i,j}^k\right) + u_{i,j}^k, \qquad \gamma = \alpha\frac{\Delta t}{h^2}\]</div>
 <p>A condição de estabilidade para o caso 2D é mais restritiva que no caso 1D: <span class="math notranslate nohighlight">\(\gamma \leq 1/4\)</span>.</p>
-<p><strong>Exemplo 8.4.3:</strong> Placa retangular com aquecimento nas bordas</p>
+<p><strong>Exemplo 8.4.4:</strong> Placa retangular com aquecimento nas bordas</p>
 <p>Placa de <span class="math notranslate nohighlight">\(50 \times 30\)</span> unidades, temperatura inicial nula em toda a região interior. Condições de contorno constantes: borda superior a <span class="math notranslate nohighlight">\(80\,°C\)</span>, borda direita a <span class="math notranslate nohighlight">\(50\,°C\)</span>, bordas esquerda e inferior a <span class="math notranslate nohighlight">\(0\,°C\)</span>.</p>
 <p>Parâmetros: <span class="math notranslate nohighlight">\(\alpha = 2\)</span>, <span class="math notranslate nohighlight">\(h = 0{,}5\)</span>, <span class="math notranslate nohighlight">\(\Delta t = 0{,}01\)</span> s <span class="math notranslate nohighlight">\(\Rightarrow\)</span> <span class="math notranslate nohighlight">\(\gamma = 0{,}08 &lt; 0{,}25\)</span> (estável).</p>
 <div class="cell docutils container">
@@ -1278,28 +945,69 @@ u(x, t)=\sin (\pi x) e^{-\pi^2 t}
 <span class="g g-Whitespace">   </span><span class="mi">1354</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_html_representation</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
 <span class="g g-Whitespace">   </span><span class="mi">1356</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_html_representation</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/animation.py:1105,</span> in <span class="ni">Animation.save</span><span class="nt">(self, filename, writer, fps, dpi, codec, bitrate, extra_args, metadata, extra_anim, savefig_kwargs, progress_callback)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1102</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">new_saved_frame_seq</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">all_anim</span><span class="p">]):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1103</span>     <span class="k">for</span> <span class="n">anim</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">all_anim</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1104</span>         <span class="c1"># TODO: See if turning off blit is really necessary</span>
-<span class="ne">-&gt; </span><span class="mi">1105</span>         <span class="n">anim</span><span class="o">.</span><span class="n">_draw_next_frame</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">blit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1106</span>         <span class="k">if</span> <span class="n">progress_callback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1107</span>             <span class="n">progress_callback</span><span class="p">(</span><span class="n">frame_number</span><span class="p">,</span> <span class="n">total_frames</span><span class="p">)</span>
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/animation.py:1109,</span> in <span class="ni">Animation.save</span><span class="nt">(self, filename, writer, fps, dpi, codec, bitrate, extra_args, metadata, extra_anim, savefig_kwargs, progress_callback)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1107</span>         <span class="n">progress_callback</span><span class="p">(</span><span class="n">frame_number</span><span class="p">,</span> <span class="n">total_frames</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1108</span>         <span class="n">frame_number</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="ne">-&gt; </span><span class="mi">1109</span> <span class="n">writer</span><span class="o">.</span><span class="n">grab_frame</span><span class="p">(</span><span class="o">**</span><span class="n">savefig_kwargs</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/animation.py:1141,</span> in <span class="ni">Animation._draw_next_frame</span><span class="nt">(self, framedata, blit)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1139</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pre_draw</span><span class="p">(</span><span class="n">framedata</span><span class="p">,</span> <span class="n">blit</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1140</span> <span class="bp">self</span><span class="o">.</span><span class="n">_draw_frame</span><span class="p">(</span><span class="n">framedata</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1141</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_draw</span><span class="p">(</span><span class="n">framedata</span><span class="p">,</span> <span class="n">blit</span><span class="p">)</span>
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/animation.py:775,</span> in <span class="ni">HTMLWriter.grab_frame</span><span class="nt">(self, **savefig_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">773</span>     <span class="k">return</span>
+<span class="g g-Whitespace">    </span><span class="mi">774</span> <span class="n">f</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">775</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_format</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">776</span>                  <span class="n">dpi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span> <span class="o">**</span><span class="n">savefig_kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">777</span> <span class="n">imgdata64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">encodebytes</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">778</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_bytes</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">imgdata64</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/animation.py:1166,</span> in <span class="ni">Animation._post_draw</span><span class="nt">(self, framedata, blit)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1164</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_blit_draw</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_drawn_artists</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1165</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1166</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/figure.py:3390,</span> in <span class="ni">Figure.savefig</span><span class="nt">(self, fname, transparent, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3388</span>     <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3389</span>         <span class="n">_recursively_make_axes_transparent</span><span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3390</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">print_figure</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/backend_bases.py:1893,</span> in <span class="ni">FigureCanvasBase.draw_idle</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_idle_drawing</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1892</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_idle_draw_cntx</span><span class="p">():</span>
-<span class="ne">-&gt; </span><span class="mi">1893</span>         <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/backend_bases.py:2193,</span> in <span class="ni">FigureCanvasBase.print_figure</span><span class="nt">(self, filename, dpi, facecolor, edgecolor, orientation, format, bbox_inches, pad_inches, bbox_extra_artists, backend, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2189</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2190</span>     <span class="c1"># _get_renderer may change the figure dpi (as vector formats</span>
+<span class="g g-Whitespace">   </span><span class="mi">2191</span>     <span class="c1"># force the figure dpi to 72), so we need to set it again here.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2192</span>     <span class="k">with</span> <span class="n">cbook</span><span class="o">.</span><span class="n">_setattr_cm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">2193</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">print_method</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2194</span>             <span class="n">filename</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2195</span>             <span class="n">facecolor</span><span class="o">=</span><span class="n">facecolor</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2196</span>             <span class="n">edgecolor</span><span class="o">=</span><span class="n">edgecolor</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2197</span>             <span class="n">orientation</span><span class="o">=</span><span class="n">orientation</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2198</span>             <span class="n">bbox_inches_restore</span><span class="o">=</span><span class="n">_bbox_inches_restore</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2199</span>             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2200</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2201</span>     <span class="k">if</span> <span class="n">bbox_inches</span> <span class="ow">and</span> <span class="n">restore_bbox</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/backend_bases.py:2043,</span> in <span class="ni">FigureCanvasBase._switch_canvas_and_return_print_method.&lt;locals&gt;.&lt;lambda&gt;</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2039</span>     <span class="n">optional_kws</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1"># Passed by print_figure for other renderers.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2040</span>         <span class="s2">&quot;dpi&quot;</span><span class="p">,</span> <span class="s2">&quot;facecolor&quot;</span><span class="p">,</span> <span class="s2">&quot;edgecolor&quot;</span><span class="p">,</span> <span class="s2">&quot;orientation&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">2041</span>         <span class="s2">&quot;bbox_inches_restore&quot;</span><span class="p">}</span>
+<span class="g g-Whitespace">   </span><span class="mi">2042</span>     <span class="n">skip</span> <span class="o">=</span> <span class="n">optional_kws</span> <span class="o">-</span> <span class="p">{</span><span class="o">*</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">meth</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="p">}</span>
+<span class="ne">-&gt; </span><span class="mi">2043</span>     <span class="n">print_method</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">meth</span><span class="p">)(</span><span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">meth</span><span class="p">(</span>
+<span class="nn">   2044         *args, **{k: v for k, v</span> in <span class="ni">kwargs.items</span><span class="nt">() if k not in skip}))</span>
+<span class="g g-Whitespace">   </span><span class="mi">2045</span> <span class="k">else</span><span class="p">:</span>  <span class="c1"># Let third-parties do as they see fit.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2046</span>     <span class="n">print_method</span> <span class="o">=</span> <span class="n">meth</span>
+
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/backends/backend_agg.py:497,</span> in <span class="ni">FigureCanvasAgg.print_png</span><span class="nt">(self, filename_or_obj, metadata, pil_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">450</span> <span class="k">def</span><span class="w"> </span><span class="nf">print_png</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename_or_obj</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pil_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">451</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span><span class="sd">     Write the figure to a PNG file.</span>
+<span class="g g-Whitespace">    </span><span class="mi">453</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">495</span><span class="sd">         *metadata*, including the default &#39;Software&#39; key.</span>
+<span class="g g-Whitespace">    </span><span class="mi">496</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">497</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_print_pil</span><span class="p">(</span><span class="n">filename_or_obj</span><span class="p">,</span> <span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="n">pil_kwargs</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/backends/backend_agg.py:445,</span> in <span class="ni">FigureCanvasAgg._print_pil</span><span class="nt">(self, filename_or_obj, fmt, pil_kwargs, metadata)</span>
+<span class="g g-Whitespace">    </span><span class="mi">440</span> <span class="k">def</span><span class="w"> </span><span class="nf">_print_pil</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename_or_obj</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">pil_kwargs</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">441</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">442</span><span class="sd">     Draw the canvas, then save it using `.image.imsave` (to which</span>
+<span class="g g-Whitespace">    </span><span class="mi">443</span><span class="sd">     *pil_kwargs* and *metadata* are forwarded).</span>
+<span class="g g-Whitespace">    </span><span class="mi">444</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">445</span>     <span class="n">FigureCanvasAgg</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">446</span>     <span class="n">mpl</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">447</span>         <span class="n">filename_or_obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer_rgba</span><span class="p">(),</span> <span class="nb">format</span><span class="o">=</span><span class="n">fmt</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;upper&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">448</span>         <span class="n">dpi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">pil_kwargs</span><span class="o">=</span><span class="n">pil_kwargs</span><span class="p">)</span>
 
 <span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/backends/backend_agg.py:388,</span> in <span class="ni">FigureCanvasAgg.draw</span><span class="nt">(self)</span>
 <span class="g g-Whitespace">    </span><span class="mi">385</span> <span class="c1"># Acquire a lock on the shared font cache.</span>
@@ -1370,83 +1078,75 @@ u(x, t)=\sin (\pi x) e^{-\pi^2 t}
 <span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="k">finally</span><span class="p">:</span>
 <span class="g g-Whitespace">     </span><span class="mi">74</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/image.py:649,</span> in <span class="ni">_ImageBase.draw</span><span class="nt">(self, renderer, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">647</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">draw_image</span><span class="p">(</span><span class="n">gc</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">im</span><span class="p">,</span> <span class="n">trans</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">648</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">649</span>     <span class="n">im</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">trans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_image</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">650</span>         <span class="n">renderer</span><span class="p">,</span> <span class="n">renderer</span><span class="o">.</span><span class="n">get_image_magnification</span><span class="p">())</span>
-<span class="g g-Whitespace">    </span><span class="mi">651</span>     <span class="k">if</span> <span class="n">im</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">652</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">draw_image</span><span class="p">(</span><span class="n">gc</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">im</span><span class="p">)</span>
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/axis.py:1391,</span> in <span class="ni">Axis.draw</span><span class="nt">(self, renderer, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1388</span> <span class="n">tlb1</span><span class="p">,</span> <span class="n">tlb2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_ticklabel_bboxes</span><span class="p">(</span><span class="n">ticks_to_draw</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1390</span> <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">ticks_to_draw</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1391</span>     <span class="n">tick</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1393</span> <span class="c1"># Shift label away from axes to avoid overlapping ticklabels.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1394</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_label_position</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/image.py:939,</span> in <span class="ni">AxesImage.make_image</span><span class="nt">(self, renderer, magnification, unsampled)</span>
-<span class="g g-Whitespace">    </span><span class="mi">936</span> <span class="n">transformed_bbox</span> <span class="o">=</span> <span class="n">TransformedBbox</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">trans</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">937</span> <span class="n">clip</span> <span class="o">=</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">get_clip_box</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clip_on</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">938</span>         <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">939</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_A</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">transformed_bbox</span><span class="p">,</span> <span class="n">clip</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">940</span>                         <span class="n">magnification</span><span class="p">,</span> <span class="n">unsampled</span><span class="o">=</span><span class="n">unsampled</span><span class="p">)</span>
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/artist.py:72,</span> in <span class="ni">allow_rasterization.&lt;locals&gt;.draw_wrapper</span><span class="nt">(artist, renderer)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">72</span>     <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/image.py:454,</span> in <span class="ni">_ImageBase._make_image</span><span class="nt">(self, A, in_bbox, out_bbox, clip_bbox, magnification, unsampled, round_to_pixel_border)</span>
-<span class="g g-Whitespace">    </span><span class="mi">445</span>     <span class="n">scaled_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span> <span class="k">if</span> <span class="n">da</span> <span class="o">&gt;</span> <span class="mf">1e8</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span>
-<span class="g g-Whitespace">    </span><span class="mi">447</span> <span class="c1"># Scale the input data to [.1, .9].  The Agg interpolators clip</span>
-<span class="g g-Whitespace">    </span><span class="mi">448</span> <span class="c1"># to [0, 1] internally, and we use a smaller input scale to</span>
-<span class="g g-Whitespace">    </span><span class="mi">449</span> <span class="c1"># identify the interpolated points that need to be flagged as</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">452</span> 
-<span class="g g-Whitespace">    </span><span class="mi">453</span> <span class="c1"># Always copy, and don&#39;t allow array subtypes.</span>
-<span class="ne">--&gt; </span><span class="mi">454</span> <span class="n">A_scaled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">scaled_dtype</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">455</span> <span class="c1"># Clip scaled data around norm if necessary.  This is necessary</span>
-<span class="g g-Whitespace">    </span><span class="mi">456</span> <span class="c1"># for big numbers at the edge of float64&#39;s ability to represent</span>
-<span class="g g-Whitespace">    </span><span class="mi">457</span> <span class="c1"># changes.  Applying a norm first would be good, but ruins the</span>
-<span class="g g-Whitespace">    </span><span class="mi">458</span> <span class="c1"># interpolation of over numbers.</span>
-<span class="g g-Whitespace">    </span><span class="mi">459</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">autoscale_None</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/axis.py:295,</span> in <span class="ni">Tick.draw</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">    </span><span class="mi">292</span> <span class="n">renderer</span><span class="o">.</span><span class="n">open_group</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">gid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_gid</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">293</span> <span class="k">for</span> <span class="n">artist</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">gridline</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tick1line</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tick2line</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">294</span>                <span class="bp">self</span><span class="o">.</span><span class="n">label1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">label2</span><span class="p">]:</span>
+<span class="ne">--&gt; </span><span class="mi">295</span>     <span class="n">artist</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">296</span> <span class="n">renderer</span><span class="o">.</span><span class="n">close_group</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span> <span class="bp">self</span><span class="o">.</span><span class="n">stale</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/artist.py:72,</span> in <span class="ni">allow_rasterization.&lt;locals&gt;.draw_wrapper</span><span class="nt">(artist, renderer)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">72</span>     <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/text.py:748,</span> in <span class="ni">Text.draw</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">    </span><span class="mi">745</span> <span class="n">renderer</span><span class="o">.</span><span class="n">open_group</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_gid</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">747</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cm_set</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_wrapped_text</span><span class="p">()):</span>
+<span class="ne">--&gt; </span><span class="mi">748</span>     <span class="n">bbox</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">descent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_layout</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">749</span>     <span class="n">trans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_transform</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">751</span>     <span class="c1"># don&#39;t use self.get_position here, which refers to text</span>
+<span class="g g-Whitespace">    </span><span class="mi">752</span>     <span class="c1"># position in Text:</span>
+
+<span class="nn">File ~/anaconda3/lib/python3.12/site-packages/matplotlib/text.py:442,</span> in <span class="ni">Text._get_layout</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">    </span><span class="mi">440</span> <span class="n">corners_rotated</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corners_horiz</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">441</span> <span class="c1"># compute the bounds of the rotated box</span>
+<span class="ne">--&gt; </span><span class="mi">442</span> <span class="n">xmin</span> <span class="o">=</span> <span class="n">corners_rotated</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">443</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">corners_rotated</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">444</span> <span class="n">ymin</span> <span class="o">=</span> <span class="n">corners_rotated</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+<span class="nn">File ~/.local/lib/python3.12/site-packages/numpy/core/_methods.py:45,</span> in <span class="ni">_amin</span><span class="nt">(a, axis, out, keepdims, initial, where)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="k">def</span><span class="w"> </span><span class="nf">_amin</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>           <span class="n">initial</span><span class="o">=</span><span class="n">_NoValue</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">45</span>     <span class="k">return</span> <span class="n">umr_minimum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">keepdims</span><span class="p">,</span> <span class="n">initial</span><span class="p">,</span> <span class="n">where</span><span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
-<img alt="../_images/d41e2abff1ecf2bf338e61cd2913293466d606b9878d8200df639a9b70338551.png" src="../_images/d41e2abff1ecf2bf338e61cd2913293466d606b9878d8200df639a9b70338551.png" />
+<img alt="../_images/472e5cecf34131150dabf381cec42a9ef8bb3594f63d1e989e17056c61aef24b.png" src="../_images/472e5cecf34131150dabf381cec42a9ef8bb3594f63d1e989e17056c61aef24b.png" />
 </div>
 </div>
 </section>
 <section id="exercicios">
 <h2>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
-<p>Modifique o programa <code class="docutils literal notranslate"><span class="pre">solve_heat</span></code> para que ele possa resolver as seguintes EDPs utilizando o método explícito de Euler direto, o método implícito de Euler regressivo e o método de Crank-Nicholson.</p>
-<p><strong>(a)</strong> $<span class="math notranslate nohighlight">\(
-\frac{\partial^2 u(x, t)}{\partial x^2}=\frac{\partial u(x, t)}{\partial t}, \quad 0 \leq x \leq 1, \quad 0 \leq t \leq 0.1
-\)</span>$</p>
-<p>com as condiçōes inicial e de contorno</p>
-<p>\begin{equation*}
-u(x, 0)=x^4, \quad u(0, t)=0, \quad u(1, t)=1 . \tag{P9.4.2}
-\end{equation*}</p>
-<p><strong>(i)</strong> Com a região de solução dividida em</p>
-<div class="math notranslate nohighlight">
-\[
-M \times N=10 \times 20,
-\]</div>
-<p>o método explícito de Euler direto converge?
-Qual é o valor de</p>
-<div class="math notranslate nohighlight">
-\[
-r=A \frac{\Delta t}{(\Delta x)^2} ?
-\]</div>
-<p><strong>(ii)</strong> Se aumentarmos <span class="math notranslate nohighlight">\(M\)</span> e <span class="math notranslate nohighlight">\(N\)</span> para</p>
-<div class="math notranslate nohighlight">
-\[
-M \times N=20 \times 40,
-\]</div>
-<p>visando obter maior precisāo, o método explícito de Euler direto ainda converge?
-Qual é o valor de</p>
-<div class="math notranslate nohighlight">
-\[
-r=A \frac{\Delta t}{(\Delta x)^2} ?
-\]</div>
-<p><strong>(iii)</strong> Qual deve ser o número <span class="math notranslate nohighlight">\(N\)</span> de subintervalos ao longo do eixo <span class="math notranslate nohighlight">\(t\)</span> para que o valor de <span class="math notranslate nohighlight">\(r\)</span> permaneça o mesmo quando <span class="math notranslate nohighlight">\(M=20\)</span> ?</p>
-<p>Com esse valor de <span class="math notranslate nohighlight">\(r\)</span>, o método explícito de Euler direto converge?</p>
+<p>Use a rotina <code class="docutils literal notranslate"><span class="pre">calor_1d()</span></code> para resolver os problemas a seguir.</p>
+<p><strong>(a)</strong> Considere a equação <span class="math notranslate nohighlight">\(u_t=u_{xx}\)</span> em <span class="math notranslate nohighlight">\(0&lt;x&lt;1\)</span>, com <span class="math notranslate nohighlight">\(u(0,t)=0\)</span>, <span class="math notranslate nohighlight">\(u(1,t)=1\)</span> e <span class="math notranslate nohighlight">\(u(x,0)=x^3\)</span>.</p>
+<p><strong>(i)</strong> Com <span class="math notranslate nohighlight">\(n_x=20\)</span> e <span class="math notranslate nohighlight">\(T=0{,}2\)</span>, use o método explícito com <span class="math notranslate nohighlight">\(n_t=100\)</span>, <span class="math notranslate nohighlight">\(150\)</span>, <span class="math notranslate nohighlight">\(160\)</span> e <span class="math notranslate nohighlight">\(200\)</span>. Calcule <span class="math notranslate nohighlight">\(r\)</span> em cada caso e verifique se a solução é estável. Os resultados estão de acordo com a condição (6)?</p>
+<p><strong>(ii)</strong> Resolva o mesmo problema com o método de Crank-Nicolson e apenas <span class="math notranslate nohighlight">\(n_t=20\)</span>. Qual é o valor de <span class="math notranslate nohighlight">\(r\)</span>? A solução é estável? Ela é precisa? Para responder, compare-a com a solução obtida com <span class="math notranslate nohighlight">\(n_t=2000\)</span>.</p>
+<p><strong>(iii)</strong> Quando <span class="math notranslate nohighlight">\(t\to\infty\)</span>, a solução tende a um estado estacionário. Qual é ele? Verifique numericamente usando <span class="math notranslate nohighlight">\(T=2\)</span>.</p>
 <p><strong>(b)</strong> Resolva o problema de condução de calor</p>
 <div class="math notranslate nohighlight">
 \[u_{xx} = 4\,u_t, \quad 0 &lt; x &lt; 2, \quad t &gt; 0\]</div>
 <div class="math notranslate nohighlight">
 \[u(0,t) = 0, \quad u(2,t) = 0, \quad u(x,0) = 2\operatorname{sen}\!\left(\frac{\pi x}{2}\right) - \operatorname{sen}(\pi x) + 4\operatorname{sen}(2\pi x)\]</div>
-<p>Compare com a solução exata <span class="math notranslate nohighlight">\(u(x,t) = 2\,e^{-\pi^2 t/16}\operatorname{sen}(\pi x/2) - e^{-\pi^2 t/4}\operatorname{sen}(\pi x) + 4\,e^{-\pi^2 t}\operatorname{sen}(2\pi x)\)</span>.</p>
+<p>Use <span class="math notranslate nohighlight">\(\alpha=1/4\)</span>, já que a equação equivale a <span class="math notranslate nohighlight">\(u_t=\tfrac{1}{4}u_{xx}\)</span>. Compare com a solução exata <span class="math notranslate nohighlight">\(u(x,t) = 2\,e^{-\pi^2 t/16}\operatorname{sen}(\pi x/2) - e^{-\pi^2 t/4}\operatorname{sen}(\pi x) + 4\,e^{-\pi^2 t}\operatorname{sen}(2\pi x)\)</span>.</p>
 <p><strong>Problemas adicionais — Barra de 40 cm</strong> (Fonte: Boyce e DiPrima, 2024)</p>
 <p>Extremidades mantidas a <span class="math notranslate nohighlight">\(0\,°C\)</span>, <span class="math notranslate nohighlight">\(\alpha^2 = 1\)</span>. Para cada condição inicial abaixo, resolva numericamente com os três métodos e construa o gráfico de <span class="math notranslate nohighlight">\(u(x,t)\)</span> para alguns instantes de tempo.</p>
 <p><strong>(c)</strong> <span class="math notranslate nohighlight">\(u(x,0) = 50, \quad 0 &lt; x &lt; 40\)</span></p>
@@ -1525,10 +1225,13 @@ r=A \frac{\Delta t}{(\Delta x)^2} ?
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-metodo-explicito-de-euler-para-frente">1. O Método Explícito de Euler para Frente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discretizacao-no-espaco-o-metodo-das-linhas">Discretização no espaço: o método das linhas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-metodo-explicito">O método explícito</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forma-matricial-do-metodo-explicito">Forma matricial do método explícito</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-euler-implicito-regressivo">2. Método de Euler Implícito Regressivo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#o-metodo-de-crank-nicholson">3. O Método de Crank-Nicholson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estabilidade">Estabilidade</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-implicitos-euler-implicito-e-crank-nicolson">Métodos implícitos: Euler implícito e Crank-Nicolson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uma-rotina-para-os-tres-metodos">Uma rotina para os três métodos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condicao-de-contorno-de-neumann">Condição de contorno de Neumann</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equacao-do-calor-2d-transiente">Equação do calor 2D (transiente)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
 </ul>

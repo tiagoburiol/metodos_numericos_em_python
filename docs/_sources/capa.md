@@ -1,2 +1,2 @@
 
-![Capa](capa.png)
+![Capa](capa_web.jpg)

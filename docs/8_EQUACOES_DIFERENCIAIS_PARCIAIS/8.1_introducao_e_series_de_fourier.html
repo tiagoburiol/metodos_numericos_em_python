@@ -156,8 +156,8 @@
       
     
     
-    <img src="../_static/capa.png" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
-    <script>document.write(`<img src="../_static/capa.png" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
+    <img src="../_static/capa_web.jpg" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
+    <script>document.write(`<img src="../_static/capa_web.jpg" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
   
   
 </a></div>
@@ -238,9 +238,6 @@
 <li class="toctree-l2"><a class="reference internal" href="8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -465,12 +462,12 @@ document.write(`
 <p>Um método importante para resolver equações diferenciais parciais, conhecido como <strong>método de separação de variáveis</strong>, transforma a equação diferencial parcial por um conjunto de equações diferenciais ordinárias. A resolução muitas vezes requer condições iniciais ou de contorno e série em senos e/ou cossenos conhecidas como <strong>séries de Fourier</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788521638841/epubcfi/6/44%5B%3Bvnd.vst.idref%3Dchapter10%5D!/4/406/162/13:44%5BFou%2Crie%5D">Boyce e Diprima, 2024</a>).</p>
 <section id="series-de-fourier">
 <h2>Séries de Fourier<a class="headerlink" href="#series-de-fourier" title="Link para este cabeçalho">#</a></h2>
-<p>As funçōes</p>
+<p>As funções</p>
 <div class="math notranslate nohighlight">
 \[
 \sin \left(\frac{n \pi x}{L}\right) \quad \mathrm{e} \quad \cos \left(\frac{n \pi x}{L}\right), \quad n=1,2, \ldots,
 \]</div>
-<p>sāo periódicas com período fundamental <span class="math notranslate nohighlight">\(T=2L/n\)</span> e formam, juntamente com a funçāo constante <span class="math notranslate nohighlight">\(1\)</span>, um conjunto ortogonal no intervalo <span class="math notranslate nohighlight">\([-L,L]\)</span>. Assim, toda funçāo periódica de período <span class="math notranslate nohighlight">\(2L\)</span> que satisfaça as condiçōes usuais de Fourier pode ser representada por sua <strong>série de Fourier</strong></p>
+<p>são periódicas com período fundamental <span class="math notranslate nohighlight">\(T=2L/n\)</span> e formam, juntamente com a função constante <span class="math notranslate nohighlight">\(1\)</span>, um conjunto ortogonal no intervalo <span class="math notranslate nohighlight">\([-L,L]\)</span>. Assim, toda função periódica de período <span class="math notranslate nohighlight">\(2L\)</span> que satisfaça as condições usuais de Fourier pode ser representada por sua <strong>série de Fourier</strong></p>
 <div class="math notranslate nohighlight">
 \[
 f(x) = \frac{a_0}{2}+\sum_{n=1}^{\infty}\left(a_n \cos \left(\frac{n \pi x}{L}\right)+b_n \sin \left(\frac{n \pi x}{L}\right)\right),
