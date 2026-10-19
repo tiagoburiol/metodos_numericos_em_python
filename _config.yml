@@ -128,6 +128,49 @@ sphinx:
         \usepackage{setspace}
         \setstretch{1.25}
 
+      # Folha de rosto (anverso e verso) no padrão da ABNT NBR 6029.
+      # Anverso: autor, título, edição, local, editora e ano.
+      # Verso: direitos autorais, licença, versão online e o espaço
+      # reservado (12,5 cm x 7,5 cm) para a ficha catalográfica (CIP),
+      # que é elaborada pela biblioteca e inclui o ISBN.
+      maketitle: |
+        \begin{titlepage}
+          \setstretch{1.15}
+          \centering
+          {\large\sffamily Tiago M. Buriol\par}
+          \vspace*{\stretch{2}}
+          {\Huge\sffamily\bfseries Caderno Didático de\\[0.3em]
+           Métodos Numéricos em Python\par}
+          \vspace{2.5cm}
+          {\large\sffamily 1ª edição\par}
+          \vspace*{\stretch{3}}
+          {\large\sffamily Santa Maria, RS\\
+           Universidade Federal de Santa Maria\\
+           2026\par}
+        \end{titlepage}
+        \begin{titlepage}
+          \setstretch{1.15}
+          \small
+          \noindent © 2026 Tiago M. Buriol.\par
+          \medskip
+          \noindent Este material é distribuído sob a licença MIT. É permitido
+          copiar, distribuir e adaptar o conteúdo, desde que mantido este
+          aviso de direitos autorais.\par
+          \medskip
+          \noindent Versão online, com todos os exemplos e códigos:\\
+          \url{https://tiagoburiol.github.io/metodos_numericos_em_python/}\par
+          \vfill
+          \begin{center}
+            {\footnotesize Dados Internacionais de Catalogação na Publicação (CIP)\par}
+            \vspace{0.2cm}
+            % Espaço reservado para a ficha catalográfica (12,5 cm x 7,5 cm).
+            % Substituir o \fbox pelo conteúdo ou imagem da ficha quando pronta.
+            {\setlength{\fboxsep}{0pt}%
+             \fbox{\parbox[c][7.5cm][c]{12.5cm}{\centering\color{gray}\footnotesize
+               Espaço reservado para a ficha catalográfica}}}\par
+          \end{center}
+        \end{titlepage}
+
 
 
 # Information about where the book exists on the web
