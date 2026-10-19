@@ -19,6 +19,8 @@ Uma versão online, em HTML, contendo todos os exemplos e código, permitindo "c
 
 **Nota sobre as fontes.** Estas notas foram elaboradas a partir da experiência do autor com as seguintes disciplinas da UFSM: MTM1013 – Métodos Numéricos e Computacionais (Matemática – Bacharelado e Licenciatura), MTM1072 – Cálculo Numérico (Matemática – Bacharelado), MTM1109 – Cálculo Numérico (Mestrado Profissional em Matemática – PROFMAT) e MTM224 – Métodos Numéricos Computacionais (Engenharias). Seu conteúdo baseia-se na bibliografia dessas disciplinas, em especial em Chapra e Canale, *Métodos Numéricos para Engenharia*, Burden e Faires, *Análise Numérica*, e Arenales e Darezzo, *Cálculo Numérico: Aprendizagem com Apoio de Software*, cuja leitura se recomenda como complemento. A organização, a redação, os exemplos e os exercícios são do autor, exceto quando indicado no texto. Trechos, exercícios ou figuras adaptados de outras obras trazem a indicação da fonte. Nas seções em que a exposição segue de perto uma obra específica, isso é informado no início da seção.
 
+**Uso de inteligência artificial.** Na preparação destas notas, foram utilizadas ferramentas de inteligência artificial generativa (Claude, da Anthropic) para revisão de redação, sugestão de exemplos e exercícios, geração e depuração de código. Todo o conteúdo foi revisado, verificado e, quando necessário, reescrito pelo autor, que é o único responsável pela obra, incluindo eventuais erros.
+
 ---
 ```{rubric} Como usar os notebooks Jupyter
 ```
