@@ -5,8 +5,9 @@ Uso, depois de `jb build . --builder pdflatex`:
     python3 adiciona_capa.py [entrada.pdf] [saida.pdf]
 
 Por padrão lê _build/latex/book.pdf e grava o PDF publicado em docs/.
-A capa ocupa a folha inteira: a imagem é cortada levemente no topo e na
-base e esticada na largura até a proporção da página do livro.
+A capa ocupa a folha inteira. O ideal é capa.png já vir na proporção da
+página (Carta a 300 dpi: 2550 x 3300 px); se não vier, a imagem é cortada
+levemente no topo e na base e esticada na largura até essa proporção.
 Requer pillow e pypdf.
 """
 
@@ -29,13 +30,14 @@ def pagina_da_capa(largura_pt, altura_pt):
     """Gera um PDF de uma página com a capa ocupando largura_pt x altura_pt."""
     img = Image.open(CAPA).convert("RGB")
     w, h = img.size
-    img = img.crop((0, CORTE, w, h - CORTE))
-    h = img.size[1]
-    # estica na largura até a proporção exata da página
-    img = img.resize((round(h * largura_pt / altura_pt), h), Image.LANCZOS)
+    if abs(w / h - largura_pt / altura_pt) > 0.005:
+        # proporção diferente da página: corta topo e base e estica na largura
+        img = img.crop((0, CORTE, w, h - CORTE))
+        h = img.size[1]
+        img = img.resize((round(h * largura_pt / altura_pt), h), Image.LANCZOS)
 
     buf = io.BytesIO()
-    img.save(buf, format="PDF", resolution=72 * img.size[1] / altura_pt)
+    img.save(buf, format="PDF", resolution=72 * img.size[1] / altura_pt, quality=92)
     pagina = PdfReader(buf).pages[0]
     pagina.scale_to(largura_pt, altura_pt)  # elimina erros de arredondamento
     return pagina
