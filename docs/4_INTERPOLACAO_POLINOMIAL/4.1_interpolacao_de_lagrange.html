@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -462,7 +467,7 @@ document.write(`
 <p>o que apresenta algumas vantagens computacionalmente, como veremos mais para frente ao realizar a interpolação pela fórmula de Newton.</p>
 <p>Interpolar uma função <span class="math notranslate nohighlight">\(f(x) = y\)</span> em um conjunto de <span class="math notranslate nohighlight">\(n+1\)</span> pontos distintos <span class="math notranslate nohighlight">\({x_0,x_1,\ldots,x_n}\)</span> de um intervalo <span class="math notranslate nohighlight">\([a,b]\)</span> por um polinômio de significa encontrar <span class="math notranslate nohighlight">\(P_n(x)= a_0 + a_1x+\cdots+ax^n\)</span> tal que <span class="math notranslate nohighlight">\(P(x_i)=y_i\)</span> com  <span class="math notranslate nohighlight">\(i = 0,1,\ldots,n\)</span>. Ou seja, significa encontrar o polinômio de grau <span class="math notranslate nohighlight">\(n\)</span> que “passa” por  esses pontos.</p>
 <p>Na figura abaixo é mostrada um polinômio que interpola uma função a partir de 6 pontos. É possível observar que o polinômio passa pelos pontos, ou seja, <span class="math notranslate nohighlight">\(P(x_i) = y_i\)</span>, <span class="math notranslate nohighlight">\(i=0,1,\ldots,5\)</span>, e que aproxima a função razoavelmente bem a função no intervalo de <span class="math notranslate nohighlight">\(x_1\)</span> até <span class="math notranslate nohighlight">\(x_5\)</span>. No intervalo entre <span class="math notranslate nohighlight">\(x_0\)</span> e <span class="math notranslate nohighlight">\(x_1\)</span> a aproximação não é tão boa e fora do intervalo <span class="math notranslate nohighlight">\((x_0,x_5)\)</span> parece não funcionar muito bem.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/figura_3.1.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/figura_3.1.png" style="width: 800px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/figura_3.1.png" /></p>
 <p>O caso mais simples de interpolação que podemos analisar é o de encontrar a reta (polinômio de grau 1) que passa por dois pontos, <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> e <span class="math notranslate nohighlight">\((x_1,y_1)\)</span>. Nesse caso, o polinômio tem a forma <span class="math notranslate nohighlight">\(P(x)=a_0+a_1x\)</span> e para determiná-lo basta encontrar os coeficientes <span class="math notranslate nohighlight">\(a_0\)</span> e <span class="math notranslate nohighlight">\(a_1\)</span> da única reta que passa por esses dois pontos. Logo, os coeficientes podem ser obtidos resolvendo o sistema linear:</p>
 <p><span class="math notranslate nohighlight">\(\begin{cases} 
        y_0 = a_0 + a_1 x_0\\ 
@@ -497,7 +502,7 @@ e
 <div class="math notranslate nohighlight">
 \[P(x)= \frac{9}{4}-\frac{1}{4}x\]</div>
 <p>A figura abaixo mostra o resultado</p>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/4_INTERPOLACAO_POLINOMIAL/imagens/reta_dois_pontos.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/4_INTERPOLACAO_POLINOMIAL/imagens/reta_dois_pontos.png?raw=true" style="width: 600px;" /></a></p>
+<p><img alt="" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/4_INTERPOLACAO_POLINOMIAL/imagens/reta_dois_pontos.png?raw=true" /></p>
 <p>Assim, generalizando o caso anterior, para obter os coeficientes do polinômio <span class="math notranslate nohighlight">\(P(x)=a_0 + a_1x + a_2x^2+\cdots+a_nx^n\)</span>, de grau <span class="math notranslate nohighlight">\(n\)</span>, que interpola uma função a partir de <span class="math notranslate nohighlight">\(n+1\)</span> pontos <span class="math notranslate nohighlight">\((x_i,y_i)\)</span>, <span class="math notranslate nohighlight">\(i=0,1,\ldots,n\)</span>, podemos resolver o seguinte sistema</p>
 <p><span class="math notranslate nohighlight">\(\left[\begin{array}{ccccc} 
           1 &amp; x_0 &amp; x_0^2 &amp;\cdots&amp; x_0^n\\ 

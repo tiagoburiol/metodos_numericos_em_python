@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -683,7 +688,7 @@ Calcular o módulo do vetor <span class="math notranslate nohighlight">\(w\)</sp
 </div>
 </div>
 <p>Para sistema com três incógnitas, as equações envolvidas são geometricamente interpretadas como planos em <span class="math notranslate nohighlight">\(\mathbb R^3\)</span>. A figura abaixo mostra quatro possibilidades de posições relativas entre três planos distintos.</p>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/3_SISTEMAS_LINEARES/imagens/planos_interc.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/3_SISTEMAS_LINEARES/imagens/planos_interc.png?raw=true" style="width: 1200px;" /></a></p>
+<p><img alt="" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/3_SISTEMAS_LINEARES/imagens/planos_interc.png?raw=true" /></p>
 <p><strong>Condicionamento de matrizes</strong></p>
 <p>Sabemos que um sistema linear <span class="math notranslate nohighlight">\(n \times n\)</span>, <span class="math notranslate nohighlight">\(Ax=b\)</span> tem solução única se <span class="math notranslate nohighlight">\(\det(A) \neq 0\)</span>, caso <span class="math notranslate nohighlight">\(\det(A)=0\)</span> dizemos que a matriz <span class="math notranslate nohighlight">\(A\)</span> é singular e o sistema poderá ter infinitas soluções ou nenhuma solução. Mas o que acontece se a matriz é “quase singular” (<span class="math notranslate nohighlight">\(\det(A)\)</span> é muito pequeno)?</p>
 <p>Dizemos que <span class="math notranslate nohighlight">\(\det(A)=|A|\)</span> é muito pequeno se <span class="math notranslate nohighlight">\(|A|&lt;&lt;||A||\)</span> onde <span class="math notranslate nohighlight">\(||A||\)</span> é a <strong>norma</strong> da matriz <span class="math notranslate nohighlight">\(A\)</span>. A norma é um número real usado para expressar a magnitude de um vetor ou de uma matriz.</p>
@@ -1340,11 +1345,11 @@ x_1-x_2+4 x_3+3 x_4 &amp; =4 .
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_109280/3041863753.py:6: RuntimeWarning: divide by zero encountered in scalar divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_22090/3041863753.py:6: RuntimeWarning: divide by zero encountered in scalar divide
   m = M[i+1,j]/M[j,j]
-/tmp/ipykernel_109280/3041863753.py:7: RuntimeWarning: invalid value encountered in multiply
+/tmp/ipykernel_22090/3041863753.py:7: RuntimeWarning: invalid value encountered in multiply
   M[i+1] = M[i+1]-m*M[j]
-/tmp/ipykernel_109280/3041863753.py:6: RuntimeWarning: invalid value encountered in scalar divide
+/tmp/ipykernel_22090/3041863753.py:6: RuntimeWarning: invalid value encountered in scalar divide
   m = M[i+1,j]/M[j,j]
 </pre></div>
 </div>

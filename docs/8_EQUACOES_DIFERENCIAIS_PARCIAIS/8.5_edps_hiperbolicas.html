@@ -63,6 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas';</script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="next" title="Referências" href="../referencias.html" />
+    <link rel="prev" title="8.4 EDPs Parabólicas" href="8.4_edps_parabolicas.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="pt-BR"/>
   </head>
@@ -125,8 +127,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -182,7 +182,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
@@ -232,10 +232,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="8_EQUACOES_DIFERENCIAIS_PARCIAIS.html">8. Equações Diferenciais Parciais</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="8_EQUACOES_DIFERENCIAIS_PARCIAIS.html">8. Equações Diferenciais Parciais</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -438,10 +443,10 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-frac-partial-2-u-x-t-partial-x-2">\begin{equation*}
 \frac{\partial^2 u(x,t)}
 {\partial x^2}</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#u-x-0">$$
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-u-x-0">\begin{equation*}
 u(x,0)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#x-1-x-begin-equation-frac-partial-u-partial-t-x-0">x(1-x),
-\begin{equation*}
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#x-1-x-quad-frac-partial-u-partial-t-x-0">x(1-x),
+\quad
 \frac{\partial u}{\partial t}(x,0)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
 </ul>
@@ -500,13 +505,13 @@ Portanto, aproximamos a condição inicial para a derivada temporal por uma dife
 \tag{5}
 \end{equation*}
 e utilizamos essa relação para eliminar <span class="math notranslate nohighlight">\(u_i^{-1}\)</span> da Equação (3):
-$<span class="math notranslate nohighlight">\(u_i^1=r\left(u_{i+1}^{0}+u_{i-1}^{0}\right)+2(1-r)u_i^{0}-\left(u_i^1-2i_0'(x_i)\Delta t\right)
-\)</span><span class="math notranslate nohighlight">\(
+\begin{equation*}u_i^1=r\left(u_{i+1}^{0}+u_{i-1}^{0}\right)+2(1-r)u_i^{0}-\left(u_i^1-2i_0’(x_i)\Delta t\right)
+\end{equation*}
 resultando em
-\begin{equation*}u_i^1=\frac{1}{2} r\left(u_{i+1}^{0}+u_{i-1}^{0}\right)+(1-r)u_i^{0}+i_0'(x_i)\Delta t
+\begin{equation*}u_i^1=\frac{1}{2} r\left(u_{i+1}^{0}+u_{i-1}^{0}\right)+(1-r)u_i^{0}+i_0’(x_i)\Delta t
 \tag{6}
 \end{equation*}
-Utilizamos a Equação (6), juntamente com as condições iniciais, para obter \)</span>u_i^1<span class="math notranslate nohighlight">\(. Em seguida, aplicamos a Equação (9.3.3) para \)</span>k=1,2,\ldots$.</p>
+Utilizamos a Equação (6), juntamente com as condições iniciais, para obter <span class="math notranslate nohighlight">\(u_i^1\)</span>. Em seguida, aplicamos a Equação (9.3.3) para <span class="math notranslate nohighlight">\(k=1,2,\ldots\)</span>.</p>
 <p>Observe os seguintes fatos:</p>
 <ul class="simple">
 <li><p>Deve-se ter <span class="math notranslate nohighlight">\(r \leq 1\)</span> para garantir a estabilidade do método.</p></li>
@@ -541,14 +546,14 @@ Utilizamos a Equação (6), juntamente com as condições iniciais, para obter \
 \end{equation*}</p>
 <p>com as condições iniciais</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="u-x-0">
-<h1>$$
-u(x,0)<a class="headerlink" href="#u-x-0" title="Link para este cabeçalho">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="begin-equation-u-x-0">
+<h1>\begin{equation*}
+u(x,0)<a class="headerlink" href="#begin-equation-u-x-0" title="Link para este cabeçalho">#</a></h1>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="x-1-x-begin-equation-frac-partial-u-partial-t-x-0">
+<section class="tex2jax_ignore mathjax_ignore" id="x-1-x-quad-frac-partial-u-partial-t-x-0">
 <h1>x(1-x),
-\begin{equation*}
-\frac{\partial u}{\partial t}(x,0)<a class="headerlink" href="#x-1-x-begin-equation-frac-partial-u-partial-t-x-0" title="Link para este cabeçalho">#</a></h1>
+\quad
+\frac{\partial u}{\partial t}(x,0)<a class="headerlink" href="#x-1-x-quad-frac-partial-u-partial-t-x-0" title="Link para este cabeçalho">#</a></h1>
 <p>0
 \tag{E9.4.2a}
 \end{equation*}</p>
@@ -940,42 +945,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img5d01fc0494c94d209810e49a88f448c3">
+  <img id="_anim_img6f508ae4363c4683b507cfe3b7a979f7">
   <div class="anim-controls">
-    <input id="_anim_slider5d01fc0494c94d209810e49a88f448c3" type="range" class="anim-slider"
+    <input id="_anim_slider6f508ae4363c4683b507cfe3b7a979f7" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="anim5d01fc0494c94d209810e49a88f448c3.set_frame(parseInt(this.value));">
+           oninput="anim6f508ae4363c4683b507cfe3b7a979f7.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim5d01fc0494c94d209810e49a88f448c3.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim6f508ae4363c4683b507cfe3b7a979f7.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim5d01fc0494c94d209810e49a88f448c3.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim6f508ae4363c4683b507cfe3b7a979f7.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim5d01fc0494c94d209810e49a88f448c3.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim6f508ae4363c4683b507cfe3b7a979f7.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim5d01fc0494c94d209810e49a88f448c3.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim6f508ae4363c4683b507cfe3b7a979f7.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim5d01fc0494c94d209810e49a88f448c3.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim6f508ae4363c4683b507cfe3b7a979f7.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim5d01fc0494c94d209810e49a88f448c3.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim6f508ae4363c4683b507cfe3b7a979f7.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim5d01fc0494c94d209810e49a88f448c3.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim6f508ae4363c4683b507cfe3b7a979f7.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim5d01fc0494c94d209810e49a88f448c3.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim6f508ae4363c4683b507cfe3b7a979f7.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim5d01fc0494c94d209810e49a88f448c3.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim6f508ae4363c4683b507cfe3b7a979f7.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select5d01fc0494c94d209810e49a88f448c3"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select6f508ae4363c4683b507cfe3b7a979f7"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_5d01fc0494c94d209810e49a88f448c3"
+      <input type="radio" name="state" value="once" id="_anim_radio1_6f508ae4363c4683b507cfe3b7a979f7"
              >
-      <label for="_anim_radio1_5d01fc0494c94d209810e49a88f448c3">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_5d01fc0494c94d209810e49a88f448c3"
+      <label for="_anim_radio1_6f508ae4363c4683b507cfe3b7a979f7">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_6f508ae4363c4683b507cfe3b7a979f7"
              checked>
-      <label for="_anim_radio2_5d01fc0494c94d209810e49a88f448c3">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_5d01fc0494c94d209810e49a88f448c3"
+      <label for="_anim_radio2_6f508ae4363c4683b507cfe3b7a979f7">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_6f508ae4363c4683b507cfe3b7a979f7"
              >
-      <label for="_anim_radio3_5d01fc0494c94d209810e49a88f448c3">Reflect</label>
+      <label for="_anim_radio3_6f508ae4363c4683b507cfe3b7a979f7">Reflect</label>
     </form>
   </div>
 </div>
@@ -985,9 +990,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img5d01fc0494c94d209810e49a88f448c3";
-    var slider_id = "_anim_slider5d01fc0494c94d209810e49a88f448c3";
-    var loop_select_id = "_anim_loop_select5d01fc0494c94d209810e49a88f448c3";
+    var img_id = "_anim_img6f508ae4363c4683b507cfe3b7a979f7";
+    var slider_id = "_anim_slider6f508ae4363c4683b507cfe3b7a979f7";
+    var loop_select_id = "_anim_loop_select6f508ae4363c4683b507cfe3b7a979f7";
     var frames = new Array(51);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAGQCAYAAABWJQQ0AAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -16287,7 +16292,7 @@ BwBwMUZAAAAAAJiGERAAAAAApiGAAAAAADANAQQAAACAaf4f1zQZjqkh7bsAAAAASUVORK5CYII=\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim5d01fc0494c94d209810e49a88f448c3 = new Animation(frames, img_id, slider_id, 100.0,
+        anim6f508ae4363c4683b507cfe3b7a979f7 = new Animation(frames, img_id, slider_id, 100.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -16604,42 +16609,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img36f629a3d042448cb42d32f579561cb4">
+  <img id="_anim_img73d6577781294bf2ab2c7bb0e5c53f36">
   <div class="anim-controls">
-    <input id="_anim_slider36f629a3d042448cb42d32f579561cb4" type="range" class="anim-slider"
+    <input id="_anim_slider73d6577781294bf2ab2c7bb0e5c53f36" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="anim36f629a3d042448cb42d32f579561cb4.set_frame(parseInt(this.value));">
+           oninput="anim73d6577781294bf2ab2c7bb0e5c53f36.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim36f629a3d042448cb42d32f579561cb4.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim73d6577781294bf2ab2c7bb0e5c53f36.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim36f629a3d042448cb42d32f579561cb4.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim73d6577781294bf2ab2c7bb0e5c53f36.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim36f629a3d042448cb42d32f579561cb4.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim73d6577781294bf2ab2c7bb0e5c53f36.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim36f629a3d042448cb42d32f579561cb4.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim73d6577781294bf2ab2c7bb0e5c53f36.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim36f629a3d042448cb42d32f579561cb4.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim73d6577781294bf2ab2c7bb0e5c53f36.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim36f629a3d042448cb42d32f579561cb4.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim73d6577781294bf2ab2c7bb0e5c53f36.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim36f629a3d042448cb42d32f579561cb4.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim73d6577781294bf2ab2c7bb0e5c53f36.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim36f629a3d042448cb42d32f579561cb4.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim73d6577781294bf2ab2c7bb0e5c53f36.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim36f629a3d042448cb42d32f579561cb4.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim73d6577781294bf2ab2c7bb0e5c53f36.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select36f629a3d042448cb42d32f579561cb4"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select73d6577781294bf2ab2c7bb0e5c53f36"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_36f629a3d042448cb42d32f579561cb4"
+      <input type="radio" name="state" value="once" id="_anim_radio1_73d6577781294bf2ab2c7bb0e5c53f36"
              >
-      <label for="_anim_radio1_36f629a3d042448cb42d32f579561cb4">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_36f629a3d042448cb42d32f579561cb4"
+      <label for="_anim_radio1_73d6577781294bf2ab2c7bb0e5c53f36">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_73d6577781294bf2ab2c7bb0e5c53f36"
              checked>
-      <label for="_anim_radio2_36f629a3d042448cb42d32f579561cb4">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_36f629a3d042448cb42d32f579561cb4"
+      <label for="_anim_radio2_73d6577781294bf2ab2c7bb0e5c53f36">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_73d6577781294bf2ab2c7bb0e5c53f36"
              >
-      <label for="_anim_radio3_36f629a3d042448cb42d32f579561cb4">Reflect</label>
+      <label for="_anim_radio3_73d6577781294bf2ab2c7bb0e5c53f36">Reflect</label>
     </form>
   </div>
 </div>
@@ -16649,9 +16654,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img36f629a3d042448cb42d32f579561cb4";
-    var slider_id = "_anim_slider36f629a3d042448cb42d32f579561cb4";
-    var loop_select_id = "_anim_loop_select36f629a3d042448cb42d32f579561cb4";
+    var img_id = "_anim_img73d6577781294bf2ab2c7bb0e5c53f36";
+    var slider_id = "_anim_slider73d6577781294bf2ab2c7bb0e5c53f36";
+    var loop_select_id = "_anim_loop_select73d6577781294bf2ab2c7bb0e5c53f36";
     var frames = new Array(21);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAAGQCAYAAAC+tZleAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -24588,7 +24593,7 @@ AMDTKGABAAAAAADA0yhgAQAAAAAAwNMoYAEAAAAAAMDT/h9PmkAoaTbR4wAAAABJRU5ErkJggg==\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim36f629a3d042448cb42d32f579561cb4 = new Animation(frames, img_id, slider_id, 100.0,
+        anim73d6577781294bf2ab2c7bb0e5c53f36 = new Animation(frames, img_id, slider_id, 100.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -25060,42 +25065,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img3a5a72a0729440c6a1f79ee943e4c45b">
+  <img id="_anim_img74d744f13d8841449ca265fcd4a56584">
   <div class="anim-controls">
-    <input id="_anim_slider3a5a72a0729440c6a1f79ee943e4c45b" type="range" class="anim-slider"
+    <input id="_anim_slider74d744f13d8841449ca265fcd4a56584" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="anim3a5a72a0729440c6a1f79ee943e4c45b.set_frame(parseInt(this.value));">
+           oninput="anim74d744f13d8841449ca265fcd4a56584.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim3a5a72a0729440c6a1f79ee943e4c45b.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim74d744f13d8841449ca265fcd4a56584.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim3a5a72a0729440c6a1f79ee943e4c45b.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim74d744f13d8841449ca265fcd4a56584.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim3a5a72a0729440c6a1f79ee943e4c45b.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim74d744f13d8841449ca265fcd4a56584.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim3a5a72a0729440c6a1f79ee943e4c45b.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim74d744f13d8841449ca265fcd4a56584.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim3a5a72a0729440c6a1f79ee943e4c45b.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim74d744f13d8841449ca265fcd4a56584.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim3a5a72a0729440c6a1f79ee943e4c45b.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim74d744f13d8841449ca265fcd4a56584.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim3a5a72a0729440c6a1f79ee943e4c45b.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim74d744f13d8841449ca265fcd4a56584.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim3a5a72a0729440c6a1f79ee943e4c45b.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim74d744f13d8841449ca265fcd4a56584.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim3a5a72a0729440c6a1f79ee943e4c45b.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim74d744f13d8841449ca265fcd4a56584.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select3a5a72a0729440c6a1f79ee943e4c45b"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select74d744f13d8841449ca265fcd4a56584"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_3a5a72a0729440c6a1f79ee943e4c45b"
+      <input type="radio" name="state" value="once" id="_anim_radio1_74d744f13d8841449ca265fcd4a56584"
              >
-      <label for="_anim_radio1_3a5a72a0729440c6a1f79ee943e4c45b">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_3a5a72a0729440c6a1f79ee943e4c45b"
+      <label for="_anim_radio1_74d744f13d8841449ca265fcd4a56584">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_74d744f13d8841449ca265fcd4a56584"
              checked>
-      <label for="_anim_radio2_3a5a72a0729440c6a1f79ee943e4c45b">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_3a5a72a0729440c6a1f79ee943e4c45b"
+      <label for="_anim_radio2_74d744f13d8841449ca265fcd4a56584">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_74d744f13d8841449ca265fcd4a56584"
              >
-      <label for="_anim_radio3_3a5a72a0729440c6a1f79ee943e4c45b">Reflect</label>
+      <label for="_anim_radio3_74d744f13d8841449ca265fcd4a56584">Reflect</label>
     </form>
   </div>
 </div>
@@ -25105,9 +25110,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img3a5a72a0729440c6a1f79ee943e4c45b";
-    var slider_id = "_anim_slider3a5a72a0729440c6a1f79ee943e4c45b";
-    var loop_select_id = "_anim_loop_select3a5a72a0729440c6a1f79ee943e4c45b";
+    var img_id = "_anim_img74d744f13d8841449ca265fcd4a56584";
+    var slider_id = "_anim_slider74d744f13d8841449ca265fcd4a56584";
+    var loop_select_id = "_anim_loop_select74d744f13d8841449ca265fcd4a56584";
     var frames = new Array(41);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAJYCAYAAACadoJwAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -134249,7 +134254,7 @@ REREJBkGECIiIiIikgwDCBERERERSeb/Ae2aAxzcC/HhAAAAAElFTkSuQmCC\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim3a5a72a0729440c6a1f79ee943e4c45b = new Animation(frames, img_id, slider_id, 100.0,
+        anim74d744f13d8841449ca265fcd4a56584 = new Animation(frames, img_id, slider_id, 100.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -134364,6 +134369,24 @@ Solução exata: <span class="math notranslate nohighlight">\(u(x,t)=\operatorna
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="8.4_edps_parabolicas.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">8.4 EDPs Parabólicas</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../referencias.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">Referências</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -134384,10 +134407,10 @@ Solução exata: <span class="math notranslate nohighlight">\(u(x,t)=\operatorna
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-frac-partial-2-u-x-t-partial-x-2">\begin{equation*}
 \frac{\partial^2 u(x,t)}
 {\partial x^2}</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#u-x-0">$$
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#begin-equation-u-x-0">\begin{equation*}
 u(x,0)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#x-1-x-begin-equation-frac-partial-u-partial-t-x-0">x(1-x),
-\begin{equation*}
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#x-1-x-quad-frac-partial-u-partial-t-x-0">x(1-x),
+\quad
 \frac{\partial u}{\partial t}(x,0)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
 </ul>

@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -479,12 +484,12 @@ Seja a equação <span class="math notranslate nohighlight">\(f(x) = x^3-x-7=0\)
 <div class="math notranslate nohighlight">
 \[x_{n} = \phi(x_{n-1})\simeq \overline{x}\]</div>
 <p>Geometricamente, interpretamos o processo iterativo como é mostrado nas figuras abaixo, para dois casos distintos. O ponto de intersecção entre o gráfico de <span class="math notranslate nohighlight">\(\phi(x)\)</span> e a reta <span class="math notranslate nohighlight">\(y=x\)</span> é o ponto cuja abcissa é a raix procurada <span class="math notranslate nohighlight">\(\overline{x}\)</span>.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/ponto_fixo_convergente.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/ponto_fixo_convergente.png" style="width: 600px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/ponto_fixo_convergente.png" /></p>
 <p style="text-align:center"> Figura 2.3.1 - Método do ponto fixo convergindo para a raiz </p>
 <p><strong>Convergência:</strong>
 Seja <span class="math notranslate nohighlight">\(\phi(x)\)</span> uma função contínua e derivável em <span class="math notranslate nohighlight">\(I=[a,b]\)</span> centrado em <span class="math notranslate nohighlight">\(\overline{x}\)</span>, então, se <span class="math notranslate nohighlight">\(|\phi'(x)|&lt;1\)</span> em <span class="math notranslate nohighlight">\(I\)</span>, a sequência <span class="math notranslate nohighlight">\({x_k}\)</span>, <span class="math notranslate nohighlight">\(k=0,1,2,3,\ldots\)</span> gerada por <span class="math notranslate nohighlight">\(x_{k+1}=\phi(x_k)\)</span> converge para a raiz <span class="math notranslate nohighlight">\(\overline{x}\)</span> procurada.</p>
 <p>No caso do processo iterativo gerar sequências divergentes, uma interpretação geométrica é mostrada na figura a seguir.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/ponto_fixo_divergente.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/ponto_fixo_divergente.png" style="width: 600px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/ponto_fixo_divergente.png" /></p>
 <p style="text-align:center"> Figura 2.3.2 - Método do ponto fixo divergindo da raiz. </p><p><strong>Exemplo 2.3.3:</strong>
 Encontre uma raiz para <span class="math notranslate nohighlight">\(f(x)=x-cosx\)</span> com <span class="math notranslate nohighlight">\(\epsilon = 0.01\)</span>.</p>
 <div class="cell docutils container">

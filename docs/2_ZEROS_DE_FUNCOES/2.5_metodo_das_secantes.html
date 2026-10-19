@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -452,7 +457,7 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ f'(x_i) \approx \frac{f(x_i) - f(x_{i-1})}{x_i-x_{i-1}}\]</div>
 <p>Observe que, neste caso, estamos trocando a inclinação da reta tangente pela inclinação da reta secante à curva, conforme a figura abaixo. Assim, dados os pontos <span class="math notranslate nohighlight">\(x_{i−1}\)</span> e <span class="math notranslate nohighlight">\(x_i\)</span> , onde a reta secante, passando por <span class="math notranslate nohighlight">\((x_{i−1}, f(x_{i−1}) )\)</span> e <span class="math notranslate nohighlight">\((x_i , f(x_i))\)</span>, cortar o eixo das abscissas, temos a aproximação <span class="math notranslate nohighlight">\(x_{i+1}\)</span> para a raiz <span class="math notranslate nohighlight">\(\overline{x}\)</span>, conforme ilustrado</p>
-<p><a class="reference internal" href="../_images/secantes.png"><img alt="" src="../_images/secantes.png" style="width: 500px;" /></a></p>
+<p><img alt="" src="../_images/secantes.png" /></p>
 <p style="text-align:center"> Figura 2.5.1 - Interpretação geométrica do método das secantes</p>
 <p>Assim, o método de Newton, dado por</p>
 <div class="math notranslate nohighlight">

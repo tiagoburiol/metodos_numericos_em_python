@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -459,7 +464,7 @@ document.write(`
 \[I=\int_a^b f(x)dx = F(b) - F(a)\]</div>
 <p>em que a função <span class="math notranslate nohighlight">\(F(x)\)</span> é a primitiva (ou antiderivada) de <span class="math notranslate nohighlight">\(f\)</span>, ou seja, é tal que <span class="math notranslate nohighlight">\(F'(x) = f(x)\)</span>.</p>
 <p>Graficamente, considerando a função <span class="math notranslate nohighlight">\(f(x) \geq 0\)</span>, para todo <span class="math notranslate nohighlight">\(x \in [a,b]\)</span> podemos interpretar a intergral <span class="math notranslate nohighlight">\(I=\int_a^b f(x)dx\)</span> como a área entre a curva de <span class="math notranslate nohighlight">\(f\)</span> e o eixo das abcissas:</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/6_INTEGRACAO_NUMERICA/imagens/integral.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/6_INTEGRACAO_NUMERICA/imagens/integral.png" style="width: 600px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/6_INTEGRACAO_NUMERICA/imagens/integral.png" /></p>
 <p>Figura 6.1.1 - A integral definida como área sob o gráfico</p>
 <section id="soma-de-riemann">
 <h2>Soma de Riemann<a class="headerlink" href="#soma-de-riemann" title="Link para este cabeçalho">#</a></h2>
@@ -599,7 +604,7 @@ R=\{(x, y) \mid a \leq x \leq b, c \leq y \leq d\}
 $<span class="math notranslate nohighlight">\(
 \iint_R f(x, y) d A=\int_a^b \int_c^d f(x, y) d y d x=\int_c^d \int_a^b f(x, y) dxdy
 \)</span>$</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/MatComp_II/refs/heads/main/imagens/integral_iterada.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/MatComp_II/refs/heads/main/imagens/integral_iterada.png" style="width: 600px;" /></a></p>
+<p><img alt="" src="../_images/integral_iterada.png" /></p>
 <p>Figura 6.3.3: Integral iterada</p>
 <p><strong>Exemplo 6.1.2:</strong> <em>(Integração dupla por soma de Riemann)</em> Vamos agora plotar o gráfico da função, estimar o volume do sólido usando somas de Riemann e comparar o resultado numérico com o valor exato de (48 unidades de volume).</p>
 <div class="cell docutils container">
@@ -649,7 +654,7 @@ $<span class="math notranslate nohighlight">\(
 <p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/MatComp_II/refs/heads/main/imagens/riemann.png" /></p>
 <p>Figura 3: Aproximação por soma de Riemann com 4 subintervalos</p>
 <p>Quanto maior é o número de divisões da região <span class="math notranslate nohighlight">\(R\)</span> melhor será a aproximação, como podemos ver na imagem abaixo:</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/MatComp_II/refs/heads/main/imagens/aproximacoes_volumes.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/MatComp_II/refs/heads/main/imagens/aproximacoes_volumes.png" style="width: 800px;" /></a></p>
+<p><img alt="" src="../_images/aproximacoes_volumes.png" /></p>
 <p>Figura 4: Aproximação do volume com diferentes discretizações da região R (Ver ANEXO II)</p>
 <p>Para obter a aproximação pela regra do ponto médio, podemos fazer:</p>
 <div class="cell docutils container">

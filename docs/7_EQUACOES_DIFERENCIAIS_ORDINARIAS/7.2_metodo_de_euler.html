@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -456,9 +461,9 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ y_{i+1} = y_i + \phi h\]</div>
 <p>Assim, a estimativa da inclinação	é usada para extrapolar de um valor antigo <span class="math notranslate nohighlight">\(y_i\)</span> para um valor novo <span class="math notranslate nohighlight">\(y_{i+1}\)</span> em uma distância <span class="math notranslate nohighlight">\(h\)</span>.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/euler_fig01.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/euler_fig01.png" style="width: 400px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/euler_fig01.png" /></p>
 <p>A inclinação no início do intervalo é tomada como uma aproximação da inclinação média em todo o intervalo, com isso um erro é inserido. Em geral, quanto maior o tamanho do passo, maior é o erro nessa apoximação.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/euler_fig02.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/euler_fig02.png" style="width: 400px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/euler_fig02.png" /></p>
 <p>No método de Euler a inclinação é tomada como sendo a derivada primeira da função <span class="math notranslate nohighlight">\(f(x,y)\)</span>, ou seja, considerando que <span class="math notranslate nohighlight">\(\frac{dy}{dx} = f(x,y)\)</span>, escrevemos</p>
 <div class="math notranslate nohighlight">
 \[ y_{i+1} = y_i + f(x_i, y_{i}) h\]</div>
@@ -689,8 +694,8 @@ y_{i+1}^{\prime}=f\left(x_{i+1}, y_{i+1}^0\right) \quad \text{com} \quad y_{i+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fc30f9917f0&gt;,
- &lt;matplotlib.lines.Line2D at 0x7fc30f94b710&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fd66f3abe60&gt;,
+ &lt;matplotlib.lines.Line2D at 0x7fd66d274230&gt;]
 </pre></div>
 </div>
 <img alt="../_images/e6da00f1586a2151996b4f6f2e45abd947187b5a504742085359905bfc675b3b.png" src="../_images/e6da00f1586a2151996b4f6f2e45abd947187b5a504742085359905bfc675b3b.png" />

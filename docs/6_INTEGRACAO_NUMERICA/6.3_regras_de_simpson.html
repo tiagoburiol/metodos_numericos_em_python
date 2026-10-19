@@ -1,0 +1,901 @@
+
+<!DOCTYPE html>
+
+
+<html lang="pt-BR" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.3 Regras de Simpson &#8212; Caderno didático de Métodos Numéricos em Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=2efa9f5e"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/translations.js?v=daa5921a"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '6_INTEGRACAO_NUMERICA/6.3_regras_de_simpson';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="next" title="7. Equações Diferenciais Ordinárias" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html" />
+    <link rel="prev" title="6.2 Regra dos trapézios" href="6.2_regra_dos_trapezios.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="pt-BR"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/capa.png" class="logo__image only-light" alt="Caderno didático de Métodos Numéricos em Python - Home"/>
+    <script>document.write(`<img src="../_static/capa.png" class="logo__image only-dark" alt="Caderno didático de Métodos Numéricos em Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Buscar</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Caderno Didático de Métodos Numéricos em Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS.html">1. Introdução e Erros</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros.html">1.1 O básico sobre erros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante.html">1.2 Aritmética de ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas.html">1.3 Erros nas aproximações numéricas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes.html">1.4 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES.html">2. Zeros de Funções</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes.html">2.1 Localização de raízes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao.html">2.2 Método da bisseção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo.html">2.3 Método do ponto fixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson.html">2.4 Método de Newton-Raphson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes.html">2.5 Método das Secantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios.html">2.6 Raízes de polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes.html">2.7 Exemplos de aplicações</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES.html">3. Sistemas Lineares</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento.html">3.1 Forma matricial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.2_decomposicao_LU.html">3.2 Métodos diretos: decomposição LU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa.html">3.3 Eliminação de Gauss-Jordan e matriz inversa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_SISTEMAS_LINEARES/3.4_metodos_iterativos.html">3.4 Métodos iterativos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL.html">4. Interpolação Polinomial</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.html">4.1. Intepolação polinomial e fórmula de Lagrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.html">4.2 Fórmula de Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.html">4.3. Erros na interpolação</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS.html">5. Ajuste por Mínimos Quadrados</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto.html">5.1 Minimos quadrados: caso discreto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.2_minimos_quadrados_continuo.html">5.2 Minimos quadrados: caso contínuo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao.html">5.3 Ajuste não linear e linearização</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="6_INTEGRACAO_NUMERICA.html">6. Integração Numérica</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="6.1_integracao_numerica.html">6.1 Integração Numérica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6.2_regra_dos_trapezios.html">6.2 Regra dos trapézios</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">6.3 Regras de Simpson</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html">7. Equações Diferenciais Ordinárias</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao.html">7.1 Introdução</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler.html">7.2 Método de Euler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor.html">7.3 Métodos de Série de Taylor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta.html">7.4 Métodos de Runge-Kutta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8_EQUACOES_DIFERENCIAIS_PARCIAIS.html">8. Equações Diferenciais Parciais</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositório fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tiagoburiol/metodos_numericos_em_python/issues/new?title=Issue%20on%20page%20%2F6_INTEGRACAO_NUMERICA/6.3_regras_de_simpson.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abra um problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Baixe esta página">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/6_INTEGRACAO_NUMERICA/6.3_regras_de_simpson.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Baixar arquivo fonte"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir em PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo tela cheia"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>6.3 Regras de Simpson</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Conteúdo </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regra-1-3-de-simpson">Regra 1/3 de Simpson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regra-3-8-de-simpson">Regra 3/8 de Simpson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="regras-de-simpson">
+<h1>6.3 Regras de Simpson<a class="headerlink" href="#regras-de-simpson" title="Link para este cabeçalho">#</a></h1>
+<section id="regra-1-3-de-simpson">
+<h2>Regra 1/3 de Simpson<a class="headerlink" href="#regra-1-3-de-simpson" title="Link para este cabeçalho">#</a></h2>
+<p>Consiste em aproximar a integral da função pela integral de um polinômio interpolador de grau 2. Para isso dividimos o intervalo de integração subintervalos e a cada 3 pontos usamos a integral do polinômio interplolador como aproximação da integral da função nesses dois subintervalos.</p>
+<p>Então, considere uma função <span class="math notranslate nohighlight">\(f(x)\)</span> definida em três pontos distintos <span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(x_1\)</span> e <span class="math notranslate nohighlight">\(x_2\)</span> equidistantes no intervalo <span class="math notranslate nohighlight">\([a,b]\)</span>. O polinômio de Lagrange para esses pontos, considerando a mudança de variável <span class="math notranslate nohighlight">\(u = \frac{x-x_0}{h}\)</span> é dado por</p>
+<div class="math notranslate nohighlight">
+\[ P_2(u) =  f(x_0) \left( \frac{u^2-3u+2}{2}\right) + f(x_1)\left( \frac{u^2-2u}{-1}\right) + f(x_2)\left( \frac{u^2-u}{2}\right)\]</div>
+<p>A integral pode ser aproximada como segue</p>
+<div class="math notranslate nohighlight">
+\[ \int_{x_0}^{x_n} f(x) dx \approx \int_{x_0}^{x_2} P_2(x) dx= h \int_{0}^{2} P_2(u) du \]</div>
+<p>ou, ainda,</p>
+<div class="math notranslate nohighlight">
+\[ h \int_{0}^{2} P_2(u) du  = h f(x_0)(u) \Big|_0^2 + h (f(x_1)-f(x_0))\left( \frac{u^2}{2} \right) \Big|_0^2
++ \frac{h}{2}(f(x_ 2)-2f(x_1)+f(x_ 0)) \left(\frac{u^3}{3}-\frac{u^2}{2} \right) \Big|_0^2 =\]</div>
+<div class="math notranslate nohighlight">
+\[ = 2hf(x_0)+2hf(x_1)-2hf(x_0)+\frac{h}{3} ( f(x_2)-2f(x_1)+f(x_0)) = \]</div>
+<div class="math notranslate nohighlight">
+\[ \frac{h}{3}[f(x_0)+4f(x_1)+f(x_2)]\]</div>
+<p>Assim, temos</p>
+<div class="math notranslate nohighlight">
+\[ \int_{x_0}^{x_n} f(x) dx \approx \frac{h}{3}[f(x_0)+4f(x_1)+f(x_2)]\]</div>
+<p>conhecida como <strong>Regra 1/3 de Simpson</strong>.</p>
+<p>Graficamente, tem-se</p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/6_INTEGRACAO_NUMERICA/imagens/integral2.png" /></p>
+<p>Figura 6.3.1 - Aproximação pela integral do polinômio interpolador de grau 2</p>
+<p>Um <strong>limitante superior</strong> para o erro será dado por</p>
+<div class="math notranslate nohighlight">
+\[ |E_2| \leq \frac{h^5}{90} \max.\{|f^{(4)}(x)|, x_0 \leq \xi \leq x_2 \}\]</div>
+<p><strong>Exemplo 6.3.1:</strong> Calcule o valor aproximado da integral <span class="math notranslate nohighlight">\(\int_{0.5}^{1.5}\cos(x)dx\)</span> usando a regra 1/3 de Simpson.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span> <span class="n">xn</span> <span class="o">=</span> <span class="mf">1.5</span> 
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">xn</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">xn</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">yi</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+
+<span class="c1"># Regra 1/3 de Simpson </span>
+<span class="n">Is</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">yi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">yi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">yi</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Resultado 1/3 Simpson: &quot;</span><span class="p">,</span> <span class="n">Is</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resultado 1/3 Simpson:  0.5182548311717724
+</pre></div>
+</div>
+</div>
+</div>
+<p>A biblioteca <code class="docutils literal notranslate"><span class="pre">scipy</span></code> contém diversas funções para integração numérica, dentre elas as regras de Simpson. Veja um exemplo de como utilizar a seguir:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">integrate</span>
+<span class="n">integrate</span><span class="o">.</span><span class="n">simpson</span><span class="p">(</span><span class="n">yi</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">xi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5182548311717724
+</pre></div>
+</div>
+</div>
+</div>
+<p>A <strong>regra 1/3 de Simpson repetida</strong> (ou generalizada) consiste em subdividirmos o intervalo de integração <span class="math notranslate nohighlight">\([a,b]\)</span> em <span class="math notranslate nohighlight">\(n\)</span> subintervalos de ampliture <span class="math notranslate nohighlight">\(h\)</span>, que que <span class="math notranslate nohighlight">\(n\)</span> é um número par de subintervalos, com <span class="math notranslate nohighlight">\(x_0=a\)</span> e <span class="math notranslate nohighlight">\(x_n=b\)</span>, então, aplicando a regra 1/3 de Simpson a cada 2 subintervalos consecutivos, obtemos</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\int_{x_0}^{x_n} f(x) dx \approx \frac{h}{3} [f(x_0)+4f(x_1)+f(x_2)] + \frac{h}{3} [f(x_2)+4f(x_3)+f(x_4)] \\
++\cdots+ \frac{h}{3} [f(x_{n-2})+4f(x_{n-1})+f(x_n)]
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[ = \frac{h}{3} [f(x_0)+ 4f(x_1) + 2f(x_2)+ 4f(x_3)+\cdots+2f(x_{n-2})+4f(x_{n-1})+f(x_n)] = \]</div>
+<div class="math notranslate nohighlight">
+\[ = \frac{h}{3} \{f(x_0)+ 4[f(x_1) + f(x_3)+\cdots+f(x_{n-1})]+ 2[f(x_2) + f(x_4)+\cdots+f(x_{n-2})] + f(x_n)\}  \]</div>
+<p>Um <strong>limitante superior</strong> para o erro será dado por</p>
+<div class="math notranslate nohighlight">
+\[ |E_2| \leq \frac{h^4}{180}(x_n-x_0)  \,\, \max.\left\{\left|f^{(4)}(x)\right|, x_0 \leq \xi \leq x_n  \right\}\]</div>
+<p><strong>Exemplo 6.3.2:</strong> Calcule o valor aproximado da integral <span class="math notranslate nohighlight">\(\int_1^4(xe^x+3)dx\)</span> usando a regra 1/3 de Simpson para 10, 20 e 100 subintervalos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span> <span class="n">xn</span> <span class="o">=</span> <span class="mf">4.0</span> 
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">100</span><span class="p">]:</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">xn</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">xn</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> 
+    <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="n">n</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span><span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;n=&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="s2">&quot;, I=&quot;</span><span class="p">,</span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n= 10 , I= 172.8109327815904
+n= 20 , I= 172.79549085115607
+n= 100 , I= 172.79445177011632
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">integrate</span><span class="o">.</span><span class="n">simpson</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="n">xi</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>172.81093278159045
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">integrate</span><span class="o">.</span><span class="n">simpson</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="n">xi</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>172.79549085115613
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">integrate</span><span class="o">.</span><span class="n">simpson</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="n">xi</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>172.79445177011632
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="regra-3-8-de-simpson">
+<h2>Regra 3/8 de Simpson<a class="headerlink" href="#regra-3-8-de-simpson" title="Link para este cabeçalho">#</a></h2>
+<p>Consiste em aproximar a integral da função pela integral de um polinômio interpolador de grau 3. Para isso dividimos o intervalo de integração subintervalos e a cada 4 pontos usamos a integral do polinômio interpolador como aproximação da integral da função nesses 3 subintervalos.</p>
+<p>Então, considere uma função <span class="math notranslate nohighlight">\(f(x)\)</span> definida em quatro pontos distintos <span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span> e <span class="math notranslate nohighlight">\(x_3\)</span> equidistantes no intervalo <span class="math notranslate nohighlight">\([a,b]\)</span>. O polinômio interpolador de Lagrange para esses pontos, considerando a mudança de variável <span class="math notranslate nohighlight">\(u = \frac{x-x_0}{h}\)</span> é dado por</p>
+<div class="math notranslate nohighlight">
+\[P_3(u)=f(x_0) \left[ \frac{(u-1)(u-2)(u-3)}{-6}\right] + f(x_1) \left[ \frac{u(u-2)(u-3)}{2} \right]+$$ $$f(x_2) \left[\frac{u(u-1)(u-3)}{-2}\right]+ f(x_3)\left[ \frac{u(u-1)(u-2)}{6}  \right]\]</div>
+<p>ou</p>
+<div class="math notranslate nohighlight">
+\[P_3(u)=f(x_0) \left[ \frac{u^3-6u^2+11u-6}{-6}\right] + f(x_1) \left[ \frac{u^3-5u^2+6u}{2} \right]+$$ $$f(x_2) \left[ \frac{u^3-4u^2+3u}{-2}\right]  + f(x_3)\left[ \frac{u^3-3u^2+2u}{6}  \right]\]</div>
+<p>O que fornece</p>
+<div class="math notranslate nohighlight">
+\[ \int_{x_0}^{x_3} f(x) dx \approx  h \int_{0}^{3} P_3(u) du = \frac{3}{8}h \left[f(x_0)+3f(x_1)+3f(x_2)+f(x_3) \right]\]</div>
+<p>Então</p>
+<div class="math notranslate nohighlight">
+\[\int_{x_0}^{x_3} f(x) dx \approx \frac{3}{8}h \left[f(x_0)+3f(x_1)+3f(x_2)+f(x_3) \right]\]</div>
+<p>que consiste na regra 3/8 de Simpson.</p>
+<p>Graficamente, tem-se</p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/6_INTEGRACAO_NUMERICA/imagens/simpson3p8.png" /></p>
+<p>Figura 6.3.2 - Aproximação pela integral do polinômio interpolador de grau 3</p>
+<p>Um <em>limitante superior</em> para o erro será dado por</p>
+<div class="math notranslate nohighlight">
+\[ |E_3| \leq \frac{3h^5}{80} \max.\{|f^{(4)}(x)|, x_0 \leq \xi \leq x_3 \}\]</div>
+<p><strong>Exemplo 6.3.3:</strong>
+Calcule o valor aproximado da integral <span class="math notranslate nohighlight">\(\int_1^7 \ln(x+9) dx\)</span> usando a regra 3/8 de Simpson.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">I</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">+</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.335299315082702
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">integrate</span><span class="o">.</span><span class="n">simpson</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.335928614229697
+</pre></div>
+</div>
+</div>
+</div>
+<p>A <strong>regra 3/8 de Simpson repetida</strong> (ou generalizada) consiste em subdividir o intervalo de integração <span class="math notranslate nohighlight">\([a,b]\)</span> em <span class="math notranslate nohighlight">\(n\)</span> subintervalos de ampliture <span class="math notranslate nohighlight">\(h\)</span>, em que <span class="math notranslate nohighlight">\(n\)</span> é um número múltiplo de 3, com <span class="math notranslate nohighlight">\(x_0=a\)</span> e <span class="math notranslate nohighlight">\(x_n=b\)</span>, então, aplicar a regra 3/8 de Simpson repetidamente a cada 3 subintervalos consecutivos. Com isso obtém-se:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\int_{x_0}^{x_n} f(x) dx \approx 
+&amp;\frac{3}{8}h \Bigr[f(x_0) + 3f(x_1)+3f(x_2)+f(x_3) \Bigr]+\\
+&amp;\frac{3}{8}h\Bigr[f(x_3)+3f(x_4)+3f(x_5)+f(x_6) \Bigr]+\\
+&amp; \quad \vdots\\
+&amp;\frac{3}{8}h \Bigr[f(x_{n-3})+3f(x_{n-2})+3f(x_{n-1})+f(x_n) \Bigr]\\
+=\\
+&amp;\frac{3}{8}h\Bigl\{f(x_0)+\\
+&amp;3 \Bigr[f(x_1)+f(x_2)+f(x_4)+f(x_5)+\ldots+ f(x_{n-2})+f(x_{n-1})\Bigr] +\\
+&amp;2 \Bigr[f(x_3)+f(x_6)+\ldots+f(x_{n-3}) \Bigr]+\\
+&amp;f(x_n)\Bigr\}
+\end{aligned}\end{split}\]</div>
+<p>que consiste na regra 3/8 de Simpson repetida.</p>
+<p>Um <em>limitante superior</em> para o erro é dado por</p>
+<div class="math notranslate nohighlight">
+\[ |E_3| \leq \frac{h^4}{80}(x_n-x_0)  \,\, \max.\left\{\left|f^{(4)}(x)\right|, x_0 \leq \xi \leq x_n  \right\}\]</div>
+<p><strong>Exemplo 6.3.4:</strong> Calcule o valor aproximado da integral <span class="math notranslate nohighlight">\(\int_1^6 \ln(x+9) dx\)</span> usando a regra 3/8 de Simpson para 8, 20 e 40 subintervalos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span> <span class="n">xn</span> <span class="o">=</span> <span class="mf">6.0</span> 
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">40</span><span class="p">]:</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">xn</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">xn</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> 
+    <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1"># Regra 3/8 de Simpson usando funções do numpy</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">+</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="n">n</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span> <span class="o">+</span>\
+                 <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="n">n</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span><span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;n=&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="s2">&quot;, I=&quot;</span><span class="p">,</span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n= 4 , I= 11.761407778686316
+n= 20 , I= 11.75388556350441
+n= 40 , I= 12.510405538009266
+</pre></div>
+</div>
+</div>
+</div>
+<p>O sub-pacote <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>, de SciPy, provê diversas funções para integração numérica, incluindo as regras de Newton-Cotes <code class="docutils literal notranslate"><span class="pre">trapezoid</span></code>, <code class="docutils literal notranslate"><span class="pre">cumulative_trapezoid</span></code> e <code class="docutils literal notranslate"><span class="pre">simpson</span></code>. Além destas, outras funções disponíveis são <code class="docutils literal notranslate"><span class="pre">quad</span></code>, <code class="docutils literal notranslate"><span class="pre">dblquad</span></code> e <code class="docutils literal notranslate"><span class="pre">tplquad</span></code> para integrais simples, duplas e triplas, respectivamente; <code class="docutils literal notranslate"><span class="pre">fixed_quad</span></code> e <code class="docutils literal notranslate"><span class="pre">quadrature</span></code>para quadratura Gaussiana e; <code class="docutils literal notranslate"><span class="pre">romberg</span></code>para integração de Romberg.</p>
+</section>
+<section id="exercicios">
+<h2>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>1.</strong> Encontre, se possível, a primitiva das seguintes funções, então obtenha a solução exata e compare com soluções numéricas usando somas de Riemann e os métodos de Newton-Cotes para diferentes números de subintervalos. Compare os resultados.</p>
+<p>a) <span class="math notranslate nohighlight">\(\int_{1}^{1.6} \frac{2x}{x^2-4} dx \quad \quad \quad \quad \quad \quad\)</span> b) <span class="math notranslate nohighlight">\(\int_{0}^{1} x^2 e^{-x} dx \quad \quad \quad \quad \quad \quad\)</span> c) <span class="math notranslate nohighlight">\(\int_{0}^{\pi/4} e^{x^3}\operatorname{sen}(2x)dx\)</span></p>
+<p>d) <span class="math notranslate nohighlight">\(\int_{0}^{0.5} \frac{2}{x-4} dx\quad \quad \quad \quad \quad \quad\)</span> e) <span class="math notranslate nohighlight">\(\int_{0}^{1} x^{-1/4}\operatorname{sen}(x) dx \quad \quad \quad \quad \quad \)</span> f) <span class="math notranslate nohighlight">\(\int_{0}^{1} \frac{e^{2x}}{\sqrt[5]{x^2}}dx\)</span></p>
+<p>g) <span class="math notranslate nohighlight">\(\int_{0}^{1} \frac{ln(x)}{(1-x)^{1/5}}dx \quad \quad \quad \quad \quad \quad\)</span> h) <span class="math notranslate nohighlight">\(\int_{0}^{1} \frac{cos(2x)}{x^{1/3}}dx \quad \quad \quad \quad \quad \quad\)</span> i) <span class="math notranslate nohighlight">\(\int e^{x^2} dx\)</span></p>
+<p>j) <span class="math notranslate nohighlight">\(\int \frac{e^x}{x} dx \quad \quad \quad \quad \quad \quad \quad \quad\)</span> k) <span class="math notranslate nohighlight">\(\int \operatorname{sen}(x^2) dx \quad \quad \quad \quad \quad \quad\)</span> l) <span class="math notranslate nohighlight">\(\int \ln(lnx) dx\)</span></p>
+<p>m) <span class="math notranslate nohighlight">\(\int e^{-\frac{x^2}{2}} dx\quad \quad \quad \quad \quad \quad\)</span> n) <span class="math notranslate nohighlight">\(\int \cos(x^2) dx\quad \quad \quad \quad \quad \quad\)</span> o) <span class="math notranslate nohighlight">\(\int \cos(e^x) dx\)</span></p>
+<p>p) <span class="math notranslate nohighlight">\(\int \frac{1}{ln(x)} dx\)</span></p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>2.</strong> A vazão de um rio (em m³/s) foi registrada em intervalos de 2 horas ao longo de um período de 12 horas:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(t\)</span> (h)</p></th>
+<th class="head text-center"><p>0</p></th>
+<th class="head text-center"><p>2</p></th>
+<th class="head text-center"><p>4</p></th>
+<th class="head text-center"><p>6</p></th>
+<th class="head text-center"><p>8</p></th>
+<th class="head text-center"><p>10</p></th>
+<th class="head text-center"><p>12</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(Q\)</span> (m³/s)</p></td>
+<td class="text-center"><p>12,0</p></td>
+<td class="text-center"><p>14,5</p></td>
+<td class="text-center"><p>18,2</p></td>
+<td class="text-center"><p>20,1</p></td>
+<td class="text-center"><p>17,6</p></td>
+<td class="text-center"><p>13,4</p></td>
+<td class="text-center"><p>10,8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>a) Verifique que o número de subintervalos permite aplicar diretamente a regra 1/3 de Simpson repetida.</p>
+<p>b) Calcule o volume total de água escoado no período, em m³ (integre <span class="math notranslate nohighlight">\(Q\)</span> em relação a <span class="math notranslate nohighlight">\(t\)</span>, convertendo horas em segundos).</p>
+<p>c) Compare o resultado com o que seria obtido pela regra dos trapézios generalizada.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>3.</strong> Quando o número de subintervalos <span class="math notranslate nohighlight">\(n\)</span> é ímpar, não é possível aplicar diretamente a regra 1/3 de Simpson repetida (que exige <span class="math notranslate nohighlight">\(n\)</span> par) nem a regra 3/8 isoladamente sobre todo o intervalo (que exige <span class="math notranslate nohighlight">\(n\)</span> múltiplo de 3). Uma estratégia comum é aplicar a regra 3/8 aos três últimos subintervalos e a regra 1/3 repetida aos demais, em número par.</p>
+<p>a) Use essa estratégia para calcular <span class="math notranslate nohighlight">\(\int_0^{\pi} \operatorname{sen}(x)\,dx\)</span> com <span class="math notranslate nohighlight">\(n=7\)</span> subintervalos.</p>
+<p>b) Compare o resultado com o valor exato (igual a <span class="math notranslate nohighlight">\(2\)</span>) e com o resultado de <code class="docutils literal notranslate"><span class="pre">scipy.integrate.simpson</span></code> aplicado aos mesmos 8 pontos.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>4. (ordem de convergência)</strong> Para a integral <span class="math notranslate nohighlight">\(\int_0^2 e^x\,dx\)</span>, cujo valor exato é <span class="math notranslate nohighlight">\(e^2-1\)</span>,</p>
+<p>a) calcule a aproximação pela regra 1/3 de Simpson repetida para <span class="math notranslate nohighlight">\(n=4\)</span>, <span class="math notranslate nohighlight">\(8\)</span>, <span class="math notranslate nohighlight">\(16\)</span> e <span class="math notranslate nohighlight">\(32\)</span> subintervalos;</p>
+<p>b) calcule o erro absoluto para cada valor de <span class="math notranslate nohighlight">\(n\)</span>;</p>
+<p>c) faça um gráfico de <span class="math notranslate nohighlight">\(\log(h)\)</span> versus <span class="math notranslate nohighlight">\(\log(\text{erro})\)</span> e estime a ordem de convergência do método a partir da inclinação da reta. O resultado é compatível com a ordem teórica <span class="math notranslate nohighlight">\(O(h^4)\)</span>?</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>5. (integral dupla)</strong> Calcule a integral dupla</p>
+<div class="math notranslate nohighlight">
+\[\int_0^1\int_0^1 \frac{1}{1+x+y}\,dx\,dy\]</div>
+<p>(a) analiticamente (o valor exato é <span class="math notranslate nohighlight">\(3\ln 3 - 4\ln 2 \approx 0{,}5232\)</span>) e (b) usando aplicação repetida da regra 1/3 de Simpson nas duas direções, com <span class="math notranslate nohighlight">\(n=4\)</span> e <span class="math notranslate nohighlight">\(n=8\)</span> subintervalos em cada uma. Compare os erros obtidos nos dois casos.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>6. (comparação de métodos)</strong> Para a integral <span class="math notranslate nohighlight">\(\displaystyle\int_0^1 \frac{4}{1+x^2}\,dx\)</span>, cujo valor exato é <span class="math notranslate nohighlight">\(\pi\)</span>, calcule aproximações usando a regra dos trapézios, a regra 1/3 de Simpson e a regra 3/8 de Simpson, todas com <span class="math notranslate nohighlight">\(n=6\)</span> subintervalos (mesmo número de avaliações da função). Compare os erros absolutos de cada método e discuta qual apresenta melhor precisão para o mesmo custo computacional.</p>
+</div></blockquote>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>7.</strong> Retome o problema do objeto em queda livre do Exercício 2 da Seção 6.2, com velocidade</p>
+<div class="math notranslate nohighlight">
+\[v(t)=\sqrt{\frac{gm}{c_d}} \tanh\left(\sqrt{\frac{gc_d}{m}}\,t\right), \qquad g=9{,}81,\ m=68{,}1,\ c_d=0{,}25.\]</div>
+<p>Use a regra 1/3 de Simpson repetida com <span class="math notranslate nohighlight">\(n=6\)</span>, <span class="math notranslate nohighlight">\(12\)</span> e <span class="math notranslate nohighlight">\(24\)</span> subintervalos para estimar a distância percorrida em 10 s, e compare o erro relativo em cada caso com o valor exato obtido por integração analítica e com os resultados já obtidos pela regra dos trapézios naquele exercício.</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./6_INTEGRACAO_NUMERICA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="6.2_regra_dos_trapezios.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">6.2 Regra dos trapézios</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">7. Equações Diferenciais Ordinárias</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Conteúdo
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regra-1-3-de-simpson">Regra 1/3 de Simpson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regra-3-8-de-simpson">Regra 3/8 de Simpson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercicios">Exercícios</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+De Tiago M. Buriol
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright Universidade Federal de Santa Maria.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

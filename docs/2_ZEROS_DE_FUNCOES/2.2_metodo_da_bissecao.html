@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -459,7 +464,7 @@ f(x)=0.
 <p>O <em>Método da Bisseção</em> é um método iterativo para resolver equações da forma <span class="math notranslate nohighlight">\(f(x)=0\)</span>. Partindo de um intervalo inicial <span class="math notranslate nohighlight">\([a,b]\)</span> em que <span class="math notranslate nohighlight">\(f(a)f(b)&lt;0\)</span>, e supondo que exista uma única raiz nesse intervalo, o método convergirá para essa raiz. Em cada iteração, o intervalo é dividido ao meio e utiliza-se o <em>Teorema de Bolzano</em> para identificar qual dos subintervalos contém a raiz.</p>
 <p>O <em>Teorema de Bolzano</em> afirma que, se <span class="math notranslate nohighlight">\(f(x)\)</span> é contínua no intervalo <span class="math notranslate nohighlight">\([a,b]\)</span> e <span class="math notranslate nohighlight">\(f(a)f(b)&lt;0\)</span>, então existe pelo menos uma raiz <span class="math notranslate nohighlight">\(\overline{x}\in(a,b)\)</span> tal que <span class="math notranslate nohighlight">\(f(\overline{x})=0\)</span>.</p>
 <p>Observe que a condição <span class="math notranslate nohighlight">\(f(a)f(b)&lt;0\)</span> indica que a função assume sinais opostos nos extremos do intervalo. Como a função é contínua, ela deve assumir o valor zero em pelo menos um ponto de <span class="math notranslate nohighlight">\((a,b)\)</span>.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/bolzano.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/bolzano.png" style="width: 480px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/bolzano.png" /></p>
 <p>O processo iterativo é repetido até que a amplitude do intervalo seja suficientemente pequena ou até que a aproximação obtida satisfaça um critério de parada previamente estabelecido.</p>
 <ol class="arabic simple">
 <li><p>Determinar um intervalo inicial <span class="math notranslate nohighlight">\([a,b]\)</span> contendo uma única raíz de <span class="math notranslate nohighlight">\(f(x)\)</span>;</p></li>
@@ -484,9 +489,9 @@ f(x)=0.
 <p><strong>Exemplo 2.2.1:</strong>
 Usando o método da bisseção, resolva a equação <span class="math notranslate nohighlight">\(x^2+\ln(x)=0\)</span>, com <span class="math notranslate nohighlight">\(\epsilon = 0.01\)</span>.</p>
 <p><em>Solução:</em> Reescrevendo a equação como <span class="math notranslate nohighlight">\(x^2=-\ln(x)\)</span> e esboçando os gráficos de <span class="math notranslate nohighlight">\(f_1(x)=x^2\)</span> e <span class="math notranslate nohighlight">\(f_2(x)=-\ln(x)\)</span> observamos que existe uma raiz no intervalo <span class="math notranslate nohighlight">\([0.1,1]\)</span>.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1loc.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1loc.png" style="width: 400px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1loc.png" /></p>
 <p>Então, na primeira iteração fazemos <span class="math notranslate nohighlight">\(x_m = \frac{a+b}{2}=\frac{1.0-0.1}{2}=0.55\)</span>. Como <span class="math notranslate nohighlight">\(f(a)=f(0.1)=-2.293\)</span>, <span class="math notranslate nohighlight">\(f(b)=f(1.0)=1\)</span> e <span class="math notranslate nohighlight">\(f(x_m)=f(0.55)=-0.295\)</span> temos que a raíz está no intervalo <span class="math notranslate nohighlight">\([x_m,b]\)</span>. Além disso, <span class="math notranslate nohighlight">\(\frac{|x_1-x_0|}{|x_0|}=0.2953\)</span> é maior que <span class="math notranslate nohighlight">\(\epsilon = 0.01\)</span>. Então seguimos o processo iterativo obtendo a sequência abaixo.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1tab.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1tab.png" style="width: 400px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/3.3_exemplo_1tab.png" /></p>
 <p>Em Python podemos fazer o gráfico como é mostrado a seguir</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -737,7 +742,7 @@ x3 = 2.818359375
 <div class="math notranslate nohighlight">
 \[ v = \sqrt{2gH} \tanh \left( \frac{\sqrt{2gH}}{2L}t \right)\]</div>
 <p>em que <span class="math notranslate nohighlight">\(g=9.81m/s^2\)</span>, <span class="math notranslate nohighlight">\(H\)</span> é a altura inicial <span class="math notranslate nohighlight">\((m)\)</span>, <span class="math notranslate nohighlight">\(L\)</span> é o comprimento do cano (<span class="math notranslate nohighlight">\(m\)</span>) e <span class="math notranslate nohighlight">\(t\)</span> é o tempo decorrido (<span class="math notranslate nohighlight">\(s\)</span>). Determine a altura necessária para atingir <span class="math notranslate nohighlight">\(v=5m/s\)</span> em <span class="math notranslate nohighlight">\(2.5s\)</span> para um cano de <span class="math notranslate nohighlight">\(4m\)</span> de comprimento pelo método da bisseção e pelo método do ponto-fixo com <span class="math notranslate nohighlight">\(\epsilon =  0.001\)</span></p>
-<p><a class="reference internal" href="../_images/tanque_de_agua.png"><img alt="" src="../_images/tanque_de_agua.png" style="width: 360px;" /></a></p>
+<p><img alt="" src="../_images/tanque_de_agua.png" /></p>
 </div></blockquote>
 <hr class="docutils" />
 <blockquote>

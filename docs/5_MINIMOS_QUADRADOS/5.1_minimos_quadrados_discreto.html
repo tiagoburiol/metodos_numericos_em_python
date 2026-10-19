@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -472,7 +477,7 @@ document.write(`
 <section id="caso-discreto">
 <h2>Caso discreto<a class="headerlink" href="#caso-discreto" title="Link para este cabeçalho">#</a></h2>
 <p>Inicialmente vamos supor que queremos ajustar uma reta <span class="math notranslate nohighlight">\(g(x) = a_1x+a_2\)</span> aos pontos <span class="math notranslate nohighlight">\((x_i, f(x_i))\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots,m\)</span>, como é mostrado na figura abaixo</p>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_reta.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_reta.png?raw=true" style="width: 500px;" /></a></p>
+<p><img alt="" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_reta.png?raw=true" /></p>
 <p>Figura 5.1.1 - Ajuste de uma reta por um conjunto de pontos.</p>
 <p>Então, buscamos os coeficientes <span class="math notranslate nohighlight">\(a_1\)</span> e <span class="math notranslate nohighlight">\(a_2\)</span> que determinam a reta que melhor se ajusta aos pontos, ou seja, os coeficientes que minimizam a função</p>
 <div class="math notranslate nohighlight">

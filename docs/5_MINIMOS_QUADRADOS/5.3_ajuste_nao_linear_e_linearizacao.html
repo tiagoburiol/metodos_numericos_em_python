@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -454,7 +459,7 @@ document.write(`
 <section id="ajuste-hiperbolico">
 <h2>Ajuste hiperbólico<a class="headerlink" href="#ajuste-hiperbolico" title="Link para este cabeçalho">#</a></h2>
 <p>Considere os dados obtidos experimentalmente, conforme ilustrado na figura abaixo</p>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_hiperbolico.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_hiperbolico.png?raw=true" style="width: 400px;" /></a></p>
+<p><img alt="" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_hiperbolico.png?raw=true" /></p>
 <p>Observando a o diagrama de dispersão, vemos que a representação dos dados possui um comportamento do tipo:</p>
 <div class="math notranslate nohighlight">
 \[ g(x) = \frac{1}{a_1x+a_2}\]</div>
@@ -612,7 +617,7 @@ Para confirmar, e verificar se a linearização do tipo \)</span><span class="ma
 <section id="ajuste-exponencial">
 <h2>Ajuste exponencial<a class="headerlink" href="#ajuste-exponencial" title="Link para este cabeçalho">#</a></h2>
 <p>Podemos obter dados experimentais dispostos conforme ilustrado na figura abaixo, a qual sugere que devemos aproximar a função observada por uma função <span class="math notranslate nohighlight">\(g(x)\)</span> da forma <span class="math notranslate nohighlight">\(g(x) = a(b)^x\)</span> com os parâmetros <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> positivos.</p>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_exp.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_exp.png?raw=true" style="width: 400px;" /></a></p>
+<p><img alt="" src="https://github.com/tiagoburiol/metodos_numericos_em_python/blob/main/5_MINIMOS_QUADRADOS/imagens/ajuste_exp.png?raw=true" /></p>
 <p>O método dos mínimos quadrados desenvolvido anteriormente pode ser usado
 fazendo-se a seguinte transformação</p>
 <div class="math notranslate nohighlight">
@@ -784,7 +789,7 @@ $<span class="math notranslate nohighlight">\(y'=\ln(y)-\ln(x)\)</span>$</p>
 <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">yl</span><span class="p">),</span>
               <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">yl</span><span class="p">)])</span>
 
-<span class="n">a</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
 
 <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">beta</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -793,18 +798,7 @@ $<span class="math notranslate nohighlight">\(y'=\ln(y)-\ln(x)\)</span>$</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>               <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>     <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)]])</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">yl</span><span class="p">),</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>               <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">yl</span><span class="p">)])</span>
-<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">a</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="ne">NameError</span>: name &#39;solve&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.910716948702433 -2.5870818862156093
 </pre></div>
 </div>
 </div>
@@ -820,12 +814,20 @@ $<span class="math notranslate nohighlight">\(y'=\ln(y)-\ln(x)\)</span>$</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/6efeda5bc804577cde3ecc5ab6f145bd5aa86c5dad14d939848784b187ff0c5b.png" src="../_images/6efeda5bc804577cde3ecc5ab6f145bd5aa86c5dad14d939848784b187ff0c5b.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">beta</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.910716948702433 -2.5870818862156093
 </pre></div>
 </div>
 </div>
@@ -845,6 +847,9 @@ $<span class="math notranslate nohighlight">\(y'=\ln(y)-\ln(x)\)</span>$</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d03261df8392c85f565796aac546ab98d8b1b205bfa8240374b9ddf7e1962e23.png" src="../_images/d03261df8392c85f565796aac546ab98d8b1b205bfa8240374b9ddf7e1962e23.png" />
 </div>
 </div>
 <p>Resposta: <span class="math notranslate nohighlight">\(\alpha = 9.6618\)</span> e <span class="math notranslate nohighlight">\(\beta = -2.4733\)</span></p>

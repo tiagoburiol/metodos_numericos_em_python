@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -578,7 +583,7 @@ u(0)=8
 <h2>Resolução numérica de um PVI<a class="headerlink" href="#resolucao-numerica-de-um-pvi" title="Link para este cabeçalho">#</a></h2>
 <p>Considere a equação diferencial ordinária, <span class="math notranslate nohighlight">\(y' = y\)</span>, cuja solução é dada por <span class="math notranslate nohighlight">\(y(x)=ce^x\)</span>, <span class="math notranslate nohighlight">\(c\in R\)</span>. Sabemos que essa equação diferencial apresenta infinitas soluções, uma vez que, para cada valor escolhido para a constante <span class="math notranslate nohighlight">\(c\)</span>, temos uma solução.</p>
 <p>Por exemplo, <span class="math notranslate nohighlight">\(y(x)=c_0e^x\)</span>, <span class="math notranslate nohighlight">\(y(x)=c_1e^x\)</span>, <span class="math notranslate nohighlight">\(y(x)=c_2e^x\)</span>, sendo <span class="math notranslate nohighlight">\(c_0\)</span>, <span class="math notranslate nohighlight">\(c_1\)</span> , <span class="math notranslate nohighlight">\(c_2\)</span> valores fixados, são soluções dessa equação conforme é ilustrado na figura abaixo.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/pvi01.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/pvi01.png" style="width: 360px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/pvi01.png" /></p>
 <p>Fonte: Arenales e Darezzo (2016)</p>
 <p>Se conhecermos o valor da função <span class="math notranslate nohighlight">\(y(x)\)</span> em um ponto <span class="math notranslate nohighlight">\(x = x_0\)</span>, ou seja, conhecermos <span class="math notranslate nohighlight">\(y_0\)</span> etal que <span class="math notranslate nohighlight">\(y(x_0) = y_0\)</span>, então, podemos obter uma única solução para a equação proposta a partir da solução geral aplicando o ponto <span class="math notranslate nohighlight">\(x = x_0\)</span> e obtendo o valor da constante <span class="math notranslate nohighlight">\(c\)</span>. Ou seja, fazemos</p>
 <div class="math notranslate nohighlight">
@@ -612,7 +617,7 @@ y(x_0)=y_0
 <div class="math notranslate nohighlight">
 \[x_n = x_0 +nh\]</div>
 <p>soluções aproximadas <span class="math notranslate nohighlight">\(y_n\)</span> para a solução exata <span class="math notranslate nohighlight">\(y(x_n)\)</span>, <span class="math notranslate nohighlight">\(n=0,1,2,\ldots,N\)</span>, conforme ilustrado na figura a seguir.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/discretizacao.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/discretizacao.png" style="width: 360px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/7_EQUACOES_DIFERENCIAIS_ORDINARIAS/imagens/discretizacao.png" /></p>
 <p>Nas seções seguintes serão estudados e implementados alguns dos principais métodos numéricos para a resolução de problemas de valor inicial (PVIs), como os métodos de Euler, Taylor e Runge-Kutta. Muitos desses métodos já estão implementados em bibliotecas computacionais e podem ser utilizados por meio de funções prontas. Como exemplo, a seguir é apresentada a utilização da função <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code>, disponível no módulo <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code> da biblioteca SciPy (Virtanen et al., 2020), para resolver o PVI apresentado no Exemplo 7.1.2.</p>
 <p><strong>Exemplo 7.1.3:</strong> Resolução de um PVI <strong>usando SciPy</strong> (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html#scipy.integrate.solve_ivp">Referência</a>):</p>
 <div class="cell docutils container">

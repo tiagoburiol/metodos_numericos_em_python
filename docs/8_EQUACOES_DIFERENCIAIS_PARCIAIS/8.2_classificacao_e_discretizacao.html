@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -489,7 +494,7 @@ document.write(`
 </ul>
 <div class="math notranslate nohighlight">
 \[\frac{\partial^2 u(x, y)}{\partial x^2}+\frac{\partial^2 u(x, y)}{\partial y^2}+g(x, y) u(x, y)=f(x, y)\]</div>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/aplicacoes_edp_eliptica.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/aplicacoes_edp_eliptica.png?raw=true" style="width: 600px;" /></a></p>
+<p><img alt="" src="../_images/aplicacoes_edp_eliptica.png" /></p>
 <p>Figura 5.1 - Três problemas de distribuições estacionários que podem ser caracterizados por EDPs elípticas. (a) Distribuição de temperatura em uma placa aquecida, (b) infiltração de água sob uma barragem e (c) o campo elétrico perto da ponta de um condutor.</p>
 <p>(Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/760">Chapra, 2016.</a>).</p>
 <p>Alguns exemplos de EDPs <strong>parabólicas</strong> em duas variáveis são:</p>
@@ -503,7 +508,7 @@ document.write(`
 </ul>
 <div class="math notranslate nohighlight">
 \[ \frac{{\partial u}}{{\partial t}} -\alpha  \frac{{\partial^2 u}}{{\partial x^2}}  = 0 \]</div>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/aplicacoes_edp_parabolica.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/aplicacoes_edp_parabolica.png?raw=true" style="width: 600px;" /></a>
+<p><img alt="" src="../_images/aplicacoes_edp_parabolica.png" />
 Figura 5.2 - (a) Uma haste longa e fina é isolada em toda parte, exceto nas extremidades. A dinâmica da distribuição unidimensional da temperatura ao longo do comprimento da haste pode ser descrita por uma EDP parabólica. (b) A solução, que consiste nas distribuições correspondentes ao estado da haste em vários instantes.</p>
 <p>Um exemplo de EDP <strong>hiperbólica</strong>:</p>
 <ul class="simple">
@@ -511,7 +516,7 @@ Figura 5.2 - (a) Uma haste longa e fina é isolada em toda parte, exceto nas ex
 </ul>
 <div class="math notranslate nohighlight">
 \[ \frac{{\partial^2 u}}{{\partial t^2}} - \frac{{\partial^2 u}}{{\partial x^2}} = 0 \]</div>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/aplicacao_edp_hiperbolica.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/aplicacao_edp_hiperbolica.png?raw=true" style="width: 400px;" /></a>
+<p><img alt="" src="../_images/aplicacao_edp_hiperbolica.png" />
 Figura 5.3 - Uma corda tensionada vibrando com pequena amplitude é um sistema físico simples que pode ser caracterizado por uma EDP hiperbólica.</p>
 <p>(Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/761">Chapra, 2016.</a>).</p>
 <p>Outros exemplos importantes</p>
@@ -610,7 +615,7 @@ Figura 5.3 - Uma corda tensionada vibrando com pequena amplitude é um sistema 
 <div class="math notranslate nohighlight">
 \[\mathrm{D}=\left\{(x,y) \mid 0 \leq x\leq 30, \quad 0 \leq y \leq 20\right\}\]</div>
 <p>Dessa forma, o intervalo <span class="math notranslate nohighlight">\([0, 30]\)</span> é discretizado em <span class="math notranslate nohighlight">\(N=12\)</span> subintervalos e o intervalo <span class="math notranslate nohighlight">\([0, 20]\)</span> é discretizado em <span class="math notranslate nohighlight">\(M=8\)</span> subintervalos. Os pontos extremos destes subintervalos passam a definir uma malha bidimensional discreta com <span class="math notranslate nohighlight">\((N+1)\times(M+1)\)</span> pontos, ou nós, na qual serão avaliadas as respostas aproximadas. A figura 5.4 mostra a malha e os índices correspondentes a cada nó.</p>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/malha_retangulo.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/malha_retangulo.png?raw=true" style="width: 800px;" /></a>
+<p><img alt="" src="../_images/malha_retangulo.png" />
 Figura 5.4 - Exemplo de discretização de uma área retangular de 30x20 com 13 pontos na direção <span class="math notranslate nohighlight">\(x\)</span> e 9 pontos na direção <span class="math notranslate nohighlight">\(y\)</span>. O código para gerar essas figuras é mostrado no final do texto.</p>
 <p><strong>Discretização do operador diferencial</strong></p>
 <p>A abordagem numérica também requer a discretização do operador diferencial que consiste em  aproximar as derivadas de uma equação diferencial parcial através de diferenças entre os valores discretos das variáveis ao longo de uma malha espacial, transformando a equação contínua em um sistema de equações algébricas solucionáveis.</p>
@@ -626,7 +631,7 @@ Figura 5.4 - Exemplo de discretização de uma área retangular de 30x20 com 13 
 \quad \left.\frac{\partial^2 u}{\partial y^2} \right|_{x_j, y_i}\approx 
 \frac{u_{i, j+1}-2 u_{i, j}+u_{i, j-1}}{\Delta y^2}\]</div>
 <p>O conjunto de 5 pontos usados para calcular a derivada aproximada no ponto central é chamado <strong>stencil</strong> e é mostrado na figura abaixo.</p>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/malha_stencil.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/malha_stencil.png?raw=true" style="width: 600px;" /></a>
+<p><img alt="" src="../_images/malha_stencil.png" />
 Figura 5.5 - Exemplo de discretização de uma área retangular de 30x20 com 13 pontos na direção <span class="math notranslate nohighlight">\(x\)</span> e 9 pontos na direção <span class="math notranslate nohighlight">\(y\)</span>.</p>
 <p>Para a derivada temporal de 1ª ordem, podemos descrever o operador diferencial em nós na malha no instante seguinte utilizando apenas o estado anterior (<em>Foward Difference Method FDM</em>). Esse esque dá origem ao chamado <em>método explícito</em> a ser resolvido iterativamente.</p>
 <div class="math notranslate nohighlight">
@@ -642,7 +647,7 @@ Figura 5.5 - Exemplo de discretização de uma área retangular de 30x20 com 13 
 \[\frac{\partial u}{\partial t} \approx \frac{u\left(x^{i}, t^{j+1}\right)-u\left(x^{i}, t^{j-1}\right)}{2\Delta t}\]</div>
 <p><strong>Exemplo 8.2.2: (A equação de diferença de Laplace)</strong>
 Considere uma placa aquecida na qual as temperaturas nas bordas são mantidas em níveis constantes (condição de contorno de Dirichlet) como é mostrado na figura abaixo (Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/769">Chapra, 2016</a>).</p>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/exemplo_laplace.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/exemplo_laplace.png?raw=true" style="width: 240px;" /></a></p>
+<p><img alt="" src="../_images/exemplo_laplace.png" /></p>
 <p>Vamos obter valores da temperatura nos pontos internos a partir da equação de Laplace</p>
 <div class="math notranslate nohighlight">
 \[
@@ -668,7 +673,7 @@ T_{i+1, j}+T_{i-1, j}+T_{i, j+1}+T_{i, j-1}-4 T_{i, j}=0
 -4 T_{11}+T_{12}+T_{21}=-75
 \]</div>
 <p>Obtendo as equações para todos os nós interiores chaga-se ao sistema linear com  nove equações simultâneas e nove incógnita</p>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/sistema_laplace.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/sistema_laplace.png?raw=true" style="width: 500px;" /></a></p>
+<p><img alt="" src="../_images/sistema_laplace.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>

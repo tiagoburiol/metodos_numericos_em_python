@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -498,7 +503,7 @@ document.write(`
 </div>
 <p><strong>Exemplo 1.4.2:</strong> (Obtendo a aproximação da raiz de uma equação de grau 3)</p>
 <p>Uma esfera de madeira (densidade relativa <span class="math notranslate nohighlight">\(\mu_e =0,638\)</span> e raio <span class="math notranslate nohighlight">\(r=10 cm\)</span>) é colocada a flutuar sobre a água (densidade relativa <span class="math notranslate nohighlight">\(\mu=1\)</span>), conforme figura. Qual é a altura <span class="math notranslate nohighlight">\(d\)</span> da esfera que ficará submersa?</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/esfera.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/esfera.png" style="width: 200px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/esfera.png" /></p>
 <p>Inicialmente, observemos que, pelo <em>Princípio de Arquimedes</em> o peso da esfera deve ser equilibrado com o peso do volume de água deslocada</p>
 <div class="math notranslate nohighlight">
 \[ M_e g = M_a g \]</div>
@@ -923,7 +928,7 @@ A figura abaixo mostra uma viga uniforme sujeita a uma carga distribuída de for
 <div class="math notranslate nohighlight">
 \[ y = \frac{w_0}{120 EIL} (-x^5+2L^2x^3-L^4x)\]</div>
 <p>Use um método de sua escolha para determinar o ponto de deflexão máxima (isto é, o valor de <span class="math notranslate nohighlight">\(x\)</span> para o qual <span class="math notranslate nohighlight">\(dy/dx=0\)</span>). A seguir, substitua esse valor na equação para determinar o valor da deflexão máxima. Use os seguintes valores dos parâmetros: <span class="math notranslate nohighlight">\(L = 450 cm\)</span>, <span class="math notranslate nohighlight">\(E = 50.000 kN/cm^2\)</span>, <span class="math notranslate nohighlight">\(I=30.000 cm^4\)</span> e <span class="math notranslate nohighlight">\(w_0=1,75 kN/cm\)</span>. Comente seus resultados e estime o erro.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/viga.jpg"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/viga.jpg" style="width: 300px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/1_INTRODUCAO_ERROS/imagens/viga.jpg" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>

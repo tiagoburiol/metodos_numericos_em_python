@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas';</script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Buscar" href="../search.html" />
-    <link rel="next" title="Referências" href="../referencias.html" />
+    <link rel="next" title="8.4 EDPs Parabólicas" href="8.4_edps_parabolicas.html" />
     <link rel="prev" title="8.2 Classificação e discretização de EDPs" href="8.2_classificacao_e_discretizacao.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="pt-BR"/>
@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -455,10 +460,12 @@ document.write(`
 <h1>8.3 EDPs Elípticas<a class="headerlink" href="#edps-elipticas" title="Link para este cabeçalho">#</a></h1>
 <p>Consideremos uma EDP geral de segunda ordem em duas variáveis independentes <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>, que é escrita como</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-A(x, y) \frac{\partial^2 u}{\partial x^2}+B(x, y) \frac{\partial^2 u}{\partial x \partial y}+C(x, y) \frac{\partial^2 u}{\partial y^2}=f\left(x, y, u, \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}\right) \\
-\text{para} \ x_0 \leq x \leq x_f, y_0 \leq y \leq y_f
-\end{split}\]</div>
+\[A(x, y) \frac{\partial^2 u}{\partial x^2}+B(x, y) \frac{\partial^2 u}{\partial x \partial y}+C(x, y) \frac{\partial^2 u}{\partial y^2}=f\left(x, y, u, \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}\right)\]</div>
+<p>para</p>
+<div class="math notranslate nohighlight">
+\[
+x_0 \leq x \leq x_f, y_0 \leq y \leq y_f
+\]</div>
 <p>com as condições de contorno dadas por</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -726,7 +733,6 @@ e
 0 \leq x \leq 4,
 \;
 0 \leq y \leq 4.
-\tag{E 1}
 \]</div>
 <p>com as condições de contorno</p>
 <div class="math notranslate nohighlight">
@@ -740,7 +746,6 @@ u(x,0)=\cos x-e^x,
 &amp;
 u(x,4)=e^4\cos x-e^x\cos 4.
 \end{array}
-\tag{E9.1.3}
 \end{split}\]</div>
 <p>O que obtemos ao resolver essa equação é a função</p>
 <div class="math notranslate nohighlight">
@@ -761,7 +766,7 @@ x=x_0
 \;
 (\text{contorno do lado esquerdo}).
 \]</div>
-<p><a class="reference internal" href="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/fig01_EDPs_Elipticas.png?raw=true"><img alt="" src="https://github.com/tiagoburiol/MatComp_IV/blob/main/imagens/fig01_EDPs_Elipticas.png?raw=true" style="width: 360px;" /></a></p>
+<p><img alt="" src="../_images/fig01_EDPs_Elipticas.png" /></p>
 <p>Substituindo a derivada de primeira ordem na fronteira do lado esquerdo <span class="math notranslate nohighlight">\(\left(x=x_0\right)\)</span> por sua aproximação de diferença central de três pontos</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1081,7 +1086,7 @@ SOR (omega=1.5): 78 iterações
 </table>
 </div>
 <p>Com <span class="math notranslate nohighlight">\(\Delta x = \Delta y = 1\,\text{cm}\)</span>, a borda inferior passa a ser uma linha de nós ativos (em vez de nós com valor prescrito). O sistema tem <span class="math notranslate nohighlight">\(3 \times 4 = 12\)</span> incógnitas.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/MatComp_IV/refs/heads/main/imagens/edp_eliptica_neumann.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/MatComp_IV/refs/heads/main/imagens/edp_eliptica_neumann.png" style="width: 520px;" /></a></p>
+<p><img alt="" src="../_images/edp_eliptica_neumann.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sistema 12x12 — nós da borda inferior incluídos (Neumann)</span>
@@ -1302,11 +1307,11 @@ u(x, 0)=\sin \left(\pi x^2\right), &amp; u(x, 1)=\sin \left(\pi\left(x^2+1\right
       </div>
     </a>
     <a class="right-next"
-       href="../referencias.html"
+       href="8.4_edps_parabolicas.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">próximo</p>
-        <p class="prev-next-title">Referências</p>
+        <p class="prev-next-title">8.4 EDPs Parabólicas</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

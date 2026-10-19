@@ -236,6 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html">8.1 Introdução e Séries de Fourier</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html">8.2 Classificação e discretização de EDPs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html">8.3 EDPs Elípticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html">8.4 EDPs Parabólicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html">8.5 EDPs Hiperbólicas</a></li>
+
+
+
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../referencias.html">Referências</a></li>
@@ -472,7 +477,7 @@ i \neq k}}^n \frac{\left(x-x_i\right)}{\left(x_k-x_i\right)}
 \end{aligned}
 \end{split}\]</div>
 <p>Um esboço do gráfico de um típico <span class="math notranslate nohighlight">\(L_{n, k}\)</span> quando <span class="math notranslate nohighlight">\(n\)</span> é par é mostrado na Figura 4.3.1.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/polinomio_Lk.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/polinomio_Lk.png" style="width: 800px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/polinomio_Lk.png" /></p>
 <p>Figura 4.3.1 - Gráfico de um típico <span class="math notranslate nohighlight">\(L_{n, k}\)</span> quando <span class="math notranslate nohighlight">\(n\)</span> é par (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788522123414/pageid/136">Burden,2016</a>).</p>
 <p>Já vimos que essa fórmula é conhecida como <em>polinômio interpolados de Lagrange</em>.</p>
 <p>O próximo passo é calcular um resto ou limitante para o erro envolvido na aproximação de uma função por um polinômio interpolador.</p>
@@ -641,7 +646,7 @@ x=\frac{7}{3}, \operatorname{com} g\left(\frac{7}{3}\right)=\frac{25}{108}, \qua
 \[...+(x-x_0)(x-x_1)...(x-x_{n-1})f[x_0,\ldots,x_n]\]</div>
 <p>onde <span class="math notranslate nohighlight">\(f[x_0]\)</span>, <span class="math notranslate nohighlight">\(f[x_0,x_1]\)</span>,…,<span class="math notranslate nohighlight">\(f[x_0,\ldots,x_n]\)</span> são as <strong>diferenças divididas</strong></p>
 <p>Uma tabela de diferenças divididas é mostrado na Figura 4.3.2.</p>
-<p><a class="reference internal" href="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/tabela_dd.png"><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/tabela_dd.png" style="width: 800px;" /></a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/4_INTERPOLACAO_POLINOMIAL/imagens/tabela_dd.png" /></p>
 <p>Figura 4.3.2 - Tabela de diferenças divididas de Newton (Fonte: <a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/455">Chapra, 2016</a>)</p>
 <p>(<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/455">Chapra, 2016, p. 455</a>) Para um polinômio interpolador de grau <span class="math notranslate nohighlight">\(n\)</span>, uma fórmula para o erro é dada por</p>
 <div class="math notranslate nohighlight">
