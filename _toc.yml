@@ -1,0 +1,58 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+
+chapters:
+- file: 1_INTRODUCAO_ERROS/1_INTRODUCAO_ERROS
+  sections:
+  - file: 1_INTRODUCAO_ERROS/1.1_o_basico_sobre_erros
+  - file: 1_INTRODUCAO_ERROS/1.2_aritmetica_de_ponto_flutuante
+  - file: 1_INTRODUCAO_ERROS/1.3_erros_nas_aproximacoes_numericas
+  - file: 1_INTRODUCAO_ERROS/1.4_exemplos_de_aplicacoes
+- file: 2_ZEROS_DE_FUNCOES/2_ZEROS_DE_FUNCOES
+  sections:
+  - file: 2_ZEROS_DE_FUNCOES/2.1_localizacao_de_raizes
+  - file: 2_ZEROS_DE_FUNCOES/2.2_metodo_da_bissecao
+  - file: 2_ZEROS_DE_FUNCOES/2.3_metodo_do_ponto_fixo
+  - file: 2_ZEROS_DE_FUNCOES/2.4_metodo_de_newton_raphson
+  - file: 2_ZEROS_DE_FUNCOES/2.5_metodo_das_secantes
+  - file: 2_ZEROS_DE_FUNCOES/2.6_raizes_de_polinomios
+  - file: 2_ZEROS_DE_FUNCOES/2.7_exemplos_de_aplicacoes
+- file: 3_SISTEMAS_LINEARES/3_SISTEMAS_LINEARES
+  sections:
+  - file: 3_SISTEMAS_LINEARES/3.1_forma_matricial_e_escalonamento
+  - file: 3_SISTEMAS_LINEARES/3.2_decomposicao_LU
+  - file: 3_SISTEMAS_LINEARES/3.3_gauss-jordan_e_matriz_inversa
+  - file: 3_SISTEMAS_LINEARES/3.4_metodos_iterativos
+- file: 4_INTERPOLACAO_POLINOMIAL/4_INTERPOLACAO_POLINOMIAL
+  sections:
+  - file: 4_INTERPOLACAO_POLINOMIAL/4.1_interpolacao_de_lagrange.ipynb
+  - file: 4_INTERPOLACAO_POLINOMIAL/4.2_interpolacao_de_newton.ipynb
+  - file: 4_INTERPOLACAO_POLINOMIAL/4.3_erro_na_interpolacao_polinomial.ipynb
+- file: 5_MINIMOS_QUADRADOS/5_MINIMOS_QUADRADOS
+  sections:
+  - file: 5_MINIMOS_QUADRADOS/5.1_minimos_quadrados_discreto
+  - file: 5_MINIMOS_QUADRADOS/5.2_minimos_quadrados_continuo
+  - file: 5_MINIMOS_QUADRADOS/5.3_ajuste_nao_linear_e_linearizacao
+ #- file: 5_MINIMOS_QUADRADOS/5.4_ajuste_nao_linear_e_gauss-newton
+- file: 6_INTEGRACAO_NUMERICA/6_INTEGRACAO_NUMERICA
+  sections:
+  - file: 6_INTEGRACAO_NUMERICA/6.1_integracao_numerica
+  - file: 6_INTEGRACAO_NUMERICA/6.2_regra_dos_trapezios
+  - file: 6_INTEGRACAO_NUMERICA/6.3_regras_de_simpson
+- file: 7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7_EQUACOES_DIFERENCIAIS_ORDINARIAS
+  sections:
+  - file: 7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.1_introducao
+  - file: 7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.2_metodo_de_euler
+  - file: 7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.3_metodos_de_serie_de_taylor
+  - file: 7_EQUACOES_DIFERENCIAIS_ORDINARIAS/7.4_metodos_de_runge_kutta
+- file: 8_EQUACOES_DIFERENCIAIS_PARCIAIS/8_EQUACOES_DIFERENCIAIS_PARCIAIS
+  sections:
+  - file: 8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier
+  - file: 8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao
+  - file: 8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas
+  - file: 8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas
+  - file: 8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas
+- file: referencias

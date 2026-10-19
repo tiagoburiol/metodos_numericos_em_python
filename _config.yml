@@ -1,0 +1,129 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: Caderno didático de Métodos Numéricos em Python
+author: Tiago M. Buriol
+copyright: Universidade Federal de Santa Maria
+logo: capa.png
+
+parse:
+  myst_enable_extensions:
+    - dollarmath
+    - linkify
+    - substitution
+    - tasklist
+    - colon_fence
+    - attrs_inline
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: cache
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_engine: pdflatex  # ou xelatex se preferir
+  language: brazil
+  latex_documents:
+    targetname: book.tex
+  latex_macros: |
+    \usepackage[brazil]{babel}
+    \addto\captionsbrazil{\renewcommand{\chaptername}{Capítulo}}
+    \addto\captionsbrazil{\renewcommand{\contentsname}{Sumário}}
+    \addto\captionsbrazil{\renewcommand{\figurename}{Figura}}
+    \addto\captionsbrazil{\renewcommand{\tablename}{Tabela}}
+
+sphinx:
+  extra_extensions:
+    - sphinx.ext.imgconverter
+    - sphinxcontrib.bibtex
+  local_extensions:
+    abnt_style: _ext
+  config:
+    language: pt_BR
+    bibtex_bibfiles: ['references.bib']
+    latex_elements:
+      classoptions: ',openany'
+      preamble: |
+        \setcounter{secnumdepth}{-2}
+        \makeatletter
+        \renewcommand{\@makechapterhead}[1]{%
+          \vspace*{20\p@}%
+          {\parindent \z@ \raggedleft \normalfont
+            \rule{\linewidth}{0.4pt}\par\nobreak
+            \vskip 2\p@
+            \color{navyblue}\sffamily\bfseries\fontsize{20}{30}\selectfont #1\par\nobreak
+            \vskip 2\p@
+            \rule{\linewidth}{0.4pt}\par\nobreak
+            \vskip 2\p@
+          }%
+        }
+        \renewcommand{\@makeschapterhead}[1]{%
+          \vspace*{30\p@}%
+          {\parindent \z@ \raggedleft \normalfont
+            \rule{\linewidth}{0.4pt}\par\nobreak
+            \vskip 2\p@
+            \color{navyblue}\sffamily\bfseries\fontsize{24}{30}\selectfont #1\par\nobreak
+            \vskip 2\p@
+            \rule{\linewidth}{0.4pt}\par\nobreak
+            \vskip 2\p@
+          }%
+        }
+        \makeatother
+        \renewenvironment{split}{\begin{gathered}}{\end{gathered}}
+        %\renewcommand{\numberline}[1]{}
+        %\renewcommand{\sectionmark}[1]{\markright{#1}}
+        \usepackage{fancyhdr}
+
+        \definecolor{meucinza}{gray}{0.4}
+        \definecolor{navyblue}{RGB}{50,50,100}
+        \definecolor{cinzaazulado}{RGB}{110,120,140}
+
+        % Remove "Capítulo X" e deixa só o título
+        \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+        % O Sphinx usa \pagestyle{normal} (e \pagestyle{plain} nas páginas
+        % de abertura de capítulo), não \pagestyle{fancy}. Por isso é
+        % necessário sobrescrever diretamente esses dois estilos.
+        \makeatletter
+        \fancypagestyle{normal}{
+          \fancyhf{}
+          \fancyhead[RO]{\footnotesize\py@HeaderFamily\color{cinzaazulado}\@title}
+          \fancyhead[LE]{\footnotesize\py@HeaderFamily\color{cinzaazulado}\@title}
+          \fancyfoot[RO]{\footnotesize\py@HeaderFamily\color{cinzaazulado}\thepage}
+          \fancyfoot[LE]{\footnotesize\py@HeaderFamily\color{cinzaazulado}\thepage}
+          \fancyfoot[LO]{\footnotesize\py@HeaderFamily\color{cinzaazulado}\nouppercase{\rightmark}}
+          \fancyfoot[RE]{\footnotesize\py@HeaderFamily\color{cinzaazulado}\nouppercase{\leftmark}}
+          \renewcommand{\headrulewidth}{0.3pt}
+          \renewcommand{\footrulewidth}{0.3pt}
+        }
+        \fancypagestyle{plain}{
+          \fancyhf{}
+          \fancyfoot[RO]{\footnotesize\py@HeaderFamily\color{cinzaazulado}\thepage}
+          \fancyfoot[LE]{\footnotesize\py@HeaderFamily\color{cinzaazulado}\thepage}
+          \renewcommand{\headrulewidth}{0pt}
+          \renewcommand{\footrulewidth}{0.3pt}
+        }
+        \makeatother
+
+        % Indentação de parágrafo estilo "tab" em vez do espaçamento do pacote parskip
+        \setlength{\parindent}{1.5em}
+        \setlength{\parskip}{0pt}
+
+        % Aumenta um pouco o espaçamento entre linhas
+        \usepackage{setspace}
+        \setstretch{1.25}
+
+
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/tiagoburiol/metodos_numericos_em_python  # Online location of your book
+  branch: main  # Which branch of the repository should be used when creating links (optional)
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  #baseurl: /metodos_numericos_em_python
+  use_issues_button: true
+  use_repository_button: true
