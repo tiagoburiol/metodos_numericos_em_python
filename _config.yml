@@ -6,6 +6,20 @@ author: Tiago M. Buriol
 copyright: Universidade Federal de Santa Maria
 logo: capa.png
 
+# Arquivos e pastas que não fazem parte do livro (rascunhos, versões
+# antigas, saídas de build e o próprio site publicado em docs/)
+exclude_patterns:
+  - _build
+  - _build_test
+  - docs
+  - refs
+  - "**/.ipynb_checkpoints"
+  - "**/olds"
+  - "**/imagens/*.ipynb"
+  - Euler01.ipynb
+  - README.md
+  - _toc_teste.yml
+
 parse:
   myst_enable_extensions:
     - dollarmath
