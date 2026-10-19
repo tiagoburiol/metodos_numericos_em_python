@@ -1,0 +1,13 @@
+# Checkpoints do Jupyter
+.ipynb_checkpoints/
+
+# Saídas de build do Jupyter Book
+_build/
+_build_test/
+
+# Python
+__pycache__/
+*.pyc
+
+# PDFs de referência (material com direitos autorais, uso pessoal)
+refs/
