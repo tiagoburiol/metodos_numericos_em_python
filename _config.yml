@@ -53,6 +53,7 @@ sphinx:
     - sphinxcontrib.bibtex
   local_extensions:
     abnt_style: _ext
+    remove_latex: _ext
   config:
     language: pt_BR
     bibtex_bibfiles: ['references.bib']
