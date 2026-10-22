@@ -11,3 +11,18 @@ __pycache__/
 
 # PDFs de referência (material com direitos autorais, uso pessoal)
 refs/
+
+# Arquivos de geração do livro: ficam só na máquina local, o GitHub
+# guarda apenas notebooks, imagens, README, LICENSE, docs/ e capa
+_config.yml
+_toc.yml
+_ext/
+adiciona_capa.py
+references.bib
+intro.md
+referencias.md
+capa.md
+/[0-9]_*/[0-9]_*.md
+/*/README
+/*/imagens/README
+*.xcf
