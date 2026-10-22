@@ -72,3 +72,5 @@ O *Caderno didático de Métodos Numéricos em Python* foi produzido para ser us
 - [8.1 Introdução e séries de Fourier](https://tiagoburiol.github.io/metodos_numericos_em_python/8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.1_introducao_e_series_de_fourier.html)
 - [8.2 Classificação e discretização](https://tiagoburiol.github.io/metodos_numericos_em_python/8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.2_classificacao_e_discretizacao.html)
 - [8.3 EDPs elípticas](https://tiagoburiol.github.io/metodos_numericos_em_python/8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.3_edps_elipticas.html)
+- [8.4 EDPs parabólicas](https://tiagoburiol.github.io/metodos_numericos_em_python/8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.4_edps_parabolicas.html)
+- [8.5 EDPs hiperbólicas](https://tiagoburiol.github.io/metodos_numericos_em_python/8_EQUACOES_DIFERENCIAIS_PARCIAIS/8.5_edps_hiperbolicas.html)
