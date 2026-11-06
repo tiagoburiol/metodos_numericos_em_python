@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -454,14 +454,16 @@ document.write(`
 <h1>2.6 Raízes de polinômios<a class="headerlink" href="#raizes-de-polinomios" title="Link para este cabeçalho">#</a></h1>
 <section id="metodo-de-briot-ruffini-para-divisao-de-polinomios">
 <h2>Método de Briot-Ruffini para divisão de polinômios<a class="headerlink" href="#metodo-de-briot-ruffini-para-divisao-de-polinomios" title="Link para este cabeçalho">#</a></h2>
-<p>Dados os polinômios
-$<span class="math notranslate nohighlight">\(
+<p>Dados os polinômios</p>
+<div class="math notranslate nohighlight">
+\[
 P(x)=a_0 x^n+a_1 x^{n-1}+\cdots+a_n
-\)</span><span class="math notranslate nohighlight">\(
-e
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>e</p>
+<div class="math notranslate nohighlight">
+\[
 Q(x)=b_0 x^{n-1}+b_1 x^{n-2}+\cdots+b_{n-1}
-\)</span>$</p>
+\]</div>
 <p>tal que <span class="math notranslate nohighlight">\(P(x)=(x-\alpha) Q(x)+P(\alpha)\)</span>, ou seja, <span class="math notranslate nohighlight">\(Q(x)\)</span> é o polinômio resultante da divisão de <span class="math notranslate nohighlight">\(P(x)\)</span> por <span class="math notranslate nohighlight">\((x-\alpha)\)</span> <span class="math notranslate nohighlight">\(P(\alpha)\)</span> é o resto.</p>
 <p>Podemos determinar <span class="math notranslate nohighlight">\(Q(x)\)</span> e <span class="math notranslate nohighlight">\(P(\alpha)\)</span> usando o método de Briot-Ruffini escrevendo</p>
 <div class="math notranslate nohighlight">

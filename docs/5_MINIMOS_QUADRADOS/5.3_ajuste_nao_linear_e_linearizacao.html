@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -543,8 +543,8 @@ Plotando os pontos tem-se</p>
 <img alt="../_images/f9a5789523c1788d93b33bd11a2e917f642b2ede2e80bc3b945be14b4bd83ea9.png" src="../_images/f9a5789523c1788d93b33bd11a2e917f642b2ede2e80bc3b945be14b4bd83ea9.png" />
 </div>
 </div>
-<p>O que sugere um comportamento de uma função do tipo $<span class="math notranslate nohighlight">\(g(x) = \frac{1}{a_1x+a_2}\)</span><span class="math notranslate nohighlight">\(. 
-Para confirmar, e verificar se a linearização do tipo \)</span><span class="math notranslate nohighlight">\(h(x) = \frac{1}{g(x)} = a_1x+a_2\)</span>$ irá funcionar, construímos uma nova tabela e plotamos os pontos</p>
+<p>O que sugere um comportamento de uma função do tipo <span class="math notranslate nohighlight">\(g(x) = \frac{1}{a_1x+a_2}\)</span>.
+Para confirmar, e verificar se a linearização do tipo <span class="math notranslate nohighlight">\(h(x) = \frac{1}{g(x)} = a_1x+a_2\)</span> irá funcionar, construímos uma nova tabela e plotamos os pontos</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Yl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
@@ -752,14 +752,19 @@ x_i &amp; -1 &amp; -0.9 &amp; -0.8 &amp; 0 &amp; 1 &amp; 2 \\
 <img alt="../_images/d71c91858d803e053dd89c22756da3c7b513af663bc7ee4fd5583aaf2248f437.png" src="../_images/d71c91858d803e053dd89c22756da3c7b513af663bc7ee4fd5583aaf2248f437.png" />
 </div>
 </div>
-<p>fazendo
-$<span class="math notranslate nohighlight">\(\ln(y)=\ln(\alpha x e^{\beta x})\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(\ln(y)=\ln(\alpha)+\ln(x)+ \beta x\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(\ln(y)-\ln(x) = \beta x + \ln(\alpha)\)</span>$</p>
-<p>escrevendo
-$<span class="math notranslate nohighlight">\(y' = a_1x+a_2\)</span>$</p>
-<p>sendo
-$<span class="math notranslate nohighlight">\(y'=\ln(y)-\ln(x)\)</span>$</p>
+<p>fazendo</p>
+<div class="math notranslate nohighlight">
+\[\ln(y)=\ln(\alpha x e^{\beta x})\]</div>
+<div class="math notranslate nohighlight">
+\[\ln(y)=\ln(\alpha)+\ln(x)+ \beta x\]</div>
+<div class="math notranslate nohighlight">
+\[\ln(y)-\ln(x) = \beta x + \ln(\alpha)\]</div>
+<p>escrevendo</p>
+<div class="math notranslate nohighlight">
+\[y' = a_1x+a_2\]</div>
+<p>sendo</p>
+<div class="math notranslate nohighlight">
+\[y'=\ln(y)-\ln(x)\]</div>
 <div class="math notranslate nohighlight">
 \[a_1 = \beta\]</div>
 <div class="math notranslate nohighlight">
@@ -857,13 +862,14 @@ $<span class="math notranslate nohighlight">\(y'=\ln(y)-\ln(x)\)</span>$</p>
 <h2>Exercícios<a class="headerlink" href="#exercicios" title="Link para este cabeçalho">#</a></h2>
 <hr class="docutils" />
 <blockquote>
-<div><p><strong>1.</strong> Considere os dados de um experimento conforme tabela:
-$<span class="math notranslate nohighlight">\(
+<div><p><strong>1.</strong> Considere os dados de um experimento conforme tabela:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
  \begin{array}{cccccccc}
  x_i &amp; -9 &amp; -6 &amp; -4 &amp; -2 &amp; 0 &amp; 2 &amp; 4 \\
  \hline f\left(x_i\right) &amp; 30.1 &amp; 10.1 &amp; 8.9 &amp; 5.9 &amp; 5.0 &amp; 3.9 &amp; 4.01
  \end{array}
- \)</span>$</p>
+ \end{split}\]</div>
 <p>Usando o método dos mínimos quadrados, ajustar aos dados da tabela funções:</p>
 <p>a) Hiperbólica.</p>
 <p>b) Exponencial.</p>

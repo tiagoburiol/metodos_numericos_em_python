@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -451,11 +451,12 @@ document.write(`
                   
   <section id="metodos-de-serie-de-taylor">
 <h1>7.3 Métodos de Série de Taylor<a class="headerlink" href="#metodos-de-serie-de-taylor" title="Link para este cabeçalho">#</a></h1>
-<p>Consideremos o Problema de Valor Inicial (PVI) descrito por
-$<span class="math notranslate nohighlight">\(\begin{cases} 
+<p>Consideremos o Problema de Valor Inicial (PVI) descrito por</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases} 
    y' = f(x,y) \\
    y(x_0)=y_0
-  \end{cases}\)</span>$</p>
+  \end{cases}\end{split}\]</div>
 <p>Supondo que a solução <span class="math notranslate nohighlight">\(y(x)\)</span> do PVI possui todas as derivadas contínuas no intervalo <span class="math notranslate nohighlight">\([a,b]\)</span> que contém os pontos de discretização <span class="math notranslate nohighlight">\(x_0\)</span>,<span class="math notranslate nohighlight">\(x_1\)</span>,…,<span class="math notranslate nohighlight">\(x_n\)</span> , o desenvolvimento em série de Taylor da função <span class="math notranslate nohighlight">\(y(x)\)</span> em torno do ponto <span class="math notranslate nohighlight">\(x_n\)</span> é dado por</p>
 <div class="math notranslate nohighlight">
 \[ y(x) = y(x_n) + y'(x_n)(x−x_n) + y''(x_n)\frac{(x-x_n)^2}{2!}+\cdots+y^{(p)}(x_n)\frac{(x-x_n)^p}{p!}+y^{(p+1)}(\xi)\frac{(x-\xi)^{p+1}}{(p+1)!}\]</div>

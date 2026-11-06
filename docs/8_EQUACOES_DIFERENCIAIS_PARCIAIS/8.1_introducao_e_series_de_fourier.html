@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -557,10 +557,11 @@ a_n=\frac{1}{2} \int_{-2}^0(-x) \cos \left(\frac{n \pi x}{2}\right) d x+\frac{1}
 \[
 b_n=\frac{1}{2} \int_{-2}^0(-x) \operatorname{sen} \left(\frac{n \pi x}{2}\right) dx+\frac{1}{2} \int_0^2 x\operatorname{sen} \left(\frac{n \pi x}{2}\right)dx=0
 \]</div>
-<p>Calculando as integrais, substituindo e simplificando, obtemos
-$<span class="math notranslate nohighlight">\(
+<p>Calculando as integrais, substituindo e simplificando, obtemos</p>
+<div class="math notranslate nohighlight">
+\[
 f(x)=1-\frac{8}{\pi^2} \sum_{n=1}^{\infty} \frac{1}{(2 n-1)^2} \cos \left(\frac{(2 n-1) \pi x}{2}\right) .
-\)</span>$</p>
+\]</div>
 <p>O gráfico da função e da série de Fourier com 3 termos é mostrado abaixo:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -746,11 +747,12 @@ f(x)=\left\{\begin{array}{rcc}
 </tbody>
 </table>
 </div>
-<p>O problema fundamental de condução de calor é encontrar <span class="math notranslate nohighlight">\(u(x, t)\)</span> que satisfaz a equação diferencial para <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span> e para <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, com a condição inicial
-$<span class="math notranslate nohighlight">\(
+<p>O problema fundamental de condução de calor é encontrar <span class="math notranslate nohighlight">\(u(x, t)\)</span> que satisfaz a equação diferencial para <span class="math notranslate nohighlight">\(0 &lt; x &lt; L\)</span> e para <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, com a condição inicial</p>
+<div class="math notranslate nohighlight">
+\[
 u(x, 0)=f(x), \quad 0 \leq x \leq L,
-\)</span><span class="math notranslate nohighlight">\(
-quando \)</span>t = 0<span class="math notranslate nohighlight">\( e as condições de contorno \)</span>T_1<span class="math notranslate nohighlight">\( em \)</span>x = 0<span class="math notranslate nohighlight">\( e \)</span>T_2<span class="math notranslate nohighlight">\( em \)</span>x = L<span class="math notranslate nohighlight">\(. Começaremos com as contições de contorno \)</span>T_1=T_2=0$,então,</p>
+\]</div>
+<p>quando <span class="math notranslate nohighlight">\(t = 0\)</span> e as condições de contorno <span class="math notranslate nohighlight">\(T_1\)</span> em <span class="math notranslate nohighlight">\(x = 0\)</span> e <span class="math notranslate nohighlight">\(T_2\)</span> em <span class="math notranslate nohighlight">\(x = L\)</span>. Começaremos com as condições de contorno <span class="math notranslate nohighlight">\(T_1=T_2=0\)</span>, então,</p>
 <div class="math notranslate nohighlight">
 \[u(0, t)=0, \quad u(L, t)=0, \quad t&gt;0.\]</div>
 <p>Pelo <strong>método de separação de variáveis</strong>, iniciamos supondo que <span class="math notranslate nohighlight">\(u(x, t)\)</span> é um produto de duas outras funções, uma dependendo só de <span class="math notranslate nohighlight">\(x\)</span> e a outra dependendo só de <span class="math notranslate nohighlight">\(t\)</span>. Assim,</p>
@@ -763,11 +765,12 @@ u(x, t)=X(x) T(t) .
 \[
 \alpha^2 X^{\prime \prime}(x) T(t)=X(x) T^{\prime}(t)
 \]</div>
-<p>ou, simplesmente
-$<span class="math notranslate nohighlight">\(
+<p>ou, simplesmente</p>
+<div class="math notranslate nohighlight">
+\[
 \alpha^2 X^{\prime \prime} T=X T^{\prime},
-\)</span><span class="math notranslate nohighlight">\(
-Dividindo os dois lados por \)</span>\alpha^2 X T$, obtemos a equação equivalente</p>
+\]</div>
+<p>Dividindo os dois lados por <span class="math notranslate nohighlight">\(\alpha^2 X T\)</span>, obtemos a equação equivalente</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{X^{\prime \prime}}{X}=\frac{1}{\alpha^2} \frac{T^{\prime}}{T},
@@ -787,9 +790,10 @@ o que leva a <span class="math notranslate nohighlight">\(X(0)=0\)</span>.  A co
 <div class="math notranslate nohighlight">
 \[
 X_n(x)=\operatorname{sen}\left(\frac{n \pi x}{L}\right), \quad n=1,2,3,\ldots\]</div>
-<p>Associadas aos autovalores
-$<span class="math notranslate nohighlight">\(\lambda_n=\frac{n^2 \pi^2}{L^2}, \quad n=1,2,3,\ldots
-\)</span>$</p>
+<p>Associadas aos autovalores</p>
+<div class="math notranslate nohighlight">
+\[\lambda_n=\frac{n^2 \pi^2}{L^2}, \quad n=1,2,3,\ldots
+\]</div>
 <p>Voltando para a equação para <span class="math notranslate nohighlight">\(T^{\prime}+\alpha^2 \lambda T=0\)</span> e substituindo <span class="math notranslate nohighlight">\(\lambda\)</span> por <span class="math notranslate nohighlight">\(n^2 \pi^2 / L^2\)</span>, temos</p>
 <div class="math notranslate nohighlight">
 \[
@@ -824,8 +828,8 @@ c_n=\frac{2}{L} \int_0^L f(x) \operatorname{sen}\left(\frac{n \pi x}{L}\right) d
 <p>com</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}c_n = \frac{2}{50} \int_{0}^{50} 20 \operatorname{sen}\left(\frac{n\pi x}{50} \right) dx = \frac{40}{n\pi}(1-\cos n\pi) = \begin{cases}
-\frac{80}{n\pi}, \,\,\,  n \,\,\,  ímpar; \\
-0, \,\,\, n  \,\,\, par.\\ 
+\frac{80}{n\pi}, \,\,\,  n \,\,\,  \text{ímpar}; \\
+0, \,\,\, n  \,\,\, \text{par}.\\ 
 \end{cases}\end{split}\]</div>
 <p>Substituindo, a solução fica</p>
 <div class="math notranslate nohighlight">

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -797,8 +797,9 @@ Resultado: -0.22313066666666673 , Erro: 5.774151870891082e-05
 <p><em>Comentário</em> <br>
 Pelo resultado do código acima, os 5 primeiros termos da série são suficientes para a aproximar <span class="math notranslate nohighlight">\(ln(0.8)\)</span>, ou seja, <span class="math notranslate nohighlight">\(ln(1+x)\)</span> com <span class="math notranslate nohighlight">\(x = -0.2\)</span>, com erro menor que 0.0001.</p>
 <p><strong>Exemplo 1.4.6:</strong></p>
-<p>De acordo com o <em>princípio de Arquimedes</em>, a força de <em>flutuação</em> é igual ao peso do fluido deslocado pela parte submersa de um objeto. Para o tronco de cone mostrado abaixo, use o método da bisseção e mais algum método de sua escolha para determinar a altura <span class="math notranslate nohighlight">\(h_1\)</span> da parte que está acima da água. Use os seguintes valores para seus cálculos: <span class="math notranslate nohighlight">\(r_1 = 0,5 m\)</span>, <span class="math notranslate nohighlight">\(r_2 = 1 m\)</span>, <span class="math notranslate nohighlight">\(h = 1 m\)</span>, <span class="math notranslate nohighlight">\(\rho_f=\text{densidade do tronco}=200 kg/m^3\)</span> e <span class="math notranslate nohighlight">\(\rho_w=\text{densidade da água}=1000 kg/m^3\)</span>. O volume do trondo de cone é dado por:
-$<span class="math notranslate nohighlight">\(V=\frac{\pi h}{3}(r_1^2+r_2^2+r_1 r_2)\)</span>$</p>
+<p>De acordo com o <em>princípio de Arquimedes</em>, a força de <em>flutuação</em> é igual ao peso do fluido deslocado pela parte submersa de um objeto. Para o tronco de cone mostrado abaixo, use o método da bisseção e mais algum método de sua escolha para determinar a altura <span class="math notranslate nohighlight">\(h_1\)</span> da parte que está acima da água. Use os seguintes valores para seus cálculos: <span class="math notranslate nohighlight">\(r_1 = 0,5 m\)</span>, <span class="math notranslate nohighlight">\(r_2 = 1 m\)</span>, <span class="math notranslate nohighlight">\(h = 1 m\)</span>, <span class="math notranslate nohighlight">\(\rho_f=\text{densidade do tronco}=200 kg/m^3\)</span> e <span class="math notranslate nohighlight">\(\rho_w=\text{densidade da água}=1000 kg/m^3\)</span>. O volume do tronco de cone é dado por:</p>
+<div class="math notranslate nohighlight">
+\[V=\frac{\pi h}{3}(r_1^2+r_2^2+r_1 r_2)\]</div>
 <p><em>Resolução:</em> A equação a ser resolvida é</p>
 <div class="math notranslate nohighlight">
 \[200 \frac{\pi1.0}{3} (0.5^2+1.0^2+1.0 \times 0.5) = 1000\frac{\pi (1-h_1)}{3}((0.5+h_1/2)^2+1.0^2+1.0 \times (0.5+h_1/2))\]</div>

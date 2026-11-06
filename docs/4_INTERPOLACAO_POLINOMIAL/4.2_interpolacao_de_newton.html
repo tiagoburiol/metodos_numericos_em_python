@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -457,16 +457,20 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[...+(x-x_0)(x-x_1)...(x-x_{n-1})f[x_0,\ldots,x_n]\]</div>
 <p>onde <span class="math notranslate nohighlight">\(f[x_0]\)</span>, <span class="math notranslate nohighlight">\(f[x_0,x_1]\)</span>,…,<span class="math notranslate nohighlight">\(f[x_0,\ldots,x_n]\)</span> são as <strong>diferenças divididas</strong>, definidas como é mostrado a seguir:</p>
-<p><strong>Diferença dividida de ordem 0:</strong>
-$<span class="math notranslate nohighlight">\(f[x_i]=f(x_i), i=0,1,\ldots,n\)</span>$</p>
-<p><strong>Diferença dividida de ordem 1:</strong>
-$<span class="math notranslate nohighlight">\(f[x_i, x_{i+1}]=\frac{f[x_{i+1}]-f[x_{i}]}{x_{i+1}-x_i}, i=0,1,\ldots,n-1\)</span>$</p>
-<p><strong>Diferença dividida de ordem 2:</strong>
-$<span class="math notranslate nohighlight">\(f[x_i, x_{i+1}, x_{i+2}]=\frac{f[x_{i+1}, x_{i+2}] - f[x_{i}, x_{i+1}]}   {x_{i+2} - x_i}, i=0,1,\ldots,n-2\)</span>$</p>
+<p><strong>Diferença dividida de ordem 0:</strong></p>
+<div class="math notranslate nohighlight">
+\[f[x_i]=f(x_i), i=0,1,\ldots,n\]</div>
+<p><strong>Diferença dividida de ordem 1:</strong></p>
+<div class="math notranslate nohighlight">
+\[f[x_i, x_{i+1}]=\frac{f[x_{i+1}]-f[x_{i}]}{x_{i+1}-x_i}, i=0,1,\ldots,n-1\]</div>
+<p><strong>Diferença dividida de ordem 2:</strong></p>
+<div class="math notranslate nohighlight">
+\[f[x_i, x_{i+1}, x_{i+2}]=\frac{f[x_{i+1}, x_{i+2}] - f[x_{i}, x_{i+1}]}   {x_{i+2} - x_i}, i=0,1,\ldots,n-2\]</div>
 <div class="math notranslate nohighlight">
 \[\vdots\]</div>
-<p><strong>Diferença dividida de ordem n:</strong>
-$<span class="math notranslate nohighlight">\(f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n] - f[x_0,\ldots,x_{n-1}]}   {x_n - x_0} \)</span>$</p>
+<p><strong>Diferença dividida de ordem n:</strong></p>
+<div class="math notranslate nohighlight">
+\[f[x_0,\ldots,x_n]=\frac{f[x_1,\ldots,x_n] - f[x_0,\ldots,x_{n-1}]}   {x_n - x_0} \]</div>
 <p>A seguir é apresentado um exemplo de como obter as diferenças divididas para um conjunto de 5 pontos distintos da função <span class="math notranslate nohighlight">\(f(x)=1/x\)</span>.</p>
 <p><strong>Exemplo 4.2.1 :</strong> Considere os pontos</p>
 <div class="math notranslate nohighlight">
@@ -932,7 +936,7 @@ P(3.63)= 1.4207663681347895
 	\begin{array}{cccccc}
  			\hline
  			T, ^\circ F &amp;700 &amp;720 &amp;740 &amp;760 &amp;780 \\ \hline
- 			v, pés^3/lb_m &amp;0,0977 &amp;0,12184 &amp;0,14060 &amp;0,15509 &amp;0,16643  \\
+ 			v, \text{pés}^3/lb_m &amp;0,0977 &amp;0,12184 &amp;0,14060 &amp;0,15509 &amp;0,16643  \\
  			\hline
  		\end{array}
  \end{split}\]</div>

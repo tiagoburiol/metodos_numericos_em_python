@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -611,10 +611,11 @@ pontos yi: [2.0, 2.0, 2.04, 2.112, 2.2096, 2.32768]
 <p>Uma melhoria nos resultados do método de Euler pode ser obtida melhorando a estimativa da inclinação <span class="math notranslate nohighlight">\(y_i'\)</span>. No método a inclinação em <span class="math notranslate nohighlight">\(y_i\)</span> é tomada como sendo constante e igual a <span class="math notranslate nohighlight">\(dy/dx\)</span> ao longo do intervalo. O método de Heun consiste em usar a inclinação média <span class="math notranslate nohighlight">\(\bar y'\)</span> entre a inclinação nos dois extremos do intervalo, ou seja:</p>
 <div class="math notranslate nohighlight">
 \[ \bar y'= \frac{y_i'+y_{i+1}'}{2}\]</div>
-<p>em que <span class="math notranslate nohighlight">\(y_{i+1}'\)</span> é estimada fazendo
-$<span class="math notranslate nohighlight">\(
+<p>em que <span class="math notranslate nohighlight">\(y_{i+1}'\)</span> é estimada fazendo</p>
+<div class="math notranslate nohighlight">
+\[
 y_{i+1}^{\prime}=f\left(x_{i+1}, y_{i+1}^0\right) \quad \text{com} \quad y_{i+1}^0=y_i+f(x_i, y_i)h
-\)</span>$</p>
+\]</div>
 <p>Aqui, <span class="math notranslate nohighlight">\(y_{i+1}^0\)</span> é a primeira aproximação obtida pelo método de Euler, uma estimativa preditiva da inclinação, então, uma correção nessa aproximação é realizada usando a média das inclinações estimadas em <span class="math notranslate nohighlight">\(x_i\)</span> e <span class="math notranslate nohighlight">\(x_{i+1}\)</span>.</p>
 <p>Essa inclinação média é, então, usada para extrapolar linearmente de <span class="math notranslate nohighlight">\(y_i\)</span> a <span class="math notranslate nohighlight">\(y_{i+1}\)</span></p>
 <div class="math notranslate nohighlight">
@@ -691,8 +692,8 @@ y_{i+1}^{\prime}=f\left(x_{i+1}, y_{i+1}^0\right) \quad \text{com} \quad y_{i+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fd66f3abe60&gt;,
- &lt;matplotlib.lines.Line2D at 0x7fd66d274230&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f63aa978860&gt;,
+ &lt;matplotlib.lines.Line2D at 0x7f63aa9786e0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/e6da00f1586a2151996b4f6f2e45abd947187b5a504742085359905bfc675b3b.png" src="../_images/e6da00f1586a2151996b4f6f2e45abd947187b5a504742085359905bfc675b3b.png" />

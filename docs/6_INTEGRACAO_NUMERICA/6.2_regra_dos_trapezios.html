@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -493,7 +493,9 @@ h \int_{0}^{1} P_1(u) du
 <div class="math notranslate nohighlight">
 \[\int_{1.5}^{5.5} \frac{1}{x}dx\]</div>
 <p>usando a regra dos trapézios.</p>
-<p><em>Solução:</em> Basta fazer  $<span class="math notranslate nohighlight">\(\int_{1.5}^{5.5} \frac{1}{x} dx \approx \frac{4}{2} [f(1.5)+f(5.5)] = 2 \left( \frac{1}{1.5} + \frac{1}{5.5} \right) \approx 1.697\)</span>$</p>
+<p><em>Solução:</em> Basta fazer</p>
+<div class="math notranslate nohighlight">
+\[\int_{1.5}^{5.5} \frac{1}{x} dx \approx \frac{4}{2} [f(1.5)+f(5.5)] = 2 \left( \frac{1}{1.5} + \frac{1}{5.5} \right) \approx 1.697\]</div>
 <p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/6_INTEGRACAO_NUMERICA/imagens/trapezioExemplo.png" /></p>
 <p>Resolvendo analiticamente o valor exato é <span class="math notranslate nohighlight">\(\ln(5.5)\)</span> - <span class="math notranslate nohighlight">\(\ln(1.5)\)</span> que pode ser calculado usando  uma calculadora obtendo-se <span class="math notranslate nohighlight">\(1.2992829841302609\)</span>. O valor obtido pela regra do trapézio é maior, como pode ser verificado observando na figura, comparando-se as áreas. Vamos usar a regra dos trapézios repetida para 5, 10 e 100 subintervalos para ver como fica.</p>
 <div class="cell docutils container">
@@ -671,8 +673,9 @@ I=\int_a^b \int_c^d f(x, y) d y d x
 </div>
 </div>
 </div>
-<p><strong>Exemplo 6.2.4:</strong> <em>(Integração dupla pela regra dos trapézios)</em> Vamos agora usar a regra dos trapézios para calcular a integral dupla
-$<span class="math notranslate nohighlight">\(\int_0^2 \int_0^2 (16-x^2-2y^2) dxdy .\)</span>$</p>
+<p><strong>Exemplo 6.2.4:</strong> <em>(Integração dupla pela regra dos trapézios)</em> Vamos agora usar a regra dos trapézios para calcular a integral dupla</p>
+<div class="math notranslate nohighlight">
+\[\int_0^2 \int_0^2 (16-x^2-2y^2) dxdy .\]</div>
 <p>Vamos criar uma função para a regra dos trapéxios generalizada:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

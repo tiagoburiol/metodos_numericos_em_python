@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -475,8 +475,9 @@ Como consequência do teorema acima, o processo será convergente se para qualqu
 <p>Tomando normas consistentes, tem-se que</p>
 <div class="math notranslate nohighlight">
 \[ \| H^k e^{(0)} \| \leq \| H \|^k \|e^{(0)}\|\]</div>
-<p>portanto
-$<span class="math notranslate nohighlight">\( \| e^{(k)} \| \leq \| H \|^k \|e^{(0)}\|\)</span>$</p>
+<p>portanto</p>
+<div class="math notranslate nohighlight">
+\[ \| e^{(k)} \| \leq \| H \|^k \|e^{(0)}\|\]</div>
 <p>como <span class="math notranslate nohighlight">\(\| H \|&lt;1\)</span> tem-se que <span class="math notranslate nohighlight">\(\| e^{(k)} \| \rightarrow 0\)</span> quando <span class="math notranslate nohighlight">\(k \rightarrow \infty\)</span>.</p>
 <p>Assim, se <span class="math notranslate nohighlight">\(\| H \|&lt;1\)</span> para alguma norma, temos a garantia de que o processo iterativo dado por <span class="math notranslate nohighlight">\( x - x^{(k)} = H(x-x^{(k-1)})\)</span> converge para a solução exata <span class="math notranslate nohighlight">\(\bar{x}\)</span>. A matriz <span class="math notranslate nohighlight">\(H\)</span> é chamada <strong>matriz de iteração</strong>.</p>
 <section id="metodo-iterativo-de-jacobi-richardson">
@@ -1021,8 +1022,9 @@ Solução: [ 1.0216  2.0069 -0.0064]
              \vdots\\
 	         \frac{b_n}{a_{nn}} \\
 	\end{array} \right]\end{split}\]</div>
-<p>ou
-$<span class="math notranslate nohighlight">\( x^{(k+1)} = P x^{(k+1)} + Q x^{(k)} + g\)</span>$</p>
+<p>ou</p>
+<div class="math notranslate nohighlight">
+\[ x^{(k+1)} = P x^{(k+1)} + Q x^{(k)} + g\]</div>
 <div class="math notranslate nohighlight">
 \[ (I-P)x^{(k+1)} = Q x^{(k)} + g\]</div>
 <div class="math notranslate nohighlight">

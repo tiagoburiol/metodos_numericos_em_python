@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -650,10 +650,11 @@ x=\frac{7}{3}, \operatorname{com} g\left(\frac{7}{3}\right)=\frac{25}{108}, \qua
 \[
 R_n=\frac{f^{(n+1)}(\xi)}{(n+1)!}\left(x-x_0\right)\left(x-x_1\right) \ldots\left(x-x_n\right)
 \]</div>
-<p>onde <span class="math notranslate nohighlight">\(\xi\)</span> é algum ponto no intervalo contendo a variável e os dados. Para essa fórmula ser útil, a função em questão deve ser conhecida e <span class="math notranslate nohighlight">\((n + 1)\)</span> vezes diferenciável. <strong>Em geral, esse não é o caso</strong>. Felizmente, está disponível uma formulação alternativa que não requer conhecimento anterior da função. Em vez disso, ela usa diferenças divididas finitas para aproximar a <span class="math notranslate nohighlight">\((n + 1)\)</span>-ésima derivada,
-$<span class="math notranslate nohighlight">\(
+<p>onde <span class="math notranslate nohighlight">\(\xi\)</span> é algum ponto no intervalo contendo a variável e os dados. Para essa fórmula ser útil, a função em questão deve ser conhecida e <span class="math notranslate nohighlight">\((n + 1)\)</span> vezes diferenciável. <strong>Em geral, esse não é o caso</strong>. Felizmente, está disponível uma formulação alternativa que não requer conhecimento anterior da função. Em vez disso, ela usa diferenças divididas finitas para aproximar a <span class="math notranslate nohighlight">\((n + 1)\)</span>-ésima derivada,</p>
+<div class="math notranslate nohighlight">
+\[
 R_n=f\left[x, x_n, x_{n-1}, \ldots, x_0\right]\left(x-x_0\right)\left(x-x_1\right) \cdots\left(x-x_n\right)
-\)</span>$</p>
+\]</div>
 <p>onde <span class="math notranslate nohighlight">\(f\left[x, x_n, x_{n-1}, \ldots, x_0\right]\)</span> é a <span class="math notranslate nohighlight">\((n+1)\)</span>-ésima diferença dividida finita.</p>
 <p>Como esta expressão contém a incógnita <span class="math notranslate nohighlight">\(f(x)\)</span>, ela não determina o erro. Entretanto, se estiver disponível um ponto dado adicional <span class="math notranslate nohighlight">\(f(x_{n+1})\)</span>, a equação pode ser usada para estimar o erro, como em</p>
 <div class="math notranslate nohighlight">
@@ -662,14 +663,15 @@ R_n \cong f\left[x_{n+1}, x_n, x_{n-1}, \ldots, x_0\right]\left(x-x_0\right)\lef
 \]</div>
 <p><strong>Exemplo 4.3.3:</strong> (<a class="reference external" href="https://integrada.minhabiblioteca.com.br/reader/books/9788580555691/pageid/451">Chapra, 2016, p. 451</a>)
 Ajuste um polinômio de segundo grau aos três pontos da função <span class="math notranslate nohighlight">\(f(x)=\ln(x)\)</span> dados, e use o polinômio para estimar <span class="math notranslate nohighlight">\(\ln(2)\)</span>. Calcule o erro absoluto.</p>
-<p>Pontos:
-$<span class="math notranslate nohighlight">\(
+<p>Pontos:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{array}{ll}
 x_0=1 &amp; f\left(x_0\right)=0 \\
 x_1=4 &amp; f\left(x_1\right)=1,386294 \\
 x_2=6 &amp; f\left(x_2\right)=1,791759
 \end{array}
-\)</span>$</p>
+\end{split}\]</div>
 <p><span class="math notranslate nohighlight">\(f[x_0]=0\)</span></p>
 <p><span class="math notranslate nohighlight">\(f[x_0,x_1]=\frac{1,386294-0}{4-1}=0,4620981\)</span></p>
 <p><span class="math notranslate nohighlight">\( f[x_0,x_1,x_2]=\frac{\frac{1,791759-1,386294}{6-4}-0,4620981}{6-1}=-0,0518731\)</span></p>

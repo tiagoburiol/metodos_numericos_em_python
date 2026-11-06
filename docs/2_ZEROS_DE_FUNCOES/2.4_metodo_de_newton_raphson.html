@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -463,19 +463,23 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\phi(x) = x+\theta(x)f(x)\]</div>
 <p>nas quais <span class="math notranslate nohighlight">\(\theta(x)\)</span> é uma função de <span class="math notranslate nohighlight">\(x\)</span> tal que <span class="math notranslate nohighlight">\(\theta(\overline{x})\neq 0\)</span>. Então, para o ponto fixo <span class="math notranslate nohighlight">\(x=\overline{x}\)</span> tem-se <span class="math notranslate nohighlight">\(\phi(\overline{x}) = \overline{x}\)</span>.</p>
-<p>Derivando a função <span class="math notranslate nohighlight">\(\phi(x)\)</span> e avaliando no ponto fixo obtemos:
-$<span class="math notranslate nohighlight">\(\phi'(x) = 1+\theta'(x)f(x) + \theta(x)f'(x)\)</span>$</p>
+<p>Derivando a função <span class="math notranslate nohighlight">\(\phi(x)\)</span> e avaliando no ponto fixo obtemos:</p>
+<div class="math notranslate nohighlight">
+\[\phi'(x) = 1+\theta'(x)f(x) + \theta(x)f'(x)\]</div>
 <p>avaliando em <span class="math notranslate nohighlight">\(\overline{x}\)</span> (lembrando que <span class="math notranslate nohighlight">\(f(\overline{x})=0\)</span> e <span class="math notranslate nohighlight">\(\theta'(\overline{x})=0\)</span>), obtemos:</p>
 <div class="math notranslate nohighlight">
 \[\phi'(\overline{x}) = 1+\theta'(\overline{x})f(\overline{x}) + \theta(\overline{x})f'(\overline{x})\]</div>
 <div class="math notranslate nohighlight">
 \[ 0 = 1 + \theta(\overline{x})f'(\overline{x}) \]</div>
-<p>então
-$<span class="math notranslate nohighlight">\(  \theta(\overline{x}) = -\frac{1}{f'(\overline{x})} \)</span>$</p>
-<p>Assim, escolhento <span class="math notranslate nohighlight">\(\theta(x) = -\frac{1}{f'(x)}\)</span> e substituindo em <span class="math notranslate nohighlight">\(\phi(x) = x+\theta(x)f(x)\)</span> obtemos a função de iteração
-$<span class="math notranslate nohighlight">\( \phi(x) = x - \frac{f(x)}{f'(x)}\)</span>$</p>
-<p>que fornece o processo iterativo do <strong>método de Newton-Raphson</strong> :
-$<span class="math notranslate nohighlight">\( x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)}\)</span>$</p>
+<p>então</p>
+<div class="math notranslate nohighlight">
+\[  \theta(\overline{x}) = -\frac{1}{f'(\overline{x})} \]</div>
+<p>Assim, escolhento <span class="math notranslate nohighlight">\(\theta(x) = -\frac{1}{f'(x)}\)</span> e substituindo em <span class="math notranslate nohighlight">\(\phi(x) = x+\theta(x)f(x)\)</span> obtemos a função de iteração</p>
+<div class="math notranslate nohighlight">
+\[ \phi(x) = x - \frac{f(x)}{f'(x)}\]</div>
+<p>que fornece o processo iterativo do <strong>método de Newton-Raphson</strong> :</p>
+<div class="math notranslate nohighlight">
+\[ x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)}\]</div>
 <p>a partir de uma aproximação inicial <span class="math notranslate nohighlight">\(x_0\)</span>,  para <span class="math notranslate nohighlight">\(i=1,2,3,\ldots\)</span>.</p>
 <p><img alt="" src="https://raw.githubusercontent.com/tiagoburiol/metodos_numericos_em_python/refs/heads/main/2_ZEROS_DE_FUNCOES/imagens/newton.png" /></p>
 <p style="text-align:center"> Figura 2.4.1 - Interpretação geométrica do método de Newton </p><p>Vejamos agora alguns exemplos. Iniciamos importando as bibliotecas <code class="docutils literal notranslate"><span class="pre">numpy</span></code>e <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>

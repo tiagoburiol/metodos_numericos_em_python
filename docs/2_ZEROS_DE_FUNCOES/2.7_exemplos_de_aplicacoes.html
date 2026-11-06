@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -756,9 +756,10 @@ Buscando t3
 <p><strong>Comentário</strong>
 Como pode ser visto no gráfico, a função possui 3 raízes, que correspondem aos tempos <span class="math notranslate nohighlight">\(t_1\)</span>, <span class="math notranslate nohighlight">\(t_2\)</span> e <span class="math notranslate nohighlight">\(t_3\)</span> em que a tensão atinge o valor de 10V. Assim, precisamos executar o método das secantes 3 vezes, com aproximações iniciais próximas a 0.01, 0.02 e 0.03 para obter as raízes.</p>
 <p><strong>Problema 4:</strong>
-Em Termodinâmica sob determinadas condições a relação entre o calor <span class="math notranslate nohighlight">\(Q\)</span> fornecido a um gás e sua variação de temperatura <span class="math notranslate nohighlight">\(T_f - T_i\)</span> é dada por
-$<span class="math notranslate nohighlight">\( Q = nR \left[ A (T_f-T_i)+ \frac{B}{2}(T_f^2-T_i^2) + \frac{C}{3}(T_f^3-T_i^3) \right].\)</span><span class="math notranslate nohighlight">\(
-Para o gás metano \)</span>R=8,314  J/mol.K<span class="math notranslate nohighlight">\( , \)</span>A=1,702<span class="math notranslate nohighlight">\(, \)</span>B=9,081 \times 10^{-3}K^{-1}<span class="math notranslate nohighlight">\(, \)</span>C=-2,164 \times 10^{-6} K^{-2}<span class="math notranslate nohighlight">\(. Em uma câmara tem-se \)</span>n=2 mol<span class="math notranslate nohighlight">\( de metano a temperatura \)</span>T_i = 300 K<span class="math notranslate nohighlight">\( qual será a temperatura final \)</span>T_f<span class="math notranslate nohighlight">\( se \)</span>20 kJ$ de energia é absorvido pelo gás?</p>
+Em Termodinâmica sob determinadas condições a relação entre o calor <span class="math notranslate nohighlight">\(Q\)</span> fornecido a um gás e sua variação de temperatura <span class="math notranslate nohighlight">\(T_f - T_i\)</span> é dada por</p>
+<div class="math notranslate nohighlight">
+\[ Q = nR \left[ A (T_f-T_i)+ \frac{B}{2}(T_f^2-T_i^2) + \frac{C}{3}(T_f^3-T_i^3) \right].\]</div>
+<p>Para o gás metano <span class="math notranslate nohighlight">\(R=8,314  J/mol.K\)</span> , <span class="math notranslate nohighlight">\(A=1,702\)</span>, <span class="math notranslate nohighlight">\(B=9,081 \times 10^{-3}K^{-1}\)</span>, <span class="math notranslate nohighlight">\(C=-2,164 \times 10^{-6} K^{-2}\)</span>. Em uma câmara tem-se <span class="math notranslate nohighlight">\(n=2 mol\)</span> de metano a temperatura <span class="math notranslate nohighlight">\(T_i = 300 K\)</span> qual será a temperatura final <span class="math notranslate nohighlight">\(T_f\)</span> se <span class="math notranslate nohighlight">\(20 kJ\)</span> de energia é absorvido pelo gás?</p>
 <p><em>Resolução:</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -810,9 +811,10 @@ Para o gás metano \)</span>R=8,314  J/mol.K<span class="math notranslate nohigh
 <p><strong>Comentário</strong> <br>
 Usando o método da bisseção, com a=500 e b=600 precisamos de 7 iteraçõespara chegar na solução com erro menor que 0,001.</p>
 <p><strong>Problema 5:</strong></p>
-<p>A resisitividade <span class="math notranslate nohighlight">\(\rho\)</span> do silício dopado é baseada na carga <span class="math notranslate nohighlight">\(q\)</span> de um elétron, na densidade eletrônica <span class="math notranslate nohighlight">\(n\)</span> e na mobilidade de elétron <span class="math notranslate nohighlight">\(\mu\)</span>. A densidade eletrônica é dada em termos da densidade da dopagem <span class="math notranslate nohighlight">\(N\)</span> e da densidade de transporte intríseca <span class="math notranslate nohighlight">\(n_i\)</span>. A mobilidade do elétron é descrita pela temperatura <span class="math notranslate nohighlight">\(T\)</span>, pela temperatura de referência <span class="math notranslate nohighlight">\(T_0\)</span> e pela mobilidade de referência <span class="math notranslate nohighlight">\(\mu_0\)</span>. As equações necessárias para o cálculo da resistividade são
-$<span class="math notranslate nohighlight">\( \rho = \frac{1}{qn\mu}\)</span>$
-onde</p>
+<p>A resisitividade <span class="math notranslate nohighlight">\(\rho\)</span> do silício dopado é baseada na carga <span class="math notranslate nohighlight">\(q\)</span> de um elétron, na densidade eletrônica <span class="math notranslate nohighlight">\(n\)</span> e na mobilidade de elétron <span class="math notranslate nohighlight">\(\mu\)</span>. A densidade eletrônica é dada em termos da densidade da dopagem <span class="math notranslate nohighlight">\(N\)</span> e da densidade de transporte intríseca <span class="math notranslate nohighlight">\(n_i\)</span>. A mobilidade do elétron é descrita pela temperatura <span class="math notranslate nohighlight">\(T\)</span>, pela temperatura de referência <span class="math notranslate nohighlight">\(T_0\)</span> e pela mobilidade de referência <span class="math notranslate nohighlight">\(\mu_0\)</span>. As equações necessárias para o cálculo da resistividade são</p>
+<div class="math notranslate nohighlight">
+\[ \rho = \frac{1}{qn\mu}\]</div>
+<p>onde</p>
 <div class="math notranslate nohighlight">
 \[n = \frac{1}{2} \left( N+\sqrt{N^2+4n^2_i} \right)\]</div>
 <p>e</p>
@@ -916,7 +918,9 @@ onde</p>
 <p><strong>Comentário</strong> <br>
 Esse é um problema que possui uma escala atípica, mas como método de Newton chega-se a solução com apenas 3 iterações.</p>
 <p><strong>Problema 6:</strong>
-De acordo com o <em>princípio de Arquimedes</em>, a força de <em>flutuação</em> é igual ao peso do fluido deslocado pela parte submersa de um objeto. Para o tronco de cone mostrado abaixo, use o método da bisseção e mais algum método de sua escolha para determinar a altura <span class="math notranslate nohighlight">\(h_1\)</span> da parte que está acima da água. Use os seguintes valores para seus cálculos: <span class="math notranslate nohighlight">\(r_1 = 0,5 m\)</span>, <span class="math notranslate nohighlight">\(r_2 = 1 m\)</span>, <span class="math notranslate nohighlight">\(h = 1 m\)</span>, <span class="math notranslate nohighlight">\(\rho_f=densidade do tronco=200 kg/m^3\)</span> e <span class="math notranslate nohighlight">\(\rho_w=densidade da água=1000 kg/m^3\)</span>. O volume do trondo de cone é dado por: $<span class="math notranslate nohighlight">\(V=\frac{\pi h}{3}(r_1^2+r_2^2+r_1 r_2)\)</span>$</p>
+De acordo com o <em>princípio de Arquimedes</em>, a força de <em>flutuação</em> é igual ao peso do fluido deslocado pela parte submersa de um objeto. Para o tronco de cone mostrado abaixo, use o método da bisseção e mais algum método de sua escolha para determinar a altura <span class="math notranslate nohighlight">\(h_1\)</span> da parte que está acima da água. Use os seguintes valores para seus cálculos: <span class="math notranslate nohighlight">\(r_1 = 0,5 m\)</span>, <span class="math notranslate nohighlight">\(r_2 = 1 m\)</span>, <span class="math notranslate nohighlight">\(h = 1 m\)</span>, <span class="math notranslate nohighlight">\(\rho_f=\text{densidade do tronco}=200 kg/m^3\)</span> e <span class="math notranslate nohighlight">\(\rho_w=\text{densidade da água}=1000 kg/m^3\)</span>. O volume do tronco de cone é dado por:</p>
+<div class="math notranslate nohighlight">
+\[V=\frac{\pi h}{3}(r_1^2+r_2^2+r_1 r_2)\]</div>
 <p><em>Resolução:</em>
 A equação a ser resolvida é</p>
 <div class="math notranslate nohighlight">
